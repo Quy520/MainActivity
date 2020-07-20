@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="245dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_background"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="15dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/edit_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="5dp"
+        android:textColor="@color/edit_color"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_content"
+        android:layout_toLeftOf="@+id/tv_accomplish"
+        android:layout_marginRight="30dp"
+        android:text="@string/sheet_dialog_cancel"
+        android:textColor="@color/hint_color"
+        android:textSize="12sp" />
+
+    <TextView
+    android:layout_marginRight="@dimen/sobot_10PX"
+        android:id="@+id/tv_accomplish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_content"
+        android:text="@string/complete"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="12sp" />
+</RelativeLayout>

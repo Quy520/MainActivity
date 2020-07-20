@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 修改toolbar背景 设置activity主题即可--><!-- PS:include需要加id的 请与Toolbar id保持一致(toolbar)-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_top">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll">
+
+        <com.fm.designstar.widget.DrawableCenterTextView
+            android:id="@+id/tv_left"
+            style="?attr/toolbarNavigationButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="@dimen/title_height"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp" />
+
+        <com.fm.designstar.widget.DrawableCenterTextView
+            android:id="@+id/tv_close"
+            style="?attr/toolbarNavigationButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="@dimen/title_height"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="17sp" />
+
+        <com.fm.designstar.widget.DrawableCenterTextView
+            android:layout_marginRight="@dimen/sobot_15PX"
+            android:id="@+id/tv_right"
+            style="?attr/toolbarNavigationButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:minWidth="@dimen/title_height"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.Toolbar>
+</RelativeLayout>

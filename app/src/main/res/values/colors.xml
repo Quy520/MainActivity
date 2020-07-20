@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主题色 -->
+    <color name="theme_color">#ffffff</color>
+    <!--默认背景颜色-->
+    <color name="default_background">#ffffff</color>
+    <!-- 标题背景颜色 -->
+    <color name="colorPrimary">#ffffff</color>
+    <!-- 标题字体颜色 -->
+    <color name="textColorPrimary">#3E4248</color>
+    <!-- 通知栏背景颜色 -->
+    <color name="colorPrimaryDark">#ffffff</color>
+
+    <color name="colorAccent">#FF6738</color>
+
+    <!-- 通用线条颜色-->
+    <color name="line">#e6e6e6</color>
+    <color name="hint_color">#9292AF</color>
+    <color name="edit_color">#3E4248</color>
+</resources>

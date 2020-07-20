@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/walking_00000"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00002"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00003"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00006"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00009"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00010"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00011"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00014"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00015"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00019"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00020"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00023"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00024"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00029"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00032"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00036"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00037"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00038"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00039"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00042"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00044"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00045"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00046"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00047"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00050"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00051"
+        android:duration="15" />
+
+    <item
+        android:drawable="@drawable/walking_00053"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00054"
+        android:duration="15" />
+
+
+    <item
+        android:drawable="@drawable/walking_00058"
+        android:duration="15" />
+    <item
+        android:drawable="@drawable/walking_00059"
+        android:duration="15" />
+</animation-list>

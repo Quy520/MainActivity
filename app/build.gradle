@@ -1,0 +1,160 @@
+apply plugin: 'com.android.application'
+
+ext {
+    /*应用名*/
+    appName = "DesignStar"
+    appName4Debug = "DesignStarTest"
+    /*应用包名*/
+    appId = "com.fm.designstar"
+    appId4debug = appId + ".test"
+    /*7.0图片权限 */
+    selectImgFileProvider = appId + ".fileProvider"
+    selectImgFileProvider4Debug = appId4debug + ".fileProvider"
+
+    baseUrl = "https://api.recomeapp.com/recome/"
+    baseUrl48080 = "http://47.74.178.77:8080/recome/"
+    baseUrl48081 = "http://47.74.178.77:8081/recome/"
+
+}
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId appId4debug
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        flavorDimensions "versionCode"
+        //自定义字段
+        buildConfigField "String", "APP_NAME", "\"" + appName4Debug + "\""
+        buildConfigField 'String', 'AUTHORITY', "\"" + selectImgFileProvider4Debug + "\""
+        buildConfigField "String", "BASE_URL", "\"" + baseUrl + "\""
+        resValue "string", "tray__authority", appId4debug + ".tray"
+        //manifest属性配置
+        manifestPlaceholders = [
+                APP_NAME       : appName4Debug
+        ]
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi', 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'//, "mips"
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+
+
+    signingConfigs {
+        release {
+            storeFile file("MyRecoMe.jks")
+            storePassword "recome2019"
+            keyAlias "recome"
+            keyPassword "recome2019"
+        }
+    }
+    buildTypes {
+        debug {
+            //混淆
+            minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            //直接使用正式的签名
+            signingConfig signingConfigs.release
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        applicationVariants.all { variant ->
+            //覆盖productFlavors的applicationId
+            if (variant.buildType.name == "debug") {
+                variant.mergedFlavor.applicationId = appId4debug
+            }
+
+            variant.outputs.all {
+                if (variant.buildType.name == "release") {
+                    outputFileName = appName + "_" + variant.productFlavors[0].name + "_v${variant.versionName}.${variant.versionCode}.apk"
+                }
+            }
+        }
+    }
+
+    productFlavors {
+        my_self {
+            applicationId = appId4debug
+            buildConfigField 'String', 'AUTHORITY', "\"" + selectImgFileProvider4Debug + "\""
+            buildConfigField "String", "APP_NAME", "\"" + appName4Debug + "\""
+            buildConfigField "String", "BASE_URL", "\"" + baseUrl + "\""
+            resValue "string", "tray__authority", appId4debug + ".tray"
+            manifestPlaceholders = [APP_NAME       : appName4Debug]
+        }
+        relased {
+            applicationId = appId4debug
+            buildConfigField 'String', 'AUTHORITY', "\"" + selectImgFileProvider4Debug + "\""
+            buildConfigField "String", "APP_NAME", "\"" + appName4Debug + "\""
+            buildConfigField "String", "BASE_URL", "\"" + baseUrl + "\""
+            resValue "string", "tray__authority", appId4debug + ".tray"
+            manifestPlaceholders = [APP_NAME       : appName4Debug]
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //突破Dex文件方法数不能超过最大值65536的上限
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //图片加载框架
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0@aar'
+
+    //json解析框架
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.alibaba:fastjson:1.2.72'
+
+    //网络加载框架
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+
+    //网络加载封装
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+
+    /*implementation 'com.squareup.retrofit2:converter-scalars:2.0.0' 返回类型转成String */
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    implementation 'io.reactivex:rxjava:1.3.8'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+
+    //总线处理框架
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //log工具
+    implementation 'com.orhanobut:logger:1.15'
+    //替代Sp的跨进程存储库
+    implementation 'net.grandcentrix.tray:tray:0.11.1'
+}
