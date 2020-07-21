@@ -24,5 +24,6 @@
 
     <dimen name="sobot_10PX">10dp</dimen>
     <dimen name="sobot_20PX">20dp</dimen>
+    <dimen name="sobot_40PX">40dp</dimen>
     <dimen name="sobot_15PX">15dp</dimen>
 </resources>

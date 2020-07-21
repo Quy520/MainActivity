@@ -63,7 +63,7 @@ public class FileUtils {
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
             return true;
         } else {
-            ToastUtil.showToast("Kartu SD tidak ada!");
+            ToastUtil.showToast("不存在!");
             return false;
         }
     }

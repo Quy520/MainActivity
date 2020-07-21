@@ -64,7 +64,7 @@ public class RxHelper {
                             if (TextUtils.isEmpty(result.getCode())) {
                                 return Observable.error(new ApiException(result.getMsg()));
                             } else {
-                                if (Integer.parseInt(result.getCode()) == 0) {
+                                if (Integer.parseInt(result.getCode()) == 200) {
                                     if (result.getCode().length() > 1) {
                                         return Observable.error(new ApiException(result.getMsg(), result.getCode(), Integer.parseInt(result.getCode())));
                                     }

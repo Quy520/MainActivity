@@ -29,15 +29,7 @@ public class ConfigUtil {
 
 
     public String[] urls = {
-            "https://api.recomeapp.com/recome/",
-            "https://api.recomeapp.com/recome2/",
-            "http://47.74.178.77:8080/recome/",
-            "http://47.74.178.77:8081/recome/",
-            "http://192.168.0.99/RecommandMe/",
-            "https://t.100baoxian.com/RecommandMe/",
-            "http://192.168.0.100/RecommandMe/",
-            "http://192.168.0.97:8080/recome/",
-            "http://nothreenofour.51vip.biz/recome/"
+            "https://cdeuapi.laifuyun.com/"
     };
 
 

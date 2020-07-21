@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fm.designstar.views.login.activitys.MsgCodeActivity">
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:id="@+id/back"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/login_top"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_below="@+id/re_top"
+        android:textSize="24dp"
+        android:textColor="@color/edit_color"
+        android:gravity="center"
+        android:text="@string/com_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_marginTop="@dimen/sobot_15PX"
+       android:gravity="center"
+        android:id="@+id/re_phone"
+        android:layout_below="@+id/login_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_phone"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已发送验证码到"
+            android:textColor="#FFCCCCCC"
+            android:textSize="14dp"
+            />
+        <TextView
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:layout_toRightOf="@+id/tv_phone"
+            android:id="@+id/phone"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18992939393"
+            android:textColor="@color/edit_color"
+            android:textSize="14dp"
+            />
+    </RelativeLayout>
+
+
+    <com.fm.designstar.widget.VerificationCodeView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_below="@+id/re_phone"
+        android:id="@+id/verificationCodeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        app:vCodeBackgroundFocus="@drawable/verification_code_et_bg_focus"
+        app:vCodeBackgroundNormal="@drawable/verification_code_et_bg_normal"
+        app:vCodeDataLength="4"
+        app:vCodeHeight="50dp"
+        app:vCodeMargin="15dp"
+
+        app:vCodeTextColor="@color/edit_color"
+        app:vCodeTextSize="20sp"
+        app:vCodeWidth="50dp" />
+    <RelativeLayout
+        android:layout_marginTop="@dimen/sobot_15PX"
+        android:gravity="center"
+        android:id="@+id/re_clock"
+        android:layout_below="@+id/verificationCodeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="58秒后"
+            android:textColor="@color/edit_color"
+            android:textSize="14dp"
+            />
+        <TextView
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:layout_toRightOf="@+id/tv_time"
+            android:id="@+id/resend"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新发送"
+            android:textColor="#FFCCCCCC"
+
+            android:textSize="14dp"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

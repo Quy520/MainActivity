@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,20 +59,24 @@ public class ToastUtil {
         if (StringUtil.isBlank(text)) {
             return;
         }
+        Log.e("qsd",text+"showToast");
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.N_MR1 && Build.VERSION.SDK_INT != Build.VERSION_CODES.N) {
             if (!Util.ActivityIsClose(mContext)) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         try {
+
                             if (toast == null) {
+                                Log.e("qsd",text+"11111");
                                 toast = Toast.makeText(mContext, text, Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                             } else {
-
+                                Log.e("qsd",text+"22222");
                                 toast.setText(text);
                             }
                             toast.show();
+                            Log.e("qsd",text+"showToast11");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

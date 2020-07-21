@@ -5,7 +5,7 @@ import android.content.Intent;
 import com.fm.designstar.app.App;
 import com.fm.designstar.app.AppManager;
 import com.fm.designstar.views.MainActivity;
-import com.fm.designstar.views.login.LoginActivity;
+import com.fm.designstar.views.login.activitys.LoginActivity;
 
 
 /**

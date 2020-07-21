@@ -13,7 +13,7 @@ public class BaseResponse<T> implements Serializable {
     public T data;
 
     public boolean success() {
-        return "0".equals(code);
+        return "200".equals(code);
     }
 
     public String getCode() {

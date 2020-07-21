@@ -16,5 +16,7 @@
     <!-- 通用线条颜色-->
     <color name="line">#e6e6e6</color>
     <color name="hint_color">#9292AF</color>
-    <color name="edit_color">#3E4248</color>
+    <color name="edit_color">#FF222222</color>
+    <color name="notice">#fdd650</color>
+
 </resources>

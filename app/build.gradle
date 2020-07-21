@@ -11,7 +11,7 @@ ext {
     selectImgFileProvider = appId + ".fileProvider"
     selectImgFileProvider4Debug = appId4debug + ".fileProvider"
 
-    baseUrl = "https://api.recomeapp.com/recome/"
+    baseUrl = "https://cdeuapi.laifuyun.com/"
     baseUrl48080 = "http://47.74.178.77:8080/recome/"
     baseUrl48081 = "http://47.74.178.77:8081/recome/"
 
@@ -19,7 +19,10 @@ ext {
 
 android {
     compileSdkVersion 29
-
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
     defaultConfig {
         applicationId appId4debug
         minSdkVersion 21

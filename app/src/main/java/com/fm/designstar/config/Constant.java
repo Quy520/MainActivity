@@ -8,7 +8,7 @@ package com.fm.designstar.config;
  */
 public class Constant {
     public static final String LOADING_TIP = "Loading...";
-    public static final String LOADING_FAIL = "LOADING_FAIL";
+    public static final String LOADING_FAIL = "服务器异常";
 
     /**
      * Activity转场动画Key

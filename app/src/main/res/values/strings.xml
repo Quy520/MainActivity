@@ -5,4 +5,17 @@
     <string name="exit_login">退出登录</string>
     <string name="sheet_dialog_cancel_batal">取消</string>
     <string name="go_to_setting">手动设置</string>
+    <string name="login_hint">请输入手机号</string>
+    <string name="next_step">下一步</string>
+    <string name="wel_regi">欢迎注册</string>
+    <string name="login">登录</string>
+    <string name="pwd_hint">输入密码</string>
+    <string name="for_pwd">忘记密码</string>
+    <string name="regi">注册</string>
+    <string name="other_login">其他方式登录</string>
+    <string name="complete_phone">填写你的手机号码</string>
+    <string name="com_code">请填写验证码</string>
+    <string name="pwd_err">密码不能为空</string>
+    <string name="pwd_err2">密码不能低于6位数</string>
+    <string name="phone_err">电话不能为空</string>
 </resources>

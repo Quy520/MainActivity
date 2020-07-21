@@ -4,7 +4,12 @@ package com.fm.designstar.https;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.fm.designstar.app.App;
+import com.fm.designstar.config.Constant;
+import com.fm.designstar.events.LogoutEvent;
 import com.fm.designstar.utils.LogUtils;
+import com.fm.designstar.utils.NetUtil;
+import com.fm.designstar.utils.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,7 +46,7 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
     /**
      * 请先登录
      */
-    private final int NO_LOGIN = 1007;
+    private final int NO_LOGIN = 430;
     /**
      * 账号或密码错误
      */
@@ -53,12 +58,12 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
     /**
      * 没有权限
      */
-    private final int PERMISSION_DENIED = 3000;
+    private final int PERMISSION_DENIED = 401;
 
     /**
      * 请求参数不合法
      */
-    private final int REQUEST_PARAMETER_INVALID = 3001;
+    private final int REQUEST_PARAMETER_INVALID = 415;
     /**
      * 当前版本太低
      */
@@ -70,7 +75,8 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
     /**
      * 服务器异常
      */
-    private final int SERVICE_ERROR = 5000;
+    private final int SERVICE_ERROR = 500;
+    private final int SERVICE_ERROR2 = 503;
 //
 //    /**
 //     * 强制升级升级 0129 add
@@ -80,15 +86,7 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
 //     * 异地登陆 0129 add
 //     */
 //    private final int LANDING_OFF = 3010;
-   private final int FORCED_UPGRADE = 3020;
 
-    private final int SHOP_OFF = 1012;
-
-    private final int JIFEN_OFF = 1013;
-
-    private final int KUCUN_OFF = 1014;
-    private final int EXCHANGE_OFF = 1015;
-    private final int FOBID_OFF = 1022;
 
 
     public AbstractHttpSubscriber() {
@@ -112,7 +110,7 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
- /*       LogUtils.loge(e.getMessage());
+        LogUtils.loge(e.getMessage());
         if (!NetUtil.isConnected(App.getContext())) {
             onHttpError(HttpErrorMessage.NET_ERROR_MESSAGE, ERROR_NETWORK);
         } else if (e instanceof ApiException) {
@@ -121,40 +119,8 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
                 EventBus.getDefault().removeStickyEvent(LogoutEvent.class);
                 EventBus.getDefault().post(new LogoutEvent(0));
                 onHttpError(HttpErrorMessage.NET_LOGON_ERROR, ((ApiException) e).getCode());
-            } else if (((ApiException) e).getCode() == TO_SET_PWD) {
-                Activity activity = AppManager.getInstance().currentActivity();
-                if (activity != null) {
-                    if (!StringUtil.isBlank(App.getConfig().getUserPhone())) {
-                        if (!SpUtil.getBoolean(Constant.IS_OTHER_LOGIN, false)) {
-                            Intent intent = new Intent(activity, ChangePwdActivity.class);
-                            activity.startActivity(intent);
-                        }
-                    }
-                }
-            } else if (((ApiException) e).getCode() == VERSION_TOO_LOW) {
-                EventBus.getDefault().removeStickyEvent(VersionEvent.class);
-                EventBus.getDefault().post(new VersionEvent());
-                onHttpError(e.getMessage(), ((ApiException) e).getCode());
-            }else if (((ApiException) e).getCode() == JIFEN_OFF) {
-                onHttpError(e.getMessage(), ((ApiException) e).getCode());
-            }else if (((ApiException) e).getCode() == KUCUN_OFF) {
-                onHttpError(e.getMessage(), ((ApiException) e).getCode());
-            }else if (((ApiException) e).getCode() == EXCHANGE_OFF) {
-                onHttpError(e.getMessage(), ((ApiException) e).getCode());
-            }else if (((ApiException) e).getCode() == FOBID_OFF){
-                onHttpError(e.getMessage(), ((ApiException) e).getCode());
-               *//* JSONObject demoJson = null;
-                try {
-                    demoJson = new JSONObject(((ApiException) e).getData());
-                    String url = demoJson.getString("url");
-                    SpUtil.putString("URL",url+"");
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }*//*
-
-               //
             } else {
-                if (((ApiException) e).getCode() == 0) {
+                if (((ApiException) e).getCode() == 200) {
                     if (!StringUtil.isBlank(((ApiException) e).getCodeStr())) {
                         onHttpError(e.getMessage(), ((ApiException) e).getCodeStr(), ((ApiException) e).getCode());
                     } else {
@@ -164,7 +130,8 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
                     onHttpError(e.getMessage(), ((ApiException) e).getCode());
                 }
             }
-        } else if (e instanceof HttpException) {
+        }
+        else if (e instanceof HttpException) {
             HttpException exception = (HttpException) e;
             if (exception.code() == NO_LOGIN) {
                 //清空
@@ -173,8 +140,12 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
                 onHttpError(HttpErrorMessage.NET_LOGON_ERROR, exception.code());
             } else if (exception.code() == SERVICE_ERROR) {
                 //"服务器异常，请稍后重试"
-                onHttpError(Constant.LOADING_FAIL, ERROR_DEFAULT);
-            } else {
+                onHttpError(Constant.LOADING_FAIL, SERVICE_ERROR);
+            } else if (exception.code() == SERVICE_ERROR2) {
+                //"服务器异常，请稍后重试"
+                onHttpError(Constant.LOADING_FAIL, SERVICE_ERROR2);
+            }
+            else {
                 //"连接服务器失败，请稍后再试"
                 onHttpError(Constant.LOADING_FAIL, ERROR_DEFAULT);
             }
@@ -185,7 +156,7 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
             //"连接服务器失败，请稍后再试"
             onHttpError(Constant.LOADING_FAIL, ERROR_DEFAULT);
         }
-        onHttpCompleted();*/
+        onHttpCompleted();
     }
 
     /**
