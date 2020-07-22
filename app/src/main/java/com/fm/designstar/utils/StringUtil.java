@@ -136,7 +136,7 @@ public class StringUtil {
             return false;
         }
         //印尼0开头08
-        if(!mobiles.startsWith("08")){
+        if(!mobiles.startsWith("1")){
             return false;
         }
         //印尼手机号判断 10- 13位

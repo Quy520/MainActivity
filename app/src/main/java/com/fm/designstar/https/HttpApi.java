@@ -5,12 +5,14 @@ package com.fm.designstar.https;
 
 import com.fm.designstar.model.server.BaseResponse;
 import com.fm.designstar.model.server.body.LoginBody;
+import com.fm.designstar.model.server.body.chnagepwdbody;
+import com.fm.designstar.model.server.body.sendMsgBody;
 import com.fm.designstar.model.server.response.LoginResponse;
 
-import java.util.List;
-
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface HttpApi {
@@ -18,19 +20,16 @@ public interface HttpApi {
     @POST("user/login")
     Observable<BaseResponse<LoginResponse>> login(@Body LoginBody body);
 
-    /*  *//**
-     * 登录
-     * onHttpErrorMaaf saat ini server kami sedang sibuk, Coba lagi nanti
-     *
-     * @param body
-     * @return
-     *//*
-    @POST("user/regist")
-    Observable<BaseResponse> sign(@Body SignBody body);
 
     @POST("user/registered")
-    Observable<BaseResponse<registeredSuccessResp>> registered(@Body RegisteredBody body);
+    Observable<BaseResponse> sendMsg(@Body sendMsgBody body);
 
-    @POST("user/sendMsg")
-    Observable<BaseResponse> sendMsg(@Body sendMsgBody body);*/
+    @GET("user/forgetPwd")
+    Observable<BaseResponse> sendMsgforget( @Query("mobile")String mobile);
+
+    @POST("user/changePwd")
+    Observable<BaseResponse> changePwd(@Body chnagepwdbody body);
+
+
+
 }

@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fm.designstar">
-    <!-- 这个权限用于进行网络定位 -->
+    <!-- 这个权限用于访问GPS定位 -->
     <application
         android:name=".app.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo"
         android:label="${APP_NAME}"
         android:largeHeap="true"
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:vmSafeMode="true">
-        <activity android:name=".views.login.activitys.MsgCodeActivity"></activity>
+        <activity android:name=".views.login.activitys.PwdActivity"></activity>
+        <activity android:name=".views.login.activitys.MsgCodeActivity" />
         <activity android:name=".views.login.activitys.ForgetActivity" />
         <activity android:name=".views.login.activitys.RegisteredActivity" />
         <activity android:name=".views.login.activitys.LoginActivity" />
@@ -28,16 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application> <!-- 这个权限用于访问GPS定位 -->
-    <uses-feature android:name="android.hardware.camera" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 用于读取手机当前的状态 -->
+    </application> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 自定义相册权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 自定义相册权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />

@@ -4,12 +4,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.model.server.response.LoginResponse;
 import com.fm.designstar.utils.FileUtils;
@@ -19,13 +22,15 @@ import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TextViewUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
+import com.fm.designstar.views.MainActivity;
 import com.fm.designstar.views.login.contract.LoginContract;
 import com.fm.designstar.views.login.presenter.LoginPresenter;
 
 public class LoginActivity extends BaseActivity<LoginPresenter>  implements LoginContract.View {
 
     @BindView(R.id.phone)
-    EditText phone;@BindView(R.id.pwd)
+    EditText phone;
+    @BindView(R.id.pwd)
     EditText pwd;
     @BindView(R.id.longin)
     TextView longin;
@@ -48,6 +53,42 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
          int[] strt={13,22};
          int[] end={21,reg_notice.getText().length()};
         TextViewUtil.setPartialColors(reg_notice,reg_notice.getText().toString(),strt,end,R.color.notice);
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length()>0&&pwd.getText().length()>0){
+                    longin.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        pwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length()>0&&phone.getText().length()>0){
+                    longin.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
     }
@@ -96,22 +137,39 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
     }
 
     @Override
-    public void loginSuccess(LoginResponse userToken) {
-        Log.e("qsd","userToken"+userToken.getEmail());
+    public void loginSuccess(LoginResponse userInfoResponse) {
+        App.getConfig().setUserToken(userInfoResponse.getToken());//token
+        App.getConfig().setUser_head(userInfoResponse.getAvatar());//touxiang
+        App.getConfig().setUser_name(userInfoResponse.getUserName());//nicheng
+        App.getConfig().setUserPhone(userInfoResponse.getMobile());//phone
+        App.getConfig().setAddress(userInfoResponse.getAddress());//dizhi
+        App.getConfig().setBirthday(userInfoResponse.getBirthday());//shengeri
+        App.getConfig().setEmail(userInfoResponse.getEmail());//youdjian
+        App.getConfig().setRealName(userInfoResponse.getRealName());//zhengshixingm
+        App.getConfig().setRole(userInfoResponse.getRole());
+        App.getConfig().setSex(userInfoResponse.getSex());
+
+
+        startActivity(MainActivity.class);
+        finish();
     }
 
     @Override
     public void showLoading(String content, int code) {
+        App.loadingDefault(mActivity);
 
     }
 
     @Override
     public void stopLoading(int code) {
+        App.hideLoading();
 
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
+        App.hideLoading();
+        ToastUtil.showToast(msg);
 
     }
 }

@@ -26,6 +26,12 @@ public class ConfigUtil {
     private String user_name;
     private String user_head;
     private String userPhone;
+    private String address;
+    private String birthday;
+    private String email;
+    private String realName;
+    private int role;
+    private int sex;
 
 
     public String[] urls = {
@@ -56,10 +62,68 @@ public class ConfigUtil {
         userPhone = SpUtil.getString(Constant.USER_PHONE);
         isLogin = !StringUtil.isBlank(userToken);
         bindPhone=SpUtil.getString(Constant.BindPhone);
+        address=SpUtil.getString(Constant.ADDRESS);
+        birthday=SpUtil.getString(Constant.BRITH);
+        email=SpUtil.getString(Constant.EMAIL);
+        realName=SpUtil.getString(Constant.REAMNAME);
+        sex=SpUtil.getInt(Constant.SEX,1);
+        role=SpUtil.getInt(Constant.ROLE,1);
 
     }
 
+    public String getRealName() {
+        return realName;
+    }
 
+    public void setRealName(String realName) {
+        SpUtil.putString(Constant.REAMNAME,realName);
+        this.realName = realName;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        SpUtil.putInt(Constant.ROLE,role);
+        this.role = role;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        SpUtil.putInt(Constant.SEX,sex);
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        SpUtil.putString(Constant.EMAIL,email);
+        this.email = email;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        SpUtil.putString(Constant.BRITH,birthday);
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        SpUtil.putString(Constant.ADDRESS,address);
+        this.address = address;
+    }
 
     public String getUserToken() {
         return userToken;

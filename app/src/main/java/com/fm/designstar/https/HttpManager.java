@@ -3,6 +3,8 @@ package com.fm.designstar.https;
 import android.text.TextUtils;
 
 import com.fm.designstar.app.App;
+import com.fm.designstar.utils.SpUtil;
+import com.fm.designstar.utils.StringUtil;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -90,6 +92,9 @@ public class HttpManager {
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 Request.Builder builder = originalRequest.newBuilder();
+                if (App.getConfig().getLoginStatus()){
+                    builder.addHeader("accessToken", SpUtil.getString("token"));
+                }
                 /*处理body*/
 //                if (originalRequest.body() != null) {
 //                    final Buffer buffer = new Buffer();

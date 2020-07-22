@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.PermissionsListener;
 import com.fm.designstar.utils.FormatUtil;
 import com.fm.designstar.utils.SpUtil;
+import com.fm.designstar.views.MainActivity;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 
 import java.util.List;
@@ -71,8 +73,12 @@ public class SplashActivity extends BaseActivity {
     private PermissionsListener mListener = new PermissionsListener() {
         @Override
         public void onGranted() {
+            if (App.getConfig().getLoginStatus()){
+                startActivity(MainActivity.class);
+            }else {
 
-            startActivity(LoginActivity.class);
+                startActivity(LoginActivity.class);
+            }
             SpUtil.putString("IMEI", FormatUtil.getIMEI(mContext));
             finish();
 
@@ -83,7 +89,12 @@ public class SplashActivity extends BaseActivity {
         @Override
         public void onDenied(List<String> deniedPermissions, boolean isNeverAsk) {
 
+            if (App.getConfig().getLoginStatus()){
+                startActivity(MainActivity.class);
+            }else {
+
                 startActivity(LoginActivity.class);
+            }
 
             finish();
 

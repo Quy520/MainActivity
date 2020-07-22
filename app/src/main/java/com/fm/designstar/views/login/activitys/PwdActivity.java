@@ -1,8 +1,10 @@
 package com.fm.designstar.views.login.activitys;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import android.app.ActivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,27 +14,30 @@ import android.widget.TextView;
 
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
+import com.fm.designstar.app.AppManager;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TextViewUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
-import com.fm.designstar.views.login.contract.SendMsgContract;
-import com.fm.designstar.views.login.presenter.SendMsgPresenter;
+import com.fm.designstar.views.MainActivity;
+import com.fm.designstar.views.login.contract.ChangePwdContract;
+import com.fm.designstar.views.login.presenter.ChangePwdPresenter;
 
-public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implements SendMsgContract.View {
-    @BindView(R.id.phone)
-    EditText phone;
-    @BindView(R.id.next)
-    TextView next;
-    @BindView(R.id.reg_notice)
-    TextView reg_notice; @BindView(R.id.login_top)
-    TextView login_top;
+public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements ChangePwdContract.View {
+    @BindView(R.id.pwd_top)
+    TextView pwd_top;
+    @BindView(R.id.long_notice)
+    TextView reg_notice;
+    @BindView(R.id.sure)
+    TextView sure;
+    @BindView(R.id.pwd)
+    EditText pwd;
     private  int roade;
-
+    private String phone,code;
     @Override
     public int getLayoutId() {
-        return R.layout.activity_registered;
+        return R.layout.activity_pwd;
     }
 
     @Override
@@ -43,17 +48,18 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
 
     @Override
     public void loadData() {
-       roade=  getIntent().getIntExtra("Rode",0);
-      if (roade==1){
-          login_top.setText(R.string.wel_regi);
-      }else {
-          login_top.setText(R.string.complete_phone);
-      }
-
+        phone=getIntent().getStringExtra("phone");
+        code=getIntent().getStringExtra("code");
+        roade=  getIntent().getIntExtra("Rode",0);
+        if (roade==1){
+            pwd_top.setText(R.string.com_pwd);
+        }else {
+            pwd_top.setText(R.string.com_nwe_pwd);
+        }
         int[] strt={13,22};
         int[] end={21,reg_notice.getText().length()};
         TextViewUtil.setPartialColors(reg_notice,reg_notice.getText().toString(),strt,end,R.color.notice);
-        phone.addTextChangedListener(new TextWatcher() {
+        pwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -61,8 +67,8 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length()>0){
-                    next.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
+                if (charSequence.length()>0&&pwd.getText().length()>0){
+                    sure.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
                 }
             }
 
@@ -71,9 +77,10 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
 
             }
         });
+
     }
 
-    @OnClick({R.id.back,R.id.next})
+    @OnClick({R.id.back,R.id.sure})
     public void OnClick(View view) {
         if (Tool.isFastDoubleClick()) {
             return;
@@ -82,22 +89,12 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
             case R.id.back:
                 finish();
                 break;
-            case R.id.next:
-                if (StringUtil.isBlank(phone.getText().toString())) {
-                    ToastUtil.showToast(R.string.no_phone);
+            case R.id.sure:
+                if (StringUtil.isBlank(pwd.getText().toString())) {
+                    ToastUtil.showToast(R.string.pwd_err);
                     return;
                 }
-                if (!StringUtil.isMobileNO(phone.getText().toString())) {
-                    ToastUtil.showToast(R.string.phone_err);
-                    return;
-                }
-                if (roade==1){
-                    mPresenter.SendMsg(phone.getText().toString());
-                }else {
-                    mPresenter.SendMsgforget(phone.getText().toString());
-                }
-
-
+                mPresenter.changePwd(phone,code,pwd.getText().toString());
 
                 break;
 
@@ -107,20 +104,12 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
     }
 
     @Override
-    public void SendMsgSuccess() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("Rode", roade);
-        bundle.putString("phone", phone.getText().toString());
-        startActivity(MsgCodeActivity.class,bundle);
+    public void changepwdSuccess() {
+        startActivity(LoginActivity.class);
+        AppManager.getInstance().finishActivity(RegisteredActivity.class);
+        finish();
     }
 
-    @Override
-    public void SendMsgforgetSuccess() {
-        Bundle bundle = new Bundle();
-        bundle.putInt("Rode", roade);
-        bundle.putString("phone", phone.getText().toString());
-        startActivity(MsgCodeActivity.class,bundle);
-    }
 
     @Override
     public void showLoading(String content, int code) {

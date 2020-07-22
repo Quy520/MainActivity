@@ -5,32 +5,17 @@ import com.fm.designstar.base.BaseBean;
 public class LoginResponse extends BaseBean {
 
 
-    /**
-     * code : 1285160959761055744
-     * userName : qsd
-     * mobile : null
-     * email : 601228243@qq.com
-     * sex : 1
-     * birthday : null
-     * address : qq
-     * nickName : qsd
-     * realName : null
-     * avatar : https://sf.laifuyun.com/img/orig/4,6e73a98cb34a
-     * role : 1
-     * signature : qqqq
-     * certificationMark : 0
-     * token : 5f16ca13b076a5d00b829dde
-     */
+
 
     private long code;
     private String userName;
-    private Object mobile;
+    private String mobile;
     private String email;
     private int sex;
-    private Object birthday;
+    private String birthday;
     private String address;
     private String nickName;
-    private Object realName;
+    private String realName;
     private String avatar;
     private int role;
     private String signature;
@@ -53,11 +38,11 @@ public class LoginResponse extends BaseBean {
         this.userName = userName;
     }
 
-    public Object getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Object mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -77,11 +62,11 @@ public class LoginResponse extends BaseBean {
         this.sex = sex;
     }
 
-    public Object getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Object birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -101,11 +86,11 @@ public class LoginResponse extends BaseBean {
         this.nickName = nickName;
     }
 
-    public Object getRealName() {
+    public String getRealName() {
         return realName;
     }
 
-    public void setRealName(Object realName) {
+    public void setRealName(String realName) {
         this.realName = realName;
     }
 

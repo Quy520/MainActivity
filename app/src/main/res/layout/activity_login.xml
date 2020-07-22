@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp">
         <ImageView
+            android:layout_marginLeft="@dimen/sobot_10PX"
             android:id="@+id/back"
             android:layout_centerVertical="true"
             android:src="@mipmap/back"
@@ -92,6 +93,7 @@
         android:layout_marginLeft="40dp"
         android:paddingLeft="@dimen/sobot_10PX"
         android:layout_marginRight="40dp"
+        android:textColor="@color/edit_color"
         android:gravity="center"
         android:text="@string/login"
         android:background="@drawable/btn_round_huise2_shape"
