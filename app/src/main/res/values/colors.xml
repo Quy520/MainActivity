@@ -17,6 +17,7 @@
     <color name="line">#e6e6e6</color>
     <color name="hint_color">#9292AF</color>
     <color name="edit_color">#FF222222</color>
+    <color name="edit_color2">#FF666666</color>
     <color name="notice">#fdd650</color>
     <color name="background_color">#F5F7FA</color>
 

@@ -92,7 +92,7 @@ public class TitleUtil {
     public void setTitle(boolean isShowBack, View.OnClickListener listener, int title) {
         mTitle.setText(title);
         if (isShowBack) {
-            Drawable left = ContextCompat.getDrawable(mActivity, R.mipmap.back_b);
+            Drawable left = ContextCompat.getDrawable(mActivity, R.mipmap.back);
             left.setBounds(0, 0, left.getMinimumWidth(), left.getMinimumHeight());
             mLeft.setCompoundDrawables(left, null, null, null);
             if (listener != null) {

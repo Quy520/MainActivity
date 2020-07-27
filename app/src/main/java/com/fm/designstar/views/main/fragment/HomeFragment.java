@@ -1,14 +1,11 @@
 package com.fm.designstar.views.main.fragment;
 
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,17 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fm.designstar.R;
-import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
-import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
-import com.fm.designstar.views.MainActivity;
-import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.widget.NoScrollViewPager;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;

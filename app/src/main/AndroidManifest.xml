@@ -2,25 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fm.designstar">
-    <!-- 这个权限用于访问GPS定位 -->
+    <!-- 自定义相册权限 -->
     <application
         android:name=".app.App"
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
         android:label="${APP_NAME}"
         android:largeHeap="true"
+        android:networkSecurityConfig="@xml/net"
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:vmSafeMode="true">
-        <activity android:name=".views.login.activitys.PwdActivity"></activity>
+        android:vmSafeMode="true"
+        tools:replace="icon,label,theme">
+        <activity android:name=".views.mine.activity.ChangInfoActivity"></activity>
+        <activity android:name=".views.mine.activity.ShDesignerActivity" />
+        <activity android:name=".views.mine.activity.DesignerMangerActivity" />
+        <activity android:name=".views.mine.activity.BeDesignerActivity" />
+        <activity android:name=".views.mine.activity.MyActivitysActivity" />
+        <activity android:name=".views.mine.activity.MyWorkActivity" />
+        <activity android:name=".views.mine.activity.BlackListActivity" />
+        <activity android:name=".views.mine.activity.SettingActivity" />
+        <activity android:name=".views.login.activitys.ComUserInfoActivity" />
+        <activity android:name=".views.login.activitys.PwdActivity" />
         <activity android:name=".views.login.activitys.MsgCodeActivity" />
         <activity android:name=".views.login.activitys.ForgetActivity" />
         <activity android:name=".views.login.activitys.RegisteredActivity" />
         <activity android:name=".views.login.activitys.LoginActivity" />
-        <activity android:name=".views.MainActivity" />
+        <activity android:name=".views.main.activity.MainActivity" />
         <activity
-            android:name=".views.main.SplashActivity"
+            android:name=".views.main.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -29,15 +40,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-feature android:name="android.hardware.camera" /> <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 用于读取手机当前的状态 -->
+
+        <provider
+            android:name=".app.MyProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+    </application>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 自定义相册权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -50,6 +72,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 

@@ -1,11 +1,8 @@
 package com.fm.designstar.views.login.activitys;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import android.app.ActivityManager;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,11 +17,12 @@ import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TextViewUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
-import com.fm.designstar.views.MainActivity;
+import com.fm.designstar.views.login.contract.AppRegistContract;
 import com.fm.designstar.views.login.contract.ChangePwdContract;
+import com.fm.designstar.views.login.presenter.AppRegistPresenter;
 import com.fm.designstar.views.login.presenter.ChangePwdPresenter;
 
-public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements ChangePwdContract.View {
+public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements ChangePwdContract.View , AppRegistContract.View {
     @BindView(R.id.pwd_top)
     TextView pwd_top;
     @BindView(R.id.long_notice)
@@ -35,6 +33,7 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
     EditText pwd;
     private  int roade;
     private String phone,code;
+    private AppRegistPresenter appRegistPresenter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_pwd;
@@ -43,6 +42,8 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
     @Override
     public void initPresenter() {
         mPresenter.init(this);
+        appRegistPresenter=new AppRegistPresenter();
+        appRegistPresenter.init(this);
 
     }
 
@@ -94,7 +95,11 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
                     ToastUtil.showToast(R.string.pwd_err);
                     return;
                 }
-                mPresenter.changePwd(phone,code,pwd.getText().toString());
+                if (roade==1){
+                    appRegistPresenter.AppRegist(phone,code,pwd.getText().toString());
+                }else {
+                    mPresenter.changePwd(phone,code,pwd.getText().toString());
+                }
 
                 break;
 
@@ -105,7 +110,6 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
 
     @Override
     public void changepwdSuccess() {
-        startActivity(LoginActivity.class);
         AppManager.getInstance().finishActivity(RegisteredActivity.class);
         finish();
     }
@@ -128,5 +132,11 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
         App.hideLoading();
         ToastUtil.showToast(msg);
 
+    }
+
+    @Override
+    public void AppRegistSuccess() {
+        AppManager.getInstance().finishActivity(RegisteredActivity.class);
+        finish();
     }
 }

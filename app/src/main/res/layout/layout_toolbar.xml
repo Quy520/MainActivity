@@ -36,15 +36,31 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="16sp"
             android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
             android:layout_gravity="center"
-            android:maxLines="1"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="17sp" />
+            android:id="@+id/re_guanzhu"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:layout_centerHorizontal="true"
+                android:id="@+id/im_guanzhu"
+                android:layout_marginTop="@dimen/sobot_15PX"
+                android:src="@drawable/btn_round_click_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/sobot_10PX"></ImageView>
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:maxLines="1"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="17dp" />
+        </RelativeLayout>
+
 
         <com.fm.designstar.widget.DrawableCenterTextView
             android:layout_marginRight="@dimen/sobot_15PX"

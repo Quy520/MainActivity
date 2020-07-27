@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fm.designstar.views.mine.activity.SettingActivity">
+    <include layout="@layout/layout_toolbar" />
+    <RelativeLayout
+
+        android:id="@+id/re_hand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.fm.designstar.widget.CircleImageView
+            android:id="@+id/hand"
+            android:layout_margin="@dimen/sobot_20PX"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/defu_hand" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"
+            android:text="@string/hand"
+            android:textColor="@color/edit_color2"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+
+        android:id="@+id/re_name"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_centerVertical="true"
+           android:layout_toLeftOf="@+id/im"
+            android:id="@+id/name"
+          android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_name"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im"
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/my_name"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+
+        android:id="@+id/re_sex"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/im2"
+            android:id="@+id/sex"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im2"
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/my_sex"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+
+        android:id="@+id/re_birth"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/im3"
+            android:id="@+id/birth"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未设定"
+            android:textColor="@color/hint_color"
+            android:textSize="16dp" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im3"
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/my_brith"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+
+        android:id="@+id/re_city"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/im4"
+            android:id="@+id/city"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上海"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im4"
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/my_city"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+
+        android:id="@+id/re_sing"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/im5"
+            android:id="@+id/sing"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去写点什么"
+            android:textColor="@color/hint_color"
+            android:textSize="16dp" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im5"
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/my_sing"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <TextView
+        android:id="@+id/longout"
+        android:layout_below="@+id/re_password"
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:layout_marginLeft="40dp"
+        android:paddingLeft="@dimen/sobot_10PX"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/edit_color"
+        android:gravity="center"
+        android:text="@string/login_out"
+        android:background="@drawable/btn_round_huise2_shape"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"/>
+</LinearLayout>

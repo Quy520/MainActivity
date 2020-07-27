@@ -72,26 +72,29 @@
             android:id="@+id/pwd"
             android:inputType="textPassword"
             android:layout_marginLeft="@dimen/sobot_10PX"
-            android:text="qianshide"
+            android:text="123"
             android:background="@null"
             android:paddingLeft="@dimen/sobot_10PX"
             android:hint="@string/pwd_hint"
             android:layout_width="match_parent"
             android:layout_height="54dp"></EditText>
-        <ImageView
+        <CheckBox
+            android:button="@null"
+            android:background="@drawable/pwd_check"
+            android:id="@+id/pwd_open"
             android:layout_marginRight="@dimen/sobot_20PX"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:src="@mipmap/close"
-            android:layout_width="26dp"
-            android:layout_height="wrap_content"></ImageView>
+            android:layout_width="30dp"
+            android:layout_height="16dp"></CheckBox>
     </RelativeLayout>
-    <TextView
+    <Button
+
         android:id="@+id/longin"
         android:layout_below="@+id/re_password"
         android:layout_marginTop="@dimen/sobot_20PX"
         android:layout_marginLeft="40dp"
-        android:paddingLeft="@dimen/sobot_10PX"
         android:layout_marginRight="40dp"
         android:textColor="@color/edit_color"
         android:gravity="center"
@@ -100,6 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"/>
     <RelativeLayout
+        android:padding="3dp"
         android:id="@+id/re_to"
         android:layout_marginTop="@dimen/sobot_20PX"
         android:layout_below="@+id/longin"

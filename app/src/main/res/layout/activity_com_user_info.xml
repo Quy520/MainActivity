@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fm.designstar.views.login.activitys.ComUserInfoActivity">
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:background="@mipmap/login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:id="@+id/back"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/re_top"
+        android:id="@+id/re_phono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="@dimen/sobot_40PX"
+            android:id="@+id/login_top"
+            android:layout_marginTop="@dimen/sobot_10PX"
+
+            android:textSize="24dp"
+            android:textColor="@color/edit_color"
+            android:gravity="center"
+            android:text="@string/com_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+
+            android:layout_below="@+id/login_top"
+            android:layout_marginLeft="@dimen/sobot_40PX"
+            android:id="@+id/notice"
+            android:layout_marginTop="@dimen/sobot_10PX"
+
+            android:textColor="@color/hint_color"
+            android:gravity="center"
+            android:text="@string/com_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.fm.designstar.widget.CircleImageView
+            android:layout_marginRight="@dimen/sobot_40PX"
+           android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/hand"
+            android:layout_width="69dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/app_logo" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_phone"
+        android:layout_below="@+id/re_phono"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/btn_round_huise_shape"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textColor="@color/edit_color"
+            android:textSize="@dimen/sobot_15PX"
+            android:id="@+id/real_name"
+            android:maxLength="7"
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:layout_toRightOf="@+id/phone_"
+            android:background="@null"
+            android:paddingLeft="@dimen/sobot_10PX"
+            android:hint="@string/nikename_hint"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"></EditText>
+
+    </RelativeLayout>
+
+
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/btn_round_huise_shape"
+            android:layout_marginTop="@dimen/sobot_20PX"
+            android:layout_below="@+id/re_phone"
+            android:textSize="@dimen/sobot_15PX"
+            android:textColor="@color/hint_color"
+            android:gravity="center_vertical"
+            android:id="@+id/brith"
+            android:paddingLeft="@dimen/sobot_20PX"
+            android:text="@string/brth"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"></TextView>
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/btn_round_huise_shape"
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:layout_below="@+id/brith"
+        android:textSize="@dimen/sobot_15PX"
+        android:textColor="@color/hint_color"
+        android:gravity="center_vertical"
+        android:id="@+id/city"
+        android:paddingLeft="@dimen/sobot_20PX"
+        android:text="选择地址"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"></TextView>
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_below="@+id/city"
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:layout_marginLeft="40dp"
+        android:paddingLeft="@dimen/sobot_10PX"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/edit_color"
+        android:gravity="center"
+        android:text="@string/next_step"
+        android:background="@drawable/btn_round_huise2_shape"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"/>
+
+
+
+
+</RelativeLayout>

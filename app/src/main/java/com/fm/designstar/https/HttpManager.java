@@ -3,6 +3,7 @@ package com.fm.designstar.https;
 import android.text.TextUtils;
 
 import com.fm.designstar.app.App;
+import com.fm.designstar.config.Constant;
 import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.orhanobut.logger.Logger;
@@ -93,53 +94,14 @@ public class HttpManager {
                 Request originalRequest = chain.request();
                 Request.Builder builder = originalRequest.newBuilder();
                 if (App.getConfig().getLoginStatus()){
-                    builder.addHeader("accessToken", SpUtil.getString("token"));
+                    builder.addHeader("accessToken", SpUtil.getString(Constant.USERTOKEN));
                 }
-                /*处理body*/
-//                if (originalRequest.body() != null) {
-//                    final Buffer buffer = new Buffer();
-//                    originalRequest.body().writeTo(buffer);
-//                    MediaType mediaType = originalRequest.body().contentType();
-//                    String content = buffer.readUtf8();
-//                    JsonParser parser = new JsonParser();
-//                    JsonObject jsonObject = parser.parse(content).getAsJsonObject();
-//                    if (jsonObject.has("to_commit")) {
-//                        content = jsonObject.get("to_commit").getAsString();
-//                        builder.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-//                        mediaType = MediaType.parse("Content-Type: application/x-www-form-urlencoded;charset=utf-8");
-//                    }
-//                    RequestBody requestBody = RequestBody.create(mediaType, content);
-//                    builder.method(originalRequest.method(), requestBody);
-//                } else {
-//                    builder.method(originalRequest.method(), originalRequest.body());
-//                }
+
                 builder.header("Content-Type", "application/json;charset=utf-8");
                 return chain.proceed(builder.build());
             }
         };
-//        Interceptor showDialogInterceptor = new Interceptor() {
-//            @Override
-//            public Response intercept(Chain chain) throws IOException {
-//                Request request = chain.request();
-//                String showDialog = request.header("showDialog");
-//                Response response = chain.proceed(chain.request());
-//                String body = response.body().string();
-//                JSONObject jsonResponse = null;
-//                try {
-//                    jsonResponse = new JSONObject(body);
-//                    String code = jsonResponse.getString("code");
-//                    //需与服务器协商,返回-3
-//                    if ("-3".equals(code)) {
-//                        if (TextUtils.isEmpty(showDialog) || !("true").equals(showDialog)) {
-//                            jsonResponse.put("code", "-1");
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                return response.newBuilder().body(ResponseBody.create(MediaType.parse("UTF-8"), jsonResponse.toString())).build();
-//            }
-//        };
+
         //日志拦截器
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override

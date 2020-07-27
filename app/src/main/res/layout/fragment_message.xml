@@ -1,15 +1,94 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fm.designstar.views.main.fragment.MessageFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
 
+
+    <RelativeLayout
+
+        android:id="@+id/titleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/theme_color">
+        <LinearLayout
+            android:id="@+id/re_title"
+            android:weightSum="8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <RelativeLayout
+                android:id="@+id/re_guanzhu"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/im_guanzhu"
+                    android:layout_marginTop="@dimen/sobot_20PX"
+                    android:visibility="gone"
 
-</FrameLayout>
+                    android:src="@drawable/btn_round_click_shape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/sobot_10PX"></ImageView>
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_guanzhu"
+                    android:textSize="16dp"
+                    android:text="@string/message_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:id="@+id/re_tuijain"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/im_tuijain"
+                    android:layout_marginTop="@dimen/sobot_20PX"
+                    android:src="@drawable/btn_round_click_shape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/sobot_10PX"></ImageView>
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_tuijain"
+                    android:textSize="22dp"
+                    android:text="@string/sixin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/re_find"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/im_find"
+                    android:layout_marginTop="@dimen/sobot_20PX"
+                    android:visibility="gone"
+                    android:src="@drawable/btn_round_click_shape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/sobot_10PX"></ImageView>
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tv_find"
+                    android:textSize="16dp"
+                    android:text="@string/activitys"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

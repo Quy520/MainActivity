@@ -1,14 +1,480 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.fm.designstar.views.main.fragment.MineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <RelativeLayout
+        android:id="@+id/re_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="210dp"
+        android:background="@drawable/design_bg">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/hand"
+            android:layout_marginTop="@dimen/sobot_20PX"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+
+            <RelativeLayout
+                android:id="@+id/zuopin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/zp_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="12"
+                    android:textColor="@color/edit_color"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/zp_num"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/zuopingnum"
+                    android:textColor="@color/edit_color2"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/getlike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/like_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="281"
+                    android:textColor="@color/edit_color"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/like_num"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/getlike"
+                    android:textColor="@color/edit_color2"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_guanzhu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/guanzhu_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="51"
+                    android:textColor="@color/edit_color"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/guanzhu_num"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/guanzhu"
+                    android:textColor="@color/edit_color2"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/re_fans"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/fans_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="81"
+                    android:textColor="@color/edit_color"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fans_num"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/fans"
+                    android:textColor="@color/edit_color2"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/hand"
+            android:text="深圳 | 中国设计星评委导师"
+            android:textSize="13dp"></TextView>
+
+        <TextView
+            android:id="@+id/info2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/info"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/hand"
+            android:text="我的征途是星辰大海"
+            android:textSize="13dp">
+
+        </TextView>
+
+        <TextView
+
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_marginTop="44dp"
+            android:layout_toRightOf="@+id/hand"
+            android:text="我是你的爸爸"
+            android:textColor="@color/edit_color"
+            android:textSize="18dp"></TextView>
+
+        <com.fm.designstar.widget.CircleImageView
+            android:id="@+id/hand"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_marginTop="44dp"
+
+            android:src="@mipmap/app_logo" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/re_zp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_zp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_myzp" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_zp"
+            android:text="@string/my_zp"
+            android:textColor="@color/edit_color"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/re_dt"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_dt"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_mydt" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_dt"
+            android:text="@string/my_dt"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/re_designer"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_designer"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_design" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_designer"
+            android:text="@string/be_designer"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/re_shdes"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_shdes"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_mysh" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_shdes"
+            android:text="@string/my_shdesigner"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/re_demanger"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_demanger"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_designmanger" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_demanger"
+            android:text="@string/my_shemanger"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+        android:id="@+id/re_black"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_black"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_blacklist" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_black"
+            android:text="@string/my_black"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+    <RelativeLayout
+        android:id="@+id/re_setting"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/im_setting"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:src="@mipmap/icon_mysetting" />
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:src="@mipmap/icon_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/im_setting"
+            android:text="@string/my_seeting"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+
+</LinearLayout>

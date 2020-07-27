@@ -10,7 +10,7 @@ import com.fm.designstar.views.login.contract.SendMsgContract;
 public class SendMsgPresenter extends BasePresenter<SendMsgContract.View> implements SendMsgContract.Presenter {
     @Override
     public void SendMsg(String userPhone) {
-        toSubscribe(HttpManager.getApi().sendMsg(new sendMsgBody(userPhone)), new AbstractHttpSubscriber() {
+        toSubscribe(HttpManager.getApi().sendMsg(userPhone), new AbstractHttpSubscriber() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);

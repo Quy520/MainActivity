@@ -2,7 +2,7 @@ package com.fm.designstar.app;
 
 import android.content.Context;
 
-import com.fm.designstar.views.MainActivity;
+import com.fm.designstar.views.main.activity.MainActivity;
 
 import java.util.Iterator;
 import java.util.Stack;

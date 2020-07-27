@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fm.designstar.views.mine.activity.ChangInfoActivity">
+    <include layout="@layout/layout_toolbar"></include>
+
+
+    <EditText
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:id="@+id/info"
+
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:background="@drawable/btn_round_huise_shape"
+        android:paddingLeft="@dimen/sobot_10PX"
+        android:hint="@string/name_hite"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"></EditText>
+</LinearLayout>

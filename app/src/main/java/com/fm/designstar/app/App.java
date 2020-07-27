@@ -39,7 +39,6 @@ public class App extends MultiDexApplication {
         //注册eventbus
         EventBus.getDefault().register(mApp);
 
-
     }
 
 
@@ -76,6 +75,7 @@ public class App extends MultiDexApplication {
      * 将事件交给事件派发controller处理
      * @param event
      */
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(BaseEvent event) {
         event.setApplicationContext(getContext());

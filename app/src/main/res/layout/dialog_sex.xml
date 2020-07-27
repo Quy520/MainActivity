@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cancle"
+            android:textColor="@color/hint_color"
+            android:textSize="16dp"
+            android:layout_margin="@dimen/sobot_15PX"
+            android:text="取消"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           />
+        <TextView
+            android:id="@+id/sure"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp"
+            android:layout_margin="@dimen/sobot_15PX"
+            android:layout_alignParentEnd="true"
+            android:text="确认"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginBottom="@dimen/sobot_40PX"
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:checked="true"
+            android:id="@+id/man"
+            android:button="@null"
+            android:background="@drawable/man_check"
+            android:layout_width="60dp"
+            android:layout_height="60dp"></CheckBox>
+        <CheckBox
+            android:layout_marginLeft="@dimen/sobot_40PX"
+            android:id="@+id/woman"
+            android:layout_toRightOf="@+id/man"
+            android:button="@null"
+            android:background="@drawable/woman_check"
+            android:layout_width="60dp"
+            android:layout_height="60dp"></CheckBox>
+    </RelativeLayout>
+
+</LinearLayout>

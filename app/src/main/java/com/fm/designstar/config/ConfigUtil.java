@@ -30,6 +30,7 @@ public class ConfigUtil {
     private String birthday;
     private String email;
     private String realName;
+    private String singmarks;
     private int role;
     private int sex;
 
@@ -43,6 +44,7 @@ public class ConfigUtil {
      * 用户的登陆状态
      */
     private boolean isLogin;
+    private int isgoHome;
 
     private String bindPhone;
 
@@ -64,11 +66,32 @@ public class ConfigUtil {
         bindPhone=SpUtil.getString(Constant.BindPhone);
         address=SpUtil.getString(Constant.ADDRESS);
         birthday=SpUtil.getString(Constant.BRITH);
+        singmarks=SpUtil.getString(Constant.singmarks);
         email=SpUtil.getString(Constant.EMAIL);
         realName=SpUtil.getString(Constant.REAMNAME);
         sex=SpUtil.getInt(Constant.SEX,1);
         role=SpUtil.getInt(Constant.ROLE,1);
+        isgoHome=SpUtil.getInt(Constant.HOME,0);
 
+    }
+
+    public String getSingmarks() {
+        return singmarks;
+    }
+
+    public void setSingmarks(String singmarks) {
+       SpUtil.putString(Constant.singmarks,singmarks);
+
+        this.singmarks = singmarks;
+    }
+
+    public int getIsgoHome() {
+        return isgoHome;
+    }
+
+    public void setIsgoHome(int isgoHome) {
+        SpUtil.putInt(Constant.HOME,isgoHome);
+        this.isgoHome = isgoHome;
     }
 
     public String getRealName() {

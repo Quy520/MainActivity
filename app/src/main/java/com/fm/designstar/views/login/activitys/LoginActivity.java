@@ -5,9 +5,13 @@ import butterknife.OnClick;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,14 +19,12 @@ import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.model.server.response.LoginResponse;
-import com.fm.designstar.utils.FileUtils;
 import com.fm.designstar.utils.FormatUtil;
-import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TextViewUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
-import com.fm.designstar.views.MainActivity;
+import com.fm.designstar.views.main.activity.MainActivity;
 import com.fm.designstar.views.login.contract.LoginContract;
 import com.fm.designstar.views.login.presenter.LoginPresenter;
 
@@ -33,9 +35,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
     @BindView(R.id.pwd)
     EditText pwd;
     @BindView(R.id.longin)
-    TextView longin;
+    Button longin;
     @BindView(R.id.long_notice)
     TextView reg_notice;
+    @BindView(R.id.pwd_open)
+    CheckBox pwd_open;
 
 
     @Override
@@ -61,7 +65,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length()>0&&pwd.getText().length()>0){
+                if (charSequence.length()>10&&pwd.getText().length()>5){
                     longin.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
                 }
             }
@@ -79,7 +83,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length()>0&&phone.getText().length()>0){
+                if (charSequence.length()>5&&phone.getText().length()>10){
                     longin.setBackground(getResources().getDrawable(R.drawable.btn_round_click_shape));
                 }
             }
@@ -89,7 +93,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
 
             }
         });
+        pwd_open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (buttonView.isPressed()) {
+                        pwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        pwd .setSelection(pwd.getText().length());
+                    }
+                    return;
+                } else {
+                    Log.e("qsd", "top==checkBox取消选中");
+                    pwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    pwd .setSelection(pwd.getText().length());
+                }
 
+
+            }});
 
     }
     @OnClick({R.id.back,R.id.longin, R.id.forgot, R.id.regist, R.id.qq,R.id.wx})
@@ -148,9 +168,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
         App.getConfig().setRealName(userInfoResponse.getRealName());//zhengshixingm
         App.getConfig().setRole(userInfoResponse.getRole());
         App.getConfig().setSex(userInfoResponse.getSex());
-
-
-        startActivity(MainActivity.class);
+        App.getConfig().setIsgoHome(userInfoResponse.getCertificationMark());
+        if (userInfoResponse.getCertificationMark()==0){
+            startActivity(ComUserInfoActivity.class);
+        }else {
+            startActivity(MainActivity.class);
+        }
         finish();
     }
 

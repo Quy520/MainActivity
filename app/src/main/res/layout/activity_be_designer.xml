@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fm.designstar.views.mine.activity.BeDesignerActivity">
+    <include layout="@layout/layout_toolbar"></include>
+<com.fm.designstar.widget.MyScrollView
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_margin="@dimen/sobot_10PX"
+        android:gravity="center"
+        android:text="请选择以下任一材料上传，证明你的职业经历"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:textColor="@color/edit_color"
+        android:textSize="18dp"
+        android:text="名片"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:src="@mipmap/upload_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:textColor="@color/edit_color"
+        android:textSize="18dp"
+        android:text="工牌"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:src="@mipmap/upload_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="@dimen/sobot_10PX"
+
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:textColor="@color/edit_color"
+        android:textSize="18dp"
+        android:text="在职证明"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginBottom="@dimen/sobot_20PX"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:src="@mipmap/upload_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</com.fm.designstar.widget.MyScrollView>
+</LinearLayout>
