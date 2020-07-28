@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme_color"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/foodImg"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="3dp"
+        android:src="@mipmap/demo_bg" />
+
+    <TextView
+        android:layout_margin="@dimen/sobot_10PX"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="今天带大家看一下能让老公给你做40年饭的厨房 "
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/theme_color"
+        android:textSize="18dp"
+        />
+<RelativeLayout
+
+    android:padding="@dimen/sobot_10PX"
+    android:layout_below="@+id/foodImg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.fm.designstar.widget.CircleImageView
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:id="@+id/hand"
+        android:src="@mipmap/defu_hand"
+        android:layout_width="33dp"
+        android:layout_height="33dp"/>
+    <TextView
+        android:textColor="@color/edit_color"
+        android:id="@+id/name"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/hand"
+        android:text="李嬷嬷"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <CheckBox
+        android:id="@+id/check_guanzhu"
+        android:button="@null"
+        android:background="@drawable/guanzhu_check"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/name"
+        android:src="@mipmap/home_guanzhu"
+        android:layout_width="@dimen/sobot_20PX"
+        android:layout_height="@dimen/sobot_20PX"/>
+
+
+    <CheckBox
+        android:id="@+id/check_like"
+        android:button="@null"
+        android:background="@drawable/homelike_check"
+        android:layout_marginLeft="@dimen/sobot_20PX"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/check_guanzhu"
+        android:src="@mipmap/home_guanzhu"
+        android:layout_width="@dimen/sobot_20PX"
+        android:layout_height="@dimen/sobot_20PX"/>
+
+    <TextView
+        android:textColor="@color/hint_color"
+        android:id="@+id/likenum"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/check_like"
+        android:text="1.2万"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+
+    android:id="@+id/message"
+
+    android:layout_marginLeft="30dp"
+    android:layout_centerVertical="true"
+    android:layout_toRightOf="@+id/likenum"
+    android:src="@mipmap/home_com"
+    android:layout_width="@dimen/sobot_20PX"
+    android:layout_height="@dimen/sobot_20PX"/>
+
+    <TextView
+        android:textColor="@color/hint_color"
+        android:id="@+id/nessage_num"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/message"
+        android:text="2323"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+
+        android:id="@+id/share"
+        android:layout_toLeftOf="@+id/tv_share"
+        android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"
+
+        android:src="@mipmap/home_share"
+        android:layout_width="@dimen/sobot_20PX"
+        android:layout_height="@dimen/sobot_20PX"/>
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_marginRight="@dimen/sobot_20PX"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/hint_color"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+
+        android:text="分享"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    
+</RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.fm.designstar.widget.CircleImageView
+        android:id="@+id/hand"
+        android:layout_margin="@dimen/sobot_10PX"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/defu_hand"
+        ></com.fm.designstar.widget.CircleImageView>
+    <TextView
+        android:id="@+id/name"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:textSize="14dp"
+        android:textColor="@color/edit_color"
+        android:text="㊙咪咪"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_below="@+id/name"
+
+        android:layout_toRightOf="@+id/hand"
+        android:textSize="14dp"
+        android:textColor="@color/hint_color"
+        android:text="三小时前"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/imgLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:id="@+id/oneImg"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+
+            android:scaleType="fitXY" />
+        <com.fm.designstar.widget.CostomGrideView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/gw"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp">
+
+        </com.fm.designstar.widget.CostomGrideView>
+
+        <com.fm.designstar.widget.CostomGrideView
+            android:visibility="gone"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/gw2"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp">
+
+        </com.fm.designstar.widget.CostomGrideView>
+    </FrameLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:text="#设计美学#今天也是元气满满的一天吖～"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.fm.designstar.widget.viegroup.MyViewGroup
+        android:id="@+id/myViewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@android:color/white" />
+    <RelativeLayout
+        android:padding="@dimen/sobot_10PX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<ImageView
+    android:layout_marginLeft="5dp"
+    android:id="@+id/im"
+    android:layout_centerVertical="true"
+    android:src="@mipmap/home_zb"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginLeft="@dimen/sobot_10PX"
+            android:textColor="@color/notice"
+            android:layout_toRightOf="@+id/im"
+            android:text="上海市"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:padding="@dimen/sobot_10PX"
+        android:layout_below="@+id/foodImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+
+            android:id="@+id/share"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+
+            android:src="@mipmap/home_share"
+            android:layout_width="@dimen/sobot_20PX"
+            android:layout_height="@dimen/sobot_20PX"/>
+
+        <TextView
+            android:layout_toRightOf="@+id/share"
+            android:id="@+id/tv_share"
+
+            android:textColor="@color/hint_color"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+
+            android:text="分享"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
+            android:layout_toLeftOf="@+id/likenum"
+            android:id="@+id/check_like"
+            android:button="@null"
+            android:background="@drawable/homelike_check"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_centerVertical="true"
+
+            android:src="@mipmap/home_guanzhu"
+            android:layout_width="@dimen/sobot_20PX"
+            android:layout_height="@dimen/sobot_20PX"/>
+
+        <TextView
+            android:textColor="@color/hint_color"
+            android:id="@+id/likenum"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/message"
+            android:layout_centerVertical="true"
+            android:text="1.2万"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+
+            android:id="@+id/message"
+
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+          android:layout_toLeftOf="@+id/nessage_num"
+            android:src="@mipmap/home_com"
+            android:layout_width="@dimen/sobot_20PX"
+            android:layout_height="@dimen/sobot_20PX"/>
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/hint_color"
+            android:id="@+id/nessage_num"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+
+            android:text="2323"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

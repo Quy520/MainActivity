@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -69,12 +70,13 @@ ImageView im_find;
 
         re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
         ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
-        fragmentList.add(new FindFragment());
-        fragmentList.add(new FindFragment());
+        fragmentList.add(new guanzhuFragment());
+        fragmentList.add(new CommFragment());
         fragmentList.add(new FindFragment());
         viewPager.setEnabled(false);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(1);
     }
     @OnClick({R.id.re_guanzhu, R.id.re_tuijain, R.id.re_find
     })
@@ -96,7 +98,7 @@ ImageView im_find;
                 setItem();
                 tv_find.setTextSize(22);
                 im_find.setVisibility(View.VISIBLE);
-                viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(0);
 
                 break;
 
@@ -126,7 +128,6 @@ ImageView im_find;
 
         @Override
         public Fragment getItem(int i) {
-            ToastUtil.showToast(i+"");
             return fragmentList.get(i);
         }
 

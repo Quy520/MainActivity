@@ -10,6 +10,7 @@ import butterknife.OnClick;
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.utils.StatusBarUtil;
+import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.main.fragment.DesignerFragment;
@@ -57,6 +59,8 @@ public class MainActivity extends BaseActivity {
     NoScrollViewPager viewPager;
     @BindView(R.id.tabLayout)
     LinearLayout tabLayout;
+    private long timeMillis;
+
     private List<BaseFragment> fragmentList = new ArrayList<>();
     @Override
     public int getLayoutId() {
@@ -164,5 +168,18 @@ public class MainActivity extends BaseActivity {
             return fragmentList.size();
         }
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (System.currentTimeMillis() - timeMillis > 2000) {
+                ToastUtil.showToast("再按一次退出程序");
+                timeMillis = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -4,6 +4,7 @@ package com.fm.designstar.https;
 
 
 import com.fm.designstar.model.server.BaseResponse;
+import com.fm.designstar.model.server.body.HomeRecomBody;
 import com.fm.designstar.model.server.body.LoginBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
@@ -44,8 +45,6 @@ public interface HttpApi {
     @POST("user/updateUserInfo")//完善信息
     Observable<BaseResponse> comInfo(@Body comInfobody body);
 
-
-
     @GET("user/loginOut")//获取他人信息
     Observable<BaseResponse> loginOut();
     @GET("user/getUserOtherInfo")//获取他人点赞
@@ -57,6 +56,18 @@ public interface HttpApi {
 
     @GET("media/moment/getToken")//获取自己点赞
     Observable<BaseResponse<OssTokenResponse>> ossToken(@Query("roleSessionName")String mobile);
+
+    @POST("media/moment/recommend")//首页推荐
+    Observable<BaseResponse> homeRecommend(@Body HomeRecomBody body);
+
+    @POST("media/moment/find")//首页发现
+    Observable<BaseResponse> homeFind(@Body HomeRecomBody body);
+
+    @POST("media/moment/follow")//完善信息
+    Observable<BaseResponse> homeFollow(@Body HomeRecomBody body);
+
+
+
 
 
 

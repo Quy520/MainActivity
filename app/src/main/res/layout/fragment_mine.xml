@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.fm.designstar.views.main.fragment.MineFragment">
+    <com.fm.designstar.widget.MyScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <RelativeLayout
         android:id="@+id/re_top"
@@ -476,5 +485,6 @@
         android:layout_marginLeft="@dimen/sobot_15PX"
         android:layout_marginRight="@dimen/sobot_15PX"
         android:background="@color/line"></View>
-
+    </LinearLayout>
+    </com.fm.designstar.widget.MyScrollView>
 </LinearLayout>

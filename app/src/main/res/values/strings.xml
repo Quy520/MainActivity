@@ -70,4 +70,5 @@
     <string name="change_sin">修改签名</string>
     <string name="no_city">请选择地址</string>
     <string name="no_sing">未设置</string>
+    <string name="guss_like">猜你喜欢</string>
 </resources>

@@ -165,5 +165,5 @@ dependencies {
     //阿里云服务器
     implementation'com.aliyun.dpa:oss-android-sdk:+'
 
-
+    implementation 'com.youth.banner:banner:2.1.0'
 }
