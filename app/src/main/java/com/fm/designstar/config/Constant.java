@@ -28,6 +28,7 @@ public class Constant {
 
     public static final String USERTOKEN = "userToken";
     public static final String USER_ID = "user_id";
+    public static final String rongyuntoken = "rongyuntoken";
     public static final String URL_KEY = "baseUrlKey";
     public static final String USER_PHONE = "userPhone";
     public static final String USER_NAME = "userName";

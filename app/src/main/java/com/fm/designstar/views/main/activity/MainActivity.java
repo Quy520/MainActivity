@@ -1,15 +1,11 @@
 package com.fm.designstar.views.main.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import android.Manifest;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,15 +18,13 @@ import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.ToastUtil;
-import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.main.fragment.DesignerFragment;
 import com.fm.designstar.views.main.fragment.HomeFragment;
 import com.fm.designstar.views.main.fragment.MessageFragment;
 import com.fm.designstar.views.main.fragment.MineFragment;
 import com.fm.designstar.widget.NoScrollViewPager;
-
-import org.greenrobot.eventbus.EventBus;
+import com.fm.designstar.map.Selectaddress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +83,7 @@ public class MainActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.addLay:
-
+            startActivity(Selectaddress.class);
                 break;
             case R.id.homeLay:
 

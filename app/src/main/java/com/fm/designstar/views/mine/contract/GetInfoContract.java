@@ -20,7 +20,7 @@ public interface GetInfoContract {
     }
 
     interface Presenter {
-        void GetotherLikeInfo();
+        void GetotherLikeInfo(String id);
         void GetuserLikeInfo();
         void getOtherUserInfo(String uuid);
 

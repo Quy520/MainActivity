@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView
+        android:id="@+id/im_card"
         android:layout_marginTop="@dimen/sobot_10PX"
         android:src="@mipmap/upload_bg"
         android:layout_width="match_parent"
@@ -44,6 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView
+        android:id="@+id/im_card2"
+
         android:layout_marginTop="@dimen/sobot_10PX"
         android:src="@mipmap/upload_bg"
         android:layout_width="match_parent"
@@ -58,6 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView
+        android:id="@+id/im_card3"
+
         android:layout_marginBottom="@dimen/sobot_20PX"
         android:layout_marginTop="@dimen/sobot_10PX"
         android:src="@mipmap/upload_bg"

@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 ext {
     /*应用名*/
     appName = "DesignStar"
-    appName4Debug = "DesignStarTest"
+    appName4Debug = "DesignStar"
     /*应用包名*/
     appId = "com.fm.designstar"
-    appId4debug = appId + ".test"
+    appId4debug = appId
     /*7.0图片权限 */
     selectImgFileProvider = appId + ".fileProvider"
     selectImgFileProvider4Debug = appId4debug + ".fileProvider"
@@ -28,7 +28,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0。0"
 
         flavorDimensions "versionCode"
         //自定义字段
@@ -38,7 +38,10 @@ android {
         resValue "string", "tray__authority", appId4debug + ".tray"
         //manifest属性配置
         manifestPlaceholders = [
-                APP_NAME       : appName4Debug
+                APP_NAME       : appName4Debug,
+                JPUSH_PKGNAME : appId,
+                JPUSH_APPKEY : "c8431a8245872dd1b14573c8", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
         ndk {
             // 设置支持的SO库架构
@@ -51,11 +54,12 @@ android {
 
 
     signingConfigs {
+
         release {
-            storeFile file("MyRecoMe.jks")
-            storePassword "recome2019"
-            keyAlias "recome"
-            keyPassword "recome2019"
+            storeFile file("Designer.jks")
+            storePassword "qweasd"
+            keyAlias "Designer"
+            keyPassword "qweasd"
         }
     }
     buildTypes {
@@ -70,6 +74,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+            }
             minifyEnabled false
             zipAlignEnabled true
             // 移除无用的resource文件
@@ -166,4 +174,14 @@ dependencies {
     implementation'com.aliyun.dpa:oss-android-sdk:+'
 
     implementation 'com.youth.banner:banner:2.1.0'
+    implementation 'com.amap.api:location:latest.integration'
+    //搜索功能
+    implementation 'com.amap.api:search:latest.integration'
+
+
+    implementation 'cn.jiguang.sdk:jpush:3.6.8'  // 此处以JPush 3.6.8 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.4.0'  // 此处以JCore 2.4.0 版本为例
+
+    api 'cn.rongcloud.sdk:im_lib:4.0.0.1'
+    api 'cn.rongcloud.sdk:im_kit:4.0.0.1'
 }

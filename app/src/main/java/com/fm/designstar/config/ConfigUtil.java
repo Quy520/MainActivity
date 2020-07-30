@@ -23,6 +23,7 @@ public class ConfigUtil {
 
 
     private String userToken;
+    private String userid;
     private String user_name;
     private String user_head;
     private String userPhone;
@@ -47,6 +48,7 @@ public class ConfigUtil {
     private int isgoHome;
 
     private String bindPhone;
+    private String rongyuntoken;
 
 
 
@@ -59,6 +61,8 @@ public class ConfigUtil {
         //初始化H5地址
         setBaseUrl(baseUrl);
         userToken = SpUtil.getString(Constant.USERTOKEN);
+        userid = SpUtil.getString(Constant.USER_ID);
+        rongyuntoken = SpUtil.getString(Constant.rongyuntoken);
         user_name = SpUtil.getString(Constant.USER_NAME);
         user_head = SpUtil.getString(Constant.USER_HEAD);
         userPhone = SpUtil.getString(Constant.USER_PHONE);
@@ -73,6 +77,27 @@ public class ConfigUtil {
         role=SpUtil.getInt(Constant.ROLE,1);
         isgoHome=SpUtil.getInt(Constant.HOME,0);
 
+    }
+
+    public String getRongyuntoken() {
+        return rongyuntoken;
+    }
+
+    public void setRongyuntoken(String rongyuntoken) {
+        SpUtil.putString(Constant.rongyuntoken,rongyuntoken);
+
+
+        this.rongyuntoken = rongyuntoken;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        SpUtil.putString(Constant.USER_ID,userid);
+
+        this.userid = userid;
     }
 
     public String getSingmarks() {

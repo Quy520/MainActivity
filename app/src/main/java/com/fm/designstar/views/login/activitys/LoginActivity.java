@@ -169,6 +169,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
         App.getConfig().setRole(userInfoResponse.getRole());
         App.getConfig().setSex(userInfoResponse.getSex());
         App.getConfig().setIsgoHome(userInfoResponse.getCertificationMark());
+        App.getConfig().setUserid(userInfoResponse.getCode()+"");
         if (userInfoResponse.getCertificationMark()==0){
             startActivity(ComUserInfoActivity.class);
         }else {

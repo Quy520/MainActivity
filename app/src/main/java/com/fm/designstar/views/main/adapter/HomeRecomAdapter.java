@@ -1,5 +1,6 @@
 package com.fm.designstar.views.main.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
+import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 
@@ -45,6 +47,12 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
         if (!StringUtil.isBlank(App.getConfig().getUser_head())){
             Glide.with(mContext).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(holder.hand);
         }
+        holder.hand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity( new Intent(mContext,InfoDetailActivity.class));
+            }
+        });
     }
 
     class LikeViewHolder extends RecyclerView.ViewHolder {

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
 import com.fm.designstar.R;
 import com.fm.designstar.config.ConfigUtil;
 import com.fm.designstar.events.BaseEvent;
@@ -19,8 +23,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 
 import androidx.multidex.MultiDexApplication;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
+import io.rong.imkit.RongIM;
 
 
 /**
@@ -28,6 +36,7 @@ import androidx.multidex.MultiDexApplication;
  */
 public class App extends MultiDexApplication {
     private static App mApp;
+    private AMapLocationClient mlocationClient;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,6 +47,18 @@ public class App extends MultiDexApplication {
         ToastUtil.register(mApp);
         //注册eventbus
         EventBus.getDefault().register(mApp);
+        //融云注册
+        String appKey = "lmxuhwaglesnd";
+        RongIM.init(mApp, appKey);
+        //极光推送注册
+        JPushInterface.setDebugMode(true); //允许被debug，正式版本的时候注掉
+        JPushInterface.init(this);  //初始化
+        JPushInterface.setAlias(mApp, App.getConfig().getUserid(), new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                Log.e("qsd",i+"alias"+s);
+            }
+        });
 
     }
 
@@ -133,4 +154,5 @@ public class App extends MultiDexApplication {
         }
         return null;
     }
+
 }

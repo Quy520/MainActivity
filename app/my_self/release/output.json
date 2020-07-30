@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.fm.designstar.test",
+  "applicationId": "com.fm.designstar",
   "variantName": "my_selfRelease",
   "elements": [
     {

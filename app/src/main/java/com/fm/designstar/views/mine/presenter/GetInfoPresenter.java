@@ -19,8 +19,8 @@ import com.fm.designstar.views.mine.contract.LoginOutContract;
 public class GetInfoPresenter extends BasePresenter<GetInfoContract.View> implements GetInfoContract.Presenter {
 
     @Override
-    public void GetotherLikeInfo() {
-        toSubscribe(HttpManager.getApi().getUserOtherInfo(), new AbstractHttpSubscriber<UserlikeResponse>() {
+    public void GetotherLikeInfo(String id) {
+        toSubscribe(HttpManager.getApi().getUserOtherInfo(id), new AbstractHttpSubscriber<UserlikeResponse>() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);
@@ -56,7 +56,6 @@ public class GetInfoPresenter extends BasePresenter<GetInfoContract.View> implem
 
             @Override
             protected void onHttpNext(UserlikeResponse Response) {
-
                 mView.GetuserlikeInfoSuccess(Response);
 
             }

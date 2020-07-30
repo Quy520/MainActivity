@@ -90,5 +90,19 @@
             </RelativeLayout>
         </LinearLayout>
 
+
+        <com.fm.designstar.widget.NoScrollViewPager
+
+            android:layout_marginBottom="@dimen/sobot_15PX"
+            android:layout_below="@+id/re_title"
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+        </com.fm.designstar.widget.NoScrollViewPager>
+
+
     </RelativeLayout>
 </RelativeLayout>

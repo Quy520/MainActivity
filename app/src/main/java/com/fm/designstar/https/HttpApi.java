@@ -4,8 +4,10 @@ package com.fm.designstar.https;
 
 
 import com.fm.designstar.model.server.BaseResponse;
+import com.fm.designstar.model.server.body.Addbody;
 import com.fm.designstar.model.server.body.HomeRecomBody;
 import com.fm.designstar.model.server.body.LoginBody;
+import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
 import com.fm.designstar.model.server.body.sendMsgBody;
@@ -49,7 +51,7 @@ public interface HttpApi {
     Observable<BaseResponse> loginOut();
     @GET("user/getUserOtherInfo")//获取他人点赞
 
-    Observable<BaseResponse> getUserOtherInfo();
+    Observable<BaseResponse> getUserOtherInfo(@Query("userId")String userId);
 
     @GET("user/getUserSelfInfo")//获取自己点赞
     Observable<BaseResponse<UserlikeResponse>> getUserSelfInfo();
@@ -63,8 +65,16 @@ public interface HttpApi {
     @POST("media/moment/find")//首页发现
     Observable<BaseResponse> homeFind(@Body HomeRecomBody body);
 
-    @POST("media/moment/follow")//完善信息
+    @POST("media/moment/follow")//完善关注
     Observable<BaseResponse> homeFollow(@Body HomeRecomBody body);
+
+    @POST("media/moment/userMoment")//获取作品和动态
+    Observable<BaseResponse> userMoment(@Body UserMomentBody body);
+
+
+    @POST("user/device/add")//获取融云token
+    Observable<BaseResponse> add(@Body Addbody body);
+
 
 
 
