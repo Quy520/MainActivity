@@ -24,7 +24,8 @@ private GetInfoPresenter getInfoPresenter;
     @BindView(R.id.sixin)
     TextView textView;
 
-
+    private int pageNum=1;
+    private String uuid;
 
     @Override
     public int getLayoutId() {
@@ -41,6 +42,11 @@ private GetInfoPresenter getInfoPresenter;
 
     @Override
     public void loadData() {
+       uuid= getIntent().getStringExtra("UUID");
+
+        mPresenter.UseMoment(pageNum,10,1,uuid);
+
+        getInfoPresenter.getOtherUserInfo(uuid);
 
 
 

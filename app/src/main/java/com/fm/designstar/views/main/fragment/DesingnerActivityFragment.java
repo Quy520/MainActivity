@@ -1,26 +1,17 @@
 package com.fm.designstar.views.main.fragment;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
 
 
-
-public class SystemMesgFragment extends BaseFragment {
+public class DesingnerActivityFragment extends BaseFragment {
 
 
     private int pagenum=1;
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_system_mesg;
+        return R.layout.fragment_designer_activity;
     }
 
     @Override

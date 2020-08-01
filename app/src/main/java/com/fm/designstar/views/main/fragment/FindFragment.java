@@ -30,7 +30,7 @@ public class FindFragment extends BaseFragment<HomeFindPresenter> implements Hom
     public void loadData() {
         Log.e("qsd","fragment_find");
 
-
+        mPresenter.HomeFind(pagenum,10);
     }
 
     @Override

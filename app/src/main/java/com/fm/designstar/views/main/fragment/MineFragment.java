@@ -91,7 +91,7 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
 
             info2.setText(App.getConfig().getSingmarks());
         }
-       // mPresenter.GetuserLikeInfo();
+
 
     }
 
@@ -102,9 +102,23 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
             mPresenter.GetuserLikeInfo();
         }
     }
-    @OnClick({R.id.re_zp,R.id.re_dt, R.id.re_designer,R.id.re_shdes,R.id.re_demanger,R.id.re_black,R.id.re_setting})
+    @OnClick({R.id.re_zp,R.id.zuopin,R.id.re_dt,R.id.re_guanzhu,R.id.re_fans, R.id.re_designer,R.id.re_shdes,R.id.re_demanger,R.id.re_black,R.id.re_setting})
     public void OnClick(View view) {
         switch (view.getId()) {
+
+            case R.id.zuopin:
+                startActivity(MyWorkActivity.class);
+
+                break;
+                case R.id.re_guanzhu:
+                startActivity(MyWorkActivity.class);
+
+                break;
+               case R.id.re_fans:
+                startActivity(MyWorkActivity.class);
+
+                break;
+
             case R.id.re_zp:
                 startActivity(MyWorkActivity.class);
 

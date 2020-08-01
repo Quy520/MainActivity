@@ -501,7 +501,6 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
 
     @Override
     public void uploadImageSuccess(String url) {
-        Log.e("qsd","url"+url);
         icon=url;
 
     }

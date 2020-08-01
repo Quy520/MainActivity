@@ -84,6 +84,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+        <service android:name="com.amap.api.location.APSService"></service>
 
         <receiver
             android:name=".service.JGReceiver"

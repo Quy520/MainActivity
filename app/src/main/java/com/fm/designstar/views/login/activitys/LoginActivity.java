@@ -103,7 +103,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
                     }
                     return;
                 } else {
-                    Log.e("qsd", "top==checkBox取消选中");
                     pwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     pwd .setSelection(pwd.getText().length());
                 }

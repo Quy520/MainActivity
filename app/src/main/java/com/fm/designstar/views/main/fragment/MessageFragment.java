@@ -1,7 +1,5 @@
 package com.fm.designstar.views.main.fragment;
 
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -11,7 +9,6 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,7 +20,6 @@ import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.utils.FormatUtil;
-import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.main.contract.AddContract;
@@ -74,8 +70,8 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
     public void loadData() {
         re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
         ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
-        fragmentList.add(new SystemMesgFragment());
-        fragmentList.add(new SixinFragment());
+        fragmentList.add(new MessageSystemFragment());
+        fragmentList.add(new MessageSixinFragment());
         viewPager.setEnabled(false);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
@@ -123,7 +119,7 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
                 setItem();
                 tv_guanzhu.setTextSize(22);
                 im_guanzhu.setVisibility(View.VISIBLE);
-                 viewPager.setCurrentItem(1);
+                 viewPager.setCurrentItem(0);
                 break;
             case R.id.re_tuijain:
                 initronhgyun(App.getConfig().getRongyuntoken());

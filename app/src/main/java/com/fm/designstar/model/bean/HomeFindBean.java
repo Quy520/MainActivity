@@ -38,16 +38,62 @@ public class HomeFindBean extends BaseBean {
     private int mediaType;
     private long userId;
     private String content;
+    private String address;
+    private String city;
     private String createTime;
     private long createTimeStamp;
     private String nickName;
     private String headUri;
     private int sex;
     private int isLike;
+    private int likes;
+    private int comments;
+    private int forwards;
     private boolean follow;
     private boolean mine;
+
     private List<MultimediaListBean> multimediaList;
     private List<TagsListBean> tagsList;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+
+    public int getForwards() {
+        return forwards;
+    }
+
+    public void setForwards(int forwards) {
+        this.forwards = forwards;
+    }
 
     public long getMomentId() {
         return momentId;
@@ -169,81 +215,7 @@ public class HomeFindBean extends BaseBean {
         this.tagsList = tagsList;
     }
 
-    public static class MultimediaListBean {
-        /**
-         * mediaId : 1287681768958328833
-         * momentId : 1287681768958328832
-         * multimediaType : 2
-         * multimediaUrl : https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/output-2020-07-27-17:30:03-791.mp4
-         * height : 640
-         * width : 360
-         * preUrl : https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/19807073081772949792/1595842226101.png
-         */
 
-        private long mediaId;
-        private long momentId;
-        private int multimediaType;
-        private String multimediaUrl;
-        private int height;
-        private int width;
-        private String preUrl;
-
-        public long getMediaId() {
-            return mediaId;
-        }
-
-        public void setMediaId(long mediaId) {
-            this.mediaId = mediaId;
-        }
-
-        public long getMomentId() {
-            return momentId;
-        }
-
-        public void setMomentId(long momentId) {
-            this.momentId = momentId;
-        }
-
-        public int getMultimediaType() {
-            return multimediaType;
-        }
-
-        public void setMultimediaType(int multimediaType) {
-            this.multimediaType = multimediaType;
-        }
-
-        public String getMultimediaUrl() {
-            return multimediaUrl;
-        }
-
-        public void setMultimediaUrl(String multimediaUrl) {
-            this.multimediaUrl = multimediaUrl;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public void setWidth(int width) {
-            this.width = width;
-        }
-
-        public String getPreUrl() {
-            return preUrl;
-        }
-
-        public void setPreUrl(String preUrl) {
-            this.preUrl = preUrl;
-        }
-    }
 
     public static class TagsListBean {
         /**

@@ -28,16 +28,16 @@ import butterknife.ButterKnife;
  * @date : 2018/8/14 16:38
  * @update : 2018/8/14
  */
-public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeViewHolder, String> {
+public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewHolder, String> {
     private RequestOptions myOptions;
 
-    public HomeRecomAdapter() {
-        myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext, 0, R.mipmap.ico_default_3_2);
+    public MessageAdapter() {
+        myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext, 0, R.mipmap.ico_default);
     }
 
     @Override
     public LikeViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recome, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_message, parent, false);
         return new LikeViewHolder(view);
     }
 
@@ -47,6 +47,8 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
         if (!StringUtil.isBlank(App.getConfig().getUser_head())){
             Glide.with(mContext).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(holder.hand);
         }
+
+
         holder.hand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

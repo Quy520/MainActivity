@@ -116,7 +116,6 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
                  latitude = amapLocation.getLatitude();//获取纬度
                  longitude = amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
-                Log.d("qsdhaha", amapLocation.getAddress());
                 LocationInfo locationInfo = new LocationInfo();
                 locationInfo.setAddress(amapLocation.getAddress());
                 locationInfo.setLatitude(latitude);

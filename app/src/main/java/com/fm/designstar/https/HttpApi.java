@@ -6,11 +6,13 @@ package com.fm.designstar.https;
 import com.fm.designstar.model.server.BaseResponse;
 import com.fm.designstar.model.server.body.Addbody;
 import com.fm.designstar.model.server.body.HomeRecomBody;
+import com.fm.designstar.model.server.body.Locationbody;
 import com.fm.designstar.model.server.body.LoginBody;
 import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
 import com.fm.designstar.model.server.body.sendMsgBody;
+import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LoginResponse;
 import com.fm.designstar.model.server.response.OssTokenResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
@@ -47,7 +49,7 @@ public interface HttpApi {
     @POST("user/updateUserInfo")//完善信息
     Observable<BaseResponse> comInfo(@Body comInfobody body);
 
-    @GET("user/loginOut")//获取他人信息
+    @GET("user/loginOut")//退出登录
     Observable<BaseResponse> loginOut();
     @GET("user/getUserOtherInfo")//获取他人点赞
 
@@ -56,24 +58,34 @@ public interface HttpApi {
     @GET("user/getUserSelfInfo")//获取自己点赞
     Observable<BaseResponse<UserlikeResponse>> getUserSelfInfo();
 
-    @GET("media/moment/getToken")//获取自己点赞
+    @GET("media/moment/getToken")//获取阿里token
     Observable<BaseResponse<OssTokenResponse>> ossToken(@Query("roleSessionName")String mobile);
 
     @POST("media/moment/recommend")//首页推荐
     Observable<BaseResponse> homeRecommend(@Body HomeRecomBody body);
 
     @POST("media/moment/find")//首页发现
-    Observable<BaseResponse> homeFind(@Body HomeRecomBody body);
+    Observable<BaseResponse<HomeFindResponse>> homeFind(@Body HomeRecomBody body);
 
-    @POST("media/moment/follow")//完善关注
-    Observable<BaseResponse> homeFollow(@Body HomeRecomBody body);
+    @POST("media/moment/follow")//首页关注
+    Observable<BaseResponse<HomeFindResponse>> homeFollow(@Body HomeRecomBody body);
 
-    @POST("media/moment/userMoment")//获取作品和动态
+    @POST("media/moment/userMoment")//获取个人或他人作品和动态
     Observable<BaseResponse> userMoment(@Body UserMomentBody body);
 
 
     @POST("user/device/add")//获取融云token
     Observable<BaseResponse> add(@Body Addbody body);
+
+    @POST("user/userLocation/updateUserLocation")//获取融云token
+    Observable<BaseResponse> updateUserLocation(@Body Locationbody body);
+
+
+    @POST("media/moment/discoverDesigners")//设计师附近
+    Observable<BaseResponse<HomeFindResponse>> discoverDesigners(@Body HomeRecomBody body);
+
+
+
 
 
 

@@ -25,7 +25,7 @@ import com.fm.designstar.views.mine.contract.GetInfoContract;
 import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 
 
-public class SixinFragment extends BaseFragment<GetInfoPresenter>  implements GetInfoContract.View {
+public class MessageSixinFragment extends BaseFragment<GetInfoPresenter>  implements GetInfoContract.View {
 
 
 private int pagenum=1;

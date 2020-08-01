@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.main.fragment.SystemMesgFragment">
+    tools:context=".views.main.fragment.MessageSystemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/all_message"
+    android:layout_margin="@dimen/sobot_10PX"
+    android:gravity="center"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:textSize="13dp"
+    android:textColor="@color/notice"
+    android:background="@drawable/shape_yellow"
+    android:text="@string/all_message"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/home" />
+        android:id="@+id/all_pl"
+        android:textColor="@color/edit_color2"
+        android:layout_margin="@dimen/sobot_10PX"
+        android:textSize="13dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:background="@drawable/btn_round_huise_shape"
+        android:text="@string/pl_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="@color/edit_color2"
 
-</FrameLayout>
+        android:id="@+id/all_zan"
+
+        android:layout_margin="@dimen/sobot_10PX"
+        android:background="@drawable/btn_round_huise_shape"
+
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:text="@string/zan_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="@color/edit_color2"
+
+        android:id="@+id/all_notice"
+
+        android:layout_margin="@dimen/sobot_10PX"
+        android:background="@drawable/btn_round_huise_shape"
+
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:text="@string/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_recy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

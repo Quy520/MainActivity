@@ -25,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
+        android:id="@+id/time"
         android:layout_marginTop="@dimen/sobot_10PX"
         android:layout_below="@+id/name"
-
         android:layout_toRightOf="@+id/hand"
         android:textSize="14dp"
         android:textColor="@color/hint_color"
@@ -47,12 +47,39 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:visibility="gone"
             android:id="@+id/oneImg"
             android:layout_width="220dp"
             android:layout_height="220dp"
-
+            android:visibility="gone"
             android:scaleType="fitXY" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ly_two_img"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/oneImg2"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+
+                android:scaleType="fitXY" />
+            <ImageView
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/oneImg3"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+
+                android:scaleType="fitXY" />
+        </LinearLayout>
         <com.fm.designstar.widget.CostomGrideView
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
@@ -84,6 +111,7 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/content"
         android:layout_marginTop="@dimen/sobot_10PX"
         android:layout_marginLeft="@dimen/sobot_15PX"
         android:text="#设计美学#今天也是元气满满的一天吖～"
@@ -107,6 +135,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/address"
             android:layout_marginLeft="@dimen/sobot_10PX"
             android:textColor="@color/notice"
             android:layout_toRightOf="@+id/im"
@@ -161,7 +190,7 @@
             android:layout_marginLeft="5dp"
             android:layout_toLeftOf="@+id/message"
             android:layout_centerVertical="true"
-            android:text="1.2万"
+            android:text="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -171,7 +200,7 @@
 
             android:layout_marginLeft="30dp"
             android:layout_centerVertical="true"
-          android:layout_toLeftOf="@+id/nessage_num"
+          android:layout_toLeftOf="@+id/message_num"
             android:src="@mipmap/home_com"
             android:layout_width="@dimen/sobot_20PX"
             android:layout_height="@dimen/sobot_20PX"/>
@@ -179,11 +208,11 @@
         <TextView
             android:layout_alignParentEnd="true"
             android:textColor="@color/hint_color"
-            android:id="@+id/nessage_num"
+            android:id="@+id/message_num"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
 
-            android:text="2323"
+            android:text="23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.events.HomeEvent;
+import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.Tool;
@@ -13,6 +15,11 @@ import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.main.contract.HomeFindContract;
 import com.fm.designstar.views.main.contract.HomeGuanzhuContract;
 import com.fm.designstar.views.main.presenter.HomeFindPresenter;
+import com.fm.designstar.views.main.presenter.HomeGuanzhuPresenter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 
-public class guanzhuFragment extends   BaseFragment<HomeFindPresenter> implements HomeFindContract.View , HomeGuanzhuContract.View {
+public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> implements HomeGuanzhuContract.View ,HomeFindContract.View  {
 
     private List<String> urls=new ArrayList<>();
 
@@ -30,6 +37,7 @@ public class guanzhuFragment extends   BaseFragment<HomeFindPresenter> implement
     @BindView(R.id.home_recy)
     RecyclerView hotRecycler;
     private int pagenum=1;
+    private HomeFindPresenter homeFindPresenter;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_guanzhu;
@@ -38,16 +46,16 @@ public class guanzhuFragment extends   BaseFragment<HomeFindPresenter> implement
     @Override
     public void initPresenter() {
     mPresenter.init(this);
+        homeFindPresenter=new HomeFindPresenter();
+        homeFindPresenter.init(this);
     }
 
     @Override
     public void loadData() {
-        mPresenter.HomeFind(pagenum,10);
-        urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=2400807498,1022710002&fm=15&gp=0.jpg");
-        urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=3848182578,3212131776&fm=15&gp=0.jpg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179792&di=64dfa2fcbaed252126d9182ae67e053c&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171107%2F62a8b9b47e6f41708416c4eb5f44fc6a.jpeg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179787&di=578959ca7cecfc13376805894ff6e52d&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F5377154223%2F0");
-        hotRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
+          hotRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         hotRecycler.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 5)));
         hotRecycler.setNestedScrollingEnabled(false);
         guanzhuAdapter=new HomeGuanzhuAdapter();
@@ -56,17 +64,22 @@ public class guanzhuFragment extends   BaseFragment<HomeFindPresenter> implement
         hotRecycler.setAdapter(guanzhuAdapter);
         hotRecycler.setHasFixedSize(true);
         hotRecycler.setFocusable(false);
-        guanzhuAdapter.addData(urls);
+
     }
 
-    @Override
-    public void HomeFindSuccess(HomeFindResponse homeFindResponse) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(HomeEvent event) {
+       if (event.getTAG()==1){
+           mPresenter.HomeGuanzhu(pagenum,10);
+       }else {
+           homeFindPresenter.HomeFind(pagenum,10);
+       }
 
     }
 
     @Override
     public void HomeGuanzhuSuccess(HomeFindResponse homeFindResponse) {
-
+        guanzhuAdapter.addData(homeFindResponse.getResult());
     }
 
     @Override
@@ -81,6 +94,11 @@ public class guanzhuFragment extends   BaseFragment<HomeFindPresenter> implement
 
     @Override
     public void showErrorMsg(String msg, int code) {
+
+    }
+
+    @Override
+    public void HomeFindSuccess(HomeFindResponse homeFindResponse) {
 
     }
 }

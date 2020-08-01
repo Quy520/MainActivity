@@ -73,4 +73,8 @@
     <string name="guss_like">猜你喜欢</string>
     <string name="zp">作品</string>
     <string name="dt">动态</string>
+    <string name="all_message">全部消息</string>
+    <string name="pl_message">评论</string>
+    <string name="zan_message">赞</string>
+    <string name="message">通知</string>
 </resources>

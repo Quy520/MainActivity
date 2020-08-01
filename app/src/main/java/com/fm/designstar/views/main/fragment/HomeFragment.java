@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,10 +15,13 @@ import android.widget.TextView;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
-import com.fm.designstar.utils.ToastUtil;
+import com.fm.designstar.events.HomeEvent;
+import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.widget.NoScrollViewPager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +72,9 @@ ImageView im_find;
 
         re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
         ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
-        fragmentList.add(new guanzhuFragment());
-        fragmentList.add(new CommFragment());
-        fragmentList.add(new FindFragment());
+        fragmentList.add(new HomeGuanzhuFragment());
+        fragmentList.add(new HomeCommFragment());
+      //  fragmentList.add(new FindFragment());
         viewPager.setEnabled(false);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
@@ -87,6 +89,8 @@ ImageView im_find;
                 tv_guanzhu.setTextSize(22);
                 im_guanzhu.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
+                EventBus.getDefault().removeStickyEvent(HomeEvent.class);
+                EventBus.getDefault().post(new HomeEvent(1));
                 break;
             case R.id.re_tuijain:
                 setItem();
@@ -99,7 +103,8 @@ ImageView im_find;
                 tv_find.setTextSize(22);
                 im_find.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
-
+                EventBus.getDefault().removeStickyEvent(HomeEvent.class);
+                EventBus.getDefault().post(new HomeEvent(2));
                 break;
 
 

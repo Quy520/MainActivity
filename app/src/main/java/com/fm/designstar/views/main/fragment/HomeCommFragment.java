@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 
-public class CommFragment extends BaseFragment<HomeRecomPresenter> implements HomeRecomContract.View  {
+public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implements HomeRecomContract.View  {
 
     @BindView(R.id.scrollView)
     MyScrollView scrollView;
