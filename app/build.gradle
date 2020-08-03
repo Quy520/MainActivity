@@ -12,6 +12,7 @@ ext {
     selectImgFileProvider4Debug = appId4debug + ".fileProvider"
 
     baseUrl = "https://cdeuapi.laifuyun.com/"
+    baseUrl2 = "http://192.168.8.134:8082/"
     baseUrl48080 = "http://47.74.178.77:8080/recome/"
     baseUrl48081 = "http://47.74.178.77:8081/recome/"
 

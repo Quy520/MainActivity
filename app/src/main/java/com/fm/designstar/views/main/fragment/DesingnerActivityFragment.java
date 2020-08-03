@@ -7,7 +7,7 @@ import com.fm.designstar.base.BaseFragment;
 public class DesingnerActivityFragment extends BaseFragment {
 
 
-    private int pagenum=1;
+    private int pagenum=0;
 
     @Override
     public int getLayoutId() {

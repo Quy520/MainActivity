@@ -1,6 +1,7 @@
 package com.fm.designstar.views.main.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,8 +84,13 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         //holder.message_num.setText(data.get(position).getLikes()+"");
         holder.message_num.setText("23");
         holder.likenum.setText("123");
-        holder.address.setText(findBean.getAddress());
-        holder.content.setText(findBean.getComments());
+        if (StringUtil.isBlank(findBean.getAddress())){
+            holder.im.setVisibility(View.GONE);
+        }else {
+            holder.im.setVisibility(View.VISIBLE);
+            holder.address.setText(findBean.getAddress());
+        }
+        holder.content.setText(findBean.getContent());
         holder.time.setText(TimeUtil.getfriendlyTime(findBean.getCreateTimeStamp()));
 
         if (data.get(position).getIsLike()==0){
@@ -115,34 +121,40 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             tagList.add(findBean.getTagsList().get(i).getTagName());
         }
         if (findBean.getMediaType()==2){//视频
+            holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
             holder.imgLay.setVisibility(View.VISIBLE);
             holder.oneImg.setVisibility(View.VISIBLE);
             holder.gw.setVisibility(View.GONE);
-            Glide.with(mContext).load(OssImageUtil.getThumbnailCut(findBean.getMultimediaList().get(0).getMultimediaUrl(), height, Width)).apply(rOptions).into(holder.oneImg);
+            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.oneImg);
+        }else if(findBean.getMediaType()==2) {
+            holder.imgLay.setVisibility(View.GONE);
 
         }else {//图片
-
             if (findBean.getMultimediaList().size()>0){
                 for (int i=0;i<findBean.getMultimediaList().size();i++){
                     urlList.add(findBean.getMultimediaList().get(i).getMultimediaUrl());
                 }
-            switch (findBean.getMultimediaList().size()) {
 
+            switch (findBean.getMultimediaList().size()) {
 
                 case 0:
                    holder.imgLay.setVisibility(View.GONE);
                    break;
                 case 1:
+                    holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.VISIBLE);
                     holder.gw.setVisibility(View.GONE);
-                    Glide.with(mContext).load(OssImageUtil.getThumbnailCut(findBean.getMultimediaList().get(0).getMultimediaUrl(), height, Width)).apply(rOptions).into(holder.oneImg);
+                    Glide.with(mContext).load(findBean.getMultimediaList().get(0).getMultimediaUrl()).apply(rOptions).into(holder.oneImg);
 
                     break;
                 case 2:
                     holder.imgLay.setVisibility(View.GONE);
                     holder.ly_two_img.setVisibility(View.VISIBLE);
                     holder.gw.setVisibility(View.GONE);
+                    holder.oneImg2.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+                    holder.oneImg3.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(1).getHeight()))/findBean.getMultimediaList().get(1).getWidth());
+
                     Glide.with(mContext).load(findBean.getMultimediaList().get(0).getMultimediaUrl()).apply(rOptions).into(holder.oneImg2);
                     Glide.with(mContext).load(findBean.getMultimediaList().get(1).getMultimediaUrl()).apply(rOptions).into(holder.oneImg3);
                     break;
@@ -224,7 +236,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         LinearLayout ly_two_img;
 
         @BindView(R.id.oneImg)
-        ImageView oneImg;
+        ImageView oneImg; @BindView(R.id.im)
+        ImageView im;
 
         @BindView(R.id.oneImg2)
         ImageView oneImg2;

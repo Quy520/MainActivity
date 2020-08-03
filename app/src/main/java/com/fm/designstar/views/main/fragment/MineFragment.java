@@ -3,6 +3,7 @@ package com.fm.designstar.views.main.fragment;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.mine.activity.BeDesignerActivity;
 import com.fm.designstar.views.mine.activity.BlackListActivity;
 import com.fm.designstar.views.mine.activity.DesignerMangerActivity;
+import com.fm.designstar.views.mine.activity.FansListActivity;
 import com.fm.designstar.views.mine.activity.MyActivitysActivity;
 import com.fm.designstar.views.mine.activity.MyWorkActivity;
 import com.fm.designstar.views.mine.activity.SettingActivity;
@@ -111,11 +113,17 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
 
                 break;
                 case R.id.re_guanzhu:
-                startActivity(MyWorkActivity.class);
+                    Intent intent=new Intent(mContext,FansListActivity.class);
+                    intent.putExtra("UUID",App.getConfig().getUserid());
+                    intent.putExtra("type",1);
+                startActivity(intent);
 
                 break;
                case R.id.re_fans:
-                startActivity(MyWorkActivity.class);
+                   Intent intent2=new Intent(mContext,FansListActivity.class);
+                   intent2.putExtra("UUID",App.getConfig().getUserid());
+                   intent2.putExtra("type",2);
+                    startActivity(intent2);
 
                 break;
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:id="@+id/layout_actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/edit_color">
+
+        <ImageView
+            android:id="@+id/iv_title_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@mipmap/back_w" />
+
+        <TextView
+            android:id="@+id/tv_actionBar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="1/2"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#303030"
+        android:gravity="right"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:id="@+id/ll_pre_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_item_check"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="6dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_image_checked" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/photo"
+                android:textColor="@color/theme_color"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rl_main_bottom"
+        android:layout_below="@id/layout_actionBar">
+
+        <com.fm.designstar.widget.imagePicker.view.HackyViewPager
+            android:id="@+id/vp_main_preImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_main_play"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/icon_video_play" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

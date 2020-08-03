@@ -5,6 +5,7 @@ package com.fm.designstar.https;
 
 import com.fm.designstar.model.server.BaseResponse;
 import com.fm.designstar.model.server.body.Addbody;
+import com.fm.designstar.model.server.body.FansListBody;
 import com.fm.designstar.model.server.body.HomeRecomBody;
 import com.fm.designstar.model.server.body.Locationbody;
 import com.fm.designstar.model.server.body.LoginBody;
@@ -12,6 +13,8 @@ import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
 import com.fm.designstar.model.server.body.sendMsgBody;
+import com.fm.designstar.model.server.response.DesignerResponse;
+import com.fm.designstar.model.server.response.FansResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LoginResponse;
 import com.fm.designstar.model.server.response.OssTokenResponse;
@@ -82,7 +85,18 @@ public interface HttpApi {
 
 
     @POST("media/moment/discoverDesigners")//设计师附近
-    Observable<BaseResponse<HomeFindResponse>> discoverDesigners(@Body HomeRecomBody body);
+    Observable<BaseResponse<DesignerResponse>> discoverDesigners(@Body HomeRecomBody body);
+
+
+    @POST("user/follow/findByUserId")//获取关注列表
+    Observable<BaseResponse<FansResponse>> findByUserId(@Body FansListBody body);
+
+
+    @POST("user/follow/findByFollowUserId")//获取粉丝列表
+    Observable<BaseResponse<FansResponse>> findByFollowUserId(@Body FansListBody body);
+
+
+
 
 
 

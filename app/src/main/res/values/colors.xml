@@ -19,7 +19,11 @@
     <color name="edit_color">#FF222222</color>
     <color name="edit_color2">#FF666666</color>
     <color name="notice">#fdd650</color>
+    <color name="black">#aa000000</color>
+
     <color name="background_color">#F5F7FA</color>
+    <color name="tip_color">#49565D</color>
+    <color name="text_bg_gray">#99000000</color>
 
 
 </resources>

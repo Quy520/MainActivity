@@ -1,13 +1,17 @@
 package com.fm.designstar.views.main.fragment;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.HomeEvent;
 import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
+import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
@@ -36,7 +40,9 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
     private HomeGuanzhuAdapter guanzhuAdapter;
     @BindView(R.id.home_recy)
     RecyclerView hotRecycler;
-    private int pagenum=1;
+    @BindView(R.id.nodada)
+    ImageView imageView;
+    private int pagenum=0;
     private HomeFindPresenter homeFindPresenter;
     @Override
     public int getLayoutId() {
@@ -79,26 +85,62 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void HomeGuanzhuSuccess(HomeFindResponse homeFindResponse) {
-        guanzhuAdapter.addData(homeFindResponse.getResult());
+        if (pagenum==0){
+            guanzhuAdapter.clearData();
+        }
+        if (homeFindResponse.getResult()==null){
+            imageView.setVisibility(View.VISIBLE);
+            hotRecycler.setVisibility(View.GONE);
+        }else {
+            if (homeFindResponse.getResult().size()>0){
+                imageView.setVisibility(View.GONE);
+                hotRecycler.setVisibility(View.VISIBLE);
+                guanzhuAdapter.addData(homeFindResponse.getResult());
+            }else {
+                imageView.setVisibility(View.VISIBLE);
+                hotRecycler.setVisibility(View.GONE);
+            }
+
+        }
     }
 
     @Override
     public void showLoading(String content, int code) {
+        App.loadingDefault(mActivity);
 
     }
 
     @Override
     public void stopLoading(int code) {
+        App.hideLoading();
 
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
+        App.hideLoading();
+        ToastUtil.showToast(msg);
 
     }
 
     @Override
     public void HomeFindSuccess(HomeFindResponse homeFindResponse) {
+        if (pagenum==0){
+            guanzhuAdapter.clearData();
+        }
+        if (homeFindResponse.getResult()==null){
+            imageView.setVisibility(View.VISIBLE);
+            hotRecycler.setVisibility(View.GONE);
+        }else {
+            if (homeFindResponse.getResult().size()>0){
+                imageView.setVisibility(View.GONE);
+                hotRecycler.setVisibility(View.VISIBLE);
+                guanzhuAdapter.addData(homeFindResponse.getResult());
+            }else {
+                imageView.setVisibility(View.VISIBLE);
+                hotRecycler.setVisibility(View.GONE);
+            }
 
+        }
     }
 }

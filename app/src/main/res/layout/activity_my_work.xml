@@ -12,7 +12,7 @@ tools:context="com.fm.designstar.views.mine.activity.MyWorkActivity">
 
 
 <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recy_black"
+    android:id="@+id/recy_works"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

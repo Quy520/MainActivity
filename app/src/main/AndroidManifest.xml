@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         android:vmSafeMode="true"
         tools:replace="icon,label,theme">
+        <activity android:name=".views.Fabu.FabuActivity"></activity>
         <activity
             android:name=".views.main.activity.ConversationActivity"
             android:launchMode="singleTop"
@@ -31,7 +32,6 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-
         <activity android:name=".views.main.activity.ConversationListActivity" />
         <activity android:name=".views.mine.activity.ChangInfoActivity" />
         <activity android:name=".views.mine.activity.ShDesignerActivity" />
@@ -40,6 +40,7 @@
         <activity android:name=".views.mine.activity.MyActivitysActivity" />
         <activity android:name=".views.mine.activity.MyWorkActivity" />
         <activity android:name=".views.mine.activity.BlackListActivity" />
+        <activity android:name=".views.mine.activity.FansListActivity" />
         <activity android:name=".views.mine.activity.SettingActivity" />
         <activity android:name=".views.login.activitys.ComUserInfoActivity" />
         <activity android:name=".views.login.activitys.PwdActivity" />
@@ -71,6 +72,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="499468ee45bbd3fb6721ac736b1b36c1" />
@@ -84,17 +86,27 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-        <service android:name="com.amap.api.location.APSService"></service>
-
+        <provider
+            android:name=".widget.imagePicker.provider.ImagePickerProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
         <receiver
             android:name=".service.JGReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
                 <category android:name="com.fm.designstar" />
             </intent-filter>
         </receiver>
+
+        <service android:name="com.amap.api.location.APSService" />
 
         <service
             android:name=".service.JGService"
@@ -105,6 +117,14 @@
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service>
+        <!-- 图片列表Activity -->
+        <activity
+            android:name=".widget.imagePicker.activity.ImagePickerActivity"
+            android:screenOrientation="portrait" />
+        <!-- 大图预览Activity -->
+        <activity
+            android:name=".widget.imagePicker.activity.ImagePreActivity"
+            android:screenOrientation="portrait" />
     </application>
     <uses-feature android:name="android.hardware.camera" />
 
@@ -121,9 +141,9 @@
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"

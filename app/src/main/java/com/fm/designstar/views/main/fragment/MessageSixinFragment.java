@@ -28,7 +28,7 @@ import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 public class MessageSixinFragment extends BaseFragment<GetInfoPresenter>  implements GetInfoContract.View {
 
 
-private int pagenum=1;
+private int pagenum=0;
     UserInfo userInfo;
     private String uuid="";
 

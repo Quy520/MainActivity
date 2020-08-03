@@ -77,4 +77,26 @@
     <string name="pl_message">评论</string>
     <string name="zan_message">赞</string>
     <string name="message">通知</string>
+    <string name="my_fans">粉丝</string>
+    <string name="shuishoupai">随手拍</string>
+    <string name="fazp">发作品</string>
+    <string name="cancel">取消</string>
+    <string name="photo">照片</string>
+    <string name="all">全部</string>
+    <string name="confirm">确认</string>
+
+    <string name="image_picker">图片选择器</string>
+    <string name="scanner_image">Sedang memindai gambar...</string>
+    <string name="select_image_max">Paling banyak memilih %1$d gambar</string>
+    <string name="confirm_msg">%1$d/%2$d</string>
+    <string name="image_num">%d张</string>
+    <string name="scanner_image_no_found">Tidak ada pemindaian untuk gambar</string>
+    <string name="all_media">全部</string>
+    <string name="all_video">所有视频</string>
+    <string name="take_photo">拍摄图片</string>
+    <string name="permission_tip">当前没有读取存储卡或摄像头权限</string>
+    <string name="image_select">选择</string>
+    <string name="single_type_choose">不能同时选择图片与视频</string>
+    <string name="next">下一步</string>
+    <string name="quan">全部</string>
 </resources>

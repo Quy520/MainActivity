@@ -22,6 +22,8 @@ import com.fm.designstar.app.App;
 import com.fm.designstar.app.AppManager;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.dialog.FabuDialogUtil;
+import com.fm.designstar.dialog.ShareDialogUtil;
 import com.fm.designstar.map.LocationInfo;
 import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.ToastUtil;
@@ -69,6 +71,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     private List<BaseFragment> fragmentList = new ArrayList<>();
     double latitude ;//获取纬度
     double longitude;
+    private FabuDialogUtil fabuDialogUtil;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -118,7 +121,12 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
         switch (view.getId()) {
             case R.id.addLay:
-            startActivity(Selectaddress.class);
+            //startActivity(Selectaddress.class);
+                fabuDialogUtil = new FabuDialogUtil(mContext);
+
+
+                fabuDialogUtil.showDialog();
+
                 break;
             case R.id.homeLay:
 

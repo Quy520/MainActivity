@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.Launcher" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+    <style name="imageFolderAnimator">
+        <item name="android:windowEnterAnimation">@anim/dialog_slide_show</item>
+        <item name="android:windowExitAnimation">@anim/dialog_slide_dismiss</item>
+    </style>
+</resources>

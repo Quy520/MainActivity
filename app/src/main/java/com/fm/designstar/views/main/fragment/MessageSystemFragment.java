@@ -27,7 +27,7 @@ import java.util.List;
 public class MessageSystemFragment extends BaseFragment {
 
 
-    private int pagenum=1;
+    private int pagenum=0;
     @BindView(R.id.all_message)
     TextView all_message;
     @BindView(R.id.all_pl)

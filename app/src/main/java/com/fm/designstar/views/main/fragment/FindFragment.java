@@ -13,7 +13,7 @@ import com.fm.designstar.views.main.presenter.HomeFindPresenter;
 public class FindFragment extends BaseFragment<HomeFindPresenter> implements HomeFindContract.View , HomeGuanzhuContract.View {
 
 
-    private int pagenum=1;
+    private int pagenum=0;
 
     @Override
     public int getLayoutId() {

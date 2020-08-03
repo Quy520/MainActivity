@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:padding="5dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.fm.designstar.widget.CircleImageView
+        android:id="@+id/hand"
+        android:layout_margin="@dimen/sobot_10PX"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/defu_hand"
+        ></com.fm.designstar.widget.CircleImageView>
+    <TextView
+        android:layout_centerVertical="true"
+        android:id="@+id/name"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:textSize="14dp"
+        android:textColor="@color/edit_color"
+        android:text="㊙咪咪"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <CheckBox
+        android:layout_marginRight="@dimen/sobot_20PX"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/check_guanzhu"
+        android:button="@null"
+        android:background="@drawable/guanzhu_check"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/home_guanzhu"
+        android:layout_width="@dimen/sobot_20PX"
+        android:layout_height="@dimen/sobot_20PX"/>
+
+
+
+</RelativeLayout>

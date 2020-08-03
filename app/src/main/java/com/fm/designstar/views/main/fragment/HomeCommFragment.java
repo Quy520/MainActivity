@@ -43,7 +43,7 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
 
     @BindView(R.id.recy_home)
     RecyclerView hotRecycler;
-    private int pagenum=1;
+    private int pagenum=0;
     private MainLikeAdapter likeAdapter;
     private HomeRecomAdapter homeRecomAdapter;
     private List<String> urls=new ArrayList<>();

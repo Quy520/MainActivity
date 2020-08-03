@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fm.designstar.widget.imagePicker.view.SquareRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_color"
+    android:padding="1dp">
+
+    <com.fm.designstar.widget.imagePicker.view.SquareImageView
+        android:id="@+id/iv_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/photo" />
+
+    <TextView
+android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/take_photo"
+        android:textColor="@color/theme_color"
+        android:textSize="14sp" />
+
+</com.fm.designstar.widget.imagePicker.view.SquareRelativeLayout>

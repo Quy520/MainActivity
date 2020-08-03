@@ -19,6 +19,12 @@
                 android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
+            <ImageView
+                android:id="@+id/nodada"
+                android:visibility="visible"
+                android:src="@mipmap/nodata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </com.fm.designstar.widget.MyScrollView>
 </LinearLayout>

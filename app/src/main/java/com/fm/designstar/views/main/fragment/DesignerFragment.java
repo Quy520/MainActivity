@@ -3,6 +3,8 @@ package com.fm.designstar.views.main.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -18,6 +20,10 @@ import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
+import com.fm.designstar.widget.NoScrollViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DesignerFragment extends BaseFragment {
@@ -48,7 +54,10 @@ public class DesignerFragment extends BaseFragment {
     @BindView(R.id.im_find)
     ImageView im_find;
 
+    @BindView(R.id.viewPager)
+    NoScrollViewPager viewPager;
 
+    private List<BaseFragment> fragmentList = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.fragment_designer;
@@ -64,6 +73,13 @@ public class DesignerFragment extends BaseFragment {
 
         re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
         ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
+        fragmentList.add(new DesingnerChildFragment());
+        fragmentList.add(new DesingnerAroundFragment());
+        fragmentList.add(new DesingnerActivityFragment());
+        viewPager.setEnabled(false);
+        viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(0);
 
     }
     @OnClick({R.id.re_guanzhu, R.id.re_tuijain, R.id.re_find
@@ -74,19 +90,19 @@ public class DesignerFragment extends BaseFragment {
                 setItem();
                 tv_guanzhu.setTextSize(22);
                 im_guanzhu.setVisibility(View.VISIBLE);
-               // viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0);
                 break;
             case R.id.re_tuijain:
                 setItem();
                 tv_tuijain.setTextSize(22);
                 im_tuijain.setVisibility(View.VISIBLE);
-               // viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(0);
                 break;
             case R.id.re_find:
                 setItem();
                 tv_find.setTextSize(22);
                 im_find.setVisibility(View.VISIBLE);
-               // viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(0);
 
                 break;
 
@@ -106,5 +122,22 @@ public class DesignerFragment extends BaseFragment {
         tv_find.setTextSize(16);
         im_find.setVisibility(View.GONE);
 
+    }
+
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        MyFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragmentList.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
     }
 }

@@ -49,8 +49,8 @@
             android:layout_marginTop="5dp"
             android:id="@+id/oneImg"
             android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+
             android:scaleType="fitXY" />
         <LinearLayout
             android:visibility="gone"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/oneImg2"
                 android:layout_width="220dp"
-                android:layout_height="220dp"
+                android:layout_height="wrap_content"
 
                 android:scaleType="fitXY" />
             <ImageView
@@ -76,7 +76,7 @@
                 android:layout_marginTop="5dp"
                 android:id="@+id/oneImg3"
                 android:layout_width="220dp"
-                android:layout_height="220dp"
+                android:layout_height="wrap_content"
 
                 android:scaleType="fitXY" />
         </LinearLayout>
