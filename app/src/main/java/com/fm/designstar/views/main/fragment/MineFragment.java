@@ -45,6 +45,22 @@ import java.util.List;
 public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetInfoContract.View {
     @BindView(R.id.re_top)
     RelativeLayout re_top;
+    @BindView(R.id.re_designer)
+    RelativeLayout re_designer;
+    @BindView(R.id.re_zp)
+    RelativeLayout re_zp;
+    @BindView(R.id.re_dt)
+    RelativeLayout re_dt;
+    @BindView(R.id.re_shdes)
+    RelativeLayout re_shdes;
+    @BindView(R.id.re_demanger)
+    RelativeLayout re_demanger;
+    @BindView(R.id.line1)
+    View line1;
+    @BindView(R.id.line2)
+    View line2;
+
+
     @BindView(R.id.hand)
     CircleImageView hand;
     @BindView(R.id.name)
@@ -93,7 +109,26 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
 
             info2.setText(App.getConfig().getSingmarks());
         }
-
+        if (App.getConfig().getRole()==1){
+            re_zp.setVisibility(View.GONE);
+            re_dt.setVisibility(View.GONE);
+            re_shdes.setVisibility(View.GONE);
+            re_demanger.setVisibility(View.GONE);
+            line1.setVisibility(View.GONE);
+            line2.setVisibility(View.GONE);
+        }else if (App.getConfig().getRole()==2){
+            re_shdes.setVisibility(View.GONE);
+            re_demanger.setVisibility(View.GONE);
+            line1.setVisibility(View.GONE);
+            line2.setVisibility(View.GONE);
+        }else {
+            re_zp.setVisibility(View.GONE);
+            re_dt.setVisibility(View.GONE);
+            re_shdes.setVisibility(View.VISIBLE);
+            re_demanger.setVisibility(View.VISIBLE);
+            line1.setVisibility(View.VISIBLE);
+            line2.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -109,6 +144,9 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
         switch (view.getId()) {
 
             case R.id.zuopin:
+                if (App.getConfig().getRole()==1&&App.getConfig().getRole()==3){
+                  return;
+                }
                 startActivity(MyWorkActivity.class);
 
                 break;
@@ -128,11 +166,17 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
                 break;
 
             case R.id.re_zp:
+                if (App.getConfig().getRole()==1&&App.getConfig().getRole()==3){
+                    return;
+                }
                 startActivity(MyWorkActivity.class);
 
                 break;
 
                 case R.id.re_dt:
+                    if (App.getConfig().getRole()==1&&App.getConfig().getRole()==3){
+                        return;
+                    }
                     startActivity(MyActivitysActivity.class);
 
                 break;

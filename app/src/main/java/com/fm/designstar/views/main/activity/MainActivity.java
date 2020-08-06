@@ -25,9 +25,12 @@ import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.dialog.FabuDialogUtil;
 import com.fm.designstar.dialog.ShareDialogUtil;
 import com.fm.designstar.map.LocationInfo;
+import com.fm.designstar.model.server.response.RoleResponse;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.views.login.activitys.LoginActivity;
+import com.fm.designstar.views.main.contract.RoleContract;
 import com.fm.designstar.views.main.contract.UpdataLocationContract;
 import com.fm.designstar.views.main.fragment.DesignerFragment;
 import com.fm.designstar.views.main.fragment.HomeFragment;
@@ -42,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View {
+public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View, RoleContract.View {
     @BindView(R.id.home)
     ImageView home;
     @BindView(R.id.location)
@@ -107,7 +110,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
         //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
+        mLocationOption.setInterval(20000);
         mLocationOption.setOnceLocationLatest(true);
         //设置定位参数
         mlocationClient.setLocationOption(mLocationOption);
@@ -121,11 +124,15 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
         switch (view.getId()) {
             case R.id.addLay:
-            //startActivity(Selectaddress.class);
-                fabuDialogUtil = new FabuDialogUtil(mContext);
+                if (App.getConfig().getRole()==1){
+                    ToastUtil.showToast("请先去申请设计师");
+
+                }else {
+                    fabuDialogUtil = new FabuDialogUtil(mContext);
+                    fabuDialogUtil.showDialog();
+                }
 
 
-                fabuDialogUtil.showDialog();
 
                 break;
             case R.id.homeLay:
@@ -205,8 +212,11 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                 locationInfo.setLatitude(latitude);
                 locationInfo.setLonTitude(longitude);
                 mPresenter.UpdataLocation(amapLocation.getAddress(),amapLocation.getCity(),amapLocation.getDistrict(),latitude,longitude);
-
-
+                SpUtil.putLong("latitude",(long) latitude);
+                SpUtil.putLong("longitude",(long) longitude);
+                if (mlocationClient != null) {
+                    mlocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
+                }
             } else {
                 mlocationClient.stopLocation();
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
@@ -227,15 +237,27 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     @Override
     public void showLoading(String content, int code) {
 
+
+
     }
 
     @Override
     public void stopLoading(int code) {
 
+
+
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
+        mlocationClient.stopLocation();
+    }
+
+    @Override
+    public void GetRoleSuccess(RoleResponse infoResponse) {
+
+        App.getConfig().setRole(infoResponse.getRole());
+
 
     }
 

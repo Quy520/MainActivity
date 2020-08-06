@@ -2,6 +2,7 @@ package com.fm.designstar.views.mine.contract;
 
 
 import com.fm.designstar.base.BaseView;
+import com.fm.designstar.model.server.response.HomeFindResponse;
 
 /**
  * description : $todo
@@ -12,7 +13,7 @@ import com.fm.designstar.base.BaseView;
  */
 public interface UseMomentContract {
     interface View extends BaseView {
-        void UseMomentSuccess();
+        void UseMomentSuccess(HomeFindResponse homeFindResponse);
 
     }
 

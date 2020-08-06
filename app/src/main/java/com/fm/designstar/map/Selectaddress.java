@@ -1,6 +1,7 @@
 package com.fm.designstar.map;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -81,7 +82,15 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
         mAdapter.setLocationItemClick(new LocateRecyclerAdapter.OnLocationItemClick() {
             @Override
             public void OnLocationClick(RecyclerView parent, View view, int position, LocationInfo locationInfo) {
-                ToastUtil.showToast("p"+position+"=="+locationInfo.getAddress());
+
+                Intent intent = new Intent();
+                intent.putExtra("address", locationInfo.getAddress());
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+                setResult(RESULT_OK, intent);
+                finish();
+
+
             }
         });
     }

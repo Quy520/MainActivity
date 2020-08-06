@@ -217,7 +217,7 @@ public class HomeFindBean extends BaseBean {
 
 
 
-    public static class TagsListBean {
+    public static class TagsListBean extends BaseBean {
         /**
          * tagId : 5
          * tagName : 阿姆斯特朗螺旋加速阿姆斯特朗螺旋炮

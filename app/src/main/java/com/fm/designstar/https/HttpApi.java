@@ -5,19 +5,30 @@ package com.fm.designstar.https;
 
 import com.fm.designstar.model.server.BaseResponse;
 import com.fm.designstar.model.server.body.Addbody;
+import com.fm.designstar.model.server.body.DeleteCombody;
 import com.fm.designstar.model.server.body.FansListBody;
+import com.fm.designstar.model.server.body.GetCommentBody;
+import com.fm.designstar.model.server.body.GetMessageBody;
 import com.fm.designstar.model.server.body.HomeRecomBody;
+import com.fm.designstar.model.server.body.LikeCombody;
 import com.fm.designstar.model.server.body.Locationbody;
 import com.fm.designstar.model.server.body.LoginBody;
+import com.fm.designstar.model.server.body.SendMessageBody;
 import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
 import com.fm.designstar.model.server.body.sendMsgBody;
+import com.fm.designstar.model.server.body.uploadMomentbody;
+import com.fm.designstar.model.server.response.CommentsResponse;
 import com.fm.designstar.model.server.response.DesignerResponse;
 import com.fm.designstar.model.server.response.FansResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
+import com.fm.designstar.model.server.response.LikeResponse;
 import com.fm.designstar.model.server.response.LoginResponse;
+import com.fm.designstar.model.server.response.MessageResponse;
 import com.fm.designstar.model.server.response.OssTokenResponse;
+import com.fm.designstar.model.server.response.RoleResponse;
+import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
 
@@ -74,13 +85,13 @@ public interface HttpApi {
     Observable<BaseResponse<HomeFindResponse>> homeFollow(@Body HomeRecomBody body);
 
     @POST("media/moment/userMoment")//获取个人或他人作品和动态
-    Observable<BaseResponse> userMoment(@Body UserMomentBody body);
+    Observable<BaseResponse<HomeFindResponse>> userMoment(@Body UserMomentBody body);
 
 
     @POST("user/device/add")//获取融云token
     Observable<BaseResponse> add(@Body Addbody body);
 
-    @POST("user/userLocation/updateUserLocation")//获取融云token
+    @POST("user/userLocation/updateUserLocation")//更新自己的地理位置
     Observable<BaseResponse> updateUserLocation(@Body Locationbody body);
 
 
@@ -96,7 +107,34 @@ public interface HttpApi {
     Observable<BaseResponse<FansResponse>> findByFollowUserId(@Body FansListBody body);
 
 
+    @POST("media/moment/uploadMoment")//获取粉丝列表
+    Observable<BaseResponse> uploadMoment(@Body uploadMomentbody body);
 
+
+
+    @GET("media/tag/findAllTagInfo")//获取标签信息
+    Observable<BaseResponse<TagInfoResponse>> findAllTagInfo();
+
+    @GET("user/getUserRoleInfo")//获取标签信息
+    Observable<BaseResponse<RoleResponse>> getUserRoleInfo();
+
+
+    @GET("media/comment/findByMomentId")//获取评论
+    Observable<BaseResponse<CommentsResponse>> findByMomentId(@Query("momentId") String momentId, @Query("pageNum") int pageNum, @Query("pageNum") int pageSize);
+
+    @POST("media/comment/insertComment")//发送评论
+    Observable<BaseResponse> insertComment(@Body SendMessageBody body);
+
+    @POST("media/comment/delComment")//删除评论
+    Observable<BaseResponse> delComment(@Body DeleteCombody body);
+
+
+    @POST("media/likes/like")//点赞
+    Observable<BaseResponse<LikeResponse>> like(@Body LikeCombody body);
+
+
+    @POST("media/message/getMessage")//评论列表
+    Observable<BaseResponse<MessageResponse>> getMessage(@Body GetMessageBody body);
 
 
 

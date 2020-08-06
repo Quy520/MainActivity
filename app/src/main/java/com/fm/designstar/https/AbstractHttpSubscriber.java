@@ -133,12 +133,12 @@ public abstract class AbstractHttpSubscriber<T> extends Subscriber<T> {
         }
         else if (e instanceof HttpException) {
             HttpException exception = (HttpException) e;
-            if (exception.code() == NO_LOGIN) {
+           /* if (exception.code() == NO_LOGIN) {
                 //清空
                 EventBus.getDefault().removeStickyEvent(LogoutEvent.class);
                 EventBus.getDefault().post(new LogoutEvent(0));
                 onHttpError(HttpErrorMessage.NET_LOGON_ERROR, exception.code());
-            } else if (exception.code() == SERVICE_ERROR) {
+            } else*/ if (exception.code() == SERVICE_ERROR) {
                 //"服务器异常，请稍后重试"
                 onHttpError(Constant.LOADING_FAIL, SERVICE_ERROR);
             } else if (exception.code() == SERVICE_ERROR2) {

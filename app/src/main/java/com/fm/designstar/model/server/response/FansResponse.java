@@ -1,55 +1,21 @@
 package com.fm.designstar.model.server.response;
 
 import com.fm.designstar.base.BaseBean;
+import com.fm.designstar.model.bean.FansBean;
+import com.fm.designstar.model.bean.MessageBean;
+
+import java.util.List;
 
 public  class FansResponse extends BaseBean {
 
+    private List<FansBean> list;
 
 
-
-    private int code;
-    private int followedUserId;
-    private int status;
-    private int type;
-    private int userId;
-
-    public int getCode() {
-        return code;
+    public List<FansBean> getResult() {
+        return list;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public int getFollowedUserId() {
-        return followedUserId;
-    }
-
-    public void setFollowedUserId(int followedUserId) {
-        this.followedUserId = followedUserId;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setResult(List<FansBean> result) {
+        this.list = result;
     }
 }

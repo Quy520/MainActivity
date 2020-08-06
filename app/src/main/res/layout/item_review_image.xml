@@ -11,6 +11,8 @@
         android:scaleType="fitXY" />
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/time"
         android:textSize="11dp"
         android:gravity="center"
         android:textColor="@color/theme_color"

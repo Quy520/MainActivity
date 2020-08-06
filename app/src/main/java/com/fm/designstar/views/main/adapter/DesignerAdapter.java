@@ -41,6 +41,7 @@ public class DesignerAdapter extends BaseRecyclerAdapter<DesignerAdapter.LikeVie
     private RequestOptions myOptions;
     private DesignervedioAdapter reviewAdapter;
     private List<String> urlList=new ArrayList<>();
+    private List<String> urlList2=new ArrayList<>();
     public DesignerAdapter() {
         myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext, 0, R.mipmap.ico_default_3_2);
 
@@ -70,11 +71,15 @@ public class DesignerAdapter extends BaseRecyclerAdapter<DesignerAdapter.LikeVie
         }
 
         if (findBean.getDesignerMomentVos()!=null){
+            urlList=new ArrayList<>();
+          urlList2=new ArrayList<>();
             for (int i=0;i<findBean.getDesignerMomentVos().size();i++){
              urlList.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getPreUrl());
+             urlList2.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getDuration());
+
             }
             holder.gw2.setVisibility(View.VISIBLE);
-            reviewAdapter = new DesignervedioAdapter(mContext, urlList);
+            reviewAdapter = new DesignervedioAdapter(mContext, urlList,urlList2);
 
 
             holder.gw2.setAdapter(reviewAdapter);
@@ -88,7 +93,7 @@ public class DesignerAdapter extends BaseRecyclerAdapter<DesignerAdapter.LikeVie
             public void onClick(View view) {
 
               Intent intent=  new Intent(mContext,InfoDetailActivity.class);
-             // intent.putExtra("UUID",)
+              intent.putExtra("UUID",findBean.getUserId());
                 mContext.startActivity(intent);
             }
         });

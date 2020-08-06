@@ -98,6 +98,7 @@ public class HttpManager {
                 }
 
                 builder.header("Content-Type", "application/json;charset=utf-8");
+                builder.header("User-Agent", "Android");
                 return chain.proceed(builder.build());
             }
         };

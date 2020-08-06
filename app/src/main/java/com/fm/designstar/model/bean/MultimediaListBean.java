@@ -13,7 +13,7 @@ public class MultimediaListBean extends BaseBean {
          * width : 360
          * preUrl : https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/19807073081772949792/1595842226101.png
          */
-
+        private String duration;
         private long mediaId;
         private long momentId;
         private int multimediaType;
@@ -78,4 +78,11 @@ public class MultimediaListBean extends BaseBean {
             this.preUrl = preUrl;
         }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 }

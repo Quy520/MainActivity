@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:vmSafeMode="true"
         tools:replace="icon,label,theme">
-        <activity android:name=".views.Fabu.FabuActivity"></activity>
+        <activity android:name=".views.Detail.DTDetailsActivity"></activity>
+        <activity android:name=".views.Fabu.activity.ChoseTagActivity" />
+        <activity android:name=".views.Fabu.FabuActivity" />
         <activity
             android:name=".views.main.activity.ConversationActivity"
             android:launchMode="singleTop"
@@ -72,6 +74,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".widget.imagePicker.activity.ImagePickerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".widget.imagePicker.activity.ImagePreActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -95,6 +103,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+
         <receiver
             android:name=".service.JGReceiver"
             android:enabled="true"
@@ -104,10 +113,8 @@
 
                 <category android:name="com.fm.designstar" />
             </intent-filter>
-        </receiver>
-
-        <service android:name="com.amap.api.location.APSService" />
-
+        </receiver> <!-- 图片列表Activity -->
+        <service android:name="com.amap.api.location.APSService" /> <!-- 大图预览Activity -->
         <service
             android:name=".service.JGService"
             android:enabled="true"
@@ -117,14 +124,6 @@
                 <action android:name="cn.jiguang.user.service.action" />
             </intent-filter>
         </service>
-        <!-- 图片列表Activity -->
-        <activity
-            android:name=".widget.imagePicker.activity.ImagePickerActivity"
-            android:screenOrientation="portrait" />
-        <!-- 大图预览Activity -->
-        <activity
-            android:name=".widget.imagePicker.activity.ImagePreActivity"
-            android:screenOrientation="portrait" />
     </application>
     <uses-feature android:name="android.hardware.camera" />
 
@@ -139,10 +138,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+        tools:ignore="ProtectedPermissions" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission

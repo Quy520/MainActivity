@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.utils.OssImageUtil;
+import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 
@@ -20,11 +22,13 @@ public class DesignervedioAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     List<String> dataList;
+    List<String> time;
     private RequestOptions rOptions;
 
-    public DesignervedioAdapter(Context context, List<String> dataList) {
+    public DesignervedioAdapter(Context context, List<String> dataList, List<String> time) {
         this.context = context;
         this.dataList = dataList;
+        this.time = time;
         inflater = LayoutInflater.from(context);
     }
 
@@ -51,7 +55,7 @@ public class DesignervedioAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_review_image, parent, false);
+            convertView = inflater.inflate(R.layout.item_review_vdios, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
@@ -65,6 +69,7 @@ public class DesignervedioAdapter extends BaseAdapter {
                 .apply(rOptions)
                 .into(viewHolder.ivimage);
 
+        viewHolder.time.setText(TimeUtil.getSecondByFormat( new Double(Double.parseDouble(time.get(position))).longValue()*1000,""));
 
         return convertView;
     }
@@ -72,10 +77,12 @@ public class DesignervedioAdapter extends BaseAdapter {
     public class ViewHolder {
 
         ImageView ivimage;
+        TextView time;
         public final View root;
 
         public ViewHolder(View itemView) {
             ivimage = (ImageView) itemView.findViewById(R.id.im_item);
+            time = (TextView) itemView.findViewById(R.id.time);
             this.root = itemView;
         }
     }

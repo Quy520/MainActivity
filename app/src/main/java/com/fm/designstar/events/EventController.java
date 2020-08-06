@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.fm.designstar.app.App;
 import com.fm.designstar.app.AppManager;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.views.main.activity.MainActivity;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.mine.contract.LoginOutContract;
@@ -81,7 +82,7 @@ public class EventController {
         Intent loginIntent = new Intent(App.getContext(), LoginActivity.class);
         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         App.getContext().startActivity(loginIntent);
-        if (event.getTAG() == 0) {
+      /*  if (event.getTAG() == 0) {
             LoginOutPresenter loginOutPresenter = new LoginOutPresenter();
             loginOutPresenter.init(new   LoginOutContract.View() {
                 @Override
@@ -105,6 +106,6 @@ public class EventController {
                 }
             });
             loginOutPresenter.LoginOut();
-        }
+        }*/
     }
 }

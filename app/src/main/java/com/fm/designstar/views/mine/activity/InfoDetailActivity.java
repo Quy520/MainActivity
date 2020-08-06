@@ -4,14 +4,19 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.views.mine.contract.GetInfoContract;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
 import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 import com.fm.designstar.views.mine.presenter.UseMomentPresenter;
+import com.fm.designstar.widget.CircleImageView;
 
 import androidx.core.os.UserManagerCompat;
 import butterknife.BindView;
@@ -24,9 +29,19 @@ private GetInfoPresenter getInfoPresenter;
     @BindView(R.id.sixin)
     TextView textView;
 
-    private int pageNum=1;
+    private int pageNum=0;
     private String uuid;
 
+
+    @BindView(R.id.hand)
+    CircleImageView hand;
+    @BindView(R.id.name)
+    TextView name;
+    @BindView(R.id.info)
+    TextView info;
+    @BindView(R.id.info2)
+    TextView info2;
+    private String nikenam="Designer";
     @Override
     public int getLayoutId() {
         return R.layout.activity_info_detail;
@@ -57,14 +72,14 @@ private GetInfoPresenter getInfoPresenter;
         switch (view.getId()) {
             case R.id.sixin:
                 //跳转到聊天页面 传入对方的id 和 名字
-                RongIM.getInstance().startPrivateChat(mContext, "1278287241650765824", "test");
+                RongIM.getInstance().startPrivateChat(mContext, uuid, nikenam);
 
                 break;
         }
     }
 
     @Override
-    public void UseMomentSuccess() {
+    public void UseMomentSuccess(HomeFindResponse homeFindResponse) {
 
     }
 
@@ -95,6 +110,15 @@ private GetInfoPresenter getInfoPresenter;
 
     @Override
     public void getOtherUserInfoSuccess(UserinfoResponse response) {
+            Glide.with(mActivity).load(response.getAvatar()).error(R.mipmap.defu_hand).into(hand);
+        name.setText(response.getUserName());
+        nikenam=response.getUserName();
+        info.setText(response.getAddress()+"|"+"中国设计星评委导师");
+        if (StringUtil.isBlank(response.getCertificationMark())){
+            info2.setText("我的征途是星辰大海");
+        }else {
+            info2.setText(response.getCertificationMark());
+        }
 
     }
 }

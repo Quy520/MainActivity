@@ -53,6 +53,14 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
     private int height;
     private ReviewImageAdapter reviewAdapter;
 
+    private OnClickListener listener;
+    public interface OnClickListener {
+        void onLikeClick(int position,boolean b,CompoundButton compoundButton);
+
+    }
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
     public HomeGuanzhuAdapter() {
 
         rOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext);
@@ -81,13 +89,14 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
         holder.name.setText(findBean.getNickName());
 
-        //holder.message_num.setText(data.get(position).getLikes()+"");
-        holder.message_num.setText("23");
-        holder.likenum.setText("123");
+        holder.message_num.setText(data.get(position).getComments()+"");
+        holder.likenum.setText(data.get(position).getLikes()+"");
         if (StringUtil.isBlank(findBean.getAddress())){
             holder.im.setVisibility(View.GONE);
+            holder.address.setVisibility(View.GONE);
         }else {
             holder.im.setVisibility(View.VISIBLE);
+            holder.address.setVisibility(View.VISIBLE);
             holder.address.setText(findBean.getAddress());
         }
         holder.content.setText(findBean.getContent());
@@ -102,7 +111,9 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         holder.check_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                if (listener != null) {
+                    listener.onLikeClick(position,b,compoundButton);
+                }
             }
         });
 
@@ -126,7 +137,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             holder.oneImg.setVisibility(View.VISIBLE);
             holder.gw.setVisibility(View.GONE);
             Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.oneImg);
-        }else if(findBean.getMediaType()==2) {
+        }else if(findBean.getMediaType()==0) {
             holder.imgLay.setVisibility(View.GONE);
 
         }else {//图片
@@ -149,7 +160,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
                     break;
                 case 2:
-                    holder.imgLay.setVisibility(View.GONE);
+                    holder.imgLay.setVisibility(View.VISIBLE);
+                    holder.oneImg.setVisibility(View.GONE);
                     holder.ly_two_img.setVisibility(View.VISIBLE);
                     holder.gw.setVisibility(View.GONE);
                     holder.oneImg2.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
@@ -199,12 +211,13 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         holder.hand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent=  new Intent(mContext, InfoDetailActivity.class);
-                 intent.putExtra("UUID",findBean.getUserId());
+                 intent.putExtra("UUID",findBean.getUserId()+"");
                 mContext.startActivity(intent);
             }
         });
+
+
 
     }
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -50,6 +51,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static com.fm.designstar.views.Fabu.FabuActivity.SELECT_RESULT;
+import static com.fm.designstar.views.Fabu.FabuActivity.SELECT_RESULT2;
 
 
 /**
@@ -98,6 +102,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
     //表示屏幕亮暗
     private static final int LIGHT_OFF = 0;
     private static final int LIGHT_ON = 1;
+    MediaFile mediaFile;
 
     private Handler mMyHandler = new Handler();
     private Runnable mHideRunnable = new Runnable() {
@@ -377,7 +382,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
     private void updateImageTime() {
         int position = mGridLayoutManager.findFirstVisibleItemPosition();
         if (position != RecyclerView.NO_POSITION) {
-            MediaFile mediaFile = mImagePickerAdapter.getMediaFile(position);
+             mediaFile = mImagePickerAdapter.getMediaFile(position);
             if (mediaFile != null) {
                 if (mTvImageTime.getVisibility() != View.VISIBLE) {
                     mTvImageTime.setVisibility(View.VISIBLE);
@@ -410,7 +415,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
     }
 
     /**
-     * 点击图片
+     * 点击图片 视频
      *
      * @param view
      * @param position
@@ -441,7 +446,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
     }
 
     /**
-     * 选中/取消选中图片
+     * 选中/取消选中图片 视频
      *
      * @param view
      * @param position
@@ -460,7 +465,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         }
 
         //执行选中/取消操作
-        MediaFile mediaFile = mImagePickerAdapter.getMediaFile(position);
+         mediaFile = mImagePickerAdapter.getMediaFile(position);//视频或者图片地址
         if (mediaFile != null) {
             String imagePath = mediaFile.getPath();
             if (isSingleType) {
@@ -529,6 +534,9 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         mFilePath = fileDir.getAbsolutePath() + "/IMG_" + System.currentTimeMillis() + ".jpg";
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+       /* Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        //设置视频录制的最长时间
+        intent.putExtra (MediaStore.EXTRA_DURATION_LIMIT,60);*/
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
             uri = FileProvider.getUriForFile(this, ImagePickerProvider.getFileProviderName(this), new File(mFilePath));
@@ -594,16 +602,12 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
                     images.add(image);
                 }
 
-/*
-                if (type==1){
-                   Intent intent=new Intent(this,NoteReviewActivity.class);
-                    intent.putStringArrayListExtra(SELECT_RESULT, images);
-                    startActivity(intent);
-                }else {
+
+
                     Intent intent = new Intent();
                     intent.putStringArrayListExtra(SELECT_RESULT, images);
                     setResult(RESULT_OK, intent);
-                }*/
+
                 SelectionManager.getInstance().removeAll();//清空选中记录
                 finish();
             }
@@ -618,7 +622,9 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
      * 选择图片完毕，返回
      */
     private void commitSelection() {
-        ArrayList<String> list = new ArrayList<>(SelectionManager.getInstance().getSelectPaths()); ArrayList<String> images = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>(SelectionManager.getInstance().getSelectPaths());
+        ArrayList<String> images = new ArrayList<>();
+
         if (mImagePaths != null && !mImagePaths.isEmpty()) {
             for (int j = 0; j < mImagePaths.size(); j++) {
                 for (int i=0;i<list.size();i++){
@@ -632,19 +638,26 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         for (String image : list) {
             images.add(image);
         }
+        if (mediaFile!=null){
+            if (MediaFileUtil.isVideoFileType( mediaFile.getPath())){
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("MEDIA", mediaFile);
+                intent.putStringArrayListExtra(SELECT_RESULT2, images);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+            }  else {
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(SELECT_RESULT, images);
+                setResult(RESULT_OK, intent);
+            }
+        }
 
-        /*if (type==1){
-            Intent intent=new Intent(this,NoteReviewActivity.class);
-            intent.putStringArrayListExtra(SELECT_RESULT, images);
-            startActivity(intent);
-        }else {
-            Intent intent = new Intent();
-            intent.putStringArrayListExtra(SELECT_RESULT, images);
-            setResult(RESULT_OK, intent);
-        }*/
-      /*  Intent intent = new Intent();
-        intent.putStringArrayListExtra(SELECT_RESULT, images);
-        setResult(RESULT_OK, intent);*/
+
+
+
+
+
         SelectionManager.getInstance().removeAll();//清空选中记录
         finish();
     }

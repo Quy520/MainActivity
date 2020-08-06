@@ -358,6 +358,7 @@
 
     </RelativeLayout>
     <View
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="@dimen/sobot_15PX"
@@ -398,13 +399,14 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
-    <View
+    <View android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="@dimen/sobot_15PX"
         android:layout_marginRight="@dimen/sobot_15PX"
         android:background="@color/line"></View>
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/re_black"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -439,6 +441,7 @@
 
     </RelativeLayout>
     <View
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="@dimen/sobot_15PX"

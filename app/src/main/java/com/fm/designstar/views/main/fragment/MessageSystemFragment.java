@@ -15,16 +15,19 @@ import android.widget.TextView;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.model.server.response.MessageResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.main.adapter.MessageAdapter;
+import com.fm.designstar.views.main.contract.MessageContract;
+import com.fm.designstar.views.main.presenter.MessagePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MessageSystemFragment extends BaseFragment {
+public class MessageSystemFragment extends BaseFragment<MessagePresenter> implements MessageContract.View {
 
 
     private int pagenum=0;
@@ -38,7 +41,8 @@ public class MessageSystemFragment extends BaseFragment {
     TextView all_notice;
     @BindView(R.id.message_recy)
     RecyclerView message_recy;
-private MessageAdapter messageAdapter;
+        private MessageAdapter messageAdapter;
+
 
     private List<String> urls=new ArrayList<>();
 
@@ -49,17 +53,14 @@ private MessageAdapter messageAdapter;
 
     @Override
     public void initPresenter() {
+        mPresenter.init(this);
 
     }
 
     @Override
     public void loadData() {
-        urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=2400807498,1022710002&fm=15&gp=0.jpg");
-        urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=3848182578,3212131776&fm=15&gp=0.jpg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179792&di=64dfa2fcbaed252126d9182ae67e053c&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171107%2F62a8b9b47e6f41708416c4eb5f44fc6a.jpeg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179787&di=578959ca7cecfc13376805894ff6e52d&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F5377154223%2F0");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179792&di=64dfa2fcbaed252126d9182ae67e053c&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171107%2F62a8b9b47e6f41708416c4eb5f44fc6a.jpeg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179787&di=578959ca7cecfc13376805894ff6e52d&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F5377154223%2F0");
+        mPresenter.Message(pagenum,10,null);
+
         message_recy.setLayoutManager(new LinearLayoutManager(mContext));
         message_recy.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 1)));
         message_recy.setNestedScrollingEnabled(false);
@@ -67,7 +68,6 @@ private MessageAdapter messageAdapter;
         message_recy.setAdapter(messageAdapter);
         message_recy.setHasFixedSize(true);
         message_recy.setFocusable(false);
-        messageAdapter.addData(urls);
 
     }
 
@@ -76,12 +76,16 @@ private MessageAdapter messageAdapter;
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.all_message:
+                mPresenter.Message(pagenum,10,null);
+
                 setItem();
                 all_message.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
                 all_message.setTextColor(getResources().getColor(R.color.notice));
 
                 break;
             case R.id.all_pl:
+                mPresenter.Message(pagenum,10,"3");
+
                 setItem();
                 all_pl.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
 
@@ -89,6 +93,7 @@ private MessageAdapter messageAdapter;
 
                 break;
             case R.id.all_zan:
+                mPresenter.Message(pagenum,10,"1");
                 setItem();
                 all_zan.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
                 all_zan.setTextColor(getResources().getColor(R.color.notice));
@@ -128,4 +133,31 @@ private MessageAdapter messageAdapter;
     }
 
 
+    @Override
+    public void MessageSuccess(MessageResponse response) {
+
+        if( pagenum==0){
+            messageAdapter.clearData();
+        }
+        messageAdapter.addData(response.getResult());
+
+
+
+
+    }
+
+    @Override
+    public void showLoading(String content, int code) {
+
+    }
+
+    @Override
+    public void stopLoading(int code) {
+
+    }
+
+    @Override
+    public void showErrorMsg(String msg, int code) {
+
+    }
 }

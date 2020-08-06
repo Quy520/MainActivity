@@ -72,6 +72,8 @@ public class VideoScanner extends AbsMediaScanner<MediaFile> {
         String folderName = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_DISPLAY_NAME));
         long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
         long dateToken = cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.DATE_TAKEN));
+      /*  int h = cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.WIDTH));
+        int w = cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media.WIDTH));*/
 
         MediaFile mediaFile = new MediaFile();
         mediaFile.setPath(path);
@@ -80,6 +82,8 @@ public class VideoScanner extends AbsMediaScanner<MediaFile> {
         mediaFile.setFolderName(folderName);
         mediaFile.setDuration(duration);
         mediaFile.setDateToken(dateToken);
+      /*  mediaFile.setH(h);
+        mediaFile.setW(w);*/
 
         return mediaFile;
     }

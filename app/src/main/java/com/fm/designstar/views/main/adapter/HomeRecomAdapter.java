@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
+import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * @date : 2018/8/14 16:38
  * @update : 2018/8/14
  */
-public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeViewHolder, String> {
+public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeViewHolder, HomeFindBean> {
     private RequestOptions myOptions;
 
     public HomeRecomAdapter() {
@@ -52,7 +53,7 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
             public void onClick(View view) {
 
               Intent intent=  new Intent(mContext,InfoDetailActivity.class);
-             // intent.putExtra("UUID",)
+                intent.putExtra("UUID",App.getConfig().getUser_head());
                 mContext.startActivity(intent);
             }
         });

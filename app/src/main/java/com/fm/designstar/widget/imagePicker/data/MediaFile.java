@@ -1,5 +1,7 @@
 package com.fm.designstar.widget.imagePicker.data;
 
+import java.io.Serializable;
+
 /**
  * 媒体实体类
  * Create by: chenWei.li
@@ -7,7 +9,7 @@ package com.fm.designstar.widget.imagePicker.data;
  * Time: 上午12:36
  * Email: lichenwei.me@foxmail.com
  */
-public class MediaFile {
+public class MediaFile implements Serializable {
 
     private String path;
     private String mime;
@@ -15,6 +17,24 @@ public class MediaFile {
     private String folderName;
     private long duration;
     private long dateToken;
+    private int H;
+    private int W;
+
+    public int getH() {
+        return H;
+    }
+
+    public void setH(int h) {
+        H = h;
+    }
+
+    public int getW() {
+        return W;
+    }
+
+    public void setW(int w) {
+        W = w;
+    }
 
     public String getPath() {
         return path;

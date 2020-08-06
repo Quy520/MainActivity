@@ -11,7 +11,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
+import com.fm.designstar.model.bean.MessageBean;
 import com.fm.designstar.utils.StringUtil;
+import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
  * @date : 2018/8/14 16:38
  * @update : 2018/8/14
  */
-public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewHolder, String> {
+public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewHolder, MessageBean> {
     private RequestOptions myOptions;
 
     public MessageAdapter() {
@@ -43,10 +45,19 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
 
     @Override
     public void mOnBindViewHolder(LikeViewHolder holder, int position) {
+        MessageBean messageBean = data.get(position);
 
-        if (!StringUtil.isBlank(App.getConfig().getUser_head())){
-            Glide.with(mContext).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(holder.hand);
+
+            Glide.with(mContext).load(messageBean.getHeadUri()).error(R.mipmap.defu_hand).into(holder.hand);
+
+        if (StringUtil.isBlank(messageBean.getUrl())){
+            holder.imageView.setVisibility(View.GONE);
+        }else {
+            Glide.with(mContext).load(messageBean.getUrl()).error(R.mipmap.defu_hand).into(holder.hand);
         }
+        holder.name.setText(messageBean.getNickName());
+        holder.content.setText(messageBean.getContent());
+        holder.time.setText(TimeUtil.getfriendlyTime(messageBean.getCreateTimeStamp()));
 
 
         holder.hand.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +65,7 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
             public void onClick(View view) {
 
               Intent intent=  new Intent(mContext,InfoDetailActivity.class);
-             // intent.putExtra("UUID",)
+             intent.putExtra("UUID",messageBean.getUserId());
                 mContext.startActivity(intent);
             }
         });
@@ -67,6 +78,10 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
         CircleImageView hand;
         @BindView(R.id.name)
         TextView name;
+        @BindView(R.id.content)
+        TextView content;
+        @BindView(R.id.time)
+        TextView time;
 
 
         public LikeViewHolder(View itemView) {

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.Detail.DTDetailsActivity">
+    <include layout="@layout/layout_toolbar"/>
+<RelativeLayout
+    android:id="@+id/re"
+android:layout_below="@+id/toolLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.fm.designstar.widget.CircleImageView
+        android:id="@+id/hand"
+        android:layout_margin="@dimen/sobot_10PX"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/defu_hand"
+        ></com.fm.designstar.widget.CircleImageView>
+    <TextView
+        android:id="@+id/name"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:textSize="14dp"
+        android:textColor="@color/edit_color"
+        android:text="㊙咪咪"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/hand"
+        android:textSize="14dp"
+        android:textColor="@color/hint_color"
+        android:text="三小时前"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
+
+<FrameLayout
+    android:layout_below="@+id/re"
+android:layout_marginLeft="55dp"
+android:id="@+id/imgLay"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    >
+<ImageView
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:id="@+id/oneImg"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+
+    android:scaleType="fitXY" />
+<LinearLayout
+    android:visibility="gone"
+    android:id="@+id/ly_two_img"
+    android:weightSum="2"
+    android:layout_width="match_parent"
+    android:layout_height="220dp">
+
+    <ImageView
+        android:layout_weight="1"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/oneImg2"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+
+        android:scaleType="fitXY" />
+    <ImageView
+        android:layout_weight="1"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/oneImg3"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+
+        android:scaleType="fitXY" />
+</LinearLayout>
+<com.fm.designstar.widget.CostomGrideView
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:id="@+id/gw"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:horizontalSpacing="5dp"
+    android:numColumns="3"
+    android:scrollbars="none"
+    android:verticalSpacing="5dp">
+
+</com.fm.designstar.widget.CostomGrideView>
+
+<com.fm.designstar.widget.CostomGrideView
+    android:visibility="gone"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:id="@+id/gw2"
+    android:layout_width="220dp"
+    android:layout_height="220dp"
+    android:horizontalSpacing="5dp"
+    android:numColumns="2"
+    android:scrollbars="none"
+    android:verticalSpacing="5dp">
+
+</com.fm.designstar.widget.CostomGrideView>
+</FrameLayout>
+
+<TextView
+    android:layout_below="@+id/imgLay"
+    android:layout_marginLeft="60dp"
+
+    android:id="@+id/content"
+android:layout_marginTop="@dimen/sobot_10PX"
+
+android:text="#设计美学#今天也是元气满满的一天吖～"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"/>
+<com.fm.designstar.widget.viegroup.MyViewGroup
+    android:layout_marginLeft="50dp"
+android:layout_below="@+id/content"
+    android:id="@+id/myViewGroup"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+
+android:background="@android:color/white" />
+<RelativeLayout
+    android:id="@+id/re1"
+    android:layout_below="@+id/myViewGroup"
+    android:layout_marginLeft="40dp"
+
+    android:padding="5dp"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+<ImageView
+    android:layout_marginLeft="5dp"
+    android:id="@+id/im"
+    android:layout_centerVertical="true"
+    android:src="@mipmap/home_zb"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+<TextView
+    android:id="@+id/address"
+    android:layout_marginLeft="@dimen/sobot_10PX"
+    android:textColor="@color/notice"
+    android:layout_toRightOf="@+id/im"
+    android:text="上海市"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+</RelativeLayout>
+    <View
+        android:id="@+id/line2"
+        android:layout_below="@+id/re1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+        android:background="@color/line"
+        />
+
+    <TextView
+        android:layout_below="@+id/line2"
+
+        android:id="@+id/reply"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="@string/repay"
+        android:textColor="@color/edit_color"
+        android:textSize="17sp" />
+
+
+    <RelativeLayout
+        android:layout_above="@+id/buttonLay"
+        android:layout_below="@+id/reply"
+        android:id="@+id/hasLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/hasLayout"
+        android:id="@+id/no_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:visibility="gone">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/no_reply"
+            android:textColor="@color/hint_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/buttonLay"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line" />
+
+       <TextView
+           android:id="@+id/go_comment"
+           android:layout_marginLeft="@dimen/sobot_20PX"
+           android:gravity="center"
+           android:textColor="@color/hint_color"
+           android:layout_centerVertical="true"
+           android:text="@string/review_i"
+           android:layout_width="150dp"
+           android:layout_height="38dp"
+           android:background="@drawable/btn_round_huise_shape"/>
+<CheckBox
+   android:layout_toLeftOf="@+id/likenum"
+        android:id="@+id/check_like"
+        android:button="@null"
+        android:background="@drawable/homelike_check"
+        android:layout_marginLeft="@dimen/sobot_20PX"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/check_guanzhu"
+
+        android:layout_width="@dimen/sobot_20PX"
+        android:layout_height="@dimen/sobot_20PX"/>
+
+        <TextView
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/hint_color"
+            android:id="@+id/likenum"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+
+            android:text="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/inputLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black2"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_above="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:background="#EEEEF3"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            android:text="@string/send"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:hint="@string/review_i"
+            android:maxLength="1000"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/edit_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

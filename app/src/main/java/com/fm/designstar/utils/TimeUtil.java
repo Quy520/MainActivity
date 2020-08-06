@@ -96,6 +96,7 @@ public class TimeUtil {
      * 时分秒.
      */
     public static String dateFormatHMS = "HH:mm:ss";
+    public static String dateFormatHMS2 = "mm:ss";
 
     /**
      * 时分.
@@ -299,6 +300,18 @@ public class TimeUtil {
         String thisDateTime = null;
         try {
             SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format);
+            thisDateTime = mSimpleDateFormat.format(milliseconds);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return thisDateTime;
+    }
+
+
+    public static String getSecondByFormat(long milliseconds, String format) {
+        String thisDateTime = null;
+        try {
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(dateFormatHMS2);
             thisDateTime = mSimpleDateFormat.format(milliseconds);
         } catch (Exception e) {
             e.printStackTrace();

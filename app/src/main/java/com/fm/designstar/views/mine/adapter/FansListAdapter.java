@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
+import com.fm.designstar.model.bean.FansBean;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * @date : 2018/8/14 16:38
  * @update : 2018/8/14
  */
-public class FansListAdapter extends BaseRecyclerAdapter<FansListAdapter.LikeViewHolder, String> {
+public class FansListAdapter extends BaseRecyclerAdapter<FansListAdapter.LikeViewHolder, FansBean> {
 
 
     public FansListAdapter() {
@@ -39,10 +40,9 @@ public class FansListAdapter extends BaseRecyclerAdapter<FansListAdapter.LikeVie
 
     @Override
     public void mOnBindViewHolder(LikeViewHolder holder, int position) {
+        FansBean fansBean = data.get(position);
+       // Glide.with(mContext).load(fansBean.getUserId()).error(R.mipmap.defu_hand).into(holder.hand);
 
-        if (!StringUtil.isBlank(App.getConfig().getUser_head())){
-            Glide.with(mContext).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(holder.hand);
-        }
 
 
     }
