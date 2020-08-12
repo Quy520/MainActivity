@@ -326,7 +326,7 @@ public class FabuActivity extends BaseActivity<UploadPresenter> implements Uploa
         multimediaListBean.setWidth(320);
         if (url.endsWith(".mp4")){
             multimediaListBean.setMultimediaType(2);
-            multimediaListBean.setDuration(mediaFile.getDuration());
+            multimediaListBean.setDuration(mediaFile.getDuration()/1000);
            multimediaListBean.setPreUrl(url+"?spm=a2c4g.11186623.2.1.yjOb8V&x-oss-process=video/snapshot,t_2000,f_jpg,w_520,h_800,m_fast");
         }else {
             multimediaListBean.setMultimediaType(1);

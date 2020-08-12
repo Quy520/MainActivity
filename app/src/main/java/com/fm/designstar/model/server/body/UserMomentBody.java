@@ -17,16 +17,55 @@ public class UserMomentBody extends BaseBody {
     @SerializedName("pageSize")
     private int pageSize;
     @SerializedName("momentType")
-    private int momentType;
+    private Integer momentType;
+    @SerializedName("mediaType")
+    private Integer mediaType;
     @SerializedName("userId")
     private String userId;
 
+    public UserMomentBody() {
 
-    public UserMomentBody(int pageNum, int pageSize,int momentType,String userId) {
+
+    }
+
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
-        this.pageSize = pageSize;
-        this.momentType=momentType;
-        this.userId=userId;
+    }
 
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getMomentType() {
+        return momentType;
+    }
+
+    public void setMomentType(Integer momentType) {
+        this.momentType = momentType;
+    }
+
+    public Integer getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(Integer mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

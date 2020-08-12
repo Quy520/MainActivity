@@ -17,6 +17,15 @@ import java.util.List;
 public class DesignerResponse extends BaseBean {
 
   private List<DesignerBean> result;
+  private boolean hasNextPage;
+
+    public boolean isHasNextPage() {
+        return hasNextPage;
+    }
+
+    public void setHasNextPage(boolean hasNextPage) {
+        this.hasNextPage = hasNextPage;
+    }
 
     public List<DesignerBean> getResult() {
         return result;

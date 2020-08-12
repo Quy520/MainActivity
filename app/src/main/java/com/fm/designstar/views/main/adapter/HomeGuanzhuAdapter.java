@@ -1,6 +1,7 @@
 package com.fm.designstar.views.main.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +12,26 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.model.bean.HomeFindBean;
+import com.fm.designstar.utils.NetUtil;
 import com.fm.designstar.utils.OssImageUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
+import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.CostomGrideView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 import com.fm.designstar.widget.viegroup.MyViewGroup;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,8 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * description : $todo
@@ -47,7 +54,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
     private List<String> urlList=new ArrayList<>();
     private List<String> tagList=new ArrayList<>();
     private RequestOptions rOptions;
-    private int oneWidth,Width;
+    private int oneWidth,Width,Width2;
     private int twoWidth;
     private int threeWidth;
     private int height;
@@ -71,6 +78,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         threeWidth = (int) ((oneWidth - (16 * dip2px + 0.5f)) / 3);
         height = (int) (110 * dip2px + 0.5f);
         Width=(int) (210 * dip2px + 0.5f);
+        Width2=(int) (170 * dip2px + 0.5f);
     }
     @Override
     public LikeViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType) {
@@ -112,7 +120,9 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (listener != null) {
-                    listener.onLikeClick(position,b,compoundButton);
+                    if (compoundButton.isPressed()) {
+                        listener.onLikeClick(position, b, compoundButton);
+                    }
                 }
             }
         });
@@ -131,16 +141,67 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         for (int i=0;i<findBean.getTagsList().size();i++){
             tagList.add(findBean.getTagsList().get(i).getTagName());
         }
+
+        Log.e("qsd","myactivity"+new Gson().toJson(findBean));
         if (findBean.getMediaType()==2){//视频
-            holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
-            holder.imgLay.setVisibility(View.VISIBLE);
-            holder.oneImg.setVisibility(View.VISIBLE);
+          Log.e("qsd","myactivity"+"sp");
+
+            holder.video_player.getLayoutParams().height = (int)((Width2*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+            holder.imgLay.setVisibility(View.GONE);
+            holder.oneImg.setVisibility(View.GONE);
             holder.gw.setVisibility(View.GONE);
-            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.oneImg);
+            holder.video_player.setVisibility(View.VISIBLE);
+            holder.video_player.setUp(findBean.getMultimediaList().get(0).getMultimediaUrl(), JZVideoPlayerStandard.SCREEN_WINDOW_LIST
+                    , "");
+
+            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
+
+            holder.video_player.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.isPressed()){
+                    Intent intent=  new Intent(mContext, VedioPlayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("info", findBean);
+                    intent.putExtras(bundle);
+                    mContext. startActivity(intent);
+                }
+
+
+            }
+        });
+          if (NetUtil.isWifi(mContext)){
+              holder.video_player.startButton.performClick();
+              holder.video_player.dismissVolumeDialog();
+              holder.video_player.startVideo();
+          }
+
         }else if(findBean.getMediaType()==0) {
             holder.imgLay.setVisibility(View.GONE);
+            holder.video_player.setVisibility(View.GONE);
 
         }else {//图片
+            Log.e("qsd","myactivity"+"tp");
+
+            if (findBean.getMultimediaList().get(0).getMultimediaUrl().endsWith(".mp4")) {
+              holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+              holder.imgLay.setVisibility(View.VISIBLE);
+              holder.oneImg.setVisibility(View.VISIBLE);
+              holder.gw.setVisibility(View.GONE);
+              holder.video_player.setVisibility(View.VISIBLE);
+              holder.video_player.setUp(findBean.getMultimediaList().get(0).getMultimediaUrl(), JZVideoPlayerStandard.SCREEN_WINDOW_LIST
+                      , "");
+
+              Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
+
+              holder.video_player.startButton.performClick();
+              holder.video_player.startVideo();
+
+          }else {
+
+
+            holder.video_player.setVisibility(View.GONE);
+
             if (findBean.getMultimediaList().size()>0){
                 for (int i=0;i<findBean.getMultimediaList().size();i++){
                     urlList.add(findBean.getMultimediaList().get(i).getMultimediaUrl());
@@ -155,6 +216,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.VISIBLE);
+                    holder.ly_two_img.setVisibility(View.GONE);
+
                     holder.gw.setVisibility(View.GONE);
                     Glide.with(mContext).load(findBean.getMultimediaList().get(0).getMultimediaUrl()).apply(rOptions).into(holder.oneImg);
 
@@ -196,7 +259,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     break;
             }
             }
-
+          }
         }
 
 
@@ -263,6 +326,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
         @BindView(R.id.myViewGroup)
         MyViewGroup myViewGroup;
+        @BindView(R.id.video_player)
+        JZVideoPlayerStandard video_player;
         public LikeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

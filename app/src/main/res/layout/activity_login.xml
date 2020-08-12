@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"></TextView>
         <EditText
             android:textColor="@color/edit_color"
-            android:text="17621678780"
+            android:text=""
             android:id="@+id/phone"
             android:maxLength="12"
             android:inputType="number"
@@ -72,7 +72,7 @@
             android:id="@+id/pwd"
             android:inputType="textPassword"
             android:layout_marginLeft="@dimen/sobot_10PX"
-            android:text="123"
+            android:text=""
             android:background="@null"
             android:paddingLeft="@dimen/sobot_10PX"
             android:hint="@string/pwd_hint"

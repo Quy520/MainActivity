@@ -29,6 +29,8 @@ import androidx.multidex.MultiDexApplication;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.manager.IUnReadMessageObserver;
+import io.rong.imlib.model.Conversation;
 
 
 /**
@@ -48,17 +50,13 @@ public class App extends MultiDexApplication {
         //注册eventbus
         EventBus.getDefault().register(mApp);
         //融云注册
-        String appKey = "lmxuhwaglesnd";
+        String appKey = "z3v5yqkbz7we0";
         RongIM.init(mApp, appKey);
         //极光推送注册
         JPushInterface.setDebugMode(true); //允许被debug，正式版本的时候注掉
         JPushInterface.init(this);  //初始化
-        JPushInterface.setAlias(mApp, App.getConfig().getUserid(), new TagAliasCallback() {
-            @Override
-            public void gotResult(int i, String s, Set<String> set) {
-                Log.e("qsd",i+"alias"+s);
-            }
-        });
+
+
 
     }
 

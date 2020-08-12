@@ -7,6 +7,7 @@ import com.fm.designstar.https.HttpManager;
 import com.fm.designstar.model.server.body.HomeRecomBody;
 import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.response.HomeFindResponse;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.views.main.contract.HomeRecomContract;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
 
@@ -19,8 +20,23 @@ import com.fm.designstar.views.mine.contract.UseMomentContract;
  */
 public class UseMomentPresenter extends BasePresenter<UseMomentContract.View> implements UseMomentContract.Presenter {
     @Override
-    public void UseMoment(int pageNum, int pageSize,int type,String uuid) {
-        toSubscribe(HttpManager.getApi().userMoment(new UserMomentBody(pageNum,pageSize,type, uuid)), new AbstractHttpSubscriber<HomeFindResponse>() {
+    public void UseMoment(int pageNum, int pageSize,Integer type,Integer mediaType,String uuid) {
+        UserMomentBody body=  new UserMomentBody();
+        if (!StringUtil.isBlank(uuid)){
+            body.setUserId(uuid);
+        }
+
+            body.setMediaType(mediaType);
+
+        body.setPageSize(10);
+        body.setPageNum(pageNum);
+
+            body.setMomentType(type);
+
+
+
+
+        toSubscribe(HttpManager.getApi().userMoment(body), new AbstractHttpSubscriber<HomeFindResponse>() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);
@@ -45,4 +61,5 @@ public class UseMomentPresenter extends BasePresenter<UseMomentContract.View> im
             }
         });
     }
+
 }

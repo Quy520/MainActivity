@@ -41,7 +41,8 @@ public class FansListAdapter extends BaseRecyclerAdapter<FansListAdapter.LikeVie
     @Override
     public void mOnBindViewHolder(LikeViewHolder holder, int position) {
         FansBean fansBean = data.get(position);
-       // Glide.with(mContext).load(fansBean.getUserId()).error(R.mipmap.defu_hand).into(holder.hand);
+        Glide.with(mContext).load(fansBean.getAvatar()).error(R.mipmap.defu_hand).into(holder.hand);
+        holder.name.setText(fansBean.getUserName());
 
 
 

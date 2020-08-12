@@ -16,6 +16,7 @@ import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
+import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.mine.adapter.BlackListAdapter;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
@@ -47,9 +48,10 @@ public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements 
     @Override
     public void loadData() {
         mTitle.setTitle(R.string.my_zp);
-        mPresenter.UseMoment(pagenum,10,2, App.getConfig().getUserid());
+        mPresenter.UseMoment(pagenum,10,2,null, App.getConfig().getUserid());
                recy_works.setLayoutManager(new LinearLayoutManager(mContext));
         recy_works.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 1)));
+
         recy_works.setNestedScrollingEnabled(false);
         homeRecomAdapter=new HomeRecomAdapter();
         recy_works.setAdapter(homeRecomAdapter);

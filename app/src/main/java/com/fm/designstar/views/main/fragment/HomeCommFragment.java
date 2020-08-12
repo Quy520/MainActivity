@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.model.bean.HomeFindBean;
+import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
@@ -87,7 +88,7 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
         likeRecycler.addItemDecoration(new SpaceItemDecoration().setRight(Tool.dip2px(mContext, 7)));
         likeAdapter = new MainLikeAdapter();
         likeRecycler.setAdapter(likeAdapter);
-        likeAdapter.addData(urls);
+       // likeAdapter.addData(urls);
         likeAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
             @Override
             public void onItemClick(View view, int position) {
@@ -105,10 +106,6 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
         homeRecomAdapter.addData(result);
     }
 
-    @Override
-    public void HomeRecomSuccess() {
-
-    }
 
     @Override
     public void showLoading(String content, int code) {
@@ -122,6 +119,21 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
 
     @Override
     public void showErrorMsg(String msg, int code) {
+
+    }
+
+    @Override
+    public void HomeRecomSuccess(HomeFindResponse homeFindResponse) {
+
+    }
+
+    @Override
+    public void HomehotecomSuccess(HomeFindResponse homeFindResponse) {
+
+    }
+
+    @Override
+    public void HomebannerRecomSuccess(HomeFindResponse homeFindResponse) {
 
     }
 }

@@ -8,12 +8,23 @@
     android:layout_height="match_parent"
     tools:context="com.fm.designstar.views.mine.activity.BeDesignerActivity">
     <include layout="@layout/layout_toolbar"></include>
+    <ImageView
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:id="@+id/com_im"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ImageView>
 <com.fm.designstar.widget.MyScrollView
+    android:id="@+id/scroll"
+
     android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

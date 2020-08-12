@@ -15,11 +15,15 @@
         android:theme="@style/AppTheme"
         android:vmSafeMode="true"
         tools:replace="icon,label,theme">
-        <activity android:name=".views.Detail.DTDetailsActivity"></activity>
+        <activity android:name=".views.mine.activity.qsdActivity" />
+
+        <activity android:name=".views.Detail.activity.VedioPlayActivity" />
+        <activity android:name=".views.Detail.activity.DTDetailsActivity" />
         <activity android:name=".views.Fabu.activity.ChoseTagActivity" />
         <activity android:name=".views.Fabu.FabuActivity" />
         <activity
             android:name=".views.main.activity.ConversationActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -49,8 +53,14 @@
         <activity android:name=".views.login.activitys.MsgCodeActivity" />
         <activity android:name=".views.login.activitys.ForgetActivity" />
         <activity android:name=".views.login.activitys.RegisteredActivity" />
-        <activity android:name=".views.login.activitys.LoginActivity" />
-        <activity android:name=".views.main.activity.MainActivity">
+        <activity
+            android:name=".views.login.activitys.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".views.main.activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -80,7 +90,6 @@
         <activity
             android:name=".widget.imagePicker.activity.ImagePreActivity"
             android:screenOrientation="portrait" />
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="499468ee45bbd3fb6721ac736b1b36c1" />
@@ -94,6 +103,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
+
         <provider
             android:name=".widget.imagePicker.provider.ImagePickerProvider"
             android:authorities="${applicationId}.provider"
@@ -103,7 +113,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
         <receiver
             android:name=".service.JGReceiver"
             android:enabled="true"
@@ -113,7 +122,19 @@
 
                 <category android:name="com.fm.designstar" />
             </intent-filter>
-        </receiver> <!-- 图片列表Activity -->
+        </receiver>
+
+     <!--   <service
+            android:name=".service.CustomPushMessageReceiver"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+            </intent-filter>
+        </service>--> <!-- 图片列表Activity -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 大图预览Activity -->
         <service
             android:name=".service.JGService"
@@ -131,15 +152,15 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" /> <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />

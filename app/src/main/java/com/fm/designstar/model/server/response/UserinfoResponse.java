@@ -19,7 +19,16 @@ public class UserinfoResponse extends BaseBean {
     private String signature;
     private int role;
     private int sex;
+    private int status;
     private long code;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getToken() {
         return token;

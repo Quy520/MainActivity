@@ -6,31 +6,29 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
-import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.HomeEvent;
-import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.events.UploadzpEvent;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
-import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
-import com.fm.designstar.views.Detail.DTDetailsActivity;
+import com.fm.designstar.views.Detail.activity.DTDetailsActivity;
+import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
 import com.fm.designstar.views.Detail.contract.LikeContract;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
-import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.main.contract.HomeFindContract;
 import com.fm.designstar.views.main.contract.HomeGuanzhuContract;
 import com.fm.designstar.views.main.presenter.HomeFindPresenter;
 import com.fm.designstar.views.main.presenter.HomeGuanzhuPresenter;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,23 +38,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 
-public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> implements HomeGuanzhuContract.View ,HomeFindContract.View , LikeContract.View  {
+public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> implements HomeGuanzhuContract.View ,HomeFindContract.View , LikeContract.View ,XRecyclerView.LoadingListener {
 
     private List<String> urls=new ArrayList<>();
 
     private HomeGuanzhuAdapter guanzhuAdapter;
     @BindView(R.id.home_recy)
-    RecyclerView hotRecycler;
+    XRecyclerView hotRecycler;
     @BindView(R.id.nodada)
     ImageView imageView;
     private int pagenum=0;
     private HomeFindPresenter homeFindPresenter;
     private LikePresenter likePresenter;
-    private int like=0,islike;
+    private int like=0,islike,type=1;
     HomeFindBean findBean;
     @Override
     public int getLayoutId() {
@@ -77,15 +74,19 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
         if(!EventBus.getDefault().isRegistered(this)){//加上判断
             EventBus.getDefault().register(this);
         }
+        hotRecycler.setPullRefreshEnabled(true);
+        hotRecycler.setLoadingMoreEnabled(true);
+        hotRecycler.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        hotRecycler.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
           hotRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         hotRecycler.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 5)));
-        hotRecycler.setNestedScrollingEnabled(false);
+
         guanzhuAdapter=new HomeGuanzhuAdapter();
         guanzhuAdapter.setScreenWidth(Util.getScreenWidth(mContext), getResources().getDisplayMetrics().density);
-
+        //4)实现 下拉刷新和加载更多 接口
+        hotRecycler.setLoadingListener(this);
         hotRecycler.setAdapter(guanzhuAdapter);
-        hotRecycler.setHasFixedSize(true);
-        hotRecycler.setFocusable(false);
+
 
        guanzhuAdapter.setOnClickListener(new HomeGuanzhuAdapter.OnClickListener() {
            @Override
@@ -110,9 +111,15 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
        guanzhuAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
            @Override
            public void onItemClick(View view, int position) {
-               if (guanzhuAdapter.getData().get(position).getMomentType()==1){
+               Log.e("qsd",position-1+"position");
+               if (guanzhuAdapter.getData().get(position-1).getMomentType()==2){
                    Bundle bundle = new Bundle();
-                   bundle.putSerializable("info", guanzhuAdapter.getData().get(position));
+                   bundle.putSerializable("info", guanzhuAdapter.getData().get(position-1));
+                   startActivity(VedioPlayActivity.class, bundle);
+
+               }else {
+                   Bundle bundle = new Bundle();
+                   bundle.putSerializable("info", guanzhuAdapter.getData().get(position-1));
                    startActivity(DTDetailsActivity.class, bundle);
                }
 
@@ -125,10 +132,13 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(HomeEvent event) {
-
+        type=event.getTAG();
        if (event.getTAG()==1){
+           guanzhuAdapter.clearData();
+
            mPresenter.HomeGuanzhu(pagenum,10);
        }else {
+           guanzhuAdapter.clearData();
            homeFindPresenter.HomeFind(pagenum,10);
        }
 
@@ -148,8 +158,11 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
                 hotRecycler.setVisibility(View.VISIBLE);
                 guanzhuAdapter.addData(homeFindResponse.getResult());
             }else {
-                imageView.setVisibility(View.VISIBLE);
-                hotRecycler.setVisibility(View.GONE);
+                if (pagenum==0){
+                    imageView.setVisibility(View.VISIBLE);
+                    hotRecycler.setVisibility(View.GONE);
+                }
+
             }
 
         }
@@ -157,21 +170,22 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void showLoading(String content, int code) {
-        App.loadingDefault(mActivity);
+      //  App.loadingDefault(mActivity);
 
     }
 
     @Override
     public void stopLoading(int code) {
-        App.hideLoading();
-
+        hotRecycler.refreshComplete(); //下拉刷新完成
+        hotRecycler.loadMoreComplete();
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
-        App.hideLoading();
-        ToastUtil.showToast(msg);
 
+        ToastUtil.showToast(msg);
+        hotRecycler.refreshComplete(); //下拉刷新完成
+        hotRecycler.loadMoreComplete();
     }
 
     @Override
@@ -180,16 +194,21 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
             guanzhuAdapter.clearData();
         }
         if (homeFindResponse.getResult()==null){
-            imageView.setVisibility(View.VISIBLE);
-            hotRecycler.setVisibility(View.GONE);
+            if (pagenum==0){
+                imageView.setVisibility(View.VISIBLE);
+                hotRecycler.setVisibility(View.GONE);
+            }
         }else {
+
             if (homeFindResponse.getResult().size()>0){
                 imageView.setVisibility(View.GONE);
                 hotRecycler.setVisibility(View.VISIBLE);
                 guanzhuAdapter.addData(homeFindResponse.getResult());
             }else {
-                imageView.setVisibility(View.VISIBLE);
-                hotRecycler.setVisibility(View.GONE);
+                if (pagenum==0){
+                    imageView.setVisibility(View.VISIBLE);
+                    hotRecycler.setVisibility(View.GONE);
+                }
             }
 
         }
@@ -197,17 +216,41 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void LikeSuccess(LikeResponse likeResponse) {
+        Log.e("qsd",islike+"==="+like);
          findBean .setLikes(likeResponse.getLikes());
         findBean.setIsLike(islike);
-        guanzhuAdapter.notifyItemChanged(like);
+        guanzhuAdapter.notifyItemChanged(like+1);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UploadzpEvent event) {
 
-
+                guanzhuAdapter.clearData();
             homeFindPresenter.HomeFind(pagenum,10);
 
 
     }
+
+    @Override
+    public void onRefresh() {
+        pagenum=0;
+        if (type==1){
+            mPresenter.HomeGuanzhu(pagenum,10);
+        }else {
+            homeFindPresenter.HomeFind(pagenum,10);
+        }
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        pagenum++;
+        if (type==1){
+            mPresenter.HomeGuanzhu(pagenum,10);
+        }else {
+            homeFindPresenter.HomeFind(pagenum,10);
+        }
+    }
+
+
 }

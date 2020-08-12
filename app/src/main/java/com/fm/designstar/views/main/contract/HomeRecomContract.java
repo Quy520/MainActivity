@@ -2,6 +2,7 @@ package com.fm.designstar.views.main.contract;
 
 
 import com.fm.designstar.base.BaseView;
+import com.fm.designstar.model.server.response.HomeFindResponse;
 
 /**
  * description : $todo
@@ -12,11 +13,16 @@ import com.fm.designstar.base.BaseView;
  */
 public interface HomeRecomContract {
     interface View extends BaseView {
-        void HomeRecomSuccess();
+        void HomeRecomSuccess(HomeFindResponse homeFindResponse);
+        void HomehotecomSuccess(HomeFindResponse homeFindResponse);
+        void HomebannerRecomSuccess(HomeFindResponse homeFindResponse);
+
 
     }
 
     interface Presenter {
         void HomeRecom(int pageNum, int pageSize);
+        void Homehote(int pageNum, int pageSize);
+        void Homebanner(int pageNum, int pageSize);
     }
 }

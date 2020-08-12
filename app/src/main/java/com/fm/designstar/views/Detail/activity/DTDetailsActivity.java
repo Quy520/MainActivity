@@ -1,4 +1,4 @@
-package com.fm.designstar.views.Detail;
+package com.fm.designstar.views.Detail.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -219,7 +219,8 @@ private int like=0;
 
                         break;
                     case 2:
-                        imgLay.setVisibility(View.GONE);
+                        imgLay.setVisibility(View.VISIBLE);
+                        oneImg.setVisibility(View.GONE);
                         ly_two_img.setVisibility(View.VISIBLE);
                         gw.setVisibility(View.GONE);
                         oneImg2.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());

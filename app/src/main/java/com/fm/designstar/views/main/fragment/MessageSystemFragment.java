@@ -15,19 +15,28 @@ import android.widget.TextView;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.events.messageEvent;
+import com.fm.designstar.events.messageupdataEvent;
 import com.fm.designstar.model.server.response.MessageResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
+import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.main.adapter.MessageAdapter;
 import com.fm.designstar.views.main.contract.MessageContract;
 import com.fm.designstar.views.main.presenter.MessagePresenter;
+import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MessageSystemFragment extends BaseFragment<MessagePresenter> implements MessageContract.View {
+public class MessageSystemFragment extends BaseFragment<MessagePresenter> implements MessageContract.View ,XRecyclerView.LoadingListener{
 
 
     private int pagenum=0;
@@ -40,10 +49,10 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
     @BindView(R.id.all_notice)
     TextView all_notice;
     @BindView(R.id.message_recy)
-    RecyclerView message_recy;
+    XRecyclerView message_recy;
         private MessageAdapter messageAdapter;
 
-
+    private String type;
     private List<String> urls=new ArrayList<>();
 
     @Override
@@ -59,16 +68,26 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
 
     @Override
     public void loadData() {
-        mPresenter.Message(pagenum,10,null);
-
+        mPresenter.Message(pagenum,10,type);
+        message_recy.setPullRefreshEnabled(true);
+        message_recy.setLoadingMoreEnabled(true);
+        message_recy.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        message_recy.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
         message_recy.setLayoutManager(new LinearLayoutManager(mContext));
         message_recy.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 1)));
-        message_recy.setNestedScrollingEnabled(false);
+   
         messageAdapter=new MessageAdapter();
         message_recy.setAdapter(messageAdapter);
-        message_recy.setHasFixedSize(true);
-        message_recy.setFocusable(false);
+   
+        //4)实现 下拉刷新和加载更多 接口
+        message_recy.setLoadingListener(this);
 
+        messageAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ToastUtil.showToast("p"+position);
+            }
+        });
     }
 
     @OnClick({R.id.all_message, R.id.all_pl, R.id.all_zan,R.id.all_notice
@@ -77,7 +96,7 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
         switch (view.getId()) {
             case R.id.all_message:
                 mPresenter.Message(pagenum,10,null);
-
+                type="";
                 setItem();
                 all_message.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
                 all_message.setTextColor(getResources().getColor(R.color.notice));
@@ -85,7 +104,7 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
                 break;
             case R.id.all_pl:
                 mPresenter.Message(pagenum,10,"3");
-
+                type="3";
                 setItem();
                 all_pl.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
 
@@ -93,6 +112,7 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
 
                 break;
             case R.id.all_zan:
+                type="1";
                 mPresenter.Message(pagenum,10,"1");
                 setItem();
                 all_zan.setBackground(getResources().getDrawable(R.drawable.shape_yellow));
@@ -148,16 +168,46 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
 
     @Override
     public void showLoading(String content, int code) {
+        //  App.loadingDefault(mActivity);
 
     }
 
     @Override
     public void stopLoading(int code) {
-
+        message_recy.refreshComplete(); //下拉刷新完成
+        message_recy.loadMoreComplete();
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
+
+        ToastUtil.showToast(msg);
+        message_recy.refreshComplete(); //下拉刷新完成
+        message_recy.loadMoreComplete();
+    }
+
+    @Override
+    public void onRefresh() {
+        pagenum=0;
+        mPresenter.Message(pagenum,10,type);
+
+
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        pagenum++;
+        mPresenter.Message(pagenum,10,type);
+
+
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(messageupdataEvent event) {
+        pagenum=0;
+        mPresenter.Message(pagenum,10,type);
 
     }
 }

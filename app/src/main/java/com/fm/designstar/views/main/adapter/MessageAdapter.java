@@ -53,7 +53,7 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
         if (StringUtil.isBlank(messageBean.getUrl())){
             holder.imageView.setVisibility(View.GONE);
         }else {
-            Glide.with(mContext).load(messageBean.getUrl()).error(R.mipmap.defu_hand).into(holder.hand);
+            Glide.with(mContext).load(messageBean.getUrl()).error(R.mipmap.defu_hand).into(holder.imageView);
         }
         holder.name.setText(messageBean.getNickName());
         holder.content.setText(messageBean.getContent());
@@ -65,7 +65,7 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
             public void onClick(View view) {
 
               Intent intent=  new Intent(mContext,InfoDetailActivity.class);
-             intent.putExtra("UUID",messageBean.getUserId());
+             intent.putExtra("UUID",messageBean.getUserId()+"");
                 mContext.startActivity(intent);
             }
         });

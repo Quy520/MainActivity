@@ -14,8 +14,17 @@ import java.util.List;
  * @update : 2018/9/27
  */
 public class HomeFindResponse extends BaseBean {
+    private boolean hasNextPage;
 
   private List<HomeFindBean> result;
+
+    public boolean isHasNextPage() {
+        return hasNextPage;
+    }
+
+    public void setHasNextPage(boolean hasNextPage) {
+        this.hasNextPage = hasNextPage;
+    }
 
     public List<HomeFindBean> getResult() {
         return result;

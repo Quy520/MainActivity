@@ -15,8 +15,10 @@ import com.fm.designstar.model.server.body.Locationbody;
 import com.fm.designstar.model.server.body.LoginBody;
 import com.fm.designstar.model.server.body.SendMessageBody;
 import com.fm.designstar.model.server.body.UserMomentBody;
+import com.fm.designstar.model.server.body.VesionBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
+import com.fm.designstar.model.server.body.followbody;
 import com.fm.designstar.model.server.body.sendMsgBody;
 import com.fm.designstar.model.server.body.uploadMomentbody;
 import com.fm.designstar.model.server.response.CommentsResponse;
@@ -31,6 +33,7 @@ import com.fm.designstar.model.server.response.RoleResponse;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
+import com.fm.designstar.model.server.response.VesionResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -76,7 +79,17 @@ public interface HttpApi {
     Observable<BaseResponse<OssTokenResponse>> ossToken(@Query("roleSessionName")String mobile);
 
     @POST("media/moment/recommend")//首页推荐
-    Observable<BaseResponse> homeRecommend(@Body HomeRecomBody body);
+    Observable<BaseResponse<HomeFindResponse>> homeRecommend(@Body HomeRecomBody body);
+
+    @POST("media/moment/getHotMoment")//首页猜你喜欢
+    Observable<BaseResponse<HomeFindResponse>> getHotMoment(@Body HomeRecomBody body);
+
+    @POST("media/moment/getBannerMoment")//首页banner
+    Observable<BaseResponse<HomeFindResponse>> getBannerMoment(@Body HomeRecomBody body);
+
+
+
+
 
     @POST("media/moment/find")//首页发现
     Observable<BaseResponse<HomeFindResponse>> homeFind(@Body HomeRecomBody body);
@@ -95,7 +108,7 @@ public interface HttpApi {
     Observable<BaseResponse> updateUserLocation(@Body Locationbody body);
 
 
-    @POST("media/moment/discoverDesigners")//设计师附近
+    @POST("media/moment/discoverDesigners")//设计师附近/media/moment/userMoment
     Observable<BaseResponse<DesignerResponse>> discoverDesigners(@Body HomeRecomBody body);
 
 
@@ -135,6 +148,18 @@ public interface HttpApi {
 
     @POST("media/message/getMessage")//评论列表
     Observable<BaseResponse<MessageResponse>> getMessage(@Body GetMessageBody body);
+
+    @POST("user/follow/follow")//关注b
+    Observable<BaseResponse> follow(@Body followbody body);
+
+    @POST("user/follow/cancel")//取消关注
+    Observable<BaseResponse> cancelfollow(@Body followbody body);
+
+    @POST("user/version/getVersion")//取消关注
+    Observable<BaseResponse<VesionResponse>> getVersion(@Body VesionBody body);
+
+
+
 
 
 

@@ -36,6 +36,7 @@ import com.fm.designstar.utils.UtilFinal;
 import com.fm.designstar.views.login.activitys.RegisteredActivity;
 import com.fm.designstar.views.mine.contract.UploadFileContract;
 import com.fm.designstar.views.mine.presenter.UploadFilePresenter;
+import com.fm.designstar.widget.MyScrollView;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +60,10 @@ public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  imple
     ImageView im_card2;
 @BindView(R.id.im_card3)
     ImageView im_card3;
+@BindView(R.id.com_im)
+    ImageView com_im;
+@BindView(R.id.scroll)
+MyScrollView scroll;
     private OssTokenResponse ossTokenResponse;
     private File newFile;
     private String upload;
@@ -77,6 +82,8 @@ public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  imple
     @Override
     public void loadData() {
         mTitle.setTitle(R.string.be_designer);
+        scroll.setVisibility(View.VISIBLE);
+        com_im.setVisibility(View.GONE);
 
     }
     @OnClick({R.id.im_card,R.id.im_card2, R.id.im_card3})
@@ -200,7 +207,7 @@ public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  imple
                     //获取图片旋转度数
                     int degree = ConvertUtil.getBitmapDegree(imagePath);
                     //压缩图片
-                    Bitmap bitmap = ConvertUtil.getCompressedBmp(imagePath, 400, 400);
+                    Bitmap bitmap = ConvertUtil.getCompressedBmp(imagePath, 1200, 1200);
                     //如果旋转度数大于0则进行校正
                     if (degree > 0) {
                         bitmap = ConvertUtil.rotateBitmapByDegree(bitmap, degree);
@@ -257,7 +264,7 @@ public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  imple
                     //获取图片旋转度数
                     int degree = ConvertUtil.getBitmapDegree(imagePath);
                     //压缩图片
-                    Bitmap bitmap = ConvertUtil.getCompressedBmp(imagePath, 400, 400);
+                    Bitmap bitmap = ConvertUtil.getCompressedBmp(imagePath, 1200, 1200);
                     //空判断 如果压缩是空的bitmap，不进行处理，直接上传。
                     if (bitmap == null) {
                         subscriber.onNext(imagePath);
@@ -397,6 +404,15 @@ public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  imple
     public void uploadImageSuccess(String url) {
         Log.e("qsd","url"+url);
         App.hideLoading();
+        scroll.setVisibility(View.GONE);
+        com_im.setVisibility(View.VISIBLE);
+        Glide.with(mActivity).load(url).error(R.mipmap.ico_default_2_1).into(com_im);
 
+        mTitle.setRightTitle("提交", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

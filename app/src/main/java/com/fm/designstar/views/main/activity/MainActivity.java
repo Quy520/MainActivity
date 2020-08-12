@@ -5,6 +5,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
+import cn.jzvd.JZVideoPlayer;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.manager.IUnReadMessageObserver;
+import io.rong.imlib.model.Conversation;
 
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,11 +18,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.app.AppManager;
@@ -24,28 +32,39 @@ import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.dialog.FabuDialogUtil;
 import com.fm.designstar.dialog.ShareDialogUtil;
+import com.fm.designstar.events.UpdatainfoEvent;
+import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.map.LocationInfo;
 import com.fm.designstar.model.server.response.RoleResponse;
+import com.fm.designstar.model.server.response.VesionResponse;
 import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StatusBarUtil;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
+import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.main.contract.RoleContract;
 import com.fm.designstar.views.main.contract.UpdataLocationContract;
+import com.fm.designstar.views.main.contract.VesionContract;
 import com.fm.designstar.views.main.fragment.DesignerFragment;
 import com.fm.designstar.views.main.fragment.HomeFragment;
 import com.fm.designstar.views.main.fragment.MessageFragment;
 import com.fm.designstar.views.main.fragment.MineFragment;
 import com.fm.designstar.views.main.presenter.UpdataLocationPresenter;
+import com.fm.designstar.views.main.presenter.VesipnPresenter;
 import com.fm.designstar.widget.NoScrollViewPager;
 import com.fm.designstar.map.Selectaddress;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View, RoleContract.View {
+public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View, RoleContract.View, VesionContract.View {
     @BindView(R.id.home)
     ImageView home;
     @BindView(R.id.location)
@@ -63,6 +82,8 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     TextView tv_message;
     @BindView(R.id.tv_my)
     TextView tv_my;
+    @BindView(R.id.interNo)
+    TextView interNo;
 
 
     @BindView(R.id.viewPager)
@@ -75,6 +96,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     double latitude ;//获取纬度
     double longitude;
     private FabuDialogUtil fabuDialogUtil;
+    private VesipnPresenter vesipnPresenter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -83,6 +105,8 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     @Override
     public void initPresenter() {
         mPresenter.init(this);
+        vesipnPresenter=new VesipnPresenter();
+        vesipnPresenter.init(this);
 
     }
 
@@ -97,8 +121,33 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
         initLocate();
-    }
+        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
+        JPushInterface.setAlias(mContext, App.getConfig().getUserToken(), new TagAliasCallback() {
+            @Override
+            public void gotResult(int i, String s, Set<String> set) {
+                Log.e("qsd",i+"alias"+s);
+            }
+        });
 
+
+        vesipnPresenter.Vesion(Util.getAppVersionCode(App.getContext()),"android");
+    }
+    /**
+     * 未读消息监听回调
+     * @param i
+     */
+    private IUnReadMessageObserver observer = new IUnReadMessageObserver() {
+        @Override
+        public void onCountChanged(int i) {
+            Log.e("qsd","数量变化s：" + i);
+
+          if (i>0){
+              interNo.setVisibility(View.VISIBLE);
+          } else {
+              interNo.setVisibility(View.GONE);
+          }
+        }
+    };
     private void initLocate() {
         //声明mLocationOption对象
         AMapLocationClientOption mLocationOption = null;
@@ -261,6 +310,11 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
     }
 
+    @Override
+    public void VesionSuccess(VesionResponse Response) {
+
+    }
+
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
         MyFragmentPagerAdapter(FragmentManager fm) {
@@ -298,5 +352,30 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
             mlocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
         }
 
+//移除监听，防止内存泄漏
+        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
+    }
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(messageEvent event) {
+        if (event.getTAG()>0){
+            interNo.setVisibility(View.VISIBLE);
+            interNo.setText(event.getTAG()+"");
+        } else {
+            interNo.setVisibility(View.GONE);
+        }
     }
 }

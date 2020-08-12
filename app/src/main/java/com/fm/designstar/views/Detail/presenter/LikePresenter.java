@@ -22,7 +22,7 @@ public class LikePresenter extends BasePresenter<LikeContract.View> implements L
 
     @Override
     public void Like(int type, long typeId) {
-        toSubscribe(HttpManager.getApi().like(new LikeCombody(type,  typeId)), new AbstractHttpSubscriber<LikeResponse>() {
+        toSubscribe(HttpManager.getApi().like(new LikeCombody(1,  typeId)), new AbstractHttpSubscriber<LikeResponse>() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);

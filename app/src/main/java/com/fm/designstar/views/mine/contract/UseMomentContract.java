@@ -18,6 +18,7 @@ public interface UseMomentContract {
     }
 
     interface Presenter {
-        void UseMoment(int pageNum, int pageSize,int type,String uuid);
+        void UseMoment(int pageNum, int pageSize,Integer type,Integer mediaType ,String uuid);
+
     }
 }

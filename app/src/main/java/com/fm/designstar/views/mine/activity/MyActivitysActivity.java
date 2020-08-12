@@ -16,6 +16,7 @@ import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
+import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.Fabu.contract.UploadContract;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.mine.adapter.BlackListAdapter;
@@ -53,10 +54,12 @@ public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implem
         recy_activits.setNestedScrollingEnabled(false);
         guanzhuAdapter=new HomeGuanzhuAdapter();
         recy_activits.setAdapter(guanzhuAdapter);
+        guanzhuAdapter.setScreenWidth(Util.getScreenWidth(mContext), getResources().getDisplayMetrics().density);
+
         recy_activits.setHasFixedSize(true);
         recy_activits.setFocusable(false);
-       // guanzhuAdapter.addData(urls);
-        mPresenter.UseMoment(pagenum,10,1, App.getConfig().getUserid());
+
+        mPresenter.UseMoment(pagenum,10,1, null,App.getConfig().getUserid());
     }
 
 

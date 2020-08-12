@@ -33,14 +33,31 @@ public class DesignerBean extends BaseBean {
 
     private String userId;
     private String userName;
+    private String nickName;
     private String headUrl;
+    private String headUri;
     private int sex;
     private long time;
     private String distance;
     private boolean follow;
     private boolean mine;
-    private List<DesignerMomentVosBean> designerMomentVos;
+    private List<HomeFindBean> designerMomentVos;
 
+    public String getHeadUri() {
+        return headUri;
+    }
+
+    public void setHeadUri(String headUri) {
+        this.headUri = headUri;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public List<TagsListBean> getTagsList() {
         return tagsList;
@@ -114,11 +131,11 @@ public class DesignerBean extends BaseBean {
         this.mine = mine;
     }
 
-    public List<DesignerMomentVosBean> getDesignerMomentVos() {
+    public List<HomeFindBean> getDesignerMomentVos() {
         return designerMomentVos;
     }
 
-    public void setDesignerMomentVos(List<DesignerMomentVosBean> designerMomentVos) {
+    public void setDesignerMomentVos(List<HomeFindBean> designerMomentVos) {
         this.designerMomentVos = designerMomentVos;
     }
 

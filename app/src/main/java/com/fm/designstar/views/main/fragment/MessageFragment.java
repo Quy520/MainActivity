@@ -19,12 +19,16 @@ import android.widget.TextView;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.events.messageEvent;
+import com.fm.designstar.events.messageupdataEvent;
 import com.fm.designstar.utils.FormatUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.main.contract.AddContract;
 import com.fm.designstar.views.main.presenter.AddPresenter;
 import com.fm.designstar.widget.NoScrollViewPager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +82,7 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
         viewPager.setCurrentItem(1);
         initronhgyun(App.getConfig().getRongyuntoken());
 
+        mPresenter.Add(FormatUtil.getIMEI(mContext),App.getConfig().getUserToken(),"android");
 
 
     }
@@ -102,7 +107,7 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
             public void onError(RongIMClient.ConnectionErrorCode errorCode) {
                 if(errorCode.equals(RongIMClient.ConnectionErrorCode.RC_CONN_TOKEN_INCORRECT)) {
                     //从 APP 服务获取新 token，并重连
-                    mPresenter.Add(FormatUtil.getIMEI(mContext),App.getConfig().getUserid(),"android");
+                //    mPresenter.Add(FormatUtil.getIMEI(mContext),App.getConfig().getUserid(),"android");
 
                 } else {
                     //无法连接 IM 服务器，请根据相应的错误码作出对应处理
@@ -120,6 +125,9 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
                 tv_guanzhu.setTextSize(22);
                 im_guanzhu.setVisibility(View.VISIBLE);
                  viewPager.setCurrentItem(0);
+
+                EventBus.getDefault().removeStickyEvent(messageupdataEvent.class);
+                EventBus.getDefault().post(new messageupdataEvent(0));
                 break;
             case R.id.re_tuijain:
                 initronhgyun(App.getConfig().getRongyuntoken());
@@ -127,6 +135,9 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
                 tv_tuijain.setTextSize(22);
                 im_tuijain.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(1);
+
+                EventBus.getDefault().removeStickyEvent(messageupdataEvent.class);
+                EventBus.getDefault().post(new messageupdataEvent(1));
                 break;
 
 

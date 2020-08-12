@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 
@@ -15,14 +16,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.events.LogoutEvent;
+import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
 import com.fm.designstar.views.mine.contract.GetInfoContract;
 import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 public class MessageSixinFragment extends BaseFragment<GetInfoPresenter>  implements GetInfoContract.View {
@@ -81,24 +88,33 @@ private int pagenum=0;
                 transaction.replace(R.id.container, conversationListFragment);
                 transaction.commit();
 
+                RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
 
 
                     }
 
     private UserInfo getUserInfoFromServer(String userId) {
         mPresenter.getOtherUserInfo(userId);
-          /*  if (!userId.equals(App.getConfig().getUserid())){
-                mPresenter.getOtherUserInfo(userId);
-            }else {
-                Log.e("qsd","=="+ App.getConfig().getUser_name()+Uri.parse(App.getConfig().getUser_head()));
-                RongIM.getInstance().refreshUserInfoCache(new UserInfo(App.getConfig().getUserid(), App.getConfig().getUser_name(), Uri.parse(App.getConfig().getUser_head())));
-            }*/
+
 
 
         return null;
     }
 
+    /**
+     * 未读消息监听回调
+     * @param i
+     */
+    private IUnReadMessageObserver observer = new IUnReadMessageObserver() {
+        @Override
+        public void onCountChanged(int i) {
+            Log.e("qsd","数量变化s：" + i);
+            //给首页发送未读消息事件，更新未读消息图标
 
+            EventBus.getDefault().removeStickyEvent(messageEvent.class);
+            EventBus.getDefault().post(new messageEvent(i));
+        }
+    };
     @Override
     public void GetotherLikeInfoSuccess(UserlikeResponse userlikeResponse) {
 
@@ -131,4 +147,6 @@ private int pagenum=0;
     public void showErrorMsg(String msg, int code) {
 
     }
+
+
 }

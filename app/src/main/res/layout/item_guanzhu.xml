@@ -39,22 +39,23 @@
 </RelativeLayout>
 
     <FrameLayout
-        android:layout_marginLeft="55dp"
+        android:visibility="gone"
+        android:layout_marginLeft="65dp"
         android:id="@+id/imgLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <ImageView
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:id="@+id/oneImg"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
-
+                android:visibility="gone"
             android:scaleType="fitXY" />
         <LinearLayout
-            android:visibility="gone"
+
             android:id="@+id/ly_two_img"
             android:weightSum="2"
             android:layout_width="match_parent"
@@ -111,8 +112,16 @@
         </com.fm.designstar.widget.CostomGrideView>
     </FrameLayout>
 
+    <cn.jzvd.JZVideoPlayerStandard
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:visibility="gone"
+        android:id="@+id/video_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="70dp"
 
         android:id="@+id/content"
         android:layout_marginTop="@dimen/sobot_10PX"
@@ -121,7 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.fm.designstar.widget.viegroup.MyViewGroup
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="70dp"
 
         android:id="@+id/myViewGroup"
         android:layout_width="match_parent"
@@ -129,7 +138,7 @@
 
         android:background="@android:color/white" />
     <RelativeLayout
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="60dp"
 
         android:padding="@dimen/sobot_10PX"
         android:layout_width="match_parent"

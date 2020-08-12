@@ -197,6 +197,7 @@
             android:src="@mipmap/app_logo" />
 
         <LinearLayout
+
             android:id="@+id/guanzhu"
             android:paddingTop="@dimen/sobot_10PX"
             android:gravity="center"
@@ -213,6 +214,7 @@
                 android:layout_height="30dp"/>
 
             <TextView
+                android:id="@+id/tv_guanzhu"
                 android:textColor="@color/notice"
                 android:gravity="center"
                 android:background="@drawable/btn_blackshape"
@@ -241,7 +243,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/im_guanzhu"
+                    android:id="@+id/im_zp"
                     android:layout_marginTop="@dimen/sobot_20PX"
 
 
@@ -251,7 +253,7 @@
                 <TextView
                     android:textSize="22dp"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/tv_guanzhu"
+                    android:id="@+id/tv_zp"
                     android:text="@string/zp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>
@@ -259,21 +261,21 @@
 
             <RelativeLayout
                 android:gravity="center"
-                android:id="@+id/re_tuijain"
+                android:id="@+id/re_dt"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:visibility="gone"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/im_tuijain"
+                    android:id="@+id/im_dt"
                     android:layout_marginTop="@dimen/sobot_20PX"
                     android:src="@drawable/btn_round_click_shape"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/sobot_10PX"></ImageView>
                 <TextView
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/tv_tuijain"
+                    android:id="@+id/tv_dt"
                     android:textSize="22dp"
                     android:text="@string/dt"
                     android:layout_width="wrap_content"
@@ -283,6 +285,7 @@
 
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_recy"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

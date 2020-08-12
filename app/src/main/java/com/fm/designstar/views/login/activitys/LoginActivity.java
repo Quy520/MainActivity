@@ -173,8 +173,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
             startActivity(ComUserInfoActivity.class);
         }else {
             startActivity(MainActivity.class);
+            ToastUtil.showToast("登录成功");
         }
         finish();
+
     }
 
     @Override

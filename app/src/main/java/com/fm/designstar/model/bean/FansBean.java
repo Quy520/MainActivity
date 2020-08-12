@@ -12,25 +12,48 @@ import com.fm.designstar.base.BaseBean;
  */
 public class FansBean extends BaseBean {
 
-    private int code;
-    private int followedUserId;
+
+    /**
+     * code : 1290903095169122304
+     * userId : 1278287241650765824
+     * followedUserId : 1285160959761055744
+     * status : 1
+     * type : 1
+     * avatar :
+     * userName :
+     * createTime : 2020-08-05T14:50:56
+     */
+
+    private long code;
+    private long userId;
+    private long followedUserId;
     private int status;
     private int type;
-    private int userId;
+    private String avatar;
+    private String userName;
+    private String createTime;
 
-    public int getCode() {
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
-    public int getFollowedUserId() {
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getFollowedUserId() {
         return followedUserId;
     }
 
-    public void setFollowedUserId(int followedUserId) {
+    public void setFollowedUserId(long followedUserId) {
         this.followedUserId = followedUserId;
     }
 
@@ -50,11 +73,27 @@ public class FansBean extends BaseBean {
         this.type = type;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
