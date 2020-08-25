@@ -3,10 +3,16 @@ package com.fm.designstar.https;
 
 
 
+import com.fm.designstar.model.server.BaseListResponse;
 import com.fm.designstar.model.server.BaseResponse;
+import com.fm.designstar.model.server.body.AddTagsBody;
 import com.fm.designstar.model.server.body.Addbody;
+import com.fm.designstar.model.server.body.AdddesignerTagsCombody;
 import com.fm.designstar.model.server.body.DeleteCombody;
+import com.fm.designstar.model.server.body.DesignerStatebody;
+import com.fm.designstar.model.server.body.Designerbody;
 import com.fm.designstar.model.server.body.FansListBody;
+import com.fm.designstar.model.server.body.Firdesignerbody;
 import com.fm.designstar.model.server.body.GetCommentBody;
 import com.fm.designstar.model.server.body.GetMessageBody;
 import com.fm.designstar.model.server.body.HomeRecomBody;
@@ -14,6 +20,8 @@ import com.fm.designstar.model.server.body.LikeCombody;
 import com.fm.designstar.model.server.body.Locationbody;
 import com.fm.designstar.model.server.body.LoginBody;
 import com.fm.designstar.model.server.body.SendMessageBody;
+import com.fm.designstar.model.server.body.TagsBody;
+import com.fm.designstar.model.server.body.Updatabody;
 import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.VesionBody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
@@ -22,6 +30,7 @@ import com.fm.designstar.model.server.body.followbody;
 import com.fm.designstar.model.server.body.sendMsgBody;
 import com.fm.designstar.model.server.body.uploadMomentbody;
 import com.fm.designstar.model.server.response.CommentsResponse;
+import com.fm.designstar.model.server.response.DesignerPageResponse;
 import com.fm.designstar.model.server.response.DesignerResponse;
 import com.fm.designstar.model.server.response.FansResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
@@ -34,6 +43,7 @@ import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
 import com.fm.designstar.model.server.response.VesionResponse;
+import com.fm.designstar.model.server.response.findPageResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -70,7 +80,7 @@ public interface HttpApi {
     Observable<BaseResponse> loginOut();
     @GET("user/getUserOtherInfo")//获取他人点赞
 
-    Observable<BaseResponse> getUserOtherInfo(@Query("userId")String userId);
+    Observable<BaseResponse<UserlikeResponse>> getUserOtherInfo(@Query("userId")String userId);
 
     @GET("user/getUserSelfInfo")//获取自己点赞
     Observable<BaseResponse<UserlikeResponse>> getUserSelfInfo();
@@ -111,6 +121,9 @@ public interface HttpApi {
     @POST("media/moment/discoverDesigners")//设计师附近/media/moment/userMoment
     Observable<BaseResponse<DesignerResponse>> discoverDesigners(@Body HomeRecomBody body);
 
+    @POST("media/moment/designers")//设计师列表
+    Observable<BaseResponse<DesignerResponse>> designers(@Body HomeRecomBody body);
+
 
     @POST("user/follow/findByUserId")//获取关注列表
     Observable<BaseResponse<FansResponse>> findByUserId(@Body FansListBody body);
@@ -123,12 +136,20 @@ public interface HttpApi {
     @POST("media/moment/uploadMoment")//获取粉丝列表
     Observable<BaseResponse> uploadMoment(@Body uploadMomentbody body);
 
+    @POST("media/tag/addDesignerTags")//获取粉丝列表
+    Observable<BaseResponse> addDesignerTags(@Body AdddesignerTagsCombody body);
+
 
 
     @GET("media/tag/findAllTagInfo")//获取标签信息
-    Observable<BaseResponse<TagInfoResponse>> findAllTagInfo();
+    Observable<BaseResponse<TagInfoResponse>> findAllTagInfo(@Query("tagType")int tagType);
 
-    @GET("user/getUserRoleInfo")//获取标签信息
+    @POST("media/tag/addDesignerTagInfo")//增加标签
+    Observable<BaseResponse> AddTag(@Body AddTagsBody tagType);
+
+
+
+    @GET("user/getUserRoleInfo")//获取个人角色信息
     Observable<BaseResponse<RoleResponse>> getUserRoleInfo();
 
 
@@ -157,6 +178,33 @@ public interface HttpApi {
 
     @POST("user/version/getVersion")//取消关注
     Observable<BaseResponse<VesionResponse>> getVersion(@Body VesionBody body);
+
+    @POST("user/audit/add")//提交审核
+    Observable<BaseResponse> Designer(@Body Designerbody body);
+
+    @POST("user/audit/findByStatus")//查询审核状态
+    Observable<BaseResponse<DesignerStatebody>> findByStatus();
+
+    @POST("user/audit/findPage")//审核类表
+    Observable<BaseResponse<findPageResponse>> findPage(@Body HomeRecomBody body);
+
+    @POST("user/audit/update")//修改审核
+    Observable<BaseResponse> update(@Body Updatabody body);
+
+    @POST("user/designerPage")//设计师类表
+    Observable<BaseResponse<DesignerPageResponse>> designerPage(@Body HomeRecomBody body);
+
+    @POST("user/fireDesigner")//解雇设计师
+    Observable<BaseResponse> fireDesigner(@Body Firdesignerbody body);
+
+
+
+
+
+
+
+
+
 
 
 

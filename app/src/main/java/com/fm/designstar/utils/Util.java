@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaMetadataRetriever;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -523,6 +524,44 @@ public class Util {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    /**
+     * 获取视频宽
+     *
+     * @param videoPath
+     * @return
+     */
+    public static int getVideoWidth(String videoPath) {
+        MediaMetadataRetriever retr = new MediaMetadataRetriever();
+        retr.setDataSource(videoPath);
+        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
+        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
+        String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION);
+        if ("90".equals(rotation) || "270".equals(rotation)) {//当视频是竖屏的时候 orientation = 90，横屏 orientation = 0 ，正确转换宽高
+            width = height;
+        }
+        retr.release();
+        return Integer.parseInt(width);
+    }
+
+    /**
+     * 获取视频高
+     *
+     * @param videoPath
+     * @return
+     */
+    public static int getVideoHeight(String videoPath) {
+        MediaMetadataRetriever retr = new MediaMetadataRetriever();
+        retr.setDataSource(videoPath);
+        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
+        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
+        String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION);
+        if ("90".equals(rotation) || "270".equals(rotation)) {//当视频是竖屏的时候 orientation = 90，横屏 orientation = 0 ，正确转换宽高
+            height = width;
+        }
+        retr.release();
+        return Integer.parseInt(height);
     }
 
 
@@ -1052,7 +1091,6 @@ public class Util {
                 }
             }
         } catch (ActivityNotFoundException activityNotFoundException1) {
-            Log.e("qsd", "GoogleMarket Intent not found");
         }
     }
 

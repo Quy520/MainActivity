@@ -22,6 +22,7 @@ import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.events.messageupdataEvent;
 import com.fm.designstar.utils.FormatUtil;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.main.contract.AddContract;
@@ -80,7 +81,7 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
         viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
         viewPager.setCurrentItem(1);
-        initronhgyun(App.getConfig().getRongyuntoken());
+       // initronhgyun(App.getConfig().getRongyuntoken());
 
         mPresenter.Add(FormatUtil.getIMEI(mContext),App.getConfig().getUserToken(),"android");
 

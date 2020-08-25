@@ -17,6 +17,6 @@ public interface DelCommentContract {
     }
 
     interface Presenter {
-        void DelComment(String commentid);
+        void DelComment(String commentid,String momentId);
     }
 }

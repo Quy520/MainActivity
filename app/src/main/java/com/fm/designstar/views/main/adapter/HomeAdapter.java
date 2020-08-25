@@ -1,31 +1,21 @@
 package com.fm.designstar.views.main.adapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.CompoundButton;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
-import com.fm.designstar.app.App;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.bean.NewsListBean;
 import com.fm.designstar.utils.SpaceItemDecoration;
-import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
-import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
-import com.fm.designstar.views.mine.activity.InfoDetailActivity;
-import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 import com.google.gson.Gson;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -37,6 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jzvd.JZVideoPlayerManager;
+import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * description : $todo
@@ -51,7 +43,14 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
     private HomeRecomAdapter homeRecomAdapter;
 
     private List<String> urls=new ArrayList<>();
+    private OnClickListener listener;
+    public interface OnClickListener {
+        void onLikeClick(int position,boolean b,CompoundButton compoundButton);
 
+    }
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
     public HomeAdapter(LifecycleOwner mowner) {
         this.mowner=mowner;
         urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=3848182578,3212131776&fm=15&gp=0.jpg");
@@ -66,8 +65,7 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
     public RecyclerView.ViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType) {
         View view ;
         RecyclerView.ViewHolder likeViewHolder;
-        Log.e("qsd","getItemViewType"+viewType);
-        switch (viewType) {
+         switch (viewType) {
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recome1, parent, false);
                 likeViewHolder=new LikeViewHolder(view);
@@ -91,7 +89,6 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
 
     @Override
     public void mOnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.e("qsd","mOnBindViewHolder"+getItemViewType(position)+"=="+position);
 
         switch (getItemViewType(position)) {
             case 1: //1张图 情况
@@ -109,7 +106,6 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                 break;
             case 2: //3张图 情况
                 List<HomeFindBean> result2 = data.get(0).getHot();
-                Log.e("qsd","2张图 情况"+position);
 
                 LikeViewHoldertwo viewHoldertwo = (LikeViewHoldertwo) holder;
 
@@ -142,7 +138,6 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                 viewHolderthree.hotRecycler.setNestedScrollingEnabled(false);
 
                 viewHolderthree. hotRecycler.setAdapter(homeRecomAdapter);
-                Log.e("qsd","3张图 情况"+position+"udhkjahdhs"+result3.size());
 
                 homeRecomAdapter.addData(result3);
                 homeRecomAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
@@ -154,6 +149,31 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                         bundle.putSerializable("info", homeRecomAdapter.getData().get(position));
                         intent.putExtras(bundle);
                         mContext. startActivity(intent);
+                    }
+                });
+
+                homeRecomAdapter.setOnClickListener(new HomeRecomAdapter.OnClickListener() {
+                    @Override
+                    public void onLikeClick(int position, boolean b, CompoundButton compoundButton) {
+                        if (listener!=null){
+                            listener.onLikeClick(position,b,compoundButton);
+                        }
+                    }
+                });
+                viewHolderthree.hotRecycler.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+                    @Override
+                    public void onChildViewAttachedToWindow(View view) {
+
+                    }
+
+                    @Override
+                    public void onChildViewDetachedFromWindow(View view) {
+                        JZVideoPlayerStandard jzvd = view.findViewById(R.id.video_player);
+                        if (jzvd != null) {
+                            if (JZVideoPlayerManager.getCurrentJzvd()!= null ) {
+                                jzvd.releaseAllVideos();
+                            }
+                        }
                     }
                 });
                 break;

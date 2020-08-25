@@ -1,5 +1,6 @@
 package com.fm.designstar.views.mine.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.dialog.AlertFragmentDialog;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
@@ -28,33 +30,42 @@ import com.fm.designstar.views.Detail.contract.LikeContract;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
+import com.fm.designstar.views.mine.contract.FirDesignerContract;
 import com.fm.designstar.views.mine.contract.GetInfoContract;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
 import com.fm.designstar.views.mine.contract.followContract;
+import com.fm.designstar.views.mine.presenter.FirDesignerPresenter;
 import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 import com.fm.designstar.views.mine.presenter.UseMomentPresenter;
 import com.fm.designstar.views.mine.presenter.followPresenter;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 
-public class InfoDetailActivity extends BaseActivity<UseMomentPresenter>  implements UseMomentContract.View , GetInfoContract.View, followContract.View, LikeContract.View {
+public class InfoDetailActivity extends BaseActivity<UseMomentPresenter>  implements UseMomentContract.View , GetInfoContract.View, followContract.View, LikeContract.View, FirDesignerContract.View {
 
 private GetInfoPresenter getInfoPresenter;
-    @BindView(R.id.sixin)
-    TextView textView;
+
     @BindView(R.id.my_recy)
     RecyclerView my_recy;
 
     private int pageNum=0;
     private String uuid;
 
-
+    @BindView(R.id.zp_num)
+    TextView zp_num;
+    @BindView(R.id.like_num)
+    TextView like_num;
+    @BindView(R.id.guanzhu_num)
+    TextView guanzhu_num;
+    @BindView(R.id.fans_num)
+    TextView fans_num;
     @BindView(R.id.hand)
     CircleImageView hand;
     @BindView(R.id.name)
@@ -69,6 +80,8 @@ private GetInfoPresenter getInfoPresenter;
     TextView tv_zp;
     @BindView(R.id.tv_dt)
     TextView tv_dt;
+    @BindView(R.id.sixin)
+    TextView sixin;
     @BindView(R.id.guanzhu)
     LinearLayout guanzhu;
     @BindView(R.id.re_top)
@@ -86,10 +99,11 @@ private GetInfoPresenter getInfoPresenter;
     private String city="上海";
     private followPresenter presenter;
     private UserinfoResponse mresponse;
+    private FirDesignerPresenter firDesignerPresenter;
     private HomeGuanzhuAdapter guanzhuAdapter;
     private HomeRecomAdapter homeRecomAdapter;
     private LikePresenter likePresenter;
-    private int like=0,islike,type=2;
+    private int like=0,islike,type=2,lujin;
     HomeFindBean findBean;
     @Override
     public int getLayoutId() {
@@ -105,26 +119,29 @@ private GetInfoPresenter getInfoPresenter;
         presenter.init(this);
         likePresenter=new LikePresenter();
         likePresenter.init(this);
+        firDesignerPresenter =new FirDesignerPresenter();
+        firDesignerPresenter.init(this);
 
     }
 
     @Override
     public void loadData() {
        uuid= getIntent().getStringExtra("UUID");
-        Log.e("qsd",uuid+"uuid");
+        lujin= getIntent().getIntExtra("type",0);
         mPresenter.UseMoment(pageNum,10,2,null,uuid);
-
+Log.e("qsd","uuid"+uuid+"=="+Long.parseLong(uuid));
         getInfoPresenter.getOtherUserInfo(uuid);
 
 if (!StringUtil.isBlank(uuid)){
 if (uuid.equals(App.getConfig().getUserid())){
     guanzhu.setVisibility(View.GONE);
     re_top.getLayoutParams().height = Tool.dip2px(mContext, 210) ;
-
+    getInfoPresenter.GetuserLikeInfo();
 }else {
     guanzhu.setVisibility(View.VISIBLE);
     re_top.getLayoutParams().height = Tool.dip2px(mContext, 250) ;
 
+    getInfoPresenter.GetotherLikeInfo(uuid);
 }
 }
 
@@ -157,10 +174,15 @@ if (uuid.equals(App.getConfig().getUserid())){
 
             }
         });
+
+
+
+
+
         guanzhuAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtil.showToast("qsd"+position);
+
                 if (guanzhuAdapter.getData().get(position).getMomentType()==1){
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("info", guanzhuAdapter.getData().get(position));
@@ -179,6 +201,26 @@ if (uuid.equals(App.getConfig().getUserid())){
         my_recy.setAdapter(homeRecomAdapter);
         my_recy.setHasFixedSize(true);
         my_recy.setFocusable(false);
+
+
+        homeRecomAdapter.setOnClickListener(new HomeRecomAdapter.OnClickListener() {
+            @Override
+            public void onLikeClick(int position, boolean b, CompoundButton compoundButton) {
+
+                if (b){
+                    if (compoundButton.isPressed()){
+                        like=1;
+                       // index=position;
+                        likePresenter.Like(1,homeRecomAdapter.getData().get(position).getMomentId());
+                    }
+                }else {
+                    like=0;
+                  //  index=position;
+                    likePresenter.Like(1,homeRecomAdapter.getData().get(position).getMomentId());
+
+                }
+            }
+        });
 
 
 
@@ -206,19 +248,43 @@ if (uuid.equals(App.getConfig().getUserid())){
 
                 break;
             case R.id.sixin:
-                //跳转到聊天页面 传入对方的id 和 名字
-                RongIM.getInstance().startPrivateChat(mContext, uuid, nikenam);
+                if(lujin==1){
+                    Intent intent=new Intent(mContext,ChoseDesignerTagsActivity.class);
+                    intent.putExtra("uuid",uuid);
+                    startActivityForResult(intent,1111);
+                }else {
+                  //跳转到聊天页面 传入对方的id 和 名字
+                    RongIM.getInstance().startPrivateChat(mContext, uuid, nikenam);
+
+                }
 
                 break;
             case R.id.tv_guanzhu:
-                if (mresponse!=null){
-                    if (mresponse.getStatus()==1){
-                        presenter.canclefollow(mresponse.getCode()+"");
-                    }else {
-                        presenter.follow(mresponse.getCode()+"");
+                if(lujin==1){
+                    new AlertFragmentDialog.Builder(mActivity)
+                            .setContent("确定要解雇设计师吗?" + "\n" + "解雇后设计师要重新提交审核，才能加入到中国设计星。" )
+                            .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                            .setRightBtnText(getString(R.string.cancle_designer))
+                            .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                                @Override
+                                public void dialogRightBtnClick() {
+                                 if (!StringUtil.isBlank(uuid))  {
+                                     firDesignerPresenter.FirDesigner(Long.parseLong(uuid));
+                                 }
+                                }
+                            }).build();
+
+
+                }else {
+                    if (mresponse != null) {
+                        if (mresponse.getStatus() == 1) {
+                            presenter.canclefollow(mresponse.getCode() + "");
+                        } else {
+                            presenter.follow(mresponse.getCode() + "");
+
+                        }
 
                     }
-
                 }
 
                 break;
@@ -232,6 +298,22 @@ if (uuid.equals(App.getConfig().getUserid())){
 
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 1111) {
+         String tags=   data.getStringExtra("resule");
+            info.setText(city+"|"+tags);
+        }
+
+    }
+
     @Override
     public void UseMomentSuccess(HomeFindResponse homeFindResponse) {
         if (pageNum==0){
@@ -270,14 +352,20 @@ if (uuid.equals(App.getConfig().getUserid())){
 
     @Override
     public void GetotherLikeInfoSuccess(UserlikeResponse userlikeResponse) {
-
+        zp_num.setText(userlikeResponse.getMomentNum()+"");
+        like_num.setText(userlikeResponse.getLikeNum()+"");
+        guanzhu_num.setText(userlikeResponse.getFollowNum()+"");
+        fans_num.setText(userlikeResponse.getFansNum()+"");
 
     }
 
     @Override
     public void GetuserlikeInfoSuccess(UserlikeResponse userlikeResponse) {
         if (pageNum==0){
-
+            zp_num.setText(userlikeResponse.getMomentNum()+"");
+            like_num.setText(userlikeResponse.getLikeNum()+"");
+            guanzhu_num.setText(userlikeResponse.getFollowNum()+"");
+            fans_num.setText(userlikeResponse.getFansNum()+"");
         }
     }
 
@@ -290,19 +378,30 @@ if (uuid.equals(App.getConfig().getUserid())){
         if (!StringUtil.isBlank(response.getAddress())){
             city=response.getAddress();
         }
-        info.setText(city+"|"+"中国设计星评委导师");
+        if (response.getTagInfo()==null){
+            info.setText(city+"|"+"暂未设置标签");
+
+        }else {
+            info.setText(city+"|"+response.getTagInfo().getTagName());
+        }
         if (StringUtil.isBlank(response.getSignature())){
             info2.setText("我的征途是星辰大海");
         }else {
             info2.setText(response.getSignature());
         }
-
-        if (response.getStatus()==0){
-            tv_guanzhu.setText("关注");
+        if (lujin==1){
+            sixin.setText("设置标签");
+            tv_guanzhu.setText("解雇");
         }else {
-            tv_guanzhu.setText("已关注");
+            if (response.getStatus()==0){
+                tv_guanzhu.setText("关注");
+            }else {
+                tv_guanzhu.setText("已关注");
 
+            }
         }
+
+
 
     }
 
@@ -324,8 +423,19 @@ if (uuid.equals(App.getConfig().getUserid())){
 
     @Override
     public void LikeSuccess(LikeResponse likeResponse) {
-        findBean .setLikes(likeResponse.getLikes());
-        findBean.setIsLike(islike);
-        guanzhuAdapter.notifyItemChanged(like);
+        if (type==1){
+            findBean .setLikes(likeResponse.getLikes());
+            findBean.setIsLike(islike);
+            guanzhuAdapter.notifyItemChanged(like);
+        }else {
+
+        }
+
+    }
+
+    @Override
+    public void FirignerSuccess() {
+        ToastUtil.showToast("解雇成功");
+
     }
 }

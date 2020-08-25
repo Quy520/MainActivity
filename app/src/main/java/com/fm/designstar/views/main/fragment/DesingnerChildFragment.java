@@ -70,7 +70,7 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
         designer_recy.setFocusable(false);
         //4)实现 下拉刷新和加载更多 接口
         designer_recy.setLoadingListener(this);
-        mPresenter.Designer(pagenum,10);
+        mPresenter.Designerfind(pagenum,10);
         designerAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
             @Override
             public void onItemClick(View view, int position) {
@@ -105,6 +105,16 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
        }
         designerAdapter.addData(homeFindResponse.getResult());
     }
+
+    @Override
+    public void DesignerfindSuccess(DesignerResponse homeFindResponse) {
+        idnext=homeFindResponse.isHasNextPage();
+        if (pagenum==0){
+            designerAdapter.clearData();
+        }
+        designerAdapter.addData(homeFindResponse.getResult());
+    }
+
     @Override
     public void showLoading(String content, int code) {
         //  App.loadingDefault(mActivity);
@@ -133,7 +143,8 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
         }
 
 
-        mPresenter.Designer(pagenum,10);
+        mPresenter.Designerfind(pagenum,10);
+
 
 
     }
@@ -142,7 +153,8 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
     public void onLoadMore() {
         if (idnext){
             pagenum++;
-            mPresenter.Designer(pagenum,10);
+            mPresenter.Designerfind(pagenum,10);
+
         }else {
             designer_recy.loadMoreComplete();
         }
@@ -152,13 +164,15 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
     }
 
     @Override
-    public void followSuccess() {        mPresenter.Designer(pagenum,10);
+    public void followSuccess() {               mPresenter.Designerfind(pagenum,10);
+        ;
 
 
     }
 
     @Override
-    public void canclefollowSuccess() {        mPresenter.Designer(pagenum,10);
+    public void canclefollowSuccess() {               mPresenter.Designerfind(pagenum,10);
+        ;
 
     }
 }

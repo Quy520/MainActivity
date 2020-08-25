@@ -1,6 +1,8 @@
 package com.fm.designstar.model.server.response;
 
 import com.fm.designstar.base.BaseBean;
+import com.fm.designstar.model.bean.TagBean;
+import com.fm.designstar.model.bean.TagsBean;
 
 public class UserinfoResponse extends BaseBean {
 
@@ -21,6 +23,15 @@ public class UserinfoResponse extends BaseBean {
     private int sex;
     private int status;
     private long code;
+    private TagBean tagInfo;
+
+    public TagBean getTagInfo() {
+        return tagInfo;
+    }
+
+    public void setTagInfo(TagBean tagInfo) {
+        this.tagInfo = tagInfo;
+    }
 
     public int getStatus() {
         return status;

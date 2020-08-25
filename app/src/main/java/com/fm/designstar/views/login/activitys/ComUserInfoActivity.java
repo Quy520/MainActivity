@@ -176,7 +176,7 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
                     ToastUtil.showToast(R.string.city_err);
                     return;
                 }
-                mPresenter.ComInfo(icon,real_name.getText().toString(),brith.getText().toString(),sex,city.getText().toString());
+                mPresenter.ComInfo(icon,real_name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),"");
 
                 break;
             case R.id.brith:

@@ -158,6 +158,7 @@ public class MediaFileUtil {
 
     //根据视频文件路径判断文件类型
     public static boolean isVideoFileType(String path) {  //自己增加
+
         MediaFileType type = getFileType(path);
         if (null != type) {
             return isVideoFileType(type.fileType);

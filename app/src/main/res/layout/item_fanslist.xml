@@ -26,6 +26,7 @@
 
 
     <CheckBox
+        android:visibility="gone"
         android:layout_marginRight="@dimen/sobot_20PX"
         android:layout_alignParentEnd="true"
         android:id="@+id/check_guanzhu"

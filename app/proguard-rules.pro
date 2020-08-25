@@ -45,3 +45,5 @@
 
     -dontwarn cn.jiguang.**
     -keep class cn.jiguang.** { *; }
+    -dontwarn com.xiaomi.mipush.sdk.**
+    -keep public class com.xiaomi.mipush.sdk.* {*; }

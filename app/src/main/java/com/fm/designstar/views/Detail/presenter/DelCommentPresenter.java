@@ -20,8 +20,8 @@ public class DelCommentPresenter extends BasePresenter<DelCommentContract.View> 
 
 
     @Override
-    public void DelComment(String momentIde) {
-        toSubscribe(HttpManager.getApi().delComment(new DeleteCombody(momentIde)), new AbstractHttpSubscriber() {
+    public void DelComment(String momentIde,String momentId) {
+        toSubscribe(HttpManager.getApi().delComment(new DeleteCombody(momentIde,momentId)), new AbstractHttpSubscriber() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);

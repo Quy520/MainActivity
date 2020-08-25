@@ -85,7 +85,7 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
         messageAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtil.showToast("p"+position);
+
             }
         });
     }

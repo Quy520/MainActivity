@@ -20,6 +20,7 @@ import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.model.server.response.LoginResponse;
 import com.fm.designstar.utils.FormatUtil;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TextViewUtil;
 import com.fm.designstar.utils.ToastUtil;
@@ -139,6 +140,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
                     }
 
                     mPresenter.login(phone.getText().toString(),pwd.getText().toString(), FormatUtil.getIMEI(mContext));
+                    closeKeyboard();
                 break;
             case R.id.regist:
                 Bundle bundle = new Bundle();
@@ -165,6 +167,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter>  implements Logi
         App.getConfig().setBirthday(userInfoResponse.getBirthday());//shengeri
         App.getConfig().setEmail(userInfoResponse.getEmail());//youdjian
         App.getConfig().setRealName(userInfoResponse.getRealName());//zhengshixingm
+        App.getConfig().setSingmarks(userInfoResponse.getSignature());//zhengshixingm
         App.getConfig().setRole(userInfoResponse.getRole());
         App.getConfig().setSex(userInfoResponse.getSex());
         App.getConfig().setIsgoHome(userInfoResponse.getCertificationMark());

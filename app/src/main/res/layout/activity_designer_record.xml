@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.mine.activity.DesignerRecordActivity">
+<include layout="@layout/layout_toolbar"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<TextView
+    android:textSize="14dp"
+    android:padding="@dimen/sobot_10PX"
+    android:text="认证设计师失败"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+        <TextView
+            android:textSize="14dp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/time"
+            android:padding="@dimen/sobot_10PX"
+            android:text="认证于：2020-8-20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:id="@+id/com_im"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ImageView>
+    <TextView
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/resons"
+        android:padding="@dimen/sobot_10PX"
+        android:text="失败原因：资格不允许"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textColor="@color/theme_color"
+        android:layout_marginTop="@dimen/sobot_10PX"
+        android:layout_marginRight="@dimen/sobot_40PX"
+        android:layout_marginLeft="@dimen/sobot_40PX"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:background="@drawable/btn_round_click_shape"
+        android:id="@+id/re_check"
+        android:padding="@dimen/sobot_10PX"
+        android:text="重新提交审核"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

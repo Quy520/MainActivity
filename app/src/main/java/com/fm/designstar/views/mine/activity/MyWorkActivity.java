@@ -21,18 +21,21 @@ import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.mine.adapter.BlackListAdapter;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
 import com.fm.designstar.views.mine.presenter.UseMomentPresenter;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View {
+public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View ,XRecyclerView.LoadingListener{
     @BindView(R.id.recy_works)
-    RecyclerView recy_works;
+    XRecyclerView recy_works;
     HomeRecomAdapter homeRecomAdapter;
-    private List<String> urls=new ArrayList<>();
+
     private int pagenum=0;
     @BindView(R.id.nodada)
     ImageView imageView;
+    private boolean hasnext;
 
     @Override
     public int getLayoutId() {
@@ -48,6 +51,11 @@ public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements 
     @Override
     public void loadData() {
         mTitle.setTitle(R.string.my_zp);
+
+        recy_works.setPullRefreshEnabled(true);
+        recy_works.setLoadingMoreEnabled(true);
+        recy_works.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        recy_works.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
         mPresenter.UseMoment(pagenum,10,2,null, App.getConfig().getUserid());
                recy_works.setLayoutManager(new LinearLayoutManager(mContext));
         recy_works.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 1)));
@@ -55,8 +63,9 @@ public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements 
         recy_works.setNestedScrollingEnabled(false);
         homeRecomAdapter=new HomeRecomAdapter();
         recy_works.setAdapter(homeRecomAdapter);
-        recy_works.setHasFixedSize(true);
-        recy_works.setFocusable(false);
+
+        //4)实现 下拉刷新和加载更多 接口
+        recy_works.setLoadingListener(this);
 
     }
 
@@ -65,6 +74,7 @@ public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements 
         if (pagenum==0){
             homeRecomAdapter.clearData();
         }
+        hasnext=findResponse.isHasNextPage();
         if (findResponse.getResult()==null){
             imageView.setVisibility(View.VISIBLE);
             recy_works.setVisibility(View.GONE);
@@ -84,20 +94,44 @@ public class MyWorkActivity extends BaseActivity<UseMomentPresenter> implements 
 
     @Override
     public void showLoading(String content, int code) {
-        App.loadingDefault(mActivity);
+
 
     }
 
     @Override
     public void stopLoading(int code) {
-        App.hideLoading();
+        recy_works.refreshComplete(); //下拉刷新完成
+        recy_works.loadMoreComplete();
 
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
-        App.hideLoading();
+        recy_works.refreshComplete(); //下拉刷新完成
+        recy_works.loadMoreComplete();
         ToastUtil.showToast(msg);
+
+    }
+
+    @Override
+    public void onRefresh() {
+        hasnext=true;
+        pagenum=0;
+        mPresenter.UseMoment(pagenum,10,2,null, App.getConfig().getUserid());
+
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (hasnext){
+            pagenum++;
+            mPresenter.UseMoment(pagenum,10,2,null, App.getConfig().getUserid());
+
+
+        } else {
+            recy_works.loadMoreComplete();
+        }
 
     }
 }

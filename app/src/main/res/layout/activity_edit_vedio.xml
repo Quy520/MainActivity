@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.Fabu.activity.EditVedioActivity"
+   >
+<include layout="@layout/layout_toolbar"></include>
+
+    <VideoView
+        android:layout_below="@+id/toolLay"
+        android:id="@+id/vv_player"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+    <TextView
+
+        android:padding="@dimen/sobot_10PX"
+        android:id="@+id/bar"
+        android:layout_below="@+id/vv_player"
+        android:text="@string/chose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <SeekBar
+
+        android:layout_below="@+id/bar"
+        android:id="@+id/sb_select"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sobot_20PX"/>
+    <ImageView
+        android:layout_marginBottom="@dimen/sobot_20PX"
+
+        android:layout_below="@+id/sb_select"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

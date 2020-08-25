@@ -11,13 +11,13 @@ tools:context="com.fm.designstar.views.mine.activity.MyWorkActivity">
 <include layout="@layout/layout_toolbar"></include>
 
 
-<androidx.recyclerview.widget.RecyclerView
+<com.jcodecraeer.xrecyclerview.XRecyclerView
 
     android:id="@+id/recy_works"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.recyclerview.widget.RecyclerView>
+</com.jcodecraeer.xrecyclerview.XRecyclerView>
     <ImageView
         android:id="@+id/nodada"
         android:visibility="visible"

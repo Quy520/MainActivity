@@ -6,8 +6,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/video_player"
+
+        android:layout_width="match_parent"
+        android:layout_height="225dp" />
+
 
     <ImageView
+        android:visibility="gone"
         android:scaleType="fitXY"
         android:id="@+id/foodImg"
         android:layout_width="match_parent"
@@ -29,7 +36,7 @@
 <RelativeLayout
 android:gravity="center_vertical"
     android:padding="@dimen/sobot_10PX"
-    android:layout_below="@+id/foodImg"
+    android:layout_below="@+id/video_player"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <com.fm.designstar.widget.CircleImageView

@@ -15,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.model.bean.HomeFindBean;
-import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
@@ -24,6 +23,7 @@ import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * description : $todo
@@ -59,14 +59,19 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
         HomeFindBean findBean = data.get(position);
         Glide.with(mContext).load(findBean.getHeadUri()).error(R.mipmap.defu_hand).into(holder.hand);
         if (findBean.getMultimediaList()!=null){
-            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).error(R.mipmap.ico_default_3_2).into(holder.imageView);
+            if (findBean.getMultimediaList().size()>0){
+                 holder.jzvdStd.setUp(
+                        findBean.getMultimediaList().get(0).getMultimediaUrl(),
+                         JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL);
+                Glide.with(holder.jzvdStd.getContext()).load(findBean.getMultimediaList().get(0).getPreUrl()).into(holder.jzvdStd.thumbImageView);
+                Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).error(R.mipmap.ico_default_3_2).into(holder.imageView);
+            }
         }
         holder.name.setText(findBean.getNickName());
         holder.title.setText(findBean.getContent());
         holder.likenum.setText(findBean.getLikes()+"");
         holder.message_num.setText(findBean.getComments()+"");
-        Log.e("qsd","uuid"+findBean.getUserId()+"=="+"zijide uuid"+App.getConfig().getUserid());
-            if (String.valueOf(findBean.getUserId()).equals(App.getConfig().getUserid())){
+             if (String.valueOf(findBean.getUserId()).equals(App.getConfig().getUserid())){
                 holder.check_guanzhu.setVisibility(View.GONE);
             }else {
                 holder.check_guanzhu.setVisibility(View.VISIBLE);
@@ -94,7 +99,6 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
         holder.hand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("qsd","ppp"+position+"uuid"+data.get(position).getUserId());
               Intent intent=  new Intent(mContext,InfoDetailActivity.class);
                 intent.putExtra("UUID",data.get(position).getUserId()+"");
                 mContext.startActivity(intent);
@@ -105,6 +109,8 @@ public class HomeRecomAdapter extends BaseRecyclerAdapter<HomeRecomAdapter.LikeV
     class LikeViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.foodImg)
         ImageView imageView;
+        @BindView(R.id.video_player)
+        JZVideoPlayerStandard jzvdStd;
         @BindView(R.id.hand)
         CircleImageView hand;
         @BindView(R.id.name)

@@ -81,6 +81,60 @@
         <!--设置动画，在这里使用让它继承系统的Animation.Dialog-->
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
     </style>
+    <style name="FlowLayout">
+
+        //选项item是否可以点击
+        <item name="item_click">true</item>
+
+        //选项item文字默认值
+        <item name="item_textColor">#3E4248</item>
+
+        //选项item背景色
+        <item name="item_backgroundColor">#ffffff</item>
+
+        //选中后选项item的文字颜色
+        <item name="item_selectedTextColor">#438BE8</item>
+
+        //选中后选项item的背景颜色
+        <item name="item_selectedBackgroundColor">#DBEAFF</item>
+
+        //选项item的圆角大小
+        <item name="item_radius">1dp</item>
+
+        //选项item的边缘颜色
+        <item name="item_strokeColor">#ffb7b7b7</item>
+
+        //选项item选中后边缘颜色
+        <item name="item_selectedStrokeColor">#ff438be8</item>
+
+        //选项item边缘的大小
+        <item name="item_strokeWidth">2px</item>
+
+        //水平方向，选项item的间距
+        <item name="item_horizontalSpacing">10dp</item>
+
+        //选项item内部padding
+        <item name="item_horizontalPadding">8dp</item>
+
+        ////竖直方向，选项item的间距
+        <item name="item_verticalPadding">10dp</item>
+
+
+        //选项item的大小，如果设置wrap_content则包裹它的内容，可设置固定值如80，单位dp
+        <item name="item_width">wrap_content</item>
+        <item name="item_height">wrap_content</item>
+
+
+        //限制item文字显示长度
+        <item name="item_maxEms">50</item>
+        <item name="item_singleLine">true</item>
+
+        //限制item文字大小
+        <item name="item_textSize">13dp</item>
+
+        //是否可以多选
+        <item name="item_multiChooseable">true</item>
+    </style>
     <declare-styleable name="CircleImageView">
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />

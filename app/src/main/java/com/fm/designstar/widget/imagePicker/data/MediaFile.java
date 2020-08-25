@@ -17,22 +17,31 @@ public class MediaFile implements Serializable {
     private String folderName;
     private long duration;
     private long dateToken;
-    private int H;
-    private int W;
+    private String H;
+    private String W;
+    private String firstImage;
 
-    public int getH() {
+    public String getFirstImage() {
+        return firstImage;
+    }
+
+    public void setFirstImage(String firstImage) {
+        this.firstImage = firstImage;
+    }
+
+    public String getH() {
         return H;
     }
 
-    public void setH(int h) {
+    public void setH(String h) {
         H = h;
     }
 
-    public int getW() {
+    public String getW() {
         return W;
     }
 
-    public void setW(int w) {
+    public void setW(String w) {
         W = w;
     }
 

@@ -6,6 +6,7 @@ import butterknife.OnClick;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.UpdatainfoEvent;
+import com.fm.designstar.model.server.body.DesignerStatebody;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
 import com.fm.designstar.utils.StringUtil;
@@ -23,12 +25,15 @@ import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.mine.activity.BeDesignerActivity;
 import com.fm.designstar.views.mine.activity.BlackListActivity;
 import com.fm.designstar.views.mine.activity.DesignerMangerActivity;
+import com.fm.designstar.views.mine.activity.DesignerRecordActivity;
 import com.fm.designstar.views.mine.activity.FansListActivity;
 import com.fm.designstar.views.mine.activity.MyActivitysActivity;
 import com.fm.designstar.views.mine.activity.MyWorkActivity;
 import com.fm.designstar.views.mine.activity.SettingActivity;
 import com.fm.designstar.views.mine.activity.ShDesignerActivity;
+import com.fm.designstar.views.mine.contract.FindDesignerContract;
 import com.fm.designstar.views.mine.contract.GetInfoContract;
+import com.fm.designstar.views.mine.presenter.FindDesignerPresenter;
 import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 import com.fm.designstar.widget.CircleImageView;
 import com.google.gson.Gson;
@@ -42,7 +47,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 
-public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetInfoContract.View {
+public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetInfoContract.View , FindDesignerContract.View {
     @BindView(R.id.re_top)
     RelativeLayout re_top;
     @BindView(R.id.re_designer)
@@ -77,6 +82,14 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
     TextView guanzhu_num;
     @BindView(R.id.fans_num)
     TextView fans_num;
+    @BindView(R.id.shtype)
+    TextView shtype;
+
+    @BindView(R.id.left)
+    ImageView left;
+    private FindDesignerPresenter designerPresenter;
+    private int state=3;
+    private DesignerStatebody mstatebody;
 
 
     @Override
@@ -87,6 +100,8 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
     @Override
     public void initPresenter() {
         mPresenter.init(this);
+        designerPresenter=new FindDesignerPresenter();
+        designerPresenter.init(this);
 
     }
 
@@ -102,13 +117,14 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
             Glide.with(mActivity).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(hand);
         }
         name.setText(App.getConfig().getUser_name());
+
         info.setText(App.getConfig().getAddress()+"|"+"中国设计星评委导师");
         if (StringUtil.isBlank(App.getConfig().getSingmarks())){
             info2.setText("我的征途是星辰大海");
         }else {
-
             info2.setText(App.getConfig().getSingmarks());
         }
+
         if (App.getConfig().getRole()==1){
             re_zp.setVisibility(View.GONE);
             re_dt.setVisibility(View.GONE);
@@ -116,18 +132,26 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
             re_demanger.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
             line2.setVisibility(View.GONE);
+            shtype.setVisibility(View.INVISIBLE);
+            left.setVisibility(View.VISIBLE);
+            re_designer.setVisibility(View.VISIBLE);
+            shtype.setVisibility(View.INVISIBLE);
         }else if (App.getConfig().getRole()==2){
             re_shdes.setVisibility(View.GONE);
             re_demanger.setVisibility(View.GONE);
             line1.setVisibility(View.GONE);
             line2.setVisibility(View.GONE);
+            shtype.setText("审核通过");
+            left.setVisibility(View.INVISIBLE);
         }else {
             re_zp.setVisibility(View.GONE);
             re_dt.setVisibility(View.GONE);
             re_shdes.setVisibility(View.VISIBLE);
             re_demanger.setVisibility(View.VISIBLE);
             line1.setVisibility(View.VISIBLE);
-            line2.setVisibility(View.VISIBLE);
+            line2.setVisibility(View.GONE);
+            re_designer.setVisibility(View.GONE);
+
         }
 
     }
@@ -137,6 +161,11 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             mPresenter.GetuserLikeInfo();
+            if (App.getConfig().getRole()!=3){
+                designerPresenter.FindDesigner();
+            }
+
+
         }
     }
     @OnClick({R.id.re_zp,R.id.zuopin,R.id.re_dt,R.id.re_guanzhu,R.id.re_fans, R.id.re_designer,R.id.re_shdes,R.id.re_demanger,R.id.re_black,R.id.re_setting})
@@ -182,20 +211,40 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
                 break;
 
             case R.id.re_designer:
-                startActivity(BeDesignerActivity.class);
+                if (App.getConfig().getRole()==2){
+
+                    return;
+
+                }else  if (App.getConfig().getRole()==1){
+                    if (state==0){
+                        return;
+                    }else if (state==2){
+                        if (mstatebody!=null){
+                            Intent intent3=new Intent(mContext,DesignerRecordActivity.class);
+                            intent3.putExtra("Result",mstatebody);
+                            startActivity(intent3);
+                        }
+
+                    } else {
+                        startActivity(BeDesignerActivity.class);
+
+                    }
+
+                }
+
 
 
                 break;
 
 
              case R.id.re_shdes:
-                 startActivity(ShDesignerActivity.class);
-
+                //
+                 startActivity(DesignerMangerActivity.class);
 
                  break;
 
             case R.id.re_demanger:
-                startActivity(DesignerMangerActivity.class);
+                startActivity(ShDesignerActivity.class);
 
 
                 break;
@@ -259,8 +308,41 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
         if (StringUtil.isBlank(App.getConfig().getSingmarks())){
             info2.setText("我的征途是星辰大海");
         }else {
-
             info2.setText(App.getConfig().getSingmarks());
         }
+    }
+
+
+
+    @Override
+    public void DFindDesignerSuccess(DesignerStatebody statebody) {
+        mstatebody=statebody;
+        if (statebody.getImgUrl()==null){
+            return;
+        }
+        state=statebody.getStatus();
+
+
+        if (statebody.getStatus()==0){//审核中
+            shtype.setVisibility(View.VISIBLE);
+            shtype.setText("审核中");
+            left.setVisibility(View.INVISIBLE);
+        } else if (statebody.getStatus()==1) {//审核通过
+            shtype.setVisibility(View.VISIBLE);
+
+
+            re_shdes.setVisibility(View.GONE);
+            re_demanger.setVisibility(View.GONE);
+            line1.setVisibility(View.GONE);
+            line2.setVisibility(View.GONE);
+            shtype.setText("审核通过");
+            left.setVisibility(View.INVISIBLE);
+            App.getConfig().setRole(2);
+        }else if (statebody.getStatus()==2) {//审核失败
+            shtype.setVisibility(View.VISIBLE);
+            shtype.setText("审核失败");
+            left.setVisibility(View.VISIBLE);
+        }
+
     }
 }

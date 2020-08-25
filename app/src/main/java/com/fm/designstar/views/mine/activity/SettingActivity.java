@@ -85,8 +85,11 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.sing)
-    TextView sing; @BindView(R.id.sex)
+    TextView sing;
+    @BindView(R.id.sex)
     TextView tv_sex;
+    @BindView(R.id.vesion)
+    TextView vesion;
     @BindView(R.id.hand)
     CircleImageView hand;
     private UploadFilePresenter uploadFilePresenter;
@@ -119,6 +122,7 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
         mTitle.setTitle(R.string.my_seeting2);
         mTitle.setRightTitleColor(R.color.notice);
 
+        vesion.setText((Util.getAppVersion(mActivity) + "(" + Util.getAppVersionCode(mActivity) + ")"));
         mTitle.setRightTitle("完成", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,7 +144,7 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
                 sex=    shareDialogUtil.getSex();
                 }
 
-                cominfoPresenter.ComInfo(icon,name.getText().toString(),brith.getText().toString(),sex,city.getText().toString());
+                cominfoPresenter.ComInfo(icon,name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),sing.getText().toString());
             }
         });
         initJsonData();

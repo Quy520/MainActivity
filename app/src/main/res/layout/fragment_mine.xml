@@ -298,10 +298,11 @@
             android:src="@mipmap/icon_design" />
 
         <ImageView
+            android:visibility="invisible"
+            android:id="@+id/left"
             android:layout_width="8dp"
             android:layout_height="@dimen/sobot_15PX"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/sobot_20PX"
             android:src="@mipmap/icon_right" />
@@ -312,6 +313,16 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/im_designer"
             android:text="@string/be_designer"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/shtype"
+            android:layout_toLeftOf="@+id/left"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="审核通过"
             android:textColor="@color/edit_color"
             android:textSize="16dp" />
 

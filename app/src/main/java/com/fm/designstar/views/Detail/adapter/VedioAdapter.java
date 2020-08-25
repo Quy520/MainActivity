@@ -1,5 +1,6 @@
 package com.fm.designstar.views.Detail.adapter;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +23,11 @@ import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
+import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
+import com.fm.designstar.widget.JzvdStdTikTok;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
+import com.mob.MobSDK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jzvdother.JZDataSource;
+import cn.jzvdother.Jzvd;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
+import static com.mob.tools.utils.Strings.getString;
 
 
 /**
@@ -55,8 +64,9 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
 
     public interface OnClickListener {
         void onLikeClick(int position,boolean b,CompoundButton compoundButton);
-        void oncommentClick(int position);
+        void oncommentClick(View view,int position);
         void ongaunzhutClick(int position);
+        void back();
 
 
     }
@@ -83,6 +93,33 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
         }else {
             holder.check_like.setChecked(true);
         }
+        if (!StringUtil.isBlank(findBean.getContent())){
+            holder.comment.setText(findBean.getContent());
+        }
+        holder.likenum.setText(findBean.getLikes()+"");
+        holder.comenum.setText(findBean.getComments()+"");
+        holder.hand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.ongaunzhutClick(position);
+
+                }
+            }
+        });
+        if (findBean.getMomentType()==2){
+          holder.  vedio_share.setVisibility(View.VISIBLE);
+          holder.vedio_share.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  showShare(findBean);
+              }
+          });
+
+        }else {
+            holder.  vedio_share.setVisibility(View.GONE);
+
+        }
 
         holder.check_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,6 +132,34 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
             }
         });
 
+        holder.go_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                        listener.oncommentClick(view ,position);
+
+                }
+            }
+        });
+      /*  holder.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.back();
+
+                }
+            }
+        });*/
+    holder.re_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                        listener.oncommentClick(view,position);
+
+                }
+            }
+        });
+
 
         if (findBean.getMultimediaList().size()>0) {
             for (int i=0;i<data.size();i++){
@@ -102,41 +167,80 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
                     videos.add(data.get(i).getMultimediaList().get(0).getMultimediaUrl());
                 }
 
+/*
+             Glide.with(mContext).load(imgs.get(position)).error(R.mipmap.defu_hand).into(holder.img_thumb);
+            holder.video_view.setVideoURI(Uri.parse(videos.get(position)));*/
+            JZDataSource jzDataSource = new JZDataSource(videos.get(position),
+                   null);
+            jzDataSource.looping = true;
+            holder.videoplayer.setUp(jzDataSource, Jzvd.SCREEN_NORMAL);
+            Glide.with(holder.videoplayer.getContext()).load(imgs.get(position)).into(holder.videoplayer.posterImageView);
 
-            Log.e("qsd",imgs+""+imgs.size()+"=="+videos+"==="+videos.size()+"'==''"+position);
-            Glide.with(mContext).load(imgs.get(position)).error(R.mipmap.defu_hand).into(holder.img_thumb);
-            holder.video_view.setVideoURI(Uri.parse(videos.get(position)));
+
         }
 
 
 
-        holder.comment.setText(findBean.getComments()+"");
 
 
     }
 
+    private void showShare(HomeFindBean findBean) {
+        Log.e("qsd",""+"https://cde.laifuyun.com/moment/"+findBean.getMomentId());
 
+        String title=findBean.getContent();
+        if (StringUtil.isBlank(title)){
+            title="星说短视频";
+        }
+
+        OnekeyShare oks = new OnekeyShare();
+
+// title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle("设计师给你分享了他的作品");
+// titleUrl QQ和QQ空间跳转链接
+       // oks.setTitleUrl("https://cde.laifuyun.com/moment/"+findBean.getMomentId());
+// text是分享文本，所有平台都需要这个字段
+        oks.setText(title);
+// setImageUrl是网络图片的url
+        oks.setImageUrl(findBean.getMultimediaList().get(0).getPreUrl());
+// url在微信、Facebook等平台中使用
+        oks.setUrl("https://cde.laifuyun.com/moment/"+findBean.getMomentId());
+// 启动分享GUI
+        oks.show(MobSDK.getContext());
+    }
 
     class CommentViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.img_thumb)
-        ImageView img_thumb;
-        @BindView(R.id.video_view)
-        VideoView video_view;
+   /*     @BindView(R.id.img_thumb)
+        ImageView img_thumb;*/
+      /*  @BindView(R.id.back)
+        ImageView back;*/
+    /*    @BindView(R.id.video_view)
+        VideoView video_view;*/
+        @BindView(R.id.videoplayer)
+        JzvdStdTikTok videoplayer;
         @BindView(R.id.hand)
         CircleImageView hand;
         @BindView(R.id.img_play)
         ImageView img_play;
+        @BindView(R.id.vedio_share)
+        ImageView vedio_share;
         @BindView(R.id.check_guanzhu)
         CheckBox check_like;
         @BindView(R.id.likenum)
         TextView likenum;
-
         @BindView(R.id.comenum)
+        TextView comenum;
+        @BindView(R.id.comment)
         TextView comment;
+        @BindView(R.id.go_comment)
+        TextView go_comment;
+
 
 
         @BindView(R.id.root_view)
         RelativeLayout root_view;
+        @BindView(R.id.re_message)
+        RelativeLayout re_message;
 
 
         public CommentViewHolder(View itemView) {

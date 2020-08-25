@@ -9,6 +9,7 @@ import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
@@ -104,12 +105,17 @@ public class UploadFilePresenter extends BasePresenter<UploadFileContract.View> 
         PutObjectRequest put = new PutObjectRequest(bucketName, objectKey, url,metadata);
 
         // You can set progress callback during asynchronous upload
-//        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
-//            @Override
-//            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-//                Log.e("123", "currentSize: " + currentSize + " totalSize: " + totalSize);
-//            }
-//        });
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                Log.e("123", "currentSize: " + currentSize + " totalSize: " + totalSize);
+                if (currentSize==totalSize){
+
+                }else {
+
+                }
+            }
+        });
 //        if (App.getConfig().getBaseUrl().contains("https://api.pinjamduit.co.id")) {
 //            put.setCallbackParam(new HashMap<String, String>() {
 //                {

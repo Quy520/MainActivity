@@ -13,9 +13,20 @@ import com.google.gson.annotations.SerializedName;
 public class DeleteCombody extends BaseBody {
     @SerializedName("code")
     private String code;
+    @SerializedName("momentId")
+    private String momentId;
 
-    public DeleteCombody(String code) {
+    public DeleteCombody(String code, String momentId) {
         this.code = code;
+        this.momentId = momentId;
+    }
+
+    public String getMomentId() {
+        return momentId;
+    }
+
+    public void setMomentId(String momentId) {
+        this.momentId = momentId;
     }
 
     public String getCode() {

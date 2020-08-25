@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,12 @@ import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.dialog.AlertFragmentDialog;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
+import com.fm.designstar.views.mine.activity.BeDesignerActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -138,10 +141,19 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
 
                 doSearchQuery();
             } else {
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e("AmapError", "location Error, ErrCode:"
-                        + amapLocation.getErrorCode() + ", errInfo:"
-                        + amapLocation.getErrorInfo());
+                new AlertFragmentDialog.Builder(mActivity)
+                        .setContent(getString(R.string.no_address) )
+                        .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                        .setRightBtnText(getString(R.string.sheet_dialog_ok))
+                        .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                            @Override
+                            public void dialogRightBtnClick() {
+                                Intent intent =  new Intent(Settings.ACTION_SETTINGS);
+                                startActivity(intent);
+
+                            }
+                        }).build();
+
             }
         }
     }

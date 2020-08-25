@@ -7,36 +7,36 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import cn.jzvd.JZVideoPlayer;
+//mport cn.jzvd.JZVideoPlayer;
+import cn.jzvdother.JzvdStd;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.model.Conversation;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
-import com.fm.designstar.app.AppManager;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.dialog.AlertFragmentDialog;
 import com.fm.designstar.dialog.FabuDialogUtil;
-import com.fm.designstar.dialog.ShareDialogUtil;
-import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.map.LocationInfo;
+import com.fm.designstar.model.server.body.DesignerStatebody;
 import com.fm.designstar.model.server.response.RoleResponse;
 import com.fm.designstar.model.server.response.VesionResponse;
+import com.fm.designstar.utils.OssImageUtil;
 import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.StringUtil;
@@ -50,21 +50,23 @@ import com.fm.designstar.views.main.fragment.DesignerFragment;
 import com.fm.designstar.views.main.fragment.HomeFragment;
 import com.fm.designstar.views.main.fragment.MessageFragment;
 import com.fm.designstar.views.main.fragment.MineFragment;
+import com.fm.designstar.views.main.presenter.RolePresenter;
 import com.fm.designstar.views.main.presenter.UpdataLocationPresenter;
 import com.fm.designstar.views.main.presenter.VesipnPresenter;
+import com.fm.designstar.views.mine.activity.BeDesignerActivity;
+import com.fm.designstar.views.mine.activity.DesignerRecordActivity;
+import com.fm.designstar.views.mine.contract.FindDesignerContract;
+import com.fm.designstar.views.mine.presenter.FindDesignerPresenter;
 import com.fm.designstar.widget.NoScrollViewPager;
-import com.fm.designstar.map.Selectaddress;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View, RoleContract.View, VesionContract.View {
+public class MainActivity extends BaseActivity<UpdataLocationPresenter> implements AMapLocationListener, UpdataLocationContract.View, RoleContract.View, VesionContract.View , FindDesignerContract.View {
     @BindView(R.id.home)
     ImageView home;
     @BindView(R.id.location)
@@ -97,6 +99,11 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     double longitude;
     private FabuDialogUtil fabuDialogUtil;
     private VesipnPresenter vesipnPresenter;
+    private RolePresenter rolePresenter;
+    private int state=3;
+    private DesignerStatebody mstatebody;
+    private FindDesignerPresenter designerPresenter;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -107,6 +114,11 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
         mPresenter.init(this);
         vesipnPresenter=new VesipnPresenter();
         vesipnPresenter.init(this);
+        rolePresenter=new RolePresenter();
+        rolePresenter.init(this);
+
+        designerPresenter=new FindDesignerPresenter();
+        designerPresenter.init(this);
 
     }
 
@@ -129,8 +141,16 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
             }
         });
 
-
+       if (App.getConfig().getRole()!=3){
+           designerPresenter.FindDesigner();
+       }
+        rolePresenter.GetRole();
         vesipnPresenter.Vesion(Util.getAppVersionCode(App.getContext()),"android");
+        try {
+            OssImageUtil.getImgWH("https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/1-1-5f3f6b43b07629bcb03ea551-1597991775-416543.jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     /**
      * 未读消息监听回调
@@ -139,7 +159,6 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     private IUnReadMessageObserver observer = new IUnReadMessageObserver() {
         @Override
         public void onCountChanged(int i) {
-            Log.e("qsd","数量变化s：" + i);
 
           if (i>0){
               interNo.setVisibility(View.VISIBLE);
@@ -173,19 +192,67 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
         switch (view.getId()) {
             case R.id.addLay:
+                rolePresenter.GetRole();
                 if (App.getConfig().getRole()==1){
-                    ToastUtil.showToast("请先去申请设计师");
+                    if (state==0){
+                        new AlertFragmentDialog.Builder(mActivity)
+                                .setContent(getString(R.string.designering) )
+                                .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                                .setRightBtnText(getString(R.string.sure))
 
-                }else {
+                                .build();
+
+                    }else if (state==1){
+                        fabuDialogUtil = new FabuDialogUtil(mContext);
+                        fabuDialogUtil.showDialog();
+
+                    }else if (state==2){
+                        new AlertFragmentDialog.Builder(mActivity)
+                                .setContent(getString(R.string.designerfalse) )
+                                .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                                .setRightBtnText(getString(R.string.go_look))
+                                .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                                    @Override
+                                    public void dialogRightBtnClick() {
+                                        if (mstatebody!=null){
+                                            Intent intent3=new Intent(mContext, DesignerRecordActivity.class);
+                                            intent3.putExtra("Result",mstatebody);
+                                            startActivity(intent3);
+                                        }
+
+                                    }
+                                }).build();
+
+                    }else {
+
+                        new AlertFragmentDialog.Builder(mActivity)
+                                .setContent(getString(R.string.no_designer) )
+                                .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                                .setRightBtnText(getString(R.string.sheet_dialog_ok))
+                                .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                                    @Override
+                                    public void dialogRightBtnClick() {
+                                        startActivity(BeDesignerActivity.class);
+
+                                    }
+                                }).build();
+                    }
+
+                  /*     fabuDialogUtil = new FabuDialogUtil(mContext);
+                    fabuDialogUtil.showDialog();*/
+
+                } else if (App.getConfig().getRole()==3){
+                   /* fabuDialogUtil = new FabuDialogUtil(mContext);
+                    fabuDialogUtil.showDialog();*/
+
+                    ToastUtil.showToast("您不是设计师不能发表作品和动态");
+                } else {
                     fabuDialogUtil = new FabuDialogUtil(mContext);
                     fabuDialogUtil.showDialog();
                 }
 
-
-
                 break;
             case R.id.homeLay:
-
                 setItem();
                 home.setImageResource(R.mipmap.icon_homeh);
                 tv_home.setTextColor(getResources().getColor(R.color.notice));
@@ -255,8 +322,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                 latitude = amapLocation.getLatitude();//获取纬度
                 longitude = amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
-                Log.d("qsdhaha", amapLocation.getAddress()+"=="+latitude+"==="+longitude+"=="+amapLocation.getCity()+"=="+amapLocation.getDistrict());
-                LocationInfo locationInfo = new LocationInfo();
+                 LocationInfo locationInfo = new LocationInfo();
                 locationInfo.setAddress(amapLocation.getAddress());
                 locationInfo.setLatitude(latitude);
                 locationInfo.setLonTitude(longitude);
@@ -266,14 +332,17 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                 if (mlocationClient != null) {
                     mlocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
                 }
+                Log.e("AmapError",latitude+"=="+longitude);
             } else {
                 mlocationClient.stopLocation();
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                mPresenter.UpdataLocation("上海市","上海市","",31.159168,121.355786);
+
+              /*  //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"
                         + amapLocation.getErrorCode() + ", errInfo:"
                         + amapLocation.getErrorInfo());
                 ToastUtil.showToast(amapLocation.getErrorInfo()+"请检查权限是否开启");
-
+*/
             }
         }
     }
@@ -312,6 +381,26 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
     @Override
     public void VesionSuccess(VesionResponse Response) {
+
+
+
+
+    }
+
+    @Override
+    public void DFindDesignerSuccess(DesignerStatebody statebody) {
+        if(StringUtil.isBlank(statebody.getImgUrl())){
+            return;
+        }
+        mstatebody=statebody;
+        state=statebody.getStatus();
+        if (statebody.getStatus()==0){//审核中
+
+        } else if (statebody.getStatus()==1) {//审核通过
+            App.getConfig().setRole(2);
+        }else {//审核失败
+
+        }
 
     }
 
@@ -357,7 +446,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     }
     @Override
     public void onBackPressed() {
-        if (JZVideoPlayer.backPress()) {
+        if (JzvdStd.backPress()) {
             return;
         }
         super.onBackPressed();
@@ -366,7 +455,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     @Override
     protected void onPause() {
         super.onPause();
-        JZVideoPlayer.releaseAllVideos();
+        JzvdStd.releaseAllVideos();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -101,10 +101,23 @@
     <string name="quan">全部</string>
     <string name="your_review">写标题并使用合适的话题，能让更多人看到～</string>
     <string name="where">您在哪里？</string>
-    <string name="bq">标签</string>
+    <string name="bq">选择标签</string>
     <string name="repay">全部评论</string>
     <string name="no_reply">还没有评论</string>
     <string name="send">发送</string>
     <string name="review_i">添加你的评论</string>
     <string name="reply_empty">请填写内容</string>
+    <string name="chose">滑动Bar来选择封面</string>
+    <string name="no_designer">您还不是设计师不能发作品，请前去申请。。</string>
+    <string name="sheet_dialog_ok">去申请</string>
+    <string name="designering">正在审核你的资料,请稍后...</string>
+    <string name="designerfalse">您的资料审核失败，请前去查看原因</string>
+    <string name="go_look">前去查看</string>
+    <string name="your_resons">请填写您的拒绝理由</string>
+    <string name="cancle_designer">"去解雇"</string>
+    <string name="no_address">缺少定位权限，请前去设置中心开启</string>
+    <string name="addtags">新增标签</string>
+    <string name="no_phonto">你没有授权获取手机基本信息权限，会影响部分功能多的使用。</string>
+    <string name="share">分享微信</string>
+
 </resources>

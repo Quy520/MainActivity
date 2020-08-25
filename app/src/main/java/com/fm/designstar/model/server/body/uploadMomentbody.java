@@ -3,6 +3,7 @@ package com.fm.designstar.model.server.body;
 import com.fm.designstar.model.bean.DesignerBean;
 import com.fm.designstar.model.bean.MultimediaListBean;
 import com.fm.designstar.model.bean.MultimediabodyBean;
+import com.fm.designstar.model.bean.TagsInfoVoBean;
 import com.fm.designstar.model.server.base.BaseBody;
 import com.google.gson.annotations.SerializedName;
 
@@ -33,9 +34,9 @@ public class uploadMomentbody extends BaseBody {
     private List<MultimediabodyBean> multimediaList;
 
     @SerializedName("tagsList")
-    private List<DesignerBean.TagsListBean> tagsList;
+    private List<TagsInfoVoBean> tagsList;
 
-    public uploadMomentbody(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<DesignerBean.TagsListBean> tagsList) {
+    public uploadMomentbody(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<TagsInfoVoBean> tagsList) {
         this.address = address;
         this.content = content;
         this.latitude = latitude;
@@ -102,11 +103,11 @@ public class uploadMomentbody extends BaseBody {
         this.multimediaList = multimediaList;
     }
 
-    public List<DesignerBean.TagsListBean> getTagsList() {
+    public List<TagsInfoVoBean> getTagsList() {
         return tagsList;
     }
 
-    public void setTagsList(List<DesignerBean.TagsListBean> tagsList) {
+    public void setTagsList(List<TagsInfoVoBean> tagsList) {
         this.tagsList = tagsList;
     }
 }

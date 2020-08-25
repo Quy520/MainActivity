@@ -22,18 +22,21 @@ import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.mine.adapter.BlackListAdapter;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
 import com.fm.designstar.views.mine.presenter.UseMomentPresenter;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View {
+public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View,XRecyclerView.LoadingListener {
     @BindView(R.id.recy_activits)
-    RecyclerView recy_activits;
+    XRecyclerView recy_activits;
     HomeGuanzhuAdapter guanzhuAdapter;
     private List<String> urls=new ArrayList<>();
     private int pagenum=0;
     @BindView(R.id.nodada)
     ImageView imageView;
+    private boolean hasnext;
 
     @Override
     public int getLayoutId() {
@@ -49,6 +52,10 @@ public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implem
     @Override
     public void loadData() {
         mTitle.setTitle(R.string.my_dt);
+        recy_activits.setPullRefreshEnabled(true);
+        recy_activits.setLoadingMoreEnabled(true);
+        recy_activits.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        recy_activits.setLoadingMoreProgressStyle(ProgressStyle.BallClipRotate);
                recy_activits.setLayoutManager(new LinearLayoutManager(mContext));
         recy_activits.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 1)));
         recy_activits.setNestedScrollingEnabled(false);
@@ -56,29 +63,31 @@ public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implem
         recy_activits.setAdapter(guanzhuAdapter);
         guanzhuAdapter.setScreenWidth(Util.getScreenWidth(mContext), getResources().getDisplayMetrics().density);
 
-        recy_activits.setHasFixedSize(true);
-        recy_activits.setFocusable(false);
-
+        //4)实现 下拉刷新和加载更多 接口
+        recy_activits.setLoadingListener(this);
         mPresenter.UseMoment(pagenum,10,1, null,App.getConfig().getUserid());
     }
 
 
 
+
     @Override
     public void showLoading(String content, int code) {
-        App.loadingDefault(mActivity);
+
 
     }
 
     @Override
     public void stopLoading(int code) {
-        App.hideLoading();
+        recy_activits.refreshComplete(); //下拉刷新完成
+        recy_activits.loadMoreComplete();
 
     }
 
     @Override
     public void showErrorMsg(String msg, int code) {
-        App.hideLoading();
+        recy_activits.refreshComplete(); //下拉刷新完成
+        recy_activits.loadMoreComplete();
         ToastUtil.showToast(msg);
 
     }
@@ -88,6 +97,7 @@ public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implem
         if (pagenum==0){
             guanzhuAdapter.clearData();
         }
+        hasnext=homeFindResponse.isHasNextPage();
         if (homeFindResponse.getResult()==null){
             imageView.setVisibility(View.VISIBLE);
             recy_activits.setVisibility(View.GONE);
@@ -102,5 +112,29 @@ public class MyActivitysActivity extends BaseActivity<UseMomentPresenter> implem
             }
 
         }
+    }
+
+
+    @Override
+    public void onRefresh() {
+        hasnext=true;
+        pagenum=0;
+        mPresenter.UseMoment(pagenum,10,1, null,App.getConfig().getUserid());
+
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (hasnext){
+            pagenum++;
+            mPresenter.UseMoment(pagenum,10,1, null,App.getConfig().getUserid());
+
+
+
+        } else {
+            recy_activits.loadMoreComplete();
+        }
+
     }
 }

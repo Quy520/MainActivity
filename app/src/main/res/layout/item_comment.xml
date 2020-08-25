@@ -31,7 +31,7 @@
             android:layout_marginTop="9dp"
             android:textColor="@color/edit_color"
             android:textSize="16sp"
-            android:textStyle="bold"
+
             app:layout_constraintStart_toEndOf="@+id/hand"
             app:layout_constraintTop_toTopOf="parent" />
 

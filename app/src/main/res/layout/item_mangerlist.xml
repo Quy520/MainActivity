@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/theme_color"
+    android:padding="@dimen/sobot_10PX"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <com.fm.designstar.widget.CircleImageView
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:src="@mipmap/defu_hand"
+        android:id="@+id/hand"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:text="设计师"
+        android:textColor="@color/edit_color"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/name"
+        android:id="@+id/content"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:text="提交了设计师认证"
+        android:textColor="@color/edit_color"
+        android:textSize="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/content"
+        android:id="@+id/time"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/hand"
+        android:text="1个小时前"
+        android:textColor="@color/hint_color"
+        android:textSize="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginLeft="@dimen/sobot_40PX"
+        android:id="@+id/image"
+        android:layout_marginRight="@dimen/sobot_10PX"
+        android:layout_toRightOf="@+id/content"
+        android:src="@mipmap/ico_default"
+        android:layout_width="72dp"
+        android:layout_height="72dp"/>
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/foodImg"
+        android:layout_marginRight="@dimen/sobot_10PX"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/designer_sh"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+
+</RelativeLayout>

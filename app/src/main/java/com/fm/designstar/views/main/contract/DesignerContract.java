@@ -15,10 +15,12 @@ import com.fm.designstar.model.server.response.HomeFindResponse;
 public interface DesignerContract {
     interface View extends BaseView {
         void DesignerSuccess(DesignerResponse homeFindResponse);
+        void DesignerfindSuccess(DesignerResponse homeFindResponse);
 
     }
 
     interface Presenter {
         void Designer(int pageNum, int pageSize);
+        void Designerfind(int pageNum, int pageSize);
     }
 }

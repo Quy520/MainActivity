@@ -5,6 +5,7 @@ import com.fm.designstar.base.BaseView;
 import com.fm.designstar.model.bean.DesignerBean;
 import com.fm.designstar.model.bean.MultimediaListBean;
 import com.fm.designstar.model.bean.MultimediabodyBean;
+import com.fm.designstar.model.bean.TagsInfoVoBean;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 
 import java.util.List;
@@ -20,9 +21,10 @@ public interface UploadContract {
     interface View extends BaseView {
         void UploadSuccess();
 
+
     }
 
     interface Presenter {
-        void Upload(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<DesignerBean.TagsListBean> tagsList);
+        void Upload(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<TagsInfoVoBean> tagsList);
     }
 }

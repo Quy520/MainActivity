@@ -34,7 +34,9 @@ import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.utils.UtilFinal;
 import com.fm.designstar.views.login.activitys.RegisteredActivity;
+import com.fm.designstar.views.mine.contract.BeDesignerContract;
 import com.fm.designstar.views.mine.contract.UploadFileContract;
+import com.fm.designstar.views.mine.presenter.BeDesignerPresenter;
 import com.fm.designstar.views.mine.presenter.UploadFilePresenter;
 import com.fm.designstar.widget.MyScrollView;
 
@@ -52,7 +54,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  implements UploadFileContract.View {
+public class BeDesignerActivity extends BaseActivity<UploadFilePresenter>  implements UploadFileContract.View , BeDesignerContract.View {
 
 @BindView(R.id.im_card)
     ImageView im_card;
@@ -68,6 +70,7 @@ MyScrollView scroll;
     private File newFile;
     private String upload;
     private int type=1;
+    private BeDesignerPresenter beDesignerPresenter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_be_designer;
@@ -76,7 +79,8 @@ MyScrollView scroll;
     @Override
     public void initPresenter() {
         mPresenter.init(this);
-
+        beDesignerPresenter=new BeDesignerPresenter();
+        beDesignerPresenter.init(this);
     }
 
     @Override
@@ -407,12 +411,18 @@ MyScrollView scroll;
         scroll.setVisibility(View.GONE);
         com_im.setVisibility(View.VISIBLE);
         Glide.with(mActivity).load(url).error(R.mipmap.ico_default_2_1).into(com_im);
-
+        mTitle.setRightTitleColor(R.color.notice);
         mTitle.setRightTitle("提交", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                beDesignerPresenter.Designer(url);
             }
         });
+    }
+
+    @Override
+    public void DesignerSuccess() {
+        finish();
+        ToastUtil.showToast("提交成功，等待审核");
     }
 }

@@ -7,6 +7,7 @@ import com.fm.designstar.https.HttpManager;
 import com.fm.designstar.model.bean.DesignerBean;
 import com.fm.designstar.model.bean.MultimediaListBean;
 import com.fm.designstar.model.bean.MultimediabodyBean;
+import com.fm.designstar.model.bean.TagsInfoVoBean;
 import com.fm.designstar.model.server.body.uploadMomentbody;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.views.Fabu.contract.GetTagContract;
@@ -24,7 +25,7 @@ import java.util.List;
 public class UploadPresenter extends BasePresenter<UploadContract.View> implements UploadContract.Presenter {
 
     @Override
-    public void Upload(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<DesignerBean.TagsListBean> tagsList){
+    public void Upload(String address, String content, long latitude, long longitude, int mediaType, int momentType, List<MultimediabodyBean> multimediaList, List<TagsInfoVoBean> tagsList){
         toSubscribe(HttpManager.getApi().uploadMoment(new uploadMomentbody(address,  content,  latitude,  longitude,  mediaType,  momentType,  multimediaList, tagsList)), new AbstractHttpSubscriber() {
             @Override
             protected void onHttpStart() {

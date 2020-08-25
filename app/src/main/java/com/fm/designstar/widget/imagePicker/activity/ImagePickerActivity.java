@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 
 
 import com.fm.designstar.R;
+import com.fm.designstar.utils.ConvertUtil;
+import com.fm.designstar.utils.ExtractVideoInfoUtil;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.widget.imagePicker.adapter.ImageFoldersAdapter;
 import com.fm.designstar.widget.imagePicker.adapter.ImagePickerAdapter;
@@ -489,7 +494,50 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         }
         updateCommitButton();
     }
+    public  MediaFile getLocalVideo(String videoPath) {
+        MediaFile mediaFile=new MediaFile();
 
+//除以 1000 返回是秒
+        int duration;
+        try {
+            MediaMetadataRetriever mmr = new  MediaMetadataRetriever();
+            mmr.setDataSource(videoPath);
+            duration = Integer.parseInt(mmr.extractMetadata
+                    (MediaMetadataRetriever.METADATA_KEY_DURATION));
+            String orientation = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION);//视频方向
+Log.e("qsd","qsd"+orientation);//横屏 是0.竖屏 90
+//宽
+            String width = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
+//高
+            String height = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);
+            mediaFile.setDuration(duration);
+            mediaFile.setPath(videoPath);
+            Log.e("qsd",videoPath+"qsd"+orientation+"width"+width+"height"+height);
+            if (orientation.equals("0")){
+                if (Integer.parseInt(height)>Integer.parseInt(width)){
+                    mediaFile.setW(height);
+                    mediaFile.setH(width);
+                }else {
+                    mediaFile.setW(width);
+                    mediaFile.setH(height);
+                }
+
+            }else {
+                if (Integer.parseInt(height)>Integer.parseInt(width)){
+                    mediaFile.setW(width);
+                    mediaFile.setH(height);
+                }else {
+                    mediaFile.setW(height);
+                    mediaFile.setH(width);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return mediaFile;
+    }
     /**
      * 更新确认按钮状态
      */
@@ -531,12 +579,21 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
-        mFilePath = fileDir.getAbsolutePath() + "/IMG_" + System.currentTimeMillis() + ".jpg";
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-       /* Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        Intent intent = new Intent();
+        if (type==1){
+            mFilePath = fileDir.getAbsolutePath() + "/IMG_" + System.currentTimeMillis() + ".jpg";
+
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        }else {
+            mFilePath = fileDir.getAbsolutePath() + "/vedio_" + System.currentTimeMillis() + ".mp4";
+
+            intent.setAction(MediaStore.ACTION_VIDEO_CAPTURE);
+            intent.putExtra (MediaStore.EXTRA_DURATION_LIMIT,1200);
+
+        }
+       /* Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);*/
         //设置视频录制的最长时间
-        intent.putExtra (MediaStore.EXTRA_DURATION_LIMIT,60);*/
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
             uri = FileProvider.getUriForFile(this, ImagePickerProvider.getFileProviderName(this), new File(mFilePath));
@@ -555,6 +612,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
      */
     @Override
     public void onImageFolderChange(View view, int position) {
+        Log.e("qsd","p"+position);
         MediaFolder mediaFolder = mMediaFolderList.get(position);
         //更新当前文件夹名
         String folderName = mediaFolder.getFolderName();
@@ -578,21 +636,23 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAPTURE) {
-                //通知媒体库刷新
+                Log.e("qsd","REQUEST_CODE_CAPTUR+11");
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + mFilePath)));
+
+
                 //添加到选中集合
-                SelectionManager.getInstance().addImageToSelectList(mFilePath);
 
+                    SelectionManager.getInstance().addImageToSelectList(mFilePath);
                 ArrayList<String> list = new ArrayList<>(SelectionManager.getInstance().getSelectPaths());
-
                 ArrayList<String> images = new ArrayList<>();
                 if (mImagePaths != null && !mImagePaths.isEmpty()) {
                     for (int j = 0; j < mImagePaths.size(); j++) {
-                        for (int i=0;i<list.size();i++){
+                        for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).equals(mImagePaths.get(j))) {
-                                // Log.e("qsd","path"+selectImages.get(i).getPath()+"===="+i);
+
                                 list.remove(i);
                             }
                         }
@@ -601,19 +661,34 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
                 for (String image : list) {
                     images.add(image);
                 }
-
-
-
-                    Intent intent = new Intent();
-                    intent.putStringArrayListExtra(SELECT_RESULT, images);
-                    setResult(RESULT_OK, intent);
+                if (type==1){
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(SELECT_RESULT, images);
+                setResult(RESULT_OK, intent);
 
                 SelectionManager.getInstance().removeAll();//清空选中记录
                 finish();
+                }
             }
 
             if (requestCode == REQUEST_SELECT_IMAGES_CODE) {
-                commitSelection();
+              //  if (type==1){
+                Log.e("qsd","REQUEST_SELECT_IMAGES_CODE");
+
+                    commitSelection();
+                /*}else {
+                        mediaFile=   getLocalVideo(mFilePath);
+                        if (MediaFileUtil.isVideoFileType( mediaFile.getPath())){
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("MEDIA", mediaFile);
+                            intent.putStringArrayListExtra(SELECT_RESULT2, images);
+                            intent.putExtras(bundle);
+                            setResult(RESULT_OK, intent);
+
+                    }
+                }*/
+
             }
         }
     }
@@ -638,8 +713,12 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
         for (String image : list) {
             images.add(image);
         }
+
+
         if (mediaFile!=null){
+            Log.e("qsd","path"+"===="+mediaFile.getPath());
             if (MediaFileUtil.isVideoFileType( mediaFile.getPath())){
+                mediaFile=   getLocalVideo( mediaFile.getPath());
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("MEDIA", mediaFile);
@@ -650,6 +729,19 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
                 Intent intent = new Intent();
                 intent.putStringArrayListExtra(SELECT_RESULT, images);
                 setResult(RESULT_OK, intent);
+            }
+        }else {
+            if (images.size()>0){
+
+                if (MediaFileUtil.isVideoFileType( images.get(0))){
+                    mediaFile=   getLocalVideo( images.get(0));
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("MEDIA", mediaFile);
+                    intent.putStringArrayListExtra(SELECT_RESULT2, images);
+                    intent.putExtras(bundle);
+                    setResult(RESULT_OK, intent);
+                }
             }
         }
 

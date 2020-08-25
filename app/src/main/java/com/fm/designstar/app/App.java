@@ -15,6 +15,7 @@ import com.fm.designstar.events.EventController;
 import com.fm.designstar.utils.LogUtils;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.ViewUtil;
+import com.mob.MobSDK;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,6 +32,8 @@ import cn.jpush.android.api.TagAliasCallback;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.model.Conversation;
+import io.rong.push.RongPushClient;
+import io.rong.push.pushconfig.PushConfig;
 
 
 /**
@@ -39,6 +42,8 @@ import io.rong.imlib.model.Conversation;
 public class App extends MultiDexApplication {
     private static App mApp;
     private AMapLocationClient mlocationClient;
+    boolean showStatus = true;
+   boolean granted=true;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -49,14 +54,20 @@ public class App extends MultiDexApplication {
         ToastUtil.register(mApp);
         //注册eventbus
         EventBus.getDefault().register(mApp);
+        //融云消息推送
+        PushConfig config = new PushConfig.Builder()
+                .enableMiPush("2882303761518619068", "5781861954068")//小米
+                .enableOppoPush("O64bfa1ce65564162b667aaec850f6a57", "0f8d83148be542d6871d8ba92b96d5b5")//oppo
+                .build();
+        RongPushClient.setPushConfig(config);
         //融云注册
         String appKey = "z3v5yqkbz7we0";
         RongIM.init(mApp, appKey);
         //极光推送注册
         JPushInterface.setDebugMode(true); //允许被debug，正式版本的时候注掉
         JPushInterface.init(this);  //初始化
-
-
+//mob分享协议
+        MobSDK.submitPolicyGrantResult(granted, null);
 
     }
 

@@ -9,9 +9,24 @@
     android:layout_height="match_parent"
     tools:context=".views.Detail.activity.DTDetailsActivity">
     <include layout="@layout/layout_toolbar"/>
+<com.fm.designstar.widget.MyScrollView
+    android:layout_above="@+id/buttonLay"
+    android:layout_below="@+id/toolLay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
 <RelativeLayout
     android:id="@+id/re"
-android:layout_below="@+id/toolLay"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <com.fm.designstar.widget.CircleImageView
@@ -186,7 +201,7 @@ android:layout_height="wrap_content">
 
 
     <RelativeLayout
-        android:layout_above="@+id/buttonLay"
+
         android:layout_below="@+id/reply"
         android:id="@+id/hasLayout"
         android:layout_width="match_parent"
@@ -222,6 +237,11 @@ android:layout_height="wrap_content">
 
 
 
+
+
+    </LinearLayout>
+
+</com.fm.designstar.widget.MyScrollView>
     <RelativeLayout
         android:id="@+id/buttonLay"
         android:layout_width="match_parent"
@@ -235,27 +255,28 @@ android:layout_height="wrap_content">
             android:layout_height="0.5dp"
             android:background="@color/line" />
 
-       <TextView
-           android:id="@+id/go_comment"
-           android:layout_marginLeft="@dimen/sobot_20PX"
-           android:gravity="center"
-           android:textColor="@color/hint_color"
-           android:layout_centerVertical="true"
-           android:text="@string/review_i"
-           android:layout_width="150dp"
-           android:layout_height="38dp"
-           android:background="@drawable/btn_round_huise_shape"/>
-<CheckBox
-   android:layout_toLeftOf="@+id/likenum"
-        android:id="@+id/check_like"
-        android:button="@null"
-        android:background="@drawable/homelike_check"
-        android:layout_marginLeft="@dimen/sobot_20PX"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/check_guanzhu"
+        <TextView
+            android:layout_toLeftOf="@+id/check_like"
+            android:id="@+id/go_comment"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:gravity="center"
+            android:textColor="@color/hint_color"
+            android:layout_centerVertical="true"
+            android:text="@string/review_i"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@drawable/btn_round_huise_shape"/>
+        <CheckBox
+            android:layout_toLeftOf="@+id/likenum"
+            android:id="@+id/check_like"
+            android:button="@null"
+            android:background="@drawable/homelike_check"
+            android:layout_marginLeft="@dimen/sobot_20PX"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/check_guanzhu"
 
-        android:layout_width="@dimen/sobot_20PX"
-        android:layout_height="@dimen/sobot_20PX"/>
+            android:layout_width="@dimen/sobot_20PX"
+            android:layout_height="@dimen/sobot_20PX"/>
 
         <TextView
             android:layout_marginRight="@dimen/sobot_20PX"
@@ -308,5 +329,4 @@ android:layout_height="wrap_content">
             android:textSize="14sp" />
 
     </RelativeLayout>
-
-</RelativeLayout>
+ </RelativeLayout>

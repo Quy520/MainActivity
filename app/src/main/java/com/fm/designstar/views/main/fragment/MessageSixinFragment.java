@@ -108,8 +108,6 @@ private int pagenum=0;
     private IUnReadMessageObserver observer = new IUnReadMessageObserver() {
         @Override
         public void onCountChanged(int i) {
-            Log.e("qsd","数量变化s：" + i);
-            //给首页发送未读消息事件，更新未读消息图标
 
             EventBus.getDefault().removeStickyEvent(messageEvent.class);
             EventBus.getDefault().post(new messageEvent(i));

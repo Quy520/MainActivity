@@ -6,11 +6,12 @@
               android:layout_height="45dp">
 
     <TextView
+        android:paddingLeft="@dimen/sobot_20PX"
         android:id="@+id/locate_info_adress"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="北京"
-        android:gravity="center"
+       android:gravity="center_vertical"
         android:layout_weight="1"/>
     <View
         android:layout_width="match_parent"

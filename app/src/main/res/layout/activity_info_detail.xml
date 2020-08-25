@@ -150,8 +150,8 @@
         <TextView
             android:id="@+id/info"
             android:layout_width="wrap_content"
-
-
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginLeft="@dimen/sobot_20PX"
@@ -162,7 +162,8 @@
 
         <TextView
             android:id="@+id/info2"
-
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/info"
@@ -175,7 +176,8 @@
         </TextView>
 
         <TextView
-
+            android:maxLines="1"
+            android:ellipsize="end"
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -96,7 +96,7 @@ public class DesignerFragment extends BaseFragment {
                 setItem();
                 tv_tuijain.setTextSize(22);
                 im_tuijain.setVisibility(View.VISIBLE);
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(1);
                 break;
             case R.id.re_find:
                 setItem();

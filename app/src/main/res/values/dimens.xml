@@ -1,6 +1,6 @@
 <resources>
     <!-- 标题栏文字大小 -->
-    <dimen name="title_height">44dp</dimen>
+    <dimen name="title_height">34dp</dimen>
 
     <!--头部view的高度-->
     <dimen name="refresh_header_height_google">80dp</dimen>
@@ -26,4 +26,5 @@
     <dimen name="sobot_20PX">20dp</dimen>
     <dimen name="sobot_40PX">40dp</dimen>
     <dimen name="sobot_15PX">15dp</dimen>
+    <dimen name="dp3">3dp</dimen>
 </resources>

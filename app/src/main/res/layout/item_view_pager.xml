@@ -4,7 +4,14 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.fm.designstar.widget.FullWindowVideoView
+    <com.fm.designstar.widget.JzvdStdTikTok
+
+        android:id="@+id/videoplayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+<!--    <com.fm.designstar.widget.FullWindowVideoView
+        android:visibility="gone"
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,19 +19,31 @@
         android:focusable="false"
         />
     <ImageView
+
         android:id="@+id/img_thumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:clickable="false"
         android:focusable="false"
-        android:visibility="visible"
+        android:visibility="gone"
         />
+    <ImageView
+        android:visibility="gone"
+     android:padding="@dimen/sobot_10PX"
+        android:layout_marginTop="@dimen/sobot_40PX"
+        android:layout_marginLeft="@dimen/sobot_10PX"
+        android:id="@+id/back"
+
+        android:src="@mipmap/back_w"
+        android:layout_width="60dp"
+        android:layout_height="50dp"/>-->
     <LinearLayout
+        android:id="@+id/btn_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="90dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
@@ -36,8 +55,8 @@
 
             <com.fm.designstar.widget.CircleImageView
                 android:id="@+id/hand"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignParentTop="true"
                 android:src="@mipmap/defu_hand"
                />
@@ -52,7 +71,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <CheckBox
@@ -61,17 +80,16 @@
                 android:button="@null"
                 android:background="@drawable/homelike_check"
                 android:src="@mipmap/home_guanzhu"
-                android:layout_width="34dp"
-                android:layout_height="34dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
             <TextView
                 android:id="@+id/likenum"
                 android:layout_below="@+id/check_guanzhu"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="8"
-                android:textSize="14dp"
-
-                android:textColor="@color/notice"
+                android:textSize="13dp"
+                android:textColor="@color/theme_color"
                 android:gravity="center"
                 />
 
@@ -80,7 +98,7 @@
 
         <RelativeLayout
             android:id="@+id/re_message"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
@@ -103,8 +121,16 @@
 
         </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/vedio_share"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@mipmap/vedio_share"
+            android:layout_width="30dp"
+            android:layout_height="30dp"></ImageView>
+
     </LinearLayout>
     <ImageView
+        android:visibility="gone"
         android:id="@+id/img_play"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -116,6 +142,72 @@
         android:layout_centerInParent="true"
         />
 
+<TextView
+    android:layout_toLeftOf="@+id/btn_left"
+    android:textStyle="bold"
+    android:layout_above="@+id/go_comment"
+    android:layout_marginRight="@dimen/sobot_10PX"
+    android:layout_marginLeft="@dimen/sobot_20PX"
+    android:layout_marginBottom="60dp"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/comment"
+    android:text=""
+    android:textSize="15dp"
+    android:maxLines="2"
+    android:ellipsize="end"
+    android:textColor="@color/theme_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 
+    <TextView
 
+        android:layout_marginRight="@dimen/sobot_20PX"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/go_comment"
+        android:layout_marginLeft="@dimen/sobot_20PX"
+        android:gravity="center"
+        android:textColor="@color/theme_color"
+        android:layout_centerVertical="true"
+        android:text="@string/review_i"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/btn_round_black"/>
+    <RelativeLayout
+        android:id="@+id/inputLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black2"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_above="@+id/editText"
+            android:layout_alignParentRight="true"
+            android:background="#EEEEF3"
+            android:gravity="center_vertical|right"
+            android:paddingRight="15dp"
+            android:text="@string/send"
+            android:textColor="@color/colorAccent"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:hint="@string/review_i"
+            android:maxLength="1000"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/edit_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
 </RelativeLayout>

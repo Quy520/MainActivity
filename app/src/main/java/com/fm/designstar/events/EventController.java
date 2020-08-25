@@ -10,6 +10,8 @@ import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.mine.contract.LoginOutContract;
 import com.fm.designstar.views.mine.presenter.LoginOutPresenter;
 
+import io.rong.imkit.RongIM;
+
 
 /**
  * @author DELL
@@ -77,8 +79,9 @@ public class EventController {
         App.getConfig().setUserPhone("");
         App.getConfig().setUser_head("");
         App.getConfig().setUser_name("");
+        RongIM.getInstance().logout();
         App.getConfig().setIsgoHome(0);
-        AppManager.getInstance().finishAllActivityButMain();
+        AppManager.getInstance().finishAllActivity();
         Intent loginIntent = new Intent(App.getContext(), LoginActivity.class);
         loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         App.getContext().startActivity(loginIntent);

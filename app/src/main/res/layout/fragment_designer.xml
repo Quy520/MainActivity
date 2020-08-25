@@ -23,7 +23,7 @@
 
             android:id="@+id/re_guanzhu"
             android:gravity="center"
-            android:layout_weight="8"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
@@ -45,13 +45,14 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:visibility="gone"
+
             android:gravity="center"
             android:id="@+id/re_tuijain"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
+                android:visibility="gone"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/im_tuijain"
                 android:layout_marginTop="@dimen/sobot_20PX"
@@ -61,7 +62,7 @@
             <TextView
                 android:layout_centerHorizontal="true"
                 android:id="@+id/tv_tuijain"
-                android:textSize="22dp"
+                android:textSize="16dp"
                 android:text="@string/around"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></TextView>

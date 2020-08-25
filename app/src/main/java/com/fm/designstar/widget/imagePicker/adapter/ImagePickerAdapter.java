@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
                 @Override
                 public void onClick(View view) {
                   //  mOnItemClickListener.onMediaClick(view, position);
-                    mOnItemClickListener.onMediaCheck(view, position);
+                      mOnItemClickListener.onMediaCheck(view, position);
                 }
             });
 
@@ -153,6 +154,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     private void bindMedia(MediaHolder mediaHolder, MediaFile mediaFile) {
 
         String imagePath = mediaFile.getPath();
+        Log.e("qsd","image"+imagePath);
         if (!TextUtils.isEmpty(imagePath)) {
             //选择状态（仅是UI表现，真正数据交给SelectionManager管理）
             if (SelectionManager.getInstance().isImageSelect(imagePath)) {

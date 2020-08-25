@@ -8,7 +8,9 @@ import butterknife.OnClick;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,9 +25,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.events.GetCommetsEvent;
+import com.fm.designstar.events.GetLikesEvent;
+import com.fm.designstar.events.GetTagsEvent;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.server.response.CommentsResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
+import com.fm.designstar.photo.ShowPictureActivity;
+import com.fm.designstar.utils.AndroidBug5497Workaround;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.ToastUtil;
@@ -48,6 +55,8 @@ import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.CostomGrideView;
 import com.fm.designstar.widget.viegroup.MyViewGroup;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +116,7 @@ private int Width;
 
     @BindView(R.id.check_like)
     CheckBox check_like;
+    private boolean isselect;
 
 
     private ReviewImageAdapter reviewAdapter;
@@ -117,6 +127,7 @@ private SendCommentPresenter sendCommentPresenter;
 private DelCommentPresenter delCommentPresenter;
 private LikePresenter likePresenter;
 private int like=0;
+private String id;
     @Override
     public int getLayoutId() {
         return R.layout.activity_d_t_details;
@@ -135,6 +146,8 @@ private int like=0;
 
     @Override
     public void loadData() {
+        AndroidBug5497Workaround.assistActivity(this);
+
         mTitle.setTitle("详情");
         findBean= (HomeFindBean) getIntent().getSerializableExtra("info");
         Width=(int) (210 * getResources().getDisplayMetrics().density + 0.5f);
@@ -259,6 +272,42 @@ private int like=0;
         }
 
 
+        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShowPictureActivity.startAction(mContext,gw, findBean.getMultimediaList(), "", "", 0, position);
+
+            }
+        });
+        gw2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ShowPictureActivity.startAction(mContext, gw2, findBean.getMultimediaList(), "", "", 0, position);
+
+            }
+        });
+        oneImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowPictureActivity.startAction(mContext, oneImg, findBean.getMultimediaList(), "", "", 0, 0);
+            }
+        });
+        oneImg2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPictureActivity.startAction(mContext, oneImg2, findBean.getMultimediaList(), "", "", 0, 0);
+            }
+        });
+        oneImg3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowPictureActivity.startAction(mContext, oneImg3, findBean.getMultimediaList(), "", "", 0, 1);
+            }
+        });
+
 
         StffReviewGroupAdapter reviewGroupAdapter = new StffReviewGroupAdapter(mContext);
         if (urlList.size()>0){
@@ -291,7 +340,8 @@ private int like=0;
         commentAdapter.setOnClickListener(new ReplyAdapter.OnClickListener() {
             @Override
             public void onClick(int position) {
-                delCommentPresenter.DelComment(commentAdapter.getData().get(position).getCode()+"");
+                id=findBean.getMomentId()+"";
+                delCommentPresenter.DelComment(commentAdapter.getData().get(position).getCode()+"",findBean.getMomentId()+"");
 
             }
         });
@@ -299,6 +349,7 @@ private int like=0;
         check_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isselect=b;
                 if (b){
                     if (compoundButton.isPressed()){
                         like=1;
@@ -314,7 +365,7 @@ private int like=0;
         });
 
     }
-    @OnClick({R.id.go_comment,R.id.send})
+    @OnClick({R.id.go_comment,R.id.send,R.id.inputLay})
     public void OnClick(View view) {
         if (Tool.isFastDoubleClick()) {
             return;
@@ -327,6 +378,12 @@ private int like=0;
 
                 showKeyboard(editText);
                 break;
+
+            case R.id.inputLay:
+                buttonLay.setVisibility(View.VISIBLE);
+                inputLay.setVisibility(View.GONE);
+                closeKeyboard();
+                break;
             case R.id.send:
                 if (!App.getConfig().getLoginStatus()) {
                     startActivity(LoginActivity.class);
@@ -336,6 +393,7 @@ private int like=0;
                     ToastUtil.showToast(R.string.reply_empty);
                     return;
                 }
+                id=findBean.getMomentId()+"";
                 sendCommentPresenter.SendComment(editText.getText().toString(),1,findBean.getMomentId()+"");
                 buttonLay.setVisibility(View.VISIBLE);
                 inputLay.setVisibility(View.GONE);
@@ -345,6 +403,10 @@ private int like=0;
     }
     @Override
     public void GetCommentSuccess(CommentsResponse commentsResponse) {
+        if (!StringUtil.isBlank(id)){
+            EventBus.getDefault().removeStickyEvent(GetCommetsEvent.class);
+            EventBus.getDefault().post(new GetCommetsEvent(id,commentsResponse.getTotal()));
+        }
     if (pagenum==0){
         commentAdapter.clearData();
     }
@@ -375,6 +437,7 @@ private int like=0;
         ToastUtil.showToast("评论成功");
         mPresenter.GetComment(pagenum,10,findBean.getMomentId()+"");
 
+
     }
 
     @Override
@@ -386,10 +449,12 @@ private int like=0;
 
     @Override
     public void LikeSuccess(LikeResponse likeResponse) {
-
             likenum.setText(likeResponse.getLikes()+"");
 
 
+        Log.e("qsd","bbbb"+isselect+"value"+likeResponse.getLikes());
+        EventBus.getDefault().removeStickyEvent(GetLikesEvent.class);
+        EventBus.getDefault().post(new GetLikesEvent(isselect,likeResponse.getLikes()));
 
     }
 }

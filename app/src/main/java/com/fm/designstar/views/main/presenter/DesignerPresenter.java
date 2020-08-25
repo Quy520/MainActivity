@@ -45,4 +45,32 @@ public class DesignerPresenter extends BasePresenter<DesignerContract.View> impl
             }
         });
     }
+
+    @Override
+    public void Designerfind(int pageNum, int pageSize) {
+        toSubscribe(HttpManager.getApi().designers(new HomeRecomBody(pageNum,pageSize)), new AbstractHttpSubscriber<DesignerResponse>() {
+            @Override
+            protected void onHttpStart() {
+                mView.showLoading("", 0);
+            }
+
+            @Override
+            protected void onHttpNext(DesignerResponse loginResponse) {
+
+                mView.DesignerfindSuccess(loginResponse);
+
+            }
+
+
+            @Override
+            protected void onHttpError(String message) {
+                mView.showErrorMsg(message, 0);
+            }
+
+            @Override
+            protected void onHttpCompleted() {
+                mView.stopLoading(0);
+            }
+        });
+    }
 }

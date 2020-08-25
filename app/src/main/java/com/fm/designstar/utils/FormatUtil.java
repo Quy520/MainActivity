@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -329,9 +330,8 @@ public class FormatUtil {
      * 需要动态权限: android.permission.READ_PHONE_STATE
      */
     public static String getIMEI(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
-        @SuppressLint("MissingPermission") String imei = telephonyManager.getDeviceId();
-        if (StringUtil.isBlank(imei)) {
+        String imei = null;
+        if (Build.VERSION.SDK_INT >= 29){
             try {
                 String m_szLongID = getAndroidID(context) + getPesudoUniqueID() + Build.SERIAL;
                 // compute md5
@@ -359,9 +359,17 @@ public class FormatUtil {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
 
+        }else {
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+            imei = telephonyManager.getDeviceId();
+
+
+
+        }
+        Log.e("qsd","imei"+imei);
         return imei;
+
     }
 
 }

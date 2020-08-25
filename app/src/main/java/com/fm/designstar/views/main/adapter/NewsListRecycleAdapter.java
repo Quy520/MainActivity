@@ -70,11 +70,9 @@ public class NewsListRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onBindViewHolder(final XRecyclerView.ViewHolder holder, int position) {
-        Log.e("qsd","3张图 情况"+position);
-        switch (getItemViewType(position)) {
+         switch (getItemViewType(position)) {
             case 0: //1张图 情况
-                Log.e("qsd","1张图 情况"+position);
-                ViewHolderOne viewHolderOne = (ViewHolderOne) holder;
+                 ViewHolderOne viewHolderOne = (ViewHolderOne) holder;
                 ImageAdapter imageAdapter =new ImageAdapter(items);
 
                 viewHolderOne. banner2.setAdapter(imageAdapter)
@@ -86,7 +84,6 @@ public class NewsListRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 viewHolderOne. banner2.setDatas(items);
                 break;
             case 1: //3张图 情况
-                Log.e("qsd","3张图 情况"+position);
 
                 ViewHolderThree viewHoldertwo = (ViewHolderThree) holder;
 

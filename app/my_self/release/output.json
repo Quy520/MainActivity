@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 1,
-      "versionName": "1",
+      "versionCode": 100,
+      "versionName": "100",
       "enabled": true,
-      "outputFile": "DesignStar_my_self_v1.0。0.1.apk"
+      "outputFile": "DesignStar_my_self_v1.0.0.100.apk"
     }
   ]
 }

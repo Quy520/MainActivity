@@ -81,8 +81,7 @@ ImageView im_find;
         viewPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(1);
-        AudioManager audioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_PLAY_SOUND);
+
     }
     @OnClick({R.id.re_guanzhu, R.id.re_tuijain, R.id.re_find
     })
@@ -101,6 +100,8 @@ ImageView im_find;
                 tv_tuijain.setTextSize(22);
                 im_tuijain.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(1);
+                EventBus.getDefault().removeStickyEvent(HomeEvent.class);
+                EventBus.getDefault().post(new HomeEvent(3));
                 break;
             case R.id.re_find:
                 setItem();

@@ -3,6 +3,7 @@ package com.fm.designstar.utils;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fm.designstar.utils.Util;
 import com.orhanobut.logger.Logger;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -36,6 +38,8 @@ import java.util.Map;
  * @author DELL
  */
 public class ConvertUtil {
+    private static String DST_FOLDER_NAME = "JCamera";
+
     /**
      * 首字母大写
      *
@@ -259,12 +263,68 @@ public class ConvertUtil {
     }
 
 
-    /**
-     * 读取图片的旋转的角度
-     *
-     * @param path 图片绝对路径
-     * @return 图片的旋转角度
-     */
+    public static String saveBitmap2(String dir, Bitmap b) {
+        DST_FOLDER_NAME = dir;
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath()  + File.separator + DST_FOLDER_NAME;
+        long dataTake = System.currentTimeMillis();
+        String jpegName = path + File.separator + "picture_" + dataTake + ".jpg";
+        File f = new File(jpegName);
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            if (b!=null){
+
+                b.compress(Bitmap.CompressFormat.JPEG, 80, out);
+            }
+            out.flush();
+            out.close(); Log.e("qsd","=="+"保存成功");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return jpegName;
+    }
+
+    public static String saveImageToGallery(Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            return file.getAbsolutePath();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "保存失败";
+    }
+        /**
+         * 读取图片的旋转的角度
+         *
+         * @param path 图片绝对路径
+         * @return 图片的旋转角度
+         */
     public static int getBitmapDegree(String path) {
         int degree = 0;
         try {

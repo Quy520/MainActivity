@@ -102,9 +102,13 @@ public class DesignerAdapter extends BaseRecyclerAdapter<DesignerAdapter.LikeVie
         if (findBean.getDesignerMomentVos()!=null){
             urlList=new ArrayList<>();
           urlList2=new ArrayList<>();
+
             for (int i=0;i<findBean.getDesignerMomentVos().size();i++){
-             urlList.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getPreUrl());
-             urlList2.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getDuration());
+                if (findBean.getDesignerMomentVos().get(i).getMultimediaList().size()>0){
+                    urlList.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getPreUrl());
+                    urlList2.add(findBean.getDesignerMomentVos().get(i).getMultimediaList().get(0).getDuration());
+
+                }
 
             }
             holder.gw2.setVisibility(View.VISIBLE);

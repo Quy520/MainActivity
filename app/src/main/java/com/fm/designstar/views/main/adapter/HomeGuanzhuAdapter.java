@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -19,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.model.bean.HomeFindBean;
+import com.fm.designstar.photo.ShowPictureActivity;
 import com.fm.designstar.utils.NetUtil;
 import com.fm.designstar.utils.OssImageUtil;
 import com.fm.designstar.utils.StringUtil;
@@ -73,12 +75,12 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         rOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext);
     }
     public void setScreenWidth(int screenWidth, float dip2px) {
-        oneWidth = (int) (screenWidth - (30 * dip2px + 0.5f));
+        oneWidth = (int) (screenWidth - (130 * dip2px + 0.5f));
         twoWidth = (int) ((oneWidth - (8 * dip2px + 0.5f)) / 2);
         threeWidth = (int) ((oneWidth - (16 * dip2px + 0.5f)) / 3);
         height = (int) (110 * dip2px + 0.5f);
         Width=(int) (210 * dip2px + 0.5f);
-        Width2=(int) (170 * dip2px + 0.5f);
+        Width2=(int) (150 * dip2px + 0.5f);
     }
     @Override
     public LikeViewHolder mOnCreateViewHolder(ViewGroup parent, int viewType) {
@@ -88,7 +90,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
     @Override
     public void mOnBindViewHolder(LikeViewHolder holder, int position) {
-        HomeFindBean findBean=    data.get(position);
+       final HomeFindBean findBean=    data.get(position);
         urlList=new ArrayList<>();
         tagList=new ArrayList<>();
         if (!StringUtil.isBlank(App.getConfig().getUser_head())){
@@ -142,11 +144,24 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             tagList.add(findBean.getTagsList().get(i).getTagName());
         }
 
-        Log.e("qsd","myactivity"+new Gson().toJson(findBean));
         if (findBean.getMediaType()==2){//视频
-          Log.e("qsd","myactivity"+"sp");
+          if (findBean.getMomentType()==2){
+                holder.video_player.getLayoutParams().width=oneWidth;
+             // holder.video_player.getLayoutParams().height = (int)((oneWidth*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+              holder.video_player.getLayoutParams().height = Width2;
 
-            holder.video_player.getLayoutParams().height = (int)((Width2*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+            }else {
+              if (findBean.getMultimediaList().get(0).getHeight()>findBean.getMultimediaList().get(0).getWidth()){
+                  holder.video_player.getLayoutParams().width=Width2;
+                  holder.video_player.getLayoutParams().height = (int)((Width2*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+              }else {
+                  holder.video_player.getLayoutParams().width=oneWidth;
+                  // holder.video_player.getLayoutParams().height = (int)((oneWidth*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+                  holder.video_player.getLayoutParams().height = Width2;
+
+              }
+
+          }
             holder.imgLay.setVisibility(View.GONE);
             holder.oneImg.setVisibility(View.GONE);
             holder.gw.setVisibility(View.GONE);
@@ -156,25 +171,27 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
             Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
 
-            holder.video_player.startButton.setOnClickListener(new View.OnClickListener() {
+           holder.video_player.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (view.isPressed()){
-                    Intent intent=  new Intent(mContext, VedioPlayActivity.class);
+                    holder.video_player.startWindowFullscreen();
+
+              /*    Intent intent=  new Intent(mContext, VedioPlayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("info", findBean);
                     intent.putExtras(bundle);
-                    mContext. startActivity(intent);
+                    mContext. startActivity(intent);*/
                 }
 
 
             }
         });
-          if (NetUtil.isWifi(mContext)){
+         /*  if (NetUtil.isWifi(mContext)){
               holder.video_player.startButton.performClick();
-              holder.video_player.dismissVolumeDialog();
-              holder.video_player.startVideo();
-          }
+             *//* holder.video_player.dismissVolumeDialog();
+              holder.video_player.startVideo();*//*
+          }*/
 
         }else if(findBean.getMediaType()==0) {
             holder.imgLay.setVisibility(View.GONE);
@@ -194,8 +211,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
               Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
 
-              holder.video_player.startButton.performClick();
-              holder.video_player.startVideo();
+          /*    holder.video_player.startButton.performClick();
+              holder.video_player.startVideo();*/
 
           }else {
 
@@ -206,6 +223,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                 for (int i=0;i<findBean.getMultimediaList().size();i++){
                     urlList.add(findBean.getMultimediaList().get(i).getMultimediaUrl());
                 }
+                Log.e("qsd","list"+urlList.size()+"=="+new Gson().toJson(urlList)+"==="+position);
 
             switch (findBean.getMultimediaList().size()) {
 
@@ -234,6 +252,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     Glide.with(mContext).load(findBean.getMultimediaList().get(1).getMultimediaUrl()).apply(rOptions).into(holder.oneImg3);
                     break;
                 case 4:
+                    holder.ly_two_img.setVisibility(View.GONE);
+
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.GONE);
                     holder.gw.setVisibility(View.GONE);
@@ -252,6 +272,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     holder.oneImg.setVisibility(View.GONE);
                     holder.gw.setVisibility(View.VISIBLE);
                     holder.gw2.setVisibility(View.VISIBLE);
+                    holder.ly_two_img.setVisibility(View.GONE);
 
                     reviewAdapter = new ReviewImageAdapter(mContext, urlList);
                     holder.gw.setAdapter(reviewAdapter);
@@ -265,10 +286,10 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
 
         StffReviewGroupAdapter reviewGroupAdapter = new StffReviewGroupAdapter(mContext);
-        if (urlList.size()>0){
+        if (tagList.size()>0){
             reviewGroupAdapter.addData(tagList);
         }
-        reviewGroupAdapter.setMAX_SHOW(6);
+        reviewGroupAdapter.setMAX_SHOW(5);
 
         holder.myViewGroup.setAdapter(reviewGroupAdapter);
         holder.hand.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +300,43 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                 mContext.startActivity(intent);
             }
         });
+
+        holder.gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShowPictureActivity.startAction(mContext,holder.gw, findBean.getMultimediaList(), "", "", 0, position);
+
+            }
+        });
+        holder.gw2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ShowPictureActivity.startAction(mContext, holder.gw2, findBean.getMultimediaList(), "", "", 0, position);
+
+            }
+        });
+        holder.oneImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowPictureActivity.startAction(mContext, holder.oneImg, findBean.getMultimediaList(), "", "", 0, 0);
+            }
+        });
+ holder.oneImg2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowPictureActivity.startAction(mContext, holder.oneImg2, findBean.getMultimediaList(), "", "", 0, 0);
+            }
+        });
+ holder.oneImg3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowPictureActivity.startAction(mContext, holder.oneImg3, findBean.getMultimediaList(), "", "", 0, 1);
+            }
+        });
+
 
 
 
