@@ -6,15 +6,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import com.alibaba.fastjson.JSON;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.HomeEvent;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.bean.NewsListBean;
+import com.fm.designstar.model.server.response.BannerResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.SpaceItemDecoration;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.Detail.contract.LikeContract;
@@ -26,6 +30,8 @@ import com.fm.designstar.views.main.adapter.MainLikeAdapter;
 import com.fm.designstar.views.main.adapter.NewsListRecycleAdapter;
 import com.fm.designstar.views.main.contract.HomeRecomContract;
 import com.fm.designstar.views.main.presenter.HomeRecomPresenter;
+import com.fm.designstar.views.mine.contract.followContract;
+import com.fm.designstar.views.mine.presenter.followPresenter;
 import com.fm.designstar.widget.MyScrollView;
 import com.fm.designstar.widget.imageview.ImageCycleViewHomeBanner;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
@@ -47,13 +53,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 
-public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implements HomeRecomContract.View ,XRecyclerView.LoadingListener , LikeContract.View{
+public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implements HomeRecomContract.View ,XRecyclerView.LoadingListener , LikeContract.View, followContract.View{
 
 
 
     @BindView(R.id.home_recy)
     XRecyclerView home_recy;
-    private int pagenum=0;
+    private int pagenum=1;
 
     private HomeAdapter homeRecomAdapter;
     private List<String> urls=new ArrayList<>();
@@ -62,8 +68,10 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
     private List<HomeFindBean> result=new ArrayList<>();
     HomeFindBean homeFindBean=new HomeFindBean();
     private boolean islding=false,hasnext;
-    private int banner,hot,recome;
+    private int banner=0,hot,recome;
     private LikePresenter likePresenter;
+    private followPresenter presenter;
+
     private int index=0;
     private int like=0;
     @Override
@@ -73,8 +81,11 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
 
     @Override
     public void initPresenter() {
-        mPresenter.init(this);likePresenter=new LikePresenter();
+        mPresenter.init(this);
+        likePresenter=new LikePresenter();
         likePresenter.init(this);
+        presenter=new followPresenter();
+        presenter.init(this);
 
     }
 
@@ -92,26 +103,61 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
         home_recy.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 0)));
         homeRecomAdapter=new HomeAdapter(this);
         home_recy.setAdapter(homeRecomAdapter);
-        mPresenter.Homehote(pagenum,10);
         mPresenter.Homebanner(pagenum,10);
-        mPresenter.HomeRecom(pagenum,50);
+
+        if (StringUtil.isBlank(SpUtil.getString("HomehotecomSuccess"))){
+            mPresenter.Homehote(pagenum,10);
+        }else {
+            hot=1;
+            HomeFindResponse muserinfo= JSON.parseObject(SpUtil.getString("HomehotecomSuccess"), HomeFindResponse.class);
+            newsListBean.setHot(muserinfo.getResult());
+            NewsList.add(newsListBean);
+            homeRecomAdapter.addData(NewsList);
+
+        }
+        if (StringUtil.isBlank(SpUtil.getString("HomeRecomSuccess"))) {
+            mPresenter.HomeRecom(pagenum, 50);
+        }else {
+            recome=1;
+            HomeFindResponse muserinfo= JSON.parseObject(SpUtil.getString("HomeRecomSuccess"), HomeFindResponse.class);
+            newsListBean.setRecom(muserinfo.getResult());
+            NewsList.add(newsListBean);
+            homeRecomAdapter.addData(NewsList);
+
+        }
+
 
         //4)实现 下拉刷新和加载更多 接口
         home_recy.setLoadingListener(this);
+
         homeRecomAdapter.setOnClickListener(new HomeAdapter.OnClickListener() {
             @Override
             public void onLikeClick(int position, boolean b, CompoundButton compoundButton) {
 
                 if (b){
                     if (compoundButton.isPressed()){
+                        Log.e("qsd","position"+position);
+
                         like=1;
                         index=position;
                         likePresenter.Like(1,homeRecomAdapter.getData().get(0).getRecom().get(position).getMomentId());
                     }
                 }else {
+                    Log.e("qsd","position"+position);
+
                     like=0;
                     index=position;
                     likePresenter.Like(1,homeRecomAdapter.getData().get(0).getRecom().get(position).getMomentId());
+
+                }
+            }
+
+            @Override
+            public void onguanClick(int position, boolean b, CompoundButton compoundButton) {
+                if (homeRecomAdapter.getData().get(0).getRecom().get(position).isFollow()){
+                    presenter.canclefollow(homeRecomAdapter.getData().get(0).getRecom().get(position).getUserId()+"");
+                }else {
+                    presenter.follow(homeRecomAdapter.getData().get(0).getRecom().get(position).getUserId()+"");
 
                 }
             }
@@ -153,13 +199,18 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
 
     @Override
     public void HomeRecomSuccess(HomeFindResponse homeFindResponse) {
+        Log.e("qsd","HomeRecomSuccess==="+new Gson().toJson(homeFindResponse));
+
         recome=1;
         hasnext=homeFindResponse.isHasNextPage();
-        if (pagenum>0){
+        if (pagenum>1){
             for (int i=0;i<homeFindResponse.getResult().size();i++){
                 NewsList.get(0).getRecom().add(homeFindResponse.getResult().get(i));
             }
         }else {
+            if (homeFindResponse!=null){
+                SpUtil.putString("HomeRecomSuccess",new Gson().toJson(homeFindResponse));
+            }
             newsListBean.setRecom(homeFindResponse.getResult());
             NewsList.add(newsListBean);
 
@@ -177,7 +228,12 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
     @Override
     public void HomehotecomSuccess(HomeFindResponse homeFindResponse) {
         hot=1;
-
+        Log.e("qsd","HomehotecomSuccess==="+new Gson().toJson(homeFindResponse));
+        if (pagenum==1){
+            if (homeFindResponse!=null){
+                SpUtil.putString("HomehotecomSuccess",new Gson().toJson(homeFindResponse));
+            }
+        }
         newsListBean.setHot(homeFindResponse.getResult());
 
         NewsList.add(newsListBean);
@@ -189,7 +245,8 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
     }
 
     @Override
-    public void HomebannerRecomSuccess(HomeFindResponse homeFindResponse) {
+    public void HomebannerRecomSuccess(BannerResponse homeFindResponse) {
+       // Log.e("qsd","==="+new Gson().toJson(homeFindResponse));
         banner=1;
 
 
@@ -208,9 +265,11 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
     public void onRefresh() {
         islding=true;
         hasnext=true;
-        pagenum=0;
+        pagenum=1;
+        if (StringUtil.isBlank(SpUtil.getString("HomehotecomSuccess"))){
+            mPresenter.Homebanner(pagenum,10);
+        }
         mPresenter.Homehote(pagenum,10);
-        mPresenter.Homebanner(pagenum,10);
         mPresenter.HomeRecom(pagenum,50);
         NewsList=new ArrayList<>();
     }
@@ -230,12 +289,12 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
 
     @Override
     public void LikeSuccess(LikeResponse likeResponse) {
-       /* pagenum=0;
+       /* pagenum=1;
         mPresenter.HomeRecom(pagenum,50);*/
-       Log.e("qsd","likeResponse"+index);
+       Log.e("qsd","likeResponse"+likeResponse.getLikes());
         homeRecomAdapter.getData().get(0).getRecom().get(index) .setLikes(likeResponse.getLikes());
         homeRecomAdapter.getData().get(0).getRecom().get(index).setIsLike(like);
-        homeRecomAdapter.notifyItemChanged(index+3);
+        homeRecomAdapter.notifyItemChanged(3);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -246,12 +305,24 @@ public class HomeTuijianFragment extends BaseFragment<HomeRecomPresenter> implem
         Log.e("qsd","手机音量"+mCurrentVolume);
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mCurrentVolume, AudioManager.FLAG_PLAY_SOUND);
        if (event.getTAG()==3){
-           pagenum=0;
+           pagenum=1;
            mPresenter.Homehote(pagenum,10);
            mPresenter.Homebanner(pagenum,10);
            mPresenter.HomeRecom(pagenum,50);
         }
 
+
+    }
+
+    @Override
+    public void followSuccess() {
+        mPresenter.HomeRecom(pagenum,50);
+
+    }
+
+    @Override
+    public void canclefollowSuccess() {
+        mPresenter.HomeRecom(pagenum,50);
 
     }
 }

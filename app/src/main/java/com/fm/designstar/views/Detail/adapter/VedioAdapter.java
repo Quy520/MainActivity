@@ -21,6 +21,7 @@ import com.fm.designstar.model.bean.CommentsBean;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
+import com.fm.designstar.utils.Util;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
@@ -54,12 +55,22 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
     private RequestOptions myOptions;
     private List<String> imgs = new ArrayList<>();
    private List<String> videos = new ArrayList<>();
-
+    private int oneWidth,Width,Width2;
+    private int twoWidth;
+    private int threeWidth;
+    private int height;
     public VedioAdapter() {
         myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext);
 
     }
-
+    public void setScreenWidth(int screenWidth, float dip2px) {
+        oneWidth = (int) (screenWidth);
+        twoWidth = (int) ((oneWidth - (8 * dip2px + 0.5f)) / 2);
+        threeWidth = (int) ((oneWidth - (16 * dip2px + 0.5f)) / 3);
+        height = (int) (110 * dip2px + 0.5f);
+        Width=(int) (210 * dip2px + 0.5f);
+        Width2=(int) (260 * dip2px + 0.5f);
+    }
     private OnClickListener listener;
 
     public interface OnClickListener {
@@ -67,6 +78,7 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
         void oncommentClick(View view,int position);
         void ongaunzhutClick(int position);
         void back();
+        void share(long id);
 
 
     }
@@ -85,6 +97,9 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
         HomeFindBean findBean=data.get(position);
         imgs.clear();
         videos.clear();
+        if (findBean==null){
+            return;
+        }
         if (!StringUtil.isBlank(findBean.getHeadUri())){
             Glide.with(mContext).load(findBean.getHeadUri()).error(R.mipmap.defu_hand).into(holder.hand);
         }
@@ -95,6 +110,9 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
         }
         if (!StringUtil.isBlank(findBean.getContent())){
             holder.comment.setText(findBean.getContent());
+        }else {
+            holder.comment.setText("");
+
         }
         holder.likenum.setText(findBean.getLikes()+"");
         holder.comenum.setText(findBean.getComments()+"");
@@ -112,12 +130,26 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
           holder.vedio_share.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
+                  if (listener != null) {
+                      listener.share(findBean.getMomentId());
+
+                  }
                   showShare(findBean);
               }
           });
 
         }else {
-            holder.  vedio_share.setVisibility(View.GONE);
+            holder.  vedio_share.setVisibility(View.VISIBLE);
+            holder.vedio_share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.share(findBean.getMomentId());
+
+                    }
+                    showShare(findBean);
+                }
+            });
 
         }
 
@@ -140,6 +172,22 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
 
                 }
             }
+        });holder.left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.back();
+
+                }
+            }
+        });
+        holder.hand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=  new Intent(mContext, InfoDetailActivity.class);
+                intent.putExtra("UUID",findBean.getUserId()+"");
+                mContext.startActivity(intent);
+            }
         });
       /*  holder.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +208,15 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
             }
         });
 
+        if (findBean.getMultimediaList().get(0).getHeight()>findBean.getMultimediaList().get(0).getWidth()){
+            holder.videoplayer.getLayoutParams().width=oneWidth;
+            holder.videoplayer.getLayoutParams().height = Util.getScreenHeight(mContext);;
+        }else {
+            holder.videoplayer.getLayoutParams().width=oneWidth;
+            // holder.video_player.getLayoutParams().height = (int)((oneWidth*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+            holder.videoplayer.getLayoutParams().height = Width2;
+
+        }
 
         if (findBean.getMultimediaList().size()>0) {
             for (int i=0;i<data.size();i++){
@@ -186,7 +243,7 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
     }
 
     private void showShare(HomeFindBean findBean) {
-        Log.e("qsd",""+"https://cde.laifuyun.com/moment/"+findBean.getMomentId());
+        //Log.e("qsd",""+"https://cde.laifuyun.com/moment/"+findBean.getMomentId());
 
         String title=findBean.getContent();
         if (StringUtil.isBlank(title)){
@@ -222,6 +279,8 @@ public class VedioAdapter extends BaseRecyclerAdapter<VedioAdapter.CommentViewHo
         CircleImageView hand;
         @BindView(R.id.img_play)
         ImageView img_play;
+        @BindView(R.id.left)
+        ImageView left;
         @BindView(R.id.vedio_share)
         ImageView vedio_share;
         @BindView(R.id.check_guanzhu)

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/theme_color"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.main.activity.SearchActivity">
+
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+
+            android:id="@+id/topLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <RelativeLayout
+
+                android:layout_toLeftOf="@+id/cancle"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="25dp"
+
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <RelativeLayout
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/shape_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                <ImageView
+                    android:id="@+id/im_search"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/icon_sousuo"></ImageView>
+                <EditText
+                    android:layout_marginLeft="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/im_search"
+                    android:id="@+id/searchEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+
+                    android:hint="@string/search2"
+                    android:singleLine="true"
+                    android:background="@null"
+                    android:textColor="@color/edit_color"
+                    android:textColorHint="@color/home_color2"
+                    android:textCursorDrawable="@null"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="17dp"
+                    android:visibility="invisible"
+                    android:src="@mipmap/clear"
+                    />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:textSize="14dp"
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/cancle"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/black3"
+                android:text="@string/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recy_designer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+</LinearLayout>

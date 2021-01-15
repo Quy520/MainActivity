@@ -15,6 +15,34 @@ public class OssTokenResponse extends BaseBean {
     private String accessKeySecret;
     private String securityToken;
     private String expiration;
+    private String baseUrl;
+    private String bucketName;
+    private String endPoint;
+
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public String getBucketName() {
+        return bucketName;
+    }
+
+    public void setBucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
+    }
 
     public String getAccessKeyId() {
         return accessKeyId;

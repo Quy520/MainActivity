@@ -34,6 +34,7 @@ public class Constant {
     public static final String USER_NAME = "userName";
     public static final String USER_HEAD = "userHead";
     public static final String ADDRESS = "address";
+    public static final String TAGNAME = "TAGNAME";
     public static final String BRITH = "brith";
     public static final String singmarks = "singmarks";
     public static final String EMAIL = "email";
@@ -41,6 +42,8 @@ public class Constant {
     public static final String SEX = "sex";
     public static final String ROLE = "role";
     public static final String HOME = "HOME";
+    public static final String contactNumber = "contactNumber";
+
 
 
     public static final String BindPhone = "BindPhone";

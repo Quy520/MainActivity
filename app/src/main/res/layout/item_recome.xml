@@ -1,18 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:layout_marginRight="@dimen/sobot_10PX"
-    android:layout_marginLeft="@dimen/rc_reference_dimen_size_10"
     android:background="@color/theme_color"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <cn.jzvd.JZVideoPlayerStandard
+    <RelativeLayout
+
+        android:layout_marginLeft="@dimen/alivc_common_font_15"
+        android:layout_marginRight="@dimen/alivc_common_font_15"
+        android:id="@+id/top_relin"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/sobot_10PX"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.fm.designstar.widget.CircleImageView
+
+            android:id="@+id/hand"
+            android:src="@mipmap/defu_hand"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:textSize="16dp"
+            android:textColor="@color/edit_color"
+            android:id="@+id/name"
+            android:layout_marginLeft="@dimen/sobot_10PX"
+
+            android:layout_toRightOf="@+id/hand"
+            android:text="林克尔"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_below="@+id/name"
+            android:textSize="12dp"
+            android:textColor="@color/home_color2"
+            android:id="@+id/tag_name"
+            android:layout_marginLeft="@dimen/sobot_10PX"
+
+            android:layout_toRightOf="@+id/hand"
+            android:text="中国设计星评委导师"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <CheckBox
+            android:layout_toLeftOf="@+id/tv_type"
+            android:checked="false"
+            android:id="@+id/check_guanzhu"
+            android:button="@null"
+            android:background="@drawable/guanzhu_check"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/home_guanzhu"
+            android:layout_width="@dimen/sobot_15PX"
+            android:layout_height="@dimen/sobot_15PX"/>
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/name"
+            android:textSize="12dp"
+            android:textColor="@color/black3"
+            android:id="@+id/tv_type"
+            android:layout_marginLeft="5dp"
+
+            android:layout_centerVertical="true"
+            android:text="关注"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <cn.jzvdother.JzvdStd
+
+        android:layout_marginLeft="@dimen/alivc_common_font_15"
+        android:layout_marginRight="@dimen/alivc_common_font_15"
+        android:layout_below="@+id/top_relin"
         android:id="@+id/video_player"
 
         android:layout_width="match_parent"
-        android:layout_height="225dp" />
+        android:layout_height="220dp" />
 
+    <TextView
+        android:textSize="12dp"
 
+        android:textColor="@color/theme_color"
+        android:id="@+id/views"
+        android:layout_marginLeft="30dp"
+       android:layout_marginTop="252dp"
+        android:text="1次播放"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/theme_color"
+        android:id="@+id/time"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="252dp"
+        android:text="02:22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <ImageView
         android:visibility="gone"
         android:scaleType="fitXY"
@@ -23,7 +109,8 @@
         android:src="@mipmap/demo_bg" />
 
     <TextView
-        android:layout_margin="@dimen/sobot_10PX"
+        android:padding="2dp"
+        android:layout_margin="8dp"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,79 +118,61 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/theme_color"
-        android:textSize="18dp"
+        android:textSize="10dp"
         />
 <RelativeLayout
+
+    android:layout_marginLeft="@dimen/alivc_common_font_15"
+    android:layout_marginRight="@dimen/alivc_common_font_15"
+    android:id="@+id/relin"
 android:gravity="center_vertical"
     android:padding="@dimen/sobot_10PX"
     android:layout_below="@+id/video_player"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <com.fm.designstar.widget.CircleImageView
-        android:layout_marginLeft="@dimen/sobot_10PX"
-        android:id="@+id/hand"
-        android:src="@mipmap/defu_hand"
-        android:layout_width="33dp"
-        android:layout_height="33dp"/>
-    <TextView
-        android:textColor="@color/edit_color"
-        android:id="@+id/name"
-        android:layout_marginLeft="@dimen/sobot_10PX"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/hand"
-        android:text="李嬷嬷"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <CheckBox
-        android:id="@+id/check_guanzhu"
-        android:button="@null"
-        android:background="@drawable/guanzhu_check"
-        android:layout_marginLeft="@dimen/sobot_10PX"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/name"
-        android:src="@mipmap/home_guanzhu"
-        android:layout_width="@dimen/sobot_20PX"
-        android:layout_height="@dimen/sobot_20PX"/>
+
 
 
     <CheckBox
+        android:layout_toLeftOf="@+id/likenum"
         android:id="@+id/check_like"
         android:button="@null"
         android:background="@drawable/homelike_check"
         android:layout_marginLeft="@dimen/sobot_20PX"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/check_guanzhu"
+
         android:src="@mipmap/home_guanzhu"
-        android:layout_width="@dimen/sobot_20PX"
-        android:layout_height="@dimen/sobot_20PX"/>
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
 
     <TextView
-        android:textColor="@color/hint_color"
+        android:textSize="12dp"
+        android:textColor="@color/home_color"
         android:id="@+id/likenum"
         android:layout_marginLeft="5dp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/check_like"
+        android:layout_toLeftOf="@+id/message"
         android:text="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
     <ImageView
 
     android:id="@+id/message"
 
     android:layout_marginLeft="30dp"
     android:layout_centerVertical="true"
-    android:layout_toRightOf="@+id/likenum"
+    android:layout_toLeftOf="@+id/message_num"
     android:src="@mipmap/home_com"
-    android:layout_width="@dimen/sobot_20PX"
-    android:layout_height="@dimen/sobot_20PX"/>
+    android:layout_width="20dp"
+    android:layout_height="20dp"/>
 
     <TextView
-        android:textColor="@color/hint_color"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/home_color"
         android:id="@+id/message_num"
         android:layout_marginLeft="5dp"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/message"
+        android:textSize="12dp"
         android:text="2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -135,4 +204,13 @@ android:gravity="center_vertical"
 
     
 </RelativeLayout>
+
+
+    <View
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/relin"
+        android:background="@color/home_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        ></View>
 </RelativeLayout>

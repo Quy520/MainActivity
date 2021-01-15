@@ -3,9 +3,12 @@ package com.fm.designstar.app;
 import android.app.Activity;
 import android.content.Context;
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.aliyun.private_service.PrivateService;
+import com.aliyun.svideo.downloader.DownloaderManager;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.fm.designstar.R;
@@ -16,6 +19,8 @@ import com.fm.designstar.utils.LogUtils;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.ViewUtil;
 import com.mob.MobSDK;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,8 +46,6 @@ import io.rong.push.pushconfig.PushConfig;
  */
 public class App extends MultiDexApplication {
     private static App mApp;
-    private AMapLocationClient mlocationClient;
-    boolean showStatus = true;
    boolean granted=true;
     @Override
     public void onCreate() {
@@ -57,9 +60,13 @@ public class App extends MultiDexApplication {
         //融云消息推送
         PushConfig config = new PushConfig.Builder()
                 .enableMiPush("2882303761518619068", "5781861954068")//小米
+                .enableVivoPush(true)
                 .enableOppoPush("O64bfa1ce65564162b667aaec850f6a57", "0f8d83148be542d6871d8ba92b96d5b5")//oppo
                 .build();
         RongPushClient.setPushConfig(config);
+
+        MiPushClient.getRegId(getApplicationContext());
+        //  Log.e("qsd","MiPushClient.getRegId==="+MiPushClient.getRegId(getApplicationContext()));
         //融云注册
         String appKey = "z3v5yqkbz7we0";
         RongIM.init(mApp, appKey);
@@ -68,7 +75,14 @@ public class App extends MultiDexApplication {
         JPushInterface.init(this);  //初始化
 //mob分享协议
         MobSDK.submitPolicyGrantResult(granted, null);
+        Conversation.ConversationType[] types = new Conversation.ConversationType[] {
+                Conversation.ConversationType.PRIVATE
+        };
+        RongIM.getInstance().setReadReceiptConversationTypeList(types);
+        MobSDK.submitPolicyGrantResult(true, null);//隐私回调
+        initDownLoader();
 
+        CrashReport.initCrashReport(getApplicationContext(), "7857b15362", true);
     }
 
 
@@ -163,5 +177,10 @@ public class App extends MultiDexApplication {
         }
         return null;
     }
+    private void initDownLoader() {
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aliyun/encryptedApp.dat";
+        PrivateService.initService(this, filePath );
+        DownloaderManager.getInstance().init(this);
 
+    }
 }

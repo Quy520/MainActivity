@@ -37,7 +37,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements GetTagContract.View {
+public class ChoseTagActivity extends BaseActivity<GetTagPresenter> /* implements GetTagContract.View */{
 
 
     @BindView(R.id.myViewGroup)
@@ -74,7 +74,7 @@ public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements 
 
     @Override
     public void initPresenter() {
-        mPresenter.init(this);
+      //  mPresenter.init(this);
 
     }
 
@@ -94,11 +94,11 @@ public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements 
             }
 
         }
+
         Intent intent = new Intent();
        intent.putExtra("resule", (Serializable) resule);
         setResult(RESULT_OK, intent);
         finish();
-
         Log.e("qsd","=="+resule.size()+"=="+new Gson().toJson(resule));
 
     }
@@ -128,6 +128,7 @@ public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements 
 
 
 
+/*
 
     @Override
     public void GetTagSuccess(TagInfoResponse infoResponse) {
@@ -150,8 +151,9 @@ public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements 
 
 
     }
+*/
 
-    @Override
+ /*   @Override
     public void setTagSucess() {
 
     }
@@ -173,5 +175,5 @@ public class ChoseTagActivity extends BaseActivity<GetTagPresenter>  implements 
         App.hideLoading();
         ToastUtil.showToast(msg);
 
-    }
+    }*/
 }

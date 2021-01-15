@@ -28,7 +28,7 @@ public class UseMomentPresenter extends BasePresenter<UseMomentContract.View> im
 
             body.setMediaType(mediaType);
 
-        body.setPageSize(10);
+        body.setPageSize(pageSize);
         body.setPageNum(pageNum);
 
             body.setMomentType(type);

@@ -4,11 +4,13 @@ import android.content.Intent;
 
 import com.fm.designstar.app.App;
 import com.fm.designstar.app.AppManager;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.views.main.activity.MainActivity;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.mine.contract.LoginOutContract;
 import com.fm.designstar.views.mine.presenter.LoginOutPresenter;
+import com.google.gson.Gson;
 
 import io.rong.imkit.RongIM;
 
@@ -79,6 +81,10 @@ public class EventController {
         App.getConfig().setUserPhone("");
         App.getConfig().setUser_head("");
         App.getConfig().setUser_name("");
+        SpUtil.putString("HomehotecomSuccess","");
+        SpUtil.putString("HomeRecomSuccess","");
+
+
         RongIM.getInstance().logout();
         App.getConfig().setIsgoHome(0);
         AppManager.getInstance().finishAllActivity();

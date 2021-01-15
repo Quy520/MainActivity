@@ -1,15 +1,27 @@
 package com.fm.designstar.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.widget.TextView;
+
+import com.fm.designstar.R;
+import com.fm.designstar.app.App;
+import com.fm.designstar.views.login.activitys.LoginActivity;
+import com.fm.designstar.views.main.activity.WebActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +35,7 @@ import androidx.core.content.ContextCompat;
  * @author DELL
  */
 public class TextViewUtil {
+    private Context context;
 
     /**
      * 给TextView设置部分大小
@@ -62,7 +75,7 @@ public class TextViewUtil {
     /**
      * 设置不同字体颜色
      */
-    public static void setPartialColors(TextView textView, String str, int[] start, int[] end, int colorResId) {
+    public static void setPartialColors2(TextView textView, String str, int[] start, int[] end, int colorResId) {
         SpannableStringBuilder builder = new SpannableStringBuilder(str);
         for (int i = 0; i < start.length; i++) {
             ForegroundColorSpan spanColor = new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), colorResId));
@@ -71,6 +84,87 @@ public class TextViewUtil {
         textView.setText(builder);
     }
 
+    /**
+     * 设置不同字体颜色
+     */
+    public static void setPartialColors(Context mContext, TextView textView, String str, int color) {
+
+        SpannableStringBuilder spannableString = new SpannableStringBuilder(str.replace(" ", ""));
+        spannableString.setSpan(new TextAgreementClick(), 13, 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new TextPrivacyClick(), 22, str.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        //设置点击事件，加上这句话才有效果
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        //设置点击后的颜色为透明（有默认背景）
+        textView.setHighlightColor(mContext.getResources().getColor(color));
+        textView.setText(spannableString);
+
+
+    }  /**
+     * 设置不同字体颜色
+     */
+    public static void setPartialColors3(Context mContext, TextView textView, String str, int color) {
+
+        SpannableStringBuilder spannableString = new SpannableStringBuilder(str.replace(" ", ""));
+        spannableString.setSpan(new TextAgreementClick(), 40, 46, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new TextPrivacyClick(), 47, str.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        //设置点击事件，加上这句话才有效果
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        //设置点击后的颜色为透明（有默认背景）
+        textView.setHighlightColor(mContext.getResources().getColor(color));
+        textView.setText(spannableString);
+
+
+    }
+    static class TextAgreementClick extends ClickableSpan {
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            //设置文本的颜色
+            ds.setColor(App.getContext().getResources().getColor(R.color.notice));
+            //超链接形式的下划线，false 表示不显示下划线，true表示显示下划线
+            ds.setUnderlineText(false);
+        }
+
+        @Override
+        public void onClick(View widget) {
+            // 执行点击逻辑
+            Intent intent  = new Intent(App.getContext(),WebActivity.class);
+            Bundle bundle3 = new Bundle();
+            bundle3.putString("url", "https://cde.laifuyun.com/userLicenseAgreement.html");
+
+            intent.putExtras(bundle3);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            App.getContext(). startActivity(intent);
+
+        }
+    }
+    static class TextPrivacyClick extends ClickableSpan {
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            //设置文本的颜色
+            ds.setColor(App.getContext().getResources().getColor(R.color.notice));
+            //超链接形式的下划线，false 表示不显示下划线，true表示显示下划线
+            ds.setUnderlineText(false);
+        }
+
+        @Override
+        public void onClick(View widget) {
+            // 执行点击逻辑
+            Intent intent  = new Intent(App.getContext(),WebActivity.class);
+            Bundle bundle3 = new Bundle();
+           bundle3.putString("url", "https://cde.laifuyun.com/privacyPolicy.html");
+            //bundle3.putString("url", "http://120.27.163.36:8686/m/Dingding/Order/OrderManage.aspx?empId=1637C94DCB827E27&isApp=1");
+
+            intent.putExtras(bundle3);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            App.getContext(). startActivity(intent);
+        }
+    }
     /**
      * 给TextView设置部分样式
      *

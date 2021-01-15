@@ -35,7 +35,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class DesignerMangerActivity extends BaseActivity<DesignerRecordPresenter>  implements DesignerRecordContract.View ,XRecyclerView.LoadingListener {
     @BindView(R.id.recy_black)
     XRecyclerView hotRecycler;
-    private int pagenum=0;
+    private int pagenum=1;
     private DesignerMangerAdapter mangerAdapter;
 
     @Override
@@ -86,7 +86,7 @@ public class DesignerMangerActivity extends BaseActivity<DesignerRecordPresenter
 
     @Override
     public void DesignerRecordSuccess(findPageResponse pageResponse) {
-        if( pagenum==0){
+        if( pagenum==1){
             mangerAdapter.clearData();
         }
         mangerAdapter.addData(pageResponse.getResult());
@@ -116,7 +116,7 @@ public class DesignerMangerActivity extends BaseActivity<DesignerRecordPresenter
 
     @Override
     public void onRefresh() {
-        pagenum=0;
+        pagenum=1;
         mPresenter.DesignerRecord(pagenum,10);
 
     }
@@ -128,7 +128,7 @@ public class DesignerMangerActivity extends BaseActivity<DesignerRecordPresenter
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UpdataEvent event) {
-        pagenum=0;
+        pagenum=1;
         mPresenter.DesignerRecord(pagenum,10);
     }
 

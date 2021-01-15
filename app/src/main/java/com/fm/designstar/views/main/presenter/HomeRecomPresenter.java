@@ -5,6 +5,7 @@ import com.fm.designstar.base.BasePresenter;
 import com.fm.designstar.https.AbstractHttpSubscriber;
 import com.fm.designstar.https.HttpManager;
 import com.fm.designstar.model.server.body.HomeRecomBody;
+import com.fm.designstar.model.server.response.BannerResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.views.main.contract.HomeRecomContract;
 
@@ -74,14 +75,14 @@ public class HomeRecomPresenter extends BasePresenter<HomeRecomContract.View> im
 
     @Override
     public void Homebanner(int pageNum, int pageSize) {
-        toSubscribe(HttpManager.getApi().getBannerMoment(new HomeRecomBody(pageNum,pageSize)), new AbstractHttpSubscriber<HomeFindResponse>() {
+        toSubscribe(HttpManager.getApi().getBannerMoment(new HomeRecomBody(pageNum,pageSize)), new AbstractHttpSubscriber<BannerResponse>() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);
             }
 
             @Override
-            protected void onHttpNext(HomeFindResponse loginResponse) {
+            protected void onHttpNext(BannerResponse loginResponse) {
 
                 mView.HomebannerRecomSuccess(loginResponse);
 

@@ -1,5 +1,6 @@
 package com.fm.designstar.views.main.fragment;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -72,8 +73,8 @@ ImageView im_find;
     @Override
     public void loadData() {
 
-        re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
-        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
+        re_title.getLayoutParams().height = Tool.dip2px(mContext, 35) + Util.getStatusBarH(mContext);
+        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext)-10;
         fragmentList.add(new HomeGuanzhuFragment());
         fragmentList.add(new HomeTuijianFragment());
       //  fragmentList.add(new FindFragment());
@@ -89,25 +90,31 @@ ImageView im_find;
         switch (view.getId()) {
             case R.id.re_guanzhu:
                 setItem();
-                tv_guanzhu.setTextSize(22);
+                tv_guanzhu.setTextSize(18);
                 im_guanzhu.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
+                tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
                 EventBus.getDefault().removeStickyEvent(HomeEvent.class);
                 EventBus.getDefault().post(new HomeEvent(1));
                 break;
             case R.id.re_tuijain:
                 setItem();
-                tv_tuijain.setTextSize(22);
+                tv_tuijain.setTextSize(18);
                 im_tuijain.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(1);
-                EventBus.getDefault().removeStickyEvent(HomeEvent.class);
-                EventBus.getDefault().post(new HomeEvent(3));
+                tv_tuijain.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
+        /*        EventBus.getDefault().removeStickyEvent(HomeEvent.class);
+                EventBus.getDefault().post(new HomeEvent(3));*/
                 break;
             case R.id.re_find:
                 setItem();
-                tv_find.setTextSize(22);
+                tv_find.setTextSize(18);
                 im_find.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
+                tv_find.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
                 EventBus.getDefault().removeStickyEvent(HomeEvent.class);
                 EventBus.getDefault().post(new HomeEvent(2));
                 break;
@@ -123,10 +130,14 @@ ImageView im_find;
     private void setItem() {
          tv_guanzhu.setTextSize(16);
          im_guanzhu.setVisibility(View.GONE);
+        tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
         tv_tuijain.setTextSize(16);
         im_tuijain.setVisibility(View.GONE);
+        tv_tuijain.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
         tv_find.setTextSize(16);
         im_find.setVisibility(View.GONE);
+        tv_find.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
 
     }
 

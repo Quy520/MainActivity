@@ -59,7 +59,8 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
         }
         int[] strt={13,22};
         int[] end={21,reg_notice.getText().length()};
-        TextViewUtil.setPartialColors(reg_notice,reg_notice.getText().toString(),strt,end,R.color.notice);
+        TextViewUtil.setPartialColors(mContext,reg_notice,reg_notice.getText().toString(),R.color.transparent);
+
         pwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -136,6 +137,7 @@ public class PwdActivity extends BaseActivity<ChangePwdPresenter> implements Cha
 
     @Override
     public void AppRegistSuccess() {
+        ToastUtil.showToast("注册成功");
         AppManager.getInstance().finishActivity(RegisteredActivity.class);
         finish();
     }

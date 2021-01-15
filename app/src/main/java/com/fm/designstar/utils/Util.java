@@ -43,6 +43,7 @@ import android.widget.ListView;
 
 
 import com.fm.designstar.app.App;
+import com.fm.designstar.model.bean.TagsInfoVoBean;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -50,10 +51,13 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 
 import androidx.core.app.ActivityCompat;
@@ -1145,5 +1149,16 @@ public class Util {
 }
 
 
+    public static ArrayList<TagsInfoVoBean> removeDuplicteUsers(ArrayList<TagsInfoVoBean> userList) {
+        Set<TagsInfoVoBean> s = new TreeSet<TagsInfoVoBean>(new Comparator<TagsInfoVoBean>() {
+
+            @Override
+            public int compare(TagsInfoVoBean o1, TagsInfoVoBean o2) {
+                return o1.getTagName().compareTo(o2.getTagName());
+            }
+        });
+        s.addAll(userList);
+        return new ArrayList<TagsInfoVoBean>(s);
+    }
 
 }

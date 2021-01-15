@@ -7,6 +7,7 @@ import butterknife.BindView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -14,12 +15,16 @@ import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.events.UpdataEvent;
+import com.fm.designstar.model.bean.DesignerTagsBean;
+import com.fm.designstar.model.bean.DesignerTagsInfoVoBean;
 import com.fm.designstar.model.bean.TagBean;
 import com.fm.designstar.model.bean.TagsBean;
 import com.fm.designstar.model.bean.TagsInfoVoBean;
 import com.fm.designstar.model.bean.TagsLogBean;
+import com.fm.designstar.model.server.response.DesignerTagInfoResponse;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
+import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.Fabu.contract.GetTagContract;
@@ -49,12 +54,12 @@ public class ChoseDesignerTagsActivity extends BaseActivity<GetTagPresenter>  im
     private boolean hasnext;
     private TagsLogBean tagsLogBean;
 
-    private List<TagsInfoVoBean> list=new ArrayList<>(); //保存数据的集合
+    private List<DesignerTagsInfoVoBean> list=new ArrayList<>(); //保存数据的集合
     private List<TagsLogBean> logBeanList=new ArrayList<>(); //保存数据的集合
-    private List<TagsInfoVoBean> list2=new ArrayList<>(); //保存数据的集合
+    private List<DesignerTagsInfoVoBean> list2=new ArrayList<>(); //保存数据的集合
     private List<String> list3=new ArrayList<>(); //保存数据的集合
     private List<Integer> list4=new ArrayList<>(); //保存数据的集合
-    private  String tag,uuid;
+    private  String tag,uuid,name;
   private   List<TagBean> tagsList=new ArrayList<>();
   private TagBean tagBean;
     @Override
@@ -75,12 +80,16 @@ public class ChoseDesignerTagsActivity extends BaseActivity<GetTagPresenter>  im
         }
         mTitle.setTitle(R.string.bq);
         uuid=getIntent().getStringExtra("uuid");
+        name=getIntent().getStringExtra("name");
 
         mPresenter.GetTag(1);
         mTitle.setRightTitle("确认", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (StringUtil.isBlank(tag)){
+                    ToastUtil.showToast("请选择设计师标签");
+                    return;
+                }
                 tagsList=new ArrayList<>();
                 tagBean=new TagBean();
                 tagBean.setTagId(list.get(pagenum).getId());
@@ -134,14 +143,15 @@ public class ChoseDesignerTagsActivity extends BaseActivity<GetTagPresenter>  im
     }
 
     @Override
-    public void GetTagSuccess(TagInfoResponse infoResponse) {
+    public void GetTagSuccess(DesignerTagInfoResponse infoResponse) {
 
         logBeanList.clear();
         listAdapter.clearData();
+        list.clear();
         list3=new ArrayList<>();
         list4=new ArrayList<>();
         for (int i=0;i<infoResponse.getList().size();i++){
-            TagsBean tagsBean = infoResponse.getList().get(i);
+            DesignerTagsBean tagsBean = infoResponse.getList().get(i);
             list2 = tagsBean.getTagInfoVoList();//标签对象集合
             list.addAll(tagsBean.getTagInfoVoList());
 
@@ -156,11 +166,26 @@ public class ChoseDesignerTagsActivity extends BaseActivity<GetTagPresenter>  im
         }
 
         listAdapter.addData(logBeanList);
+        Log.e("qsd","name"+name);
+        if (!StringUtil.isBlank(name)){
+            for ( int i=0;i<list.size();i++){
+                if (name.equals(list.get(i).getTagName())){
+                    Log.e("qsd","name"+name+"===="+i);
+
+                    logBeanList.get(i).setSelect(1);
+                    listAdapter.notifyDataSetChanged();
+
+                }
+
+            }
+        }
 
     }
 
     @Override
     public void setTagSucess() {
+      //  mPresenter.GetTag(1);
+
         Intent intent = new Intent();
         intent.putExtra("resule", tag);
         setResult(RESULT_OK, intent);

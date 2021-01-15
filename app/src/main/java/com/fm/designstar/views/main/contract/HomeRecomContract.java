@@ -2,6 +2,7 @@ package com.fm.designstar.views.main.contract;
 
 
 import com.fm.designstar.base.BaseView;
+import com.fm.designstar.model.server.response.BannerResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 
 /**
@@ -15,7 +16,7 @@ public interface HomeRecomContract {
     interface View extends BaseView {
         void HomeRecomSuccess(HomeFindResponse homeFindResponse);
         void HomehotecomSuccess(HomeFindResponse homeFindResponse);
-        void HomebannerRecomSuccess(HomeFindResponse homeFindResponse);
+        void HomebannerRecomSuccess(BannerResponse homeFindResponse);
 
 
     }

@@ -4,6 +4,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,20 +15,26 @@ import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.dialog.AlertFragmentDialog;
 import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.model.server.body.DesignerStatebody;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
+import com.fm.designstar.photo.ShowPictureActivity;
+import com.fm.designstar.utils.DataCleanManager;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
+import com.fm.designstar.views.main.activity.FeedbackActivity;
 import com.fm.designstar.views.mine.activity.BeDesignerActivity;
 import com.fm.designstar.views.mine.activity.BlackListActivity;
 import com.fm.designstar.views.mine.activity.DesignerMangerActivity;
 import com.fm.designstar.views.mine.activity.DesignerRecordActivity;
 import com.fm.designstar.views.mine.activity.FansListActivity;
 import com.fm.designstar.views.mine.activity.MyActivitysActivity;
+import com.fm.designstar.views.mine.activity.MyLikesListActivity;
 import com.fm.designstar.views.mine.activity.MyWorkActivity;
 import com.fm.designstar.views.mine.activity.SettingActivity;
 import com.fm.designstar.views.mine.activity.ShDesignerActivity;
@@ -44,6 +51,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -84,12 +92,15 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
     TextView fans_num;
     @BindView(R.id.shtype)
     TextView shtype;
+    @BindView(R.id.cash)
+    TextView tv_cash;
 
     @BindView(R.id.left)
     ImageView left;
     private FindDesignerPresenter designerPresenter;
     private int state=3;
     private DesignerStatebody mstatebody;
+    private List<String> handurl=new ArrayList<>();
 
 
     @Override
@@ -110,17 +121,46 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
         if(!EventBus.getDefault().isRegistered(this)){//加上判断
             EventBus.getDefault().register(this);
         }
+        try {
+         String cash=   DataCleanManager.getTotalCacheSize(mContext);
+            Log.e("qsd","cash===="+cash);
+
+            tv_cash.setText(cash);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ((ViewGroup.MarginLayoutParams) hand.getLayoutParams()).topMargin = Util.getStatusBarH(mContext)+ Tool.dip2px(mContext, 24);
         ((ViewGroup.MarginLayoutParams) re_top.getLayoutParams()).height =  Tool.dip2px(mContext, 210);
         ((ViewGroup.MarginLayoutParams) name.getLayoutParams()).topMargin = Util.getStatusBarH(mContext)+ Tool.dip2px(mContext, 24);
         if (!StringUtil.isBlank(App.getConfig().getUser_head())){
             Glide.with(mActivity).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(hand);
+            handurl.add(App.getConfig().getUser_head());
         }
         name.setText(App.getConfig().getUser_name());
+        if (StringUtil.isBlank(App.getConfig().getTagname())&&StringUtil.isBlank(App.getConfig().getAddress())){
+            info.setText("上海"+"|"+"暂无标签");
 
-        info.setText(App.getConfig().getAddress()+"|"+"中国设计星评委导师");
+        }else {
+            if (!StringUtil.isBlank(App.getConfig().getTagname())&&!StringUtil.isBlank(App.getConfig().getAddress())){
+                info.setText(App.getConfig().getAddress()+"|"+App.getConfig().getTagname());
+
+            }
+            if (!StringUtil.isBlank(App.getConfig().getTagname())&&StringUtil.isBlank(App.getConfig().getAddress())){
+                info.setText("上海"+"|"+App.getConfig().getTagname());
+
+            }
+            if (StringUtil.isBlank(App.getConfig().getTagname())&&!StringUtil.isBlank(App.getConfig().getAddress())){
+                info.setText(App.getConfig().getAddress()+"|"+"暂无标签");
+
+            }
+
+        }
+
+
+
         if (StringUtil.isBlank(App.getConfig().getSingmarks())){
-            info2.setText("我的征途是星辰大海");
+            info2.setText("暂无签名");
         }else {
             info2.setText(App.getConfig().getSingmarks());
         }
@@ -168,10 +208,12 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
 
         }
     }
-    @OnClick({R.id.re_zp,R.id.zuopin,R.id.re_dt,R.id.re_guanzhu,R.id.re_fans, R.id.re_designer,R.id.re_shdes,R.id.re_demanger,R.id.re_black,R.id.re_setting})
+    @OnClick({R.id.re_zp,R.id.zuopin,R.id.getlike,R.id.re_dt,R.id.re_guanzhu,R.id.re_fans, R.id.re_designer,R.id.re_shdes,R.id.re_demanger,R.id.re_black,R.id.re_setting,R.id.hand,R.id.re_advise,R.id.re_clear})
     public void OnClick(View view) {
         switch (view.getId()) {
-
+            case R.id.hand:
+                ShowPictureActivity.startAction(mContext,view, (ArrayList<String>) handurl, "", "", 0, 0,1);
+                break;
             case R.id.zuopin:
                 if (App.getConfig().getRole()==1&&App.getConfig().getRole()==3){
                   return;
@@ -199,6 +241,11 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
                     return;
                 }
                 startActivity(MyWorkActivity.class);
+
+                break;
+    case R.id.getlike:
+
+                startActivity(MyLikesListActivity.class);
 
                 break;
 
@@ -242,6 +289,22 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
                  startActivity(DesignerMangerActivity.class);
 
                  break;
+                 case R.id.re_clear:
+                     new AlertFragmentDialog.Builder(mActivity)
+                             .setContent("确定要清除缓存吗？")
+                             .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                             .setRightBtnText(getString(R.string.cancle_clear))
+                             .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                                 @Override
+                                 public void dialogRightBtnClick() {
+                                     SpUtil.putString("HomehotecomSuccess","");
+                                        DataCleanManager.clearAllCache(mContext);
+                                     ToastUtil.showToast("缓存清除成功");
+                                     tv_cash.setText("0M");
+                                 }
+                             }).build();
+
+                 break;
 
             case R.id.re_demanger:
                 startActivity(ShDesignerActivity.class);
@@ -256,6 +319,11 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
                 break;
             case R.id.re_setting:
                 startActivity(SettingActivity.class);
+
+                break;
+            case R.id.re_advise://vivo 市场需求
+
+                startActivity(FeedbackActivity.class);
 
                 break;
 
@@ -304,7 +372,19 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
             Glide.with(mActivity).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(hand);
         }
         name.setText(App.getConfig().getUser_name());
-        info.setText(App.getConfig().getAddress()+"|"+"中国设计星评委导师");
+        if (!StringUtil.isBlank(App.getConfig().getTagname())&&!StringUtil.isBlank(App.getConfig().getAddress())){
+            info.setText(App.getConfig().getAddress()+"|"+App.getConfig().getTagname());
+
+        }
+        if (!StringUtil.isBlank(App.getConfig().getTagname())&&StringUtil.isBlank(App.getConfig().getAddress())){
+            info.setText("上海"+"|"+App.getConfig().getTagname());
+
+        }
+        if (StringUtil.isBlank(App.getConfig().getTagname())&&!StringUtil.isBlank(App.getConfig().getAddress())){
+            info.setText(App.getConfig().getAddress()+"|"+"暂无标签");
+
+        }
+
         if (StringUtil.isBlank(App.getConfig().getSingmarks())){
             info2.setText("我的征途是星辰大海");
         }else {
@@ -318,11 +398,10 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
     public void DFindDesignerSuccess(DesignerStatebody statebody) {
         mstatebody=statebody;
         if (statebody.getImgUrl()==null){
+            state=3;
             return;
         }
         state=statebody.getStatus();
-
-
         if (statebody.getStatus()==0){//审核中
             shtype.setVisibility(View.VISIBLE);
             shtype.setText("审核中");
@@ -344,5 +423,12 @@ public class MineFragment extends BaseFragment<GetInfoPresenter> implements GetI
             left.setVisibility(View.VISIBLE);
         }
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (App.getConfig().getRole()!=3){
+            designerPresenter.FindDesigner();
+        }
     }
 }

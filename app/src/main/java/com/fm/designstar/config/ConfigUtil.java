@@ -12,7 +12,7 @@ import com.fm.designstar.utils.StringUtil;
  */
 public class ConfigUtil {
     private static final String TEXT_APK_MARKET = "my_self";
-    private static final String BASE_URL = "https://api.recomeapp.com/recome/";//todo
+    private static final String BASE_URL = "https://cdeuapi.laifuyun.com/";//todo
     /**
      * 是否调试模式,上线必须改为false
      */
@@ -28,6 +28,7 @@ public class ConfigUtil {
     private String user_head;
     private String userPhone;
     private String address;
+    private String tagname;
     private String birthday;
     private String email;
     private String realName;
@@ -49,6 +50,7 @@ public class ConfigUtil {
 
     private String bindPhone;
     private String rongyuntoken;
+    private String contactNumber;
 
 
 
@@ -69,6 +71,7 @@ public class ConfigUtil {
         isLogin = !StringUtil.isBlank(userToken);
         bindPhone=SpUtil.getString(Constant.BindPhone);
         address=SpUtil.getString(Constant.ADDRESS);
+        tagname=SpUtil.getString(Constant.TAGNAME);
         birthday=SpUtil.getString(Constant.BRITH);
         singmarks=SpUtil.getString(Constant.singmarks);
         email=SpUtil.getString(Constant.EMAIL);
@@ -76,6 +79,26 @@ public class ConfigUtil {
         sex=SpUtil.getInt(Constant.SEX,1);
         role=SpUtil.getInt(Constant.ROLE,1);
         isgoHome=SpUtil.getInt(Constant.HOME,0);
+        contactNumber=SpUtil.getString(Constant.contactNumber);
+
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+        SpUtil.putString(Constant.contactNumber,contactNumber);
+
+    }
+    public String getTagname() {
+        return tagname;
+    }
+
+    public void setTagname(String tagname) {
+        this.tagname = tagname;
+        SpUtil.putString(Constant.TAGNAME,tagname);
 
     }
 

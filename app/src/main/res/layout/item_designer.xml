@@ -11,76 +11,123 @@
         <com.fm.designstar.widget.CircleImageView
             android:id="@+id/hand"
             android:layout_margin="@dimen/sobot_10PX"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@mipmap/defu_hand"
             ></com.fm.designstar.widget.CircleImageView>
         <TextView
             android:id="@+id/name"
-            android:layout_marginTop="@dimen/sobot_10PX"
+            android:layout_marginTop="11dp"
             android:layout_toRightOf="@+id/hand"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:textColor="@color/edit_color"
             android:text="㊙咪咪"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/type"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:layout_below="@+id/name"
             android:layout_toRightOf="@+id/hand"
-            android:textSize="14dp"
-            android:textColor="@color/hint_color"
-            android:text="中国设计星评委导师"
+            android:textSize="12dp"
+            android:textColor="@color/home_color2"
+            android:text="北京 · 中国设计星评委导师"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <CheckBox
-            android:visibility="gone"
-            android:layout_marginRight="@dimen/sobot_20PX"
-            android:layout_alignParentEnd="true"
+            android:layout_toLeftOf="@+id/tv_type"
+            android:checked="false"
             android:id="@+id/check_guanzhu"
             android:button="@null"
             android:background="@drawable/guanzhu_check"
+            android:layout_marginLeft="2dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/home_guanzhu"
-            android:layout_width="@dimen/sobot_20PX"
-            android:layout_height="@dimen/sobot_20PX"/>
+            android:layout_width="@dimen/sobot_15PX"
+            android:layout_height="@dimen/sobot_15PX"/>
         <TextView
-            android:gravity="center"
             android:layout_marginRight="@dimen/sobot_20PX"
             android:layout_alignParentEnd="true"
-            android:id="@+id/tv_guanzhu"
-            android:textSize="12dp"
-            android:text="关注"
-            android:background="@drawable/bank_close_shape"
+            android:layout_below="@+id/name"
+            android:textSize="14dp"
+            android:textColor="@color/black3"
+            android:id="@+id/tv_type"
+            android:layout_marginLeft="5dp"
+
             android:layout_centerVertical="true"
-            android:src="@mipmap/home_guanzhu"
-            android:layout_width="60dp"
-            android:layout_height="25dp"/>
+            android:text="关注"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
     </RelativeLayout>
 
     <FrameLayout
+
         android:id="@+id/imgLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/sobot_15PX"
+            android:layout_marginLeft="@dimen/sobot_15PX"
+            android:id="@+id/re_item"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+>
+
+            <ImageView
+                android:id="@+id/im_item"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+
+                android:scaleType="centerCrop" />
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_video_play"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+
+                android:id="@+id/time"
+                android:textSize="11dp"
+                android:gravity="center"
+                android:textColor="@color/theme_color"
+                android:background="@drawable/btn_blackshape_"
+                android:layout_marginRight="@dimen/sobot_10PX"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="42dp"
+                android:layout_height="@dimen/sobot_20PX"
+                android:layout_marginBottom="5dp"
+                android:text="21:20" />
+        </RelativeLayout>
+
 
         <com.fm.designstar.widget.CostomGrideView
-
+            android:visibility="gone"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:id="@+id/gw2"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:horizontalSpacing="5dp"
+            android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:scrollbars="none"
-            android:verticalSpacing="5dp">
+            android:verticalSpacing="8dp">
 
         </com.fm.designstar.widget.CostomGrideView>
     </FrameLayout>
+
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/relin"
+        android:background="@color/home_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        ></View>
 </LinearLayout>

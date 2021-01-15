@@ -3,6 +3,8 @@ package com.fm.designstar.https;
 
 
 
+import com.fm.designstar.model.bean.DesignerTagsInfoVoBean;
+import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.server.BaseListResponse;
 import com.fm.designstar.model.server.BaseResponse;
 import com.fm.designstar.model.server.body.AddTagsBody;
@@ -12,6 +14,7 @@ import com.fm.designstar.model.server.body.DeleteCombody;
 import com.fm.designstar.model.server.body.DesignerStatebody;
 import com.fm.designstar.model.server.body.Designerbody;
 import com.fm.designstar.model.server.body.FansListBody;
+import com.fm.designstar.model.server.body.Finddesignerbody;
 import com.fm.designstar.model.server.body.Firdesignerbody;
 import com.fm.designstar.model.server.body.GetCommentBody;
 import com.fm.designstar.model.server.body.GetMessageBody;
@@ -24,14 +27,17 @@ import com.fm.designstar.model.server.body.TagsBody;
 import com.fm.designstar.model.server.body.Updatabody;
 import com.fm.designstar.model.server.body.UserMomentBody;
 import com.fm.designstar.model.server.body.VesionBody;
+import com.fm.designstar.model.server.body.Viewbody;
 import com.fm.designstar.model.server.body.chnagepwdbody;
 import com.fm.designstar.model.server.body.comInfobody;
 import com.fm.designstar.model.server.body.followbody;
 import com.fm.designstar.model.server.body.sendMsgBody;
 import com.fm.designstar.model.server.body.uploadMomentbody;
+import com.fm.designstar.model.server.response.BannerResponse;
 import com.fm.designstar.model.server.response.CommentsResponse;
 import com.fm.designstar.model.server.response.DesignerPageResponse;
 import com.fm.designstar.model.server.response.DesignerResponse;
+import com.fm.designstar.model.server.response.DesignerTagInfoResponse;
 import com.fm.designstar.model.server.response.FansResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
@@ -39,6 +45,7 @@ import com.fm.designstar.model.server.response.LoginResponse;
 import com.fm.designstar.model.server.response.MessageResponse;
 import com.fm.designstar.model.server.response.OssTokenResponse;
 import com.fm.designstar.model.server.response.RoleResponse;
+import com.fm.designstar.model.server.response.SearchDesignerResponse;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
@@ -78,7 +85,7 @@ public interface HttpApi {
 
     @GET("user/loginOut")//退出登录
     Observable<BaseResponse> loginOut();
-    @GET("user/getUserOtherInfo")//获取他人点赞
+    @GET("user/getUserOtherInfo")//获取他人点赞 find
 
     Observable<BaseResponse<UserlikeResponse>> getUserOtherInfo(@Query("userId")String userId);
 
@@ -94,14 +101,14 @@ public interface HttpApi {
     @POST("media/moment/getHotMoment")//首页猜你喜欢
     Observable<BaseResponse<HomeFindResponse>> getHotMoment(@Body HomeRecomBody body);
 
-    @POST("media/moment/getBannerMoment")//首页banner
-    Observable<BaseResponse<HomeFindResponse>> getBannerMoment(@Body HomeRecomBody body);
+    @POST("media/moment/getBannerActivity")//首页banner
+    Observable<BaseResponse<BannerResponse>> getBannerMoment(@Body HomeRecomBody body);
 
 
 
 
 
-    @POST("media/moment/find")//首页发现
+    @POST("media/moment/find")//首页发现/media/moment/findMomentById
     Observable<BaseResponse<HomeFindResponse>> homeFind(@Body HomeRecomBody body);
 
     @POST("media/moment/follow")//首页关注
@@ -111,8 +118,14 @@ public interface HttpApi {
     Observable<BaseResponse<HomeFindResponse>> userMoment(@Body UserMomentBody body);
 
 
+
+
     @POST("user/device/add")//获取融云token
     Observable<BaseResponse> add(@Body Addbody body);
+
+
+    @POST("media/moment/view")//获取融云token
+    Observable<BaseResponse> view(@Body Viewbody body);
 
     @POST("user/userLocation/updateUserLocation")//更新自己的地理位置
     Observable<BaseResponse> updateUserLocation(@Body Locationbody body);
@@ -142,7 +155,7 @@ public interface HttpApi {
 
 
     @GET("media/tag/findAllTagInfo")//获取标签信息
-    Observable<BaseResponse<TagInfoResponse>> findAllTagInfo(@Query("tagType")int tagType);
+    Observable<BaseResponse<DesignerTagInfoResponse>> findAllTagInfo(@Query("tagType")int tagType);
 
     @POST("media/tag/addDesignerTagInfo")//增加标签
     Observable<BaseResponse> AddTag(@Body AddTagsBody tagType);
@@ -151,10 +164,19 @@ public interface HttpApi {
 
     @GET("user/getUserRoleInfo")//获取个人角色信息
     Observable<BaseResponse<RoleResponse>> getUserRoleInfo();
+    @GET("media/moment/forward")//获取个人角色信息
+    Observable<BaseResponse> forward(@Query("momentId")long momentId);
+    @GET("media/moment/deleteMoment")//获取个人角色信息
+
+    Observable<BaseResponse> deleteMoment(@Query("momentId")long momentId);
+
+    @GET("media/moment/findMomentById")//
+
+    Observable<BaseResponse<HomeFindBean>> findMomentById(@Query("momentId")long momentId);
 
 
     @GET("media/comment/findByMomentId")//获取评论
-    Observable<BaseResponse<CommentsResponse>> findByMomentId(@Query("momentId") String momentId, @Query("pageNum") int pageNum, @Query("pageNum") int pageSize);
+    Observable<BaseResponse<CommentsResponse>> findByMomentId(@Query("momentId") String momentId, @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     @POST("media/comment/insertComment")//发送评论
     Observable<BaseResponse> insertComment(@Body SendMessageBody body);
@@ -196,6 +218,9 @@ public interface HttpApi {
 
     @POST("user/fireDesigner")//解雇设计师
     Observable<BaseResponse> fireDesigner(@Body Firdesignerbody body);
+
+    @POST("user/searchDesigner")//搜索设计师
+    Observable<BaseResponse<SearchDesignerResponse>> findDesigner(@Body Finddesignerbody body);
 
 
 

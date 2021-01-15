@@ -1,6 +1,7 @@
 package com.fm.designstar.model.bean;
 
 import com.fm.designstar.base.BaseBean;
+import com.fm.designstar.model.server.response.BannerResponse;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
              */
 
             private List<HomeFindBean> hot;
-            private List<HomeFindBean> banner;
+            private List<BannerBean> banner;
             private List<HomeFindBean> recom;
 
 
@@ -36,11 +37,11 @@ import java.util.List;
         this.hot = hot;
     }
 
-    public List<HomeFindBean> getBanner() {
+    public List<BannerBean> getBanner() {
         return banner;
     }
 
-    public void setBanner(List<HomeFindBean> banner) {
+    public void setBanner(List<BannerBean> banner) {
         this.banner = banner;
     }
 

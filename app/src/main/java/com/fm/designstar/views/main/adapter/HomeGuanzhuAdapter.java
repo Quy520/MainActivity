@@ -43,6 +43,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
+import cn.jzvdother.Jzvd;
+import cn.jzvdother.JzvdStd;
+
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 /**
  * description : $todo
@@ -65,6 +69,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
     private OnClickListener listener;
     public interface OnClickListener {
         void onLikeClick(int position,boolean b,CompoundButton compoundButton);
+        void onmoreClick(long id);
+        void onjubaoClick(long id);
 
     }
     public void setOnClickListener(OnClickListener listener) {
@@ -79,7 +85,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         twoWidth = (int) ((oneWidth - (8 * dip2px + 0.5f)) / 2);
         threeWidth = (int) ((oneWidth - (16 * dip2px + 0.5f)) / 3);
         height = (int) (110 * dip2px + 0.5f);
-        Width=(int) (210 * dip2px + 0.5f);
+        Width=(int) (150 * dip2px + 0.5f);
         Width2=(int) (150 * dip2px + 0.5f);
     }
     @Override
@@ -101,6 +107,12 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
         holder.message_num.setText(data.get(position).getComments()+"");
         holder.likenum.setText(data.get(position).getLikes()+"");
+        if (StringUtil.isBlank(findBean.getTagName())){
+            holder.tv_name.setText("暂无头衔");
+
+        }else {
+            holder.tv_name.setText(findBean.getTagName()+"");
+        }
         if (StringUtil.isBlank(findBean.getAddress())){
             holder.im.setVisibility(View.GONE);
             holder.address.setVisibility(View.GONE);
@@ -109,7 +121,15 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             holder.address.setVisibility(View.VISIBLE);
             holder.address.setText(findBean.getAddress());
         }
-        holder.content.setText(findBean.getContent());
+        if (StringUtil.isBlank(findBean.getContent())){
+            holder.content.setVisibility(View.GONE);
+
+        }else {
+            holder.content.setVisibility(View.VISIBLE);
+
+            holder.content.setText(findBean.getContent());
+
+        }
         holder.time.setText(TimeUtil.getfriendlyTime(findBean.getCreateTimeStamp()));
 
         if (data.get(position).getIsLike()==0){
@@ -126,6 +146,29 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                         listener.onLikeClick(position, b, compoundButton);
                     }
                 }
+            }
+        });
+if (!findBean.isMine()){
+    holder.more.setVisibility(View.GONE);
+}else {
+    holder.more.setVisibility(View.VISIBLE);
+
+}
+        holder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (findBean.isMine()){
+                    if (listener != null) {
+                        listener.onmoreClick(findBean.getMomentId());
+
+                    }
+                }else {
+                    if (listener != null) {
+                        listener.onjubaoClick(findBean.getMomentId());
+
+                    }
+                }
+
             }
         });
 
@@ -145,7 +188,9 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         }
 
         if (findBean.getMediaType()==2){//视频
-          if (findBean.getMomentType()==2){
+            holder.video_player.setVisibility(View.VISIBLE);
+
+            if (findBean.getMomentType()==2){
                 holder.video_player.getLayoutParams().width=oneWidth;
              // holder.video_player.getLayoutParams().height = (int)((oneWidth*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
               holder.video_player.getLayoutParams().height = Width2;
@@ -165,28 +210,37 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
             holder.imgLay.setVisibility(View.GONE);
             holder.oneImg.setVisibility(View.GONE);
             holder.gw.setVisibility(View.GONE);
-            holder.video_player.setVisibility(View.VISIBLE);
+            holder.video_player.thumbImageView.setScaleType(CENTER_CROP);
+
             holder.video_player.setUp(findBean.getMultimediaList().get(0).getMultimediaUrl(), JZVideoPlayerStandard.SCREEN_WINDOW_LIST
                     , "");
 
             Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
+          //  JZVideoPlayerStandard.setVideoImageDisplayType(Jzvd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
 
-           holder.video_player.startButton.setOnClickListener(new View.OnClickListener() {
+         /*   holder.video_player.fullscreenButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    holder.video_player.onStatePlaying();
+                }
+            });*/
+        /*   holder.video_player.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (view.isPressed()){
                     holder.video_player.startWindowFullscreen();
 
-              /*    Intent intent=  new Intent(mContext, VedioPlayActivity.class);
+
+              *//*    Intent intent=  new Intent(mContext, VedioPlayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("info", findBean);
                     intent.putExtras(bundle);
-                    mContext. startActivity(intent);*/
+                    mContext. startActivity(intent);*//*
                 }
 
 
             }
-        });
+        });*/
          /*  if (NetUtil.isWifi(mContext)){
               holder.video_player.startButton.performClick();
              *//* holder.video_player.dismissVolumeDialog();
@@ -210,6 +264,7 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                       , "");
 
               Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(rOptions).into(holder.video_player.thumbImageView);
+              //  JZVideoPlayerStandard.setVideoImageDisplayType(Jzvd.VIDEO_IMAGE_DISPLAY_TYPE_FILL_SCROP);
 
           /*    holder.video_player.startButton.performClick();
               holder.video_player.startVideo();*/
@@ -231,16 +286,30 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                    holder.imgLay.setVisibility(View.GONE);
                    break;
                 case 1:
-                    holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+
+                    if (findBean.getMultimediaList().get(0).getHeight()/findBean.getMultimediaList().get(0).getWidth()>3||findBean.getMultimediaList().get(0).getHeight()/findBean.getMultimediaList().get(0).getWidth()==3){
+
+                        holder.oneImg.getLayoutParams().height = (int)(Width*2);
+                        holder.oneImg.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        holder.longmip.setVisibility(View.VISIBLE);
+                    }else {
+                        holder.oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
+                        holder.oneImg.setScaleType(ImageView.ScaleType.FIT_XY);
+                        holder.longmip.setVisibility(View.GONE);
+
+                    }
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.VISIBLE);
                     holder.ly_two_img.setVisibility(View.GONE);
+                    holder.gw2.setVisibility(View.GONE);
 
                     holder.gw.setVisibility(View.GONE);
                     Glide.with(mContext).load(findBean.getMultimediaList().get(0).getMultimediaUrl()).apply(rOptions).into(holder.oneImg);
 
                     break;
                 case 2:
+                    holder.longmip.setVisibility(View.GONE);
+
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.GONE);
                     holder.ly_two_img.setVisibility(View.VISIBLE);
@@ -252,6 +321,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     Glide.with(mContext).load(findBean.getMultimediaList().get(1).getMultimediaUrl()).apply(rOptions).into(holder.oneImg3);
                     break;
                 case 4:
+                    holder.longmip.setVisibility(View.GONE);
+
                     holder.ly_two_img.setVisibility(View.GONE);
 
                     holder.imgLay.setVisibility(View.VISIBLE);
@@ -268,6 +339,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
                     reviewAdapter.notifyDataSetChanged(urlList);
                     break;
                 default:
+                    holder.longmip.setVisibility(View.GONE);
+
                     holder.imgLay.setVisibility(View.VISIBLE);
                     holder.oneImg.setVisibility(View.GONE);
                     holder.gw.setVisibility(View.VISIBLE);
@@ -346,6 +419,8 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
 
         @BindView(R.id.hand)
         CircleImageView hand;
+        @BindView(R.id.more)
+        ImageView more;
         @BindView(R.id.name)
         TextView name;
         @BindView(R.id.message_num)
@@ -358,9 +433,15 @@ public class HomeGuanzhuAdapter extends BaseRecyclerAdapter<HomeGuanzhuAdapter.L
         TextView address;
         @BindView(R.id.content)
         TextView content;
+        @BindView(R.id.longmip)
+        TextView longmip;
 
         @BindView(R.id.time)
         TextView time;
+
+
+        @BindView(R.id.tv_name)
+        TextView tv_name;
 
 
 

@@ -38,22 +38,118 @@ public class DesignerPageBean extends BaseBean {
      */
 
     private int agreeFlag;
-    private String avatar;
     private long code;
-    private String email;
-    private int id;
-    private String mobile;
-    private String nickName;
-    private String password;
-    private String realName;
-    private String registerIp;
-    private int role;
-    private int sex;
-    private String signature;
-    private int status;
+    private long createTimestamp;
     private String userName;
+    private String createTime;
+    private String updateLastTime;
+    private String mobile;
+    private String contactNumber;
+    private String email;
+    private int sex;
+    private String birthday;
+    private String address;
+    private String nickName;
+    private String realName;
+    private String avatar;
+    private int role;
+    private String signature;
+    private int certificationMark;
+    private String token;
+    private int status;
+    private String corporation;
+    private String position;
+    private String imgUrl;
 
     private TagBean tagInfo;
+
+    public long getCreateTimestamp() {
+        return createTimestamp;
+    }
+
+    public void setCreateTimestamp(long createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateLastTime() {
+        return updateLastTime;
+    }
+
+    public void setUpdateLastTime(String updateLastTime) {
+        this.updateLastTime = updateLastTime;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getCertificationMark() {
+        return certificationMark;
+    }
+
+    public void setCertificationMark(int certificationMark) {
+        this.certificationMark = certificationMark;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getCorporation() {
+        return corporation;
+    }
+
+    public void setCorporation(String corporation) {
+        this.corporation = corporation;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public TagBean getTagInfo() {
         return tagInfo;
@@ -95,13 +191,7 @@ public class DesignerPageBean extends BaseBean {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getMobile() {
         return mobile;
@@ -119,13 +209,7 @@ public class DesignerPageBean extends BaseBean {
         this.nickName = nickName;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getRealName() {
         return realName;
@@ -135,13 +219,6 @@ public class DesignerPageBean extends BaseBean {
         this.realName = realName;
     }
 
-    public String getRegisterIp() {
-        return registerIp;
-    }
-
-    public void setRegisterIp(String registerIp) {
-        this.registerIp = registerIp;
-    }
 
     public int getRole() {
         return role;

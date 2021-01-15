@@ -485,6 +485,24 @@ public class TimeUtil {
         int m = 0;
         m = m1 - m2 + h * 60;
         return m;
+    } /**
+     * 描述：计算两个日期所差的分钟数.
+     *
+     * @param date1 第一个时间的毫秒表示
+     * @param date2 第二个时间的毫秒表示
+     * @return int 所差的分钟数
+     */
+    public static int getOffectSeconds(long date1, long date2) {
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTimeInMillis(date1);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTimeInMillis(date2);
+        int m1 = calendar1.get(Calendar.SECOND);
+        int m2 = calendar2.get(Calendar.SECOND);
+
+        int m = 0;
+        m = m1 - m2 ;
+        return m;
     }
 
     /**

@@ -27,7 +27,7 @@ public class ShDesignerActivity extends BaseActivity<DesignerPagePresenter>  imp
     @BindView(R.id.recy_mansger)
     XRecyclerView recy_mansger;
     private DesignerPageAdapter  homeRecomAdapter;
-private int pagenum=0;
+private int pagenum=1;
 private boolean hasnext;
     @Override
     public int getLayoutId() {
@@ -72,7 +72,7 @@ private boolean hasnext;
 
     @Override
     public void DesignerPageSuccess(DesignerPageResponse statebody) {
-        hasnext=statebody.isHasNextPage();if (pagenum==0){
+        hasnext=statebody.isHasNextPage();if (pagenum==1){
             homeRecomAdapter.clearData();
         }
         homeRecomAdapter.addData(statebody.getResult());
@@ -103,7 +103,7 @@ private boolean hasnext;
     @Override
     public void onRefresh() {
         hasnext=true;
-        pagenum=0;
+        pagenum=1;
         mPresenter.DesignerPage(pagenum,10);
 
 

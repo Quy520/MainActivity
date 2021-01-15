@@ -14,6 +14,8 @@ public class comInfobody extends BaseBody {
     private String address;
     @SerializedName("signature")
     private String signature;
+    @SerializedName("contactNumber")
+    private String contactNumber;
     @SerializedName("sex")
     private int sex;
     @SerializedName("certificationMark")
@@ -21,7 +23,7 @@ public class comInfobody extends BaseBody {
 
 
 
-    public comInfobody(String avatar, String userName, String birthday, int sex,int certificationMark,String address,String signature) {
+    public comInfobody(String avatar, String userName, String birthday, int sex,int certificationMark,String address,String signature,String contactNumber) {
         this.avatar = avatar;
         this.userName = userName;
         this.birthday = birthday;
@@ -29,5 +31,6 @@ public class comInfobody extends BaseBody {
         this.certificationMark=certificationMark;
         this.address=address;
         this.signature=signature;
+        this.contactNumber=contactNumber;
     }
 }

@@ -93,9 +93,9 @@ public class UploadFilePresenter extends BasePresenter<UploadFileContract.View> 
         conf.setMaxErrorRetry(2);
 
 //        OSSLog.enableLog(); //write local log file ,path is SDCard_path\OSSLog\logs.csv
-         imageBaseUrl = "https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/";
-         bucketName = "yuxuanlin";
-        endpoint = "https://oss-cn-shanghai.aliyuncs.com";
+        imageBaseUrl = response.getBaseUrl();
+        bucketName = response.getBucketName();
+        endpoint = response.getEndPoint();
         OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(response.getAccessKeyId(), response.getAccessKeySecret(), response.getSecurityToken());
         OSS oss = new OSSClient(App.getContext(), endpoint, credentialProvider, conf);
         final String uid = App.getConfig().getLoginStatus() ? App.getConfig().getUserToken() + "" : "";

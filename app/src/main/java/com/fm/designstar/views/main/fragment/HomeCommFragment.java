@@ -30,7 +30,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-
+/*无用的*/
+/*
 public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implements HomeRecomContract.View  {
 
     @BindView(R.id.scrollView)
@@ -45,7 +46,7 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
 
     @BindView(R.id.recy_home)
     RecyclerView hotRecycler;
-    private int pagenum=0;
+    private int pagenum=1;
     private MainLikeAdapter likeAdapter;
     private HomeRecomAdapter homeRecomAdapter;
     private List<String> urls=new ArrayList<>();
@@ -136,4 +137,4 @@ public class HomeCommFragment extends BaseFragment<HomeRecomPresenter> implement
     public void HomebannerRecomSuccess(HomeFindResponse homeFindResponse) {
 
     }
-}
+}*/

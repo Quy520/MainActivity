@@ -2,6 +2,7 @@ package com.fm.designstar.views.main.fragment;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -20,6 +21,7 @@ import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
+import com.fm.designstar.views.main.activity.SearchActivity;
 import com.fm.designstar.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -70,9 +72,8 @@ public class DesignerFragment extends BaseFragment {
 
     @Override
     public void loadData() {
-
-        re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
-        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
+        re_title.getLayoutParams().height = Tool.dip2px(mContext, 35) + Util.getStatusBarH(mContext);
+        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext)-10;
         fragmentList.add(new DesingnerChildFragment());
         fragmentList.add(new DesingnerAroundFragment());
         fragmentList.add(new DesingnerActivityFragment());
@@ -82,27 +83,37 @@ public class DesignerFragment extends BaseFragment {
         viewPager.setCurrentItem(0);
 
     }
-    @OnClick({R.id.re_guanzhu, R.id.re_tuijain, R.id.re_find
+    @OnClick({R.id.re_guanzhu, R.id.re_tuijain, R.id.re_find,R.id.searchTv
     })
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.re_guanzhu:
                 setItem();
-                tv_guanzhu.setTextSize(22);
+                tv_guanzhu.setTextSize(18);
                 im_guanzhu.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
+                tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
                 break;
             case R.id.re_tuijain:
                 setItem();
-                tv_tuijain.setTextSize(22);
+                tv_tuijain.setTextSize(18);
                 im_tuijain.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(1);
+                tv_tuijain.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
                 break;
             case R.id.re_find:
                 setItem();
-                tv_find.setTextSize(22);
+                tv_find.setTextSize(18);
                 im_find.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(0);
+                tv_find.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
+
+
+                break;
+            case R.id.searchTv:
+             startActivity(SearchActivity.class);
 
                 break;
 
@@ -117,10 +128,16 @@ public class DesignerFragment extends BaseFragment {
     private void setItem() {
         tv_guanzhu.setTextSize(16);
         im_guanzhu.setVisibility(View.GONE);
+        tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
         tv_tuijain.setTextSize(16);
         im_tuijain.setVisibility(View.GONE);
+        tv_tuijain.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
         tv_find.setTextSize(16);
         im_find.setVisibility(View.GONE);
+        tv_find.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
 
     }
 

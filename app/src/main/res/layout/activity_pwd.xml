@@ -80,7 +80,7 @@
         android:id="@+id/long_notice"
         android:layout_marginLeft="@dimen/sobot_20PX"
         android:layout_marginRight="@dimen/sobot_20PX"
-        android:gravity="center"
+
         android:layout_marginBottom="@dimen/sobot_20PX"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

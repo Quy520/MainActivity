@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
+import com.fm.designstar.utils.StringUtil;
 
 import java.util.List;
 
@@ -56,7 +58,13 @@ public class LocateRecyclerAdapter extends RecyclerView.Adapter<LocateRecyclerAd
 
     @Override
     public void onBindViewHolder(LocateViewHolder holder, int position) {
-        holder.mTextView.setText(mList.get(position).getAddress());
+        if (!StringUtil.isBlank(mList.get(position).getAddress())){
+            holder.mTextView.setText(mList.get(position).getAddress());
+
+        }else {
+            holder.mTextView.setText(App.getConfig().getAddress()+"");
+
+        }
 
     }
 

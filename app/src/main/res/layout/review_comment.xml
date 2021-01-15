@@ -24,6 +24,24 @@
             android:layout_width="20dp"
             android:layout_height="20dp"/>
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/re_no"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/nocommet"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/nocomments"></ImageView>
+        <TextView
+            android:layout_below="@+id/nocommet"
+            android:text="暂无评论"
+            android:id="@+id/notv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+    </RelativeLayout>
 
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:layout_marginBottom="45dp"

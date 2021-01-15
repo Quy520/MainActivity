@@ -9,11 +9,15 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
+import com.fm.designstar.model.bean.BannerBean;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.bean.NewsListBean;
 import com.fm.designstar.utils.SpaceItemDecoration;
+import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
+import com.fm.designstar.views.main.activity.WebActivity;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 import com.google.gson.Gson;
 import com.youth.banner.Banner;
@@ -29,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.jzvd.JZVideoPlayerManager;
 import cn.jzvd.JZVideoPlayerStandard;
+import cn.jzvdother.Jzvd;
 
 /**
  * description : $todo
@@ -43,9 +48,11 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
     private HomeRecomAdapter homeRecomAdapter;
 
     private List<String> urls=new ArrayList<>();
+    List<BannerBean> bnnerlist=new ArrayList<>();
     private OnClickListener listener;
     public interface OnClickListener {
         void onLikeClick(int position,boolean b,CompoundButton compoundButton);
+        void onguanClick(int position,boolean b,CompoundButton compoundButton);
 
     }
     public void setOnClickListener(OnClickListener listener) {
@@ -53,10 +60,6 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
     }
     public HomeAdapter(LifecycleOwner mowner) {
         this.mowner=mowner;
-        urls.add("https://ss1.baidu.com/6ON1bjeh1BF3odCf/it/u=3848182578,3212131776&fm=15&gp=0.jpg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179792&di=64dfa2fcbaed252126d9182ae67e053c&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171107%2F62a8b9b47e6f41708416c4eb5f44fc6a.jpeg");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179787&di=578959ca7cecfc13376805894ff6e52d&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F5377154223%2F0");
-        urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1595928179787&di=578959ca7cecfc13376805894ff6e52d&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F5377154223%2F0");
 
     }
 
@@ -91,8 +94,34 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
     public void mOnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         switch (getItemViewType(position)) {
-            case 1: //1张图 情况
+            case 1: //1张图 情况urls
+                urls=new ArrayList<>();
+               bnnerlist = data.get(0).getBanner();
 
+                if (bnnerlist!=null){
+                    if (bnnerlist.size()>0){
+                    if (bnnerlist.get(0).getBanner()!=null){
+                        if (bnnerlist.size()>0){
+                            for (int i=0;i<bnnerlist.size();i++){
+                                urls.add(bnnerlist.get(i).getBanner());
+                            }
+                    }
+                    }else {
+                        urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-687149.jpg");
+                        urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-870361.jpg");
+                        urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-372720.jpg");
+                        urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557550-949497.jpg");
+
+                    }
+                }
+
+                }else {
+                    urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-687149.jpg");
+                    urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-870361.jpg");
+                    urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557549-372720.jpg");
+                    urls.add("https://cdefile.oss-cn-hangzhou.aliyuncs.com/1-1-5f844c05b076ac5a2ff3d0b8-1602557550-949497.jpg");
+
+                }
                 LikeViewHolder viewHolderOne = (LikeViewHolder) holder;
                 ImageAdapter imageAdapter =new ImageAdapter(urls);
 
@@ -100,6 +129,17 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                         .addBannerLifecycleObserver(mowner)//添加生命周期观察者
                         .setIndicator(new CircleIndicator(mContext))//设置指示器
                         .setOnBannerListener((data, i) -> {
+                            if (bnnerlist==null){
+                                return;
+                            }
+                            Intent intent  = new Intent(App.getContext(),WebActivity.class);
+                            Bundle bundle3 = new Bundle();
+                            bundle3.putString("url", bnnerlist.get(i).getActivityContent());
+
+                            intent.putExtras(bundle3);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                            App.getContext(). startActivity(intent);
 
                         });
                 viewHolderOne. banner2.setDatas(urls);
@@ -126,7 +166,7 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                 });
                 break;
             case 3: //3张图 情况
-                homeRecomAdapter=new HomeRecomAdapter();
+                homeRecomAdapter=new HomeRecomAdapter(0);
                 homeRecomAdapter.clearData();
                 List<HomeFindBean> result3 =new ArrayList<>();
                 result3 = data.get(0).getRecom();
@@ -159,6 +199,13 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
                             listener.onLikeClick(position,b,compoundButton);
                         }
                     }
+
+                    @Override
+                    public void onGuanClick(int position, boolean b, CompoundButton compoundButton) {
+                        if (listener!=null){
+                            listener.onguanClick(position,b,compoundButton);
+                        }
+                    }
                 });
                 viewHolderthree.hotRecycler.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
                     @Override
@@ -168,12 +215,17 @@ public class HomeAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder, Ne
 
                     @Override
                     public void onChildViewDetachedFromWindow(View view) {
-                        JZVideoPlayerStandard jzvd = view.findViewById(R.id.video_player);
-                        if (jzvd != null) {
+                        Jzvd jzvd = view.findViewById(R.id.video_player);
+                        if (jzvd != null && Jzvd.CURRENT_JZVD != null) {
+                            if (Jzvd.CURRENT_JZVD != null && Jzvd.CURRENT_JZVD.screen != Jzvd.SCREEN_FULLSCREEN) {
+                                Jzvd.releaseAllVideos();
+                            }
+                        }
+                       /* if (jzvd != null) {
                             if (JZVideoPlayerManager.getCurrentJzvd()!= null ) {
                                 jzvd.releaseAllVideos();
                             }
-                        }
+                        }*/
                     }
                 });
                 break;

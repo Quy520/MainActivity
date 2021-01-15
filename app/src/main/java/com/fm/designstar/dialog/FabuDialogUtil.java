@@ -1,5 +1,6 @@
 package com.fm.designstar.dialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.StrictMode;
@@ -11,9 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import com.fm.designstar.R;
+import com.fm.designstar.utils.GlideLoader;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.views.Fabu.FabuActivity;
+import com.fm.designstar.widget.imagePicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import static com.fm.designstar.views.Fabu.FabuActivity.SELECT_CODE;
 
 
 /**
@@ -26,9 +31,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 public class FabuDialogUtil {
     private BottomSheetDialog bottomSheet;
     private Context context;
+    private Activity activity;
     private LinearLayout suishoupai;
     private LinearLayout zp;
-    public FabuDialogUtil(Context context) {
+    public FabuDialogUtil(Context context,Activity activity) {
+        this.activity=activity;
         this.context = context;
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());

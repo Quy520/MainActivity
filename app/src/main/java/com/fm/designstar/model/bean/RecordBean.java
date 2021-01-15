@@ -27,10 +27,65 @@ public class RecordBean extends BaseBean {
     private String avatar;
     private String content;
     private String userName;
+    private String realName;
+    private String birthday;
+    private String address;
+    private String corporation;
+    private String position;
     private String mobile;
+    private String contactNumber;
+
     private int status;
     private long createTimestamp;
     private String updateLastTime;
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCorporation() {
+        return corporation;
+    }
+
+    public void setCorporation(String corporation) {
+        this.corporation = corporation;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public long getCreateTimestamp() {
         return createTimestamp;

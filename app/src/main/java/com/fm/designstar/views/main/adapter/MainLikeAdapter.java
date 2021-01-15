@@ -34,7 +34,8 @@ public class MainLikeAdapter extends BaseRecyclerAdapter<MainLikeAdapter.LikeVie
     private RequestOptions myOptions;
 
     public MainLikeAdapter() {
-        myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext, 5, R.mipmap.ico_default_3_2);
+        myOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext, 0, R.mipmap.ico_default_3_2);
+
     }
 
     @Override
@@ -49,9 +50,10 @@ public class MainLikeAdapter extends BaseRecyclerAdapter<MainLikeAdapter.LikeVie
         HomeFindBean findBean = data.get(position);
 
         if (findBean.getMultimediaList()!=null){
-            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).error(R.mipmap.ico_default_3_2).into(holder.imageView);
+            Glide.with(mContext).load(findBean.getMultimediaList().get(0).getPreUrl()).apply(myOptions).into(holder.imageView);
         }
         holder.name.setText(findBean.getContent());
+        holder.views.setText(findBean.getViews()+"次播放");
         if (findBean.getMultimediaList()!=null){
             if (!StringUtil.isBlank(findBean.getMultimediaList().get(0).getDuration())){
                 BigDecimal bd = new BigDecimal(findBean.getMultimediaList().get(0).getDuration());
@@ -76,6 +78,9 @@ public class MainLikeAdapter extends BaseRecyclerAdapter<MainLikeAdapter.LikeVie
         @BindView(R.id.time)
         TextView time;
 
+
+        @BindView(R.id.views)
+        TextView views;
 
         public LikeViewHolder(View itemView) {
             super(itemView);

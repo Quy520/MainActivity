@@ -52,7 +52,8 @@ public class RegisteredActivity extends BaseActivity<SendMsgPresenter>  implemen
 
         int[] strt={13,22};
         int[] end={21,reg_notice.getText().length()};
-        TextViewUtil.setPartialColors(reg_notice,reg_notice.getText().toString(),strt,end,R.color.notice);
+        TextViewUtil.setPartialColors(mContext,reg_notice,reg_notice.getText().toString(),R.color.transparent);
+
         phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

@@ -1,6 +1,7 @@
 package com.fm.designstar.views.mine.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.fm.designstar.model.bean.DesignerPageBean;
 import com.fm.designstar.model.bean.RecordBean;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
+import com.fm.designstar.views.mine.activity.DesignerMangerDetailActivity;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
  */
 public class DesignerPageAdapter extends BaseRecyclerAdapter<DesignerPageAdapter.LikeViewHolder, DesignerPageBean> {
 
+    private RecordBean recordBean;
 
     public DesignerPageAdapter() {
 
@@ -56,6 +59,32 @@ public class DesignerPageAdapter extends BaseRecyclerAdapter<DesignerPageAdapter
         }
 
 
+        holder.details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recordBean=new RecordBean();
+                recordBean.setAddress(messageBean.getAddress());
+                recordBean.setRealName(messageBean.getRealName());
+                recordBean.setUserName(messageBean.getUserName());
+                recordBean.setAvatar(messageBean.getAvatar());
+                recordBean.setImgUrl(messageBean.getImgUrl());
+                recordBean.setBirthday(messageBean.getBirthday());
+                recordBean.setCreateTimestamp(messageBean.getCreateTimestamp());
+                recordBean.setContactNumber(messageBean.getContactNumber());
+                recordBean.setCorporation(messageBean.getCorporation());
+                recordBean.setPosition(messageBean.getPosition());
+                recordBean.setCreateTime(messageBean.getCreateTime());
+                Intent intent=  new Intent(mContext, DesignerMangerDetailActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("info",recordBean);
+                intent.putExtras(bundle);
+                intent.putExtra("type",1);
+                mContext. startActivity(intent);
+            }
+        });
+
+
 
 
     }
@@ -69,6 +98,8 @@ public class DesignerPageAdapter extends BaseRecyclerAdapter<DesignerPageAdapter
         @BindView(R.id.content)
         TextView content;
 
+        @BindView(R.id.details)
+        TextView details;
 
         public LikeViewHolder(View itemView) {
             super(itemView);

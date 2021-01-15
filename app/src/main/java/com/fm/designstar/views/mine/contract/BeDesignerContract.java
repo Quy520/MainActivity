@@ -17,6 +17,6 @@ public interface BeDesignerContract {
     }
 
     interface Presenter {
-        void Designer(String url);
+        void Designer(String imgUrl, String address, String birthday, String corporation, String position, String realName,String contactNumber);
     }
 }

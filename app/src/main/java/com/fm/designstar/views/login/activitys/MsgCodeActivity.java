@@ -56,7 +56,7 @@ TextView tv_time;
             public void verificationCodeIncomplete(String verificationCode) {
             }
         });
-        timer = new CountDownTimer(300 * 1000, 1000) {
+        timer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 tv_time.setText((millisUntilFinished / 1000) + "s");

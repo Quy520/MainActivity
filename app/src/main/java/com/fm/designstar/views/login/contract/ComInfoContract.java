@@ -16,6 +16,6 @@ public interface ComInfoContract {
     }
 
     interface Presenter {
-        void ComInfo(String avatar, String userName, String birthday, int sex,String address,String signature);
+        void ComInfo(String avatar, String userName, String birthday, int sex,String address,String signature,String contactNumber);
     }
 }

@@ -44,6 +44,9 @@ private DesignerStatebody designerStatebody;
     public void loadData() {
         mTitle.setTitle("审核结果");
         designerStatebody=  (DesignerStatebody) getIntent().getSerializableExtra("Result");
+        if (designerStatebody==null){
+            return;
+        }
 
         if (!StringUtil.isBlank(designerStatebody.getImgUrl())){
             Glide.with(mActivity).load(designerStatebody.getImgUrl()).error(R.mipmap.defu_hand).into(hand);

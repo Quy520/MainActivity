@@ -31,7 +31,7 @@
     <string name="guanzhu">关注</string>
     <string name="tuijian">推荐</string>
     <string name="find">发现</string>
-    <string name="nikename_hint">昵称不超过7个汉字</string>
+    <string name="nikename_hint">请输入昵称</string>
     <string name="brth">出生年月日</string>
     <string name="com_info">完善信息</string>
     <string name="com_info2">完善信息有利于交流哦！</string>
@@ -99,7 +99,7 @@
     <string name="single_type_choose">不能同时选择图片与视频</string>
     <string name="next">下一步</string>
     <string name="quan">全部</string>
-    <string name="your_review">写标题并使用合适的话题，能让更多人看到～</string>
+    <string name="your_review">写标题并使用合适的话题，能让更多人看到～（100字以内）</string>
     <string name="where">您在哪里？</string>
     <string name="bq">选择标签</string>
     <string name="repay">全部评论</string>
@@ -119,5 +119,33 @@
     <string name="addtags">新增标签</string>
     <string name="no_phonto">你没有授权获取手机基本信息权限，会影响部分功能多的使用。</string>
     <string name="share">分享微信</string>
+    <string name="ok">更新</string>
+    <string name="sign">升级</string>
+    <string name="version">您的版本现在太低，请更新以便使用</string>
+    <string name="notice">温馨提示</string>
+    <string name="real_name">真实姓名</string>
+    <string name="plsce_ent">请填写</string>
+    <string name="com_name">所在公司</string>
+    <string name="job_name">职务</string>
+    <string name="com_err">公司名称不能为空</string>
+    <string name="job_err">职位不能为空</string>
+    <string name="phone">手机</string>
+    <string name="delete_review">删除</string>
+    <string name="jubao_review">举报</string>
+    <string name="my_advise">意见反馈</string>
+    <string name="you_feedback">反馈意见</string>
+    <string name="write">填写你的反馈意见</string>
+    <string name="commit">提交</string>
+    <string name="feedback">意见反馈</string>
+    <string name="feedback_err">意见为空</string>
+    <string name="my_clear">清除缓存</string>
+    <string name="cancle_clear">确认</string>
+    <string name="like">点赞</string>
+    <string name="search">搜索你想要的位置</string>
+    <string name="search2"> 搜索设计师，头衔</string>
+    <string name="mapchose">图片</string>
+    <string name="vedio">视频</string>
+    <string name="real_phone">联系方式</string>
+    <string name="lainxi">联系方式</string>
 
 </resources>

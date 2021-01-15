@@ -19,6 +19,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
+import android.widget.Chronometer;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +50,7 @@ import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
 import com.fm.designstar.utils.AndroidBug5497Workaround;
 import com.fm.designstar.utils.StringUtil;
+import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
@@ -59,10 +62,14 @@ import com.fm.designstar.views.Detail.contract.DelCommentContract;
 import com.fm.designstar.views.Detail.contract.GetCommentContract;
 import com.fm.designstar.views.Detail.contract.LikeContract;
 import com.fm.designstar.views.Detail.contract.SendCommentContract;
+import com.fm.designstar.views.Detail.contract.ShareContract;
+import com.fm.designstar.views.Detail.contract.ViewContract;
 import com.fm.designstar.views.Detail.presenter.DelCommentPresenter;
 import com.fm.designstar.views.Detail.presenter.GetCommentPresenter;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.Detail.presenter.SendCommentPresenter;
+import com.fm.designstar.views.Detail.presenter.SharePresenter;
+import com.fm.designstar.views.Detail.presenter.ViewPresenter;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.views.mine.contract.UseMomentContract;
@@ -79,7 +86,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View   , GetCommentContract.View, SendCommentContract.View, DelCommentContract.View ,XRecyclerView.LoadingListener , LikeContract.View{
+public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implements UseMomentContract.View   , GetCommentContract.View, SendCommentContract.View, DelCommentContract.View ,XRecyclerView.LoadingListener , LikeContract.View, ViewContract.View, ShareContract.View {
     private static final String TAG = "douyin";
     private HomeFindBean findBean;
 
@@ -87,8 +94,8 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
   private MyLayoutManager myLayoutManager;
   private VedioAdapter mAdapter;
   private List<HomeFindBean> findBeanList;
-  private int pagenum=0;
-  private int pagenum2=0;
+  private int pagenum=1;
+  private int pagenum2=1;
     PopupWindow popupWindow;
     WindowManager.LayoutParams lp;
     private ReplyAdapter commentAdapter;
@@ -97,12 +104,17 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
     private LikePresenter likePresenter;
     private GetCommentPresenter getCommentPresenter;
     View  mview;
-    private int like=0;
+    private int like=0, hour;
     private int index=0;
+    private int vedioindex=0,relsevedioindex=0;
     private boolean hasnext;
     private String id;
     XRecyclerView commentRecycler;
-
+    RelativeLayout nocommet;
+    private ViewPresenter viewPresenter;
+    private  Chronometer timer;
+    long firstSeconds,second;
+    SharePresenter sharePresenter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_vedio_play;
@@ -119,11 +131,18 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
         delCommentPresenter.init(this);
         likePresenter=new LikePresenter();
         likePresenter.init(this);
+
+        viewPresenter=new ViewPresenter();
+        viewPresenter.init(this);
+        sharePresenter=new SharePresenter();
+        sharePresenter.init(this);
     }
 
     @Override
     public void loadData() {
     //    AndroidBug5497Workaround.assistActivity(this);
+        firstSeconds = System.currentTimeMillis()/1000;
+
 
         findBeanList=new ArrayList<>();
         findBean= (HomeFindBean) getIntent().getSerializableExtra("info");
@@ -133,6 +152,8 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
         mRecyclerView = findViewById(R.id.recycler);
         myLayoutManager = new MyLayoutManager(this, OrientationHelper.VERTICAL, false);
         mAdapter = new VedioAdapter();
+        mAdapter.setScreenWidth(Util.getScreenWidth(mContext), getResources().getDisplayMetrics().density);
+
         mRecyclerView.setLayoutManager(myLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addData(findBeanList);
@@ -187,10 +208,16 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
             @Override
             public void back() {
-                Log.e("qsd","back");
-
+                second = System.currentTimeMillis()/1000;
+                long sum=  second-firstSeconds;
+                viewPresenter.View(sum+"",findBean.getMultimediaList().get(0).getDuration(),findBean.getMomentId(),findBean.getMomentType());
                 finish();
 
+            }
+
+            @Override
+            public void share(long id) {
+                sharePresenter.Share(id);
             }
         });
 
@@ -212,7 +239,6 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
             }
         });
 
-
     }
 
     private void initListener2() {
@@ -229,14 +255,9 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
             @Override
             public void onPageRelease(boolean isNext, int position) {
                 Log.e(TAG, "释放位置:" + position + " 下一页:" + isNext);
-                int index = 0;
-                if (isNext) {
-                    index = 0;
-                } else {
-                    index = 1;
-                }
-                Jzvd.releaseAllVideos();
-               // releaseVideo(index);
+
+                   //  Jzvd.releaseAllVideos();
+
             }
 
             @Override
@@ -244,11 +265,9 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
                 Log.e(TAG, "选择位置:" + position + " 下一页:" + bottom+"rexy"+mAdapter.getData().size());
                // playVideo(0);
                 autoPlayVideo(0);
-                if (position==findBeanList.size()-1){
-                  /*  pagenum++;
-                    getCommentPresenter.GetComment(pagenum,10,mAdapter.getData().get(position).getMomentId()+"");
-*/
-                }
+
+              //  firstSeconds = System.currentTimeMillis()/1000;
+
 
             }
         });
@@ -332,6 +351,7 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
 
         ImageView close=contentView.findViewById(R.id.close);
+         nocommet=contentView.findViewById(R.id.re_no);
 
         commentRecycler.setPullRefreshEnabled(true);
         commentRecycler.setLoadingMoreEnabled(true);
@@ -413,9 +433,17 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
             }
         });
 
-
-        if (pagenum==0){
+Log.e("qsd","commentsResponse"+commentsResponse.getResult().size());
+        if (pagenum==1){
             commentAdapter.clearData();
+            if (commentsResponse.getResult().size()==0){
+                nocommet.setVisibility(View.VISIBLE);
+            }else {
+                nocommet.setVisibility(View.GONE);
+
+            }
+        }else {
+            nocommet.setVisibility(View.GONE);
         }
 
 
@@ -492,7 +520,7 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
     @Override
     public void DelCommentSuccess() {
-        pagenum=0;
+        pagenum=1;
         ToastUtil.showToast("评论删除成功");
         getCommentPresenter.GetComment(pagenum,10,mAdapter.getData().get(index).getMomentId()+""+"");
 
@@ -510,8 +538,14 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
                         popupWindow.showAtLocation(mview, Gravity.BOTTOM, 0, 0);
                         popupWindow.setFocusable(true);
                         if (popupWindow.isShowing()) {
-                            if (pagenum==0){
+                            if (pagenum==1){
                                 commentAdapter.clearData();
+                                if (commentsResponse.getResult().size()==0){
+                                    nocommet.setVisibility(View.VISIBLE);
+                                }else {
+                                    nocommet.setVisibility(View.GONE);
+
+                                }
                             }
                             commentAdapter.addData(commentsResponse.getResult());
                         }
@@ -535,7 +569,7 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
     @Override
     public void SendCommentSuccess() {
-       pagenum=0;
+       pagenum=1;
          ToastUtil.showToast("评论成功");
         getCommentPresenter.GetComment(pagenum,10,mAdapter.getData().get(index).getMomentId()+"");
 
@@ -545,21 +579,29 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
     @Override
     public void onBackPressed() {
-        if (Jzvd.backPress()) {
-            return;
-        }
         super.onBackPressed();
+        second = System.currentTimeMillis()/1000;
+      long sum=  second-firstSeconds;
+
+
+        Log.e("qsd",firstSeconds+"===="+second+"onBackPressed"+sum);
+        viewPresenter.View(sum+"",findBean.getMultimediaList().get(0).getDuration(),findBean.getMomentId(),findBean.getMomentType());
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Jzvd.releaseAllVideos();
+
+        Log.e("qsd","onPause");
     }
+
+
 
     @Override
     public void onRefresh() {
-        pagenum=0;
+        pagenum=1;
         hasnext=true;
         getCommentPresenter.GetComment(pagenum,10,mAdapter.getData().get(index).getMomentId()+"");
 
@@ -577,4 +619,12 @@ public class VedioPlayActivity extends BaseActivity<UseMomentPresenter> implemen
 
 
     }
+
+    @Override
+    public void ViewSuccess() {
+
+    }
+
+
+
 }

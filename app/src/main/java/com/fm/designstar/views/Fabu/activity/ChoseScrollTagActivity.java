@@ -19,6 +19,7 @@ import com.fm.designstar.model.bean.TagsBean;
 import com.fm.designstar.model.bean.TagsInfoVoBean;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.utils.ToastUtil;
+import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.Fabu.contract.GetTagContract;
 import com.fm.designstar.views.Fabu.presenter.GetTagPresenter;
 import com.fm.designstar.widget.scrollchange.ScrollBean;
@@ -36,7 +37,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -44,7 +47,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  implements GetTagContract.View {
+public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  /*implements GetTagContract.View */{
 
 
     @BindView(R.id.rec_left)
@@ -69,7 +72,7 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
     //记录右侧当前可见的第一个item的position
     private int first = 0;
     private List<TagsInfoVoBean> list=new ArrayList<>(); //保存数据的集合
-    private List<TagsInfoVoBean> resule=new ArrayList<>(); //保存数据的集合
+    private ArrayList<TagsInfoVoBean> resule=new ArrayList<>(); //保存数据的集合
     private List<String> list3=new ArrayList<>(); //保存数据的集合
 
 
@@ -80,7 +83,7 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
 
     @Override
     public void initPresenter() {
-        mPresenter.init(this);
+      //  mPresenter.init(this);
 
     }
 
@@ -96,16 +99,30 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
     @Override
     public void onClick(View view) {
 
-        for (int i=0;i<right2.size();i++){
+            for (int i=0;i<right2.size();i++){
             for (int j=0;j<list3.size();j++){
                 if (right2.get(i).equals(list3.get(j))){
+
                     resule.add(list.get(j));
                 }
             }
 
         }
+        Log.e("qsd","resule"+resule.size());
+        ArrayList<TagsInfoVoBean> tagsInfoVoBeans = Util.removeDuplicteUsers(resule);
+
+        Log.e("qsd","tagsInfoVoBeans"+tagsInfoVoBeans.size());
+
+
+     /*   if (right2.size()!=resule.size()){
+
+
+            resule.remove(0);
+        }*/
+
+
         Intent intent = new Intent();
-        intent.putExtra("resule", (Serializable) resule);
+        intent.putExtra("resule", (Serializable) tagsInfoVoBeans);
         setResult(RESULT_OK, intent);
         finish();
 
@@ -186,7 +203,6 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 //判断如果是header
                 if (right.get(first).isHeader) {
                     //获取此组名item的view
@@ -218,7 +234,6 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
                         rightTitle.setText(right.get(first).t.getType());
                     }
                 }
-
                 //遍历左边列表,列表对应的内容等于右边的title,则设置左侧对应item高亮
                 for (int i = 0; i < left.size(); i++) {
                     if (left.get(i).equals(rightTitle.getText().toString())) {
@@ -236,9 +251,9 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
 
 
 
-
     }
 
+/*
 
     @Override
     public void GetTagSuccess(TagInfoResponse infoResponse) {
@@ -260,7 +275,7 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
           right.add(new ScrollBean(true, left.get(s)));
           TagsBean tagsBean = infoResponse.getList().get(s);//每一个父类对象
           for (int j=0;j<tagsBean.getTagInfoVoList().size();j++){
-              right.add(new ScrollBean(new ScrollBean.ScrollItemBean(tagsBean.getTagInfoVoList().get(j).getTagName(), left.get(s))));
+              right.add(new ScrollBean(new ScrollBean.ScrollItemBean(tagsBean.getTagInfoVoList().get(j).getTagName(), left.get(s),s,j)));
 
           }
       }
@@ -282,6 +297,8 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
 
 
     }
+*/
+/*
 
     @Override
     public void setTagSucess() {
@@ -306,6 +323,7 @@ public class ChoseScrollTagActivity extends BaseActivity<GetTagPresenter>  imple
         ToastUtil.showToast(msg);
 
     }
+*/
 
     /**
      * 获得资源 dimens (dp)

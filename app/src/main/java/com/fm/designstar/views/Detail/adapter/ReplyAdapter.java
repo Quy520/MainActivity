@@ -17,6 +17,7 @@ import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
+import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 
@@ -71,6 +72,14 @@ public class ReplyAdapter extends BaseRecyclerAdapter<ReplyAdapter.CommentViewHo
                 if (listener!=null){
                     listener.onClick(position);
                 }
+            }
+        });
+        holder.hand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=  new Intent(mContext, InfoDetailActivity.class);
+                intent.putExtra("UUID",bean.getUserId()+"");
+                mContext.startActivity(intent);
             }
         });
 

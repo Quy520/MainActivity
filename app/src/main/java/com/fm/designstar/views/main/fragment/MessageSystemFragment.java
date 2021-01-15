@@ -8,27 +8,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fm.designstar.R;
+import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.events.messageupdataEvent;
+import com.fm.designstar.model.bean.HomeFindBean;
+import com.fm.designstar.model.bean.MessageBean;
 import com.fm.designstar.model.server.response.MessageResponse;
 import com.fm.designstar.utils.SpaceItemDecoration;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
+import com.fm.designstar.views.Detail.activity.DTDetailsActivity;
+import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
+import com.fm.designstar.views.Detail.contract.FindBidContract;
+import com.fm.designstar.views.Detail.presenter.FindByIdPresenter;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
 import com.fm.designstar.views.main.adapter.MessageAdapter;
 import com.fm.designstar.views.main.contract.MessageContract;
 import com.fm.designstar.views.main.presenter.MessagePresenter;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
+import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -36,10 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MessageSystemFragment extends BaseFragment<MessagePresenter> implements MessageContract.View ,XRecyclerView.LoadingListener{
+public class MessageSystemFragment extends BaseFragment<MessagePresenter> implements MessageContract.View ,XRecyclerView.LoadingListener, FindBidContract .View{
 
 
-    private int pagenum=0;
+    private int pagenum=1;
     @BindView(R.id.all_message)
     TextView all_message;
     @BindView(R.id.all_pl)
@@ -50,10 +60,13 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
     TextView all_notice;
     @BindView(R.id.message_recy)
     XRecyclerView message_recy;
-        private MessageAdapter messageAdapter;
+    private MessageAdapter messageAdapter;
 
     private String type;
     private List<String> urls=new ArrayList<>();
+    private boolean isindex=false;
+    MessageBean findBean;
+    private FindByIdPresenter findByIdPresenter;
 
     @Override
     public int getLayoutId() {
@@ -63,11 +76,26 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
     @Override
     public void initPresenter() {
         mPresenter.init(this);
+        findByIdPresenter=new FindByIdPresenter();
+        findByIdPresenter.init(this);
 
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+            EventBus.getDefault().removeStickyEvent(messageEvent.class);
+            EventBus.getDefault().post(new messageEvent(0,2));
+
+        }
     }
 
     @Override
     public void loadData() {
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
         mPresenter.Message(pagenum,10,type);
         message_recy.setPullRefreshEnabled(true);
         message_recy.setLoadingMoreEnabled(true);
@@ -85,6 +113,10 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
         messageAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
             @Override
             public void onItemClick(View view, int position) {
+
+                findBean = messageAdapter.getData().get(position-1);
+                Log.e("qsd","messageAdapter"+position+"==="+new Gson().toJson(findBean));
+                findByIdPresenter.FindBid(findBean.getMomentId());
 
             }
         });
@@ -156,7 +188,7 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
     @Override
     public void MessageSuccess(MessageResponse response) {
 
-        if( pagenum==0){
+        if( pagenum==1){
             messageAdapter.clearData();
         }
         messageAdapter.addData(response.getResult());
@@ -188,7 +220,10 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
 
     @Override
     public void onRefresh() {
-        pagenum=0;
+        EventBus.getDefault().removeStickyEvent(messageEvent.class);
+        EventBus.getDefault().post(new messageEvent(0,2));
+
+        pagenum=1;
         mPresenter.Message(pagenum,10,type);
 
 
@@ -206,8 +241,23 @@ public class MessageSystemFragment extends BaseFragment<MessagePresenter> implem
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(messageupdataEvent event) {
-        pagenum=0;
+        pagenum=1;
         mPresenter.Message(pagenum,10,type);
 
+    }
+
+    @Override
+    public void FindBidSuccess(HomeFindBean homeFindBean) {
+           if (homeFindBean.getMediaType()==2){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("info",homeFindBean);
+                    startActivity(VedioPlayActivity.class, bundle);
+
+                }else {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("info", homeFindBean);
+                    startActivity(DTDetailsActivity.class, bundle);
+                }
     }
 }

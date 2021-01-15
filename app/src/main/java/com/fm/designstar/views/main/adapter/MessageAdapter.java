@@ -53,6 +53,8 @@ public class MessageAdapter extends BaseRecyclerAdapter<MessageAdapter.LikeViewH
         if (StringUtil.isBlank(messageBean.getUrl())){
             holder.imageView.setVisibility(View.GONE);
         }else {
+            holder.imageView.setVisibility(View.VISIBLE);
+
             Glide.with(mContext).load(messageBean.getUrl()).error(R.mipmap.defu_hand).into(holder.imageView);
         }
         holder.name.setText(messageBean.getNickName());

@@ -2,13 +2,18 @@ package com.fm.designstar.map;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import android.provider.Settings;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +33,7 @@ import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.mine.activity.BeDesignerActivity;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +62,13 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
     @BindView(R.id.locate_refresh)
     TextView mLocateRefresh; @BindView(R.id.top_title)
     LinearLayout top_title;
+    @BindView(R.id.titleLayout)
+    RelativeLayout titleLayout;
+    @BindView(R.id.back)
+    ImageView back;
+
+    @BindView(R.id.searchEt)
+    EditText searchEt;
     private List<LocationInfo> mList;
     private LocateRecyclerAdapter mAdapter;
     private int currentPage = 0;// 当前页面，从0开始计数
@@ -71,11 +84,22 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
     public void initPresenter() {
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initLocate();
+    }
+
 
     @Override
     public void loadData() {
-        mTitle.setTitle("所在位置");
-        initLocate();
+        ((ViewGroup.MarginLayoutParams) titleLayout.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mList = new ArrayList<>();
         mAdapter = new LocateRecyclerAdapter(this, mList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -125,12 +149,12 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                 latitude = amapLocation.getLatitude();//获取纬度
-                 longitude = amapLocation.getLongitude();//获取经度
+                 latitude =  amapLocation.getLatitude();//获取纬度
+                 longitude =  amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
                 LocationInfo locationInfo = new LocationInfo();
                 locationInfo.setAddress(amapLocation.getAddress());
-                locationInfo.setLatitude(latitude);
+                locationInfo.setLatitude( latitude);
                 locationInfo.setLonTitude(longitude);
                 mList.clear();
                 mList.add(locationInfo);
@@ -138,9 +162,11 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date(amapLocation.getTime());
                 df.format(date);//定位时间
+                Log.e("qsd","===onLocationChanged+"+latitude+"=="+longitude);
 
                 doSearchQuery();
             } else {
+                mlocationClient.stopLocation();
                 new AlertFragmentDialog.Builder(mActivity)
                         .setContent(getString(R.string.no_address) )
                         .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
@@ -153,6 +179,9 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
 
                             }
                         }).build();
+
+
+
 
             }
         }
@@ -171,13 +200,15 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
              city = poi.getCityName();
             String snippet = poi.getSnippet();
             LocationInfo info = new LocationInfo();
-            info.setAddress(snippet);
-            LatLonPoint point = poi.getLatLonPoint();
+            if (!StringUtil.isBlank(snippet)){
+                info.setAddress(snippet);
+                LatLonPoint point = poi.getLatLonPoint();
+                info.setLatitude(point.getLatitude());
+                info.setLonTitude(point.getLongitude());
+                mList.add(info);
+            }
 
-            info.setLatitude(point.getLatitude());
-            info.setLonTitude(point.getLongitude());
-            mList.add(info);
-            Log.d("haha", "poi" + snippet);
+           // Log.d("haha", "poi" +new Gson().toJson(result));
 
         }
 
@@ -247,5 +278,21 @@ public class Selectaddress extends BaseActivity implements LocateRecyclerAdapter
         if (progDialog != null) {
             progDialog.dismiss();
         }
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+        if (KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction()) {
+            //处理事件
+            if (!StringUtil.isBlankEdit(searchEt)) {
+                keyWord=searchEt.getText().toString();
+                doSearchQuery();
+            } else {
+                ToastUtil.showToast("");
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 }

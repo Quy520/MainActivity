@@ -14,6 +14,7 @@ import io.rong.imkit.manager.IUnReadMessageObserver;
 import io.rong.imlib.model.Conversation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,7 +32,9 @@ import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.BaseFragment;
 import com.fm.designstar.dialog.AlertFragmentDialog;
 import com.fm.designstar.dialog.FabuDialogUtil;
+import com.fm.designstar.dialog.UpgradeDialog;
 import com.fm.designstar.events.messageEvent;
+import com.fm.designstar.https.HttpManager;
 import com.fm.designstar.map.LocationInfo;
 import com.fm.designstar.model.server.body.DesignerStatebody;
 import com.fm.designstar.model.server.response.RoleResponse;
@@ -41,6 +44,7 @@ import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.StatusBarUtil;
 import com.fm.designstar.utils.StringUtil;
 import com.fm.designstar.utils.ToastUtil;
+import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.main.contract.RoleContract;
@@ -59,6 +63,7 @@ import com.fm.designstar.views.mine.contract.FindDesignerContract;
 import com.fm.designstar.views.mine.presenter.FindDesignerPresenter;
 import com.fm.designstar.widget.NoScrollViewPager;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -103,6 +108,9 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     private int state=3;
     private DesignerStatebody mstatebody;
     private FindDesignerPresenter designerPresenter;
+    private UpgradeDialog dialog;
+    private boolean index=false;
+    private int first=1;
 
     @Override
     public int getLayoutId() {
@@ -120,10 +128,14 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
         designerPresenter=new FindDesignerPresenter();
         designerPresenter.init(this);
 
+
     }
 
     @Override
     public void loadData() {
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
         fragmentList.add(new HomeFragment());
         fragmentList.add(new DesignerFragment());
         fragmentList.add(new MessageFragment());
@@ -137,20 +149,22 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
         JPushInterface.setAlias(mContext, App.getConfig().getUserToken(), new TagAliasCallback() {
             @Override
             public void gotResult(int i, String s, Set<String> set) {
-                Log.e("qsd",i+"alias"+s);
+                Log.e("qsd",i+"alias"+s+"==="+App.getConfig().getUserToken());
             }
         });
+       //JPushInterface.setAlias(mContext,1,App.getConfig().getUserToken());
+      //  JPushInterface.deleteAlias(mContext,1);
 
-       if (App.getConfig().getRole()!=3){
+       if (App.getConfig().getRole()==2){
            designerPresenter.FindDesigner();
        }
         rolePresenter.GetRole();
         vesipnPresenter.Vesion(Util.getAppVersionCode(App.getContext()),"android");
-        try {
+      /*  try {
             OssImageUtil.getImgWH("https://yuxuanlin.oss-cn-shanghai.aliyuncs.com/1-1-5f3f6b43b07629bcb03ea551-1597991775-416543.jpg");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
     /**
      * 未读消息监听回调
@@ -159,7 +173,6 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     private IUnReadMessageObserver observer = new IUnReadMessageObserver() {
         @Override
         public void onCountChanged(int i) {
-
           if (i>0){
               interNo.setVisibility(View.VISIBLE);
           } else {
@@ -191,9 +204,24 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
     public void OnClick(View view) {
 
         switch (view.getId()) {
+
             case R.id.addLay:
+                if (Tool.isFastDoubleClick()) {
+                    return;
+                }
+                first=2;
                 rolePresenter.GetRole();
                 if (App.getConfig().getRole()==1){
+                    designerPresenter.FindDesigner();
+                }else {
+                     if (App.getConfig().getRole()==3){
+                        ToastUtil.showToast("您不是设计师不能发表作品和动态");
+                    } else {
+                        fabuDialogUtil = new FabuDialogUtil(mContext,mActivity);
+                        fabuDialogUtil.showDialog();
+                    }
+                }
+           /*     if (App.getConfig().getRole()==1){
                     if (state==0){
                         new AlertFragmentDialog.Builder(mActivity)
                                 .setContent(getString(R.string.designering) )
@@ -238,24 +266,24 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                                 }).build();
                     }
 
-                  /*     fabuDialogUtil = new FabuDialogUtil(mContext);
-                    fabuDialogUtil.showDialog();*/
+                  *//*     fabuDialogUtil = new FabuDialogUtil(mContext);
+                    fabuDialogUtil.showDialog();*//*
 
                 } else if (App.getConfig().getRole()==3){
-                   /* fabuDialogUtil = new FabuDialogUtil(mContext);
-                    fabuDialogUtil.showDialog();*/
+                   *//* fabuDialogUtil = new FabuDialogUtil(mContext);
+                    fabuDialogUtil.showDialog();*//*
 
                     ToastUtil.showToast("您不是设计师不能发表作品和动态");
                 } else {
                     fabuDialogUtil = new FabuDialogUtil(mContext);
                     fabuDialogUtil.showDialog();
-                }
+                }*/
 
                 break;
             case R.id.homeLay:
                 setItem();
                 home.setImageResource(R.mipmap.icon_homeh);
-                tv_home.setTextColor(getResources().getColor(R.color.notice));
+                tv_home.setTextColor(getResources().getColor(R.color.black3));
                 viewPager.setCurrentItem(0);
                 StatusBarUtil.setAndroidNativeLightStatusBar(mActivity, true);
                 break;
@@ -265,15 +293,16 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                 setItem();
                 viewPager.setCurrentItem(1);
                 location.setImageResource(R.mipmap.me_h);
-                tv_des.setTextColor(getResources().getColor(R.color.notice));
+                tv_des.setTextColor(getResources().getColor(R.color.black3));
 
                 StatusBarUtil.setAndroidNativeLightStatusBar(mActivity, true);
                 break;
             case R.id.couponLay:
                 if (App.getConfig().getLoginStatus()) {
+                    interNo.setVisibility(View.GONE);
                     setItem();
                     coupon.setImageResource(R.mipmap.icon_xiaoxih);
-                    tv_message.setTextColor(getResources().getColor(R.color.notice));
+                    tv_message.setTextColor(getResources().getColor(R.color.black3));
 
                     viewPager.setCurrentItem(2);
                     StatusBarUtil.setAndroidNativeLightStatusBar(mActivity, true);
@@ -285,7 +314,7 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
                 if (App.getConfig().getLoginStatus()) {
                     setItem();
                     me.setImageResource(R.mipmap.icon_meh);
-                    tv_my.setTextColor(getResources().getColor(R.color.notice));
+                    tv_my.setTextColor(getResources().getColor(R.color.black3));
 
                     viewPager.setCurrentItem(3);
                     StatusBarUtil.setAndroidNativeLightStatusBar(mActivity, true);
@@ -373,34 +402,153 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
     @Override
     public void GetRoleSuccess(RoleResponse infoResponse) {
-
+        Log.e("qsd","infoResponse"+infoResponse.getTagBean().getTagName());
         App.getConfig().setRole(infoResponse.getRole());
+        if (infoResponse.getTagBean()!=null){
+            App.getConfig().setTagname(infoResponse.getTagBean().getTagName());
+        }
 
 
     }
 
     @Override
-    public void VesionSuccess(VesionResponse Response) {
+    public void VesionSuccess(VesionResponse response) {
+
+        final int version = Util.getAppVersionCode(App.getContext());//100
+        if (StringUtil.isBlank(response.getVersionName())){
+            return;
+        }
+
+
+        if (response.getVersionCode() > version) {
+            if (response.getType() == 1) {//强制升级版本
+                setDialog(false, response, new UpgradeDialog.OnClickListener() {
+                    @Override
+                    public void up() {
+                        Uri uri = Uri.parse(HttpManager.getUrl("https://static.laifuyun.com/app/com.fm.designstar.apk"));
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        if (getPackageManager().resolveActivity(intent, 0) == null) {
+                            // 说明系统中不存在这个activity
+                            return;
+                        }
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void close() {
+
+                    }
+                });
+                return;
+
+            }else {
+                setDialog(true, response, new UpgradeDialog.OnClickListener() {
+                    @Override
+                    public void up() {
+                        Uri uri = Uri.parse(HttpManager.getUrl("https://static.laifuyun.com/app/com.fm.designstar.apk"));
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        if (getPackageManager().resolveActivity(intent, 0) == null) {
+                            // 说明系统中不存在这个activity
+                            return;
+                        }
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void close() {
+
+                    }
+                });
+                return;
+            }
 
 
 
+        }
 
     }
 
+    private void setDialog(boolean noUpgrade, VesionResponse response, UpgradeDialog.OnClickListener onClickListener) {
+        if (dialog == null) {
+            dialog = new UpgradeDialog(mContext);
+            dialog.setNoUpgrade(noUpgrade);
+            dialog.setVersionInfo(response.getVersionInfo());
+            dialog.setOnClickListener(onClickListener);
+        }
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
     @Override
     public void DFindDesignerSuccess(DesignerStatebody statebody) {
         if(StringUtil.isBlank(statebody.getImgUrl())){
+            state=3;
+          if (first==2) {
+              new AlertFragmentDialog.Builder(mActivity)
+                      .setContent(getString(R.string.no_designer) )
+                      .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                      .setRightBtnText(getString(R.string.sheet_dialog_ok))
+                      .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                          @Override
+                          public void dialogRightBtnClick() {
+                              startActivity(BeDesignerActivity.class);
+
+                          }
+                      }).build();
+          }
+
             return;
         }
+
         mstatebody=statebody;
         state=statebody.getStatus();
-        if (statebody.getStatus()==0){//审核中
+        if (App.getConfig().getRole()==1){
+            if (state==0){
+                new AlertFragmentDialog.Builder(mActivity)
+                        .setContent(getString(R.string.designering) )
+                        .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                        .setRightBtnText(getString(R.string.sure))
 
-        } else if (statebody.getStatus()==1) {//审核通过
-            App.getConfig().setRole(2);
-        }else {//审核失败
+                        .build();
+
+            }else if (state==1){
+                App.getConfig().setRole(2);
+                fabuDialogUtil = new FabuDialogUtil(mContext,mActivity);
+                fabuDialogUtil.showDialog();
+
+            }else if (state==2){
+                new AlertFragmentDialog.Builder(mActivity)
+                        .setContent(getString(R.string.designerfalse) )
+                        .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                        .setRightBtnText(getString(R.string.go_look))
+                        .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                            @Override
+                            public void dialogRightBtnClick() {
+                                if (mstatebody!=null){
+                                    Intent intent3=new Intent(mContext, DesignerRecordActivity.class);
+                                    intent3.putExtra("Result",mstatebody);
+                                    startActivity(intent3);
+                                }
+
+                            }
+                        }).build();
+
+            }else {
+                new AlertFragmentDialog.Builder(mActivity)
+                        .setContent(getString(R.string.no_designer) )
+                        .setLeftBtnText(getString(R.string.sheet_dialog_cancel))
+                        .setRightBtnText(getString(R.string.sheet_dialog_ok))
+                        .setRightCallBack(new AlertFragmentDialog.RightClickCallBack() {
+                            @Override
+                            public void dialogRightBtnClick() {
+                                startActivity(BeDesignerActivity.class);
+
+                            }
+                        }).build();
+            }
 
         }
+
 
     }
 
@@ -460,11 +608,23 @@ public class MainActivity extends BaseActivity<UpdataLocationPresenter> implemen
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(messageEvent event) {
+        Log.e("qsd","messageEvent"+event.getType());
+        if (event.getType()==1){
         if (event.getTAG()>0){
             interNo.setVisibility(View.VISIBLE);
             interNo.setText(event.getTAG()+"");
         } else {
             interNo.setVisibility(View.GONE);
+        }
+        }else {
+            if (event.getTAG()==0){//当前消息页面
+                interNo.setVisibility(View.INVISIBLE);
+            }else {
+                interNo.setVisibility(View.VISIBLE);
+
+            }
+
+
         }
     }
 }

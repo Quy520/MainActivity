@@ -18,15 +18,23 @@ public class TagsInfoVoBean extends BaseBean {
      * tagName : 阿姆斯特朗螺旋加速阿姆斯特朗螺旋炮
      */
 
-    private int id;
+    private int tagId;
     private String tagName;
 
+    public int getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
+    }
+
     public int getId() {
-        return id;
+        return tagId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.tagId = id;
     }
 
     public String getTagName() {

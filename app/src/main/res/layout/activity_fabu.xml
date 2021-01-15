@@ -57,7 +57,7 @@
         android:background="@android:color/white"
         android:gravity="top"
         android:hint="@string/your_review"
-        android:maxLength="10000"
+        android:maxLength="100"
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
@@ -67,16 +67,18 @@
         android:textColorHint="@color/hint_color"
         android:textSize="14sp" />
     <LinearLayout
+        android:visibility="gone"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginTop="8dp"
             android:id="@+id/huati"
             android:layout_marginLeft="@dimen/sobot_10PX"
             android:padding="4dp"
             android:gravity="center"
             android:background="@drawable/btn_round_huise_shape"
-            android:text="#话题"
+            android:text="#标签"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

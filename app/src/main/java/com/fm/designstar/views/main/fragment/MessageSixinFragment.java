@@ -31,11 +31,14 @@ import com.fm.designstar.views.mine.presenter.GetInfoPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MessageSixinFragment extends BaseFragment<GetInfoPresenter>  implements GetInfoContract.View {
 
 
-private int pagenum=0;
+private int pagenum=1;
     UserInfo userInfo;
     private String uuid="";
 
@@ -68,6 +71,7 @@ private int pagenum=0;
                     }
 
                 }, isCacheUserInfo);
+
                 ConversationListFragment conversationListFragment=new ConversationListFragment();
                 // 此处设置 Uri. 通过 appendQueryParameter 去设置所要支持的会话类型. 例如
                 // .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(),"false")
@@ -81,7 +85,6 @@ private int pagenum=0;
                         .appendQueryParameter(Conversation.ConversationType.APP_PUBLIC_SERVICE.getName(), "false")//订阅号
                         .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")//系统
                         .build();
-
                 conversationListFragment.setUri(uri);
                 FragmentManager manager = getChildFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -89,7 +92,6 @@ private int pagenum=0;
                 transaction.commit();
 
                 RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE);
-
 
                     }
 
@@ -110,7 +112,7 @@ private int pagenum=0;
         public void onCountChanged(int i) {
 
             EventBus.getDefault().removeStickyEvent(messageEvent.class);
-            EventBus.getDefault().post(new messageEvent(i));
+            EventBus.getDefault().post(new messageEvent(i,1));
         }
     };
     @Override

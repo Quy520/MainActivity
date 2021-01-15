@@ -2,7 +2,9 @@ package com.fm.designstar.views.Fabu.contract;
 
 
 import com.fm.designstar.base.BaseView;
+import com.fm.designstar.model.bean.DesignerTagsInfoVoBean;
 import com.fm.designstar.model.bean.TagBean;
+import com.fm.designstar.model.server.response.DesignerTagInfoResponse;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 public interface GetTagContract {
     interface View extends BaseView {
-        void GetTagSuccess(TagInfoResponse infoResponse);
+        void GetTagSuccess(DesignerTagInfoResponse infoResponse);
         void setTagSucess();
 
     }

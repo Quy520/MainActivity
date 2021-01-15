@@ -42,6 +42,7 @@ import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.base.PermissionsListener;
 import com.fm.designstar.config.Constant;
 import com.fm.designstar.dialog.ActionSheetDialog;
+import com.fm.designstar.dialog.ShareDialogUtil;
 import com.fm.designstar.model.bean.JsonBean;
 import com.fm.designstar.model.server.response.OssTokenResponse;
 import com.fm.designstar.utils.ConvertUtil;
@@ -77,7 +78,8 @@ EditText real_name;
 TextView brith;
 @BindView(R.id.next)
 TextView next;@BindView(R.id.city)
-TextView city;
+TextView city;@BindView(R.id.sex)
+TextView tv_sex;
 @BindView(R.id.hand)
 CircleImageView hand;
     TimePickerView pvTime;
@@ -91,6 +93,8 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
     private List<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    ShareDialogUtil shareDialogUtil;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_com_user_info;
@@ -156,7 +160,7 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
         });
     }
 
-    @OnClick({R.id.next,R.id.brith,R.id.hand,R.id.city})
+    @OnClick({R.id.next,R.id.brith,R.id.hand,R.id.city,R.id.sex})
     public void OnClick(View view) {
         if (Tool.isFastDoubleClick()) {
             return;
@@ -168,7 +172,8 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
                     ToastUtil.showToast(R.string.name_err);
                     return;
                 }
-                if (brith.getText().toString().equals(R.string.brth)) {
+                Log.e("qsd","出生年月日==="+brith.getText().toString());
+                if (brith.getText().toString().equals("出生年月日")) {
                     ToastUtil.showToast(R.string.birth_err);
                     return;
                 }
@@ -176,12 +181,32 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
                     ToastUtil.showToast(R.string.city_err);
                     return;
                 }
-                mPresenter.ComInfo(icon,real_name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),"");
+                mPresenter.ComInfo(icon,real_name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),"","");
 
                 break;
             case R.id.brith:
                 closeKeyboard();
                 pvTime.show(view);
+                break;
+            case R.id.sex:
+                shareDialogUtil = new ShareDialogUtil(mContext);
+                shareDialogUtil.setOnClickListener(new ShareDialogUtil.OnSuccess() {
+                    @Override
+                    public void success(int msex) {
+                        sex=msex;
+                        Log.e("qsd","shareDialogUtil"+sex);
+
+                        if (sex==1){
+                            tv_sex.setText("男");
+                        }else if (sex==2){
+                            tv_sex.setText("女");
+                        }else {
+                            tv_sex.setText("保密");
+                        }
+                    }
+                });
+                shareDialogUtil.showDialog();
+
                 break;
             case R.id.hand:
                 imageAction();
@@ -193,8 +218,7 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
                         //返回的分别是三个级别的选中位置
-                        String tx = options1Items.get(options1).getPickerViewText()
-                                + options2Items.get(options1).get(option2)
+                        String tx =options2Items.get(options1).get(option2)
                                 ;
                         city.setText(tx);
                         city.setTextColor(getResources().getColor(R.color.edit_color));
@@ -464,6 +488,7 @@ private String icon="https://ttmsocial-1256411278.cos.ap-shanghai.myqcloud.com/b
     public void ComInfoSuccess() {
         App.getConfig().setBirthday(brith.getText().toString());//shengeri
         App.getConfig().setUser_name(real_name.getText().toString());//zhengshixingm
+        App.getConfig().setAddress(city.getText().toString());//zhengshixingm
         App.getConfig().setUser_head(icon);
         App.getConfig().setSex(sex);
         App.getConfig().setIsgoHome(1);

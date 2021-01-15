@@ -1,6 +1,8 @@
 package com.fm.designstar.model.server.response;
 
 import com.fm.designstar.base.BaseBean;
+import com.fm.designstar.model.bean.TagBean;
+import com.fm.designstar.model.bean.TagsBean;
 
 public class LoginResponse extends BaseBean {
 
@@ -21,6 +23,23 @@ public class LoginResponse extends BaseBean {
     private String signature;
     private int certificationMark;
     private String token;
+    private String contactNumber;
+    private TagBean tagInfo;
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+    public TagBean getTagBean() {
+        return tagInfo;
+    }
+
+    public void setTagBean(TagBean tagBean) {
+        this.tagInfo = tagBean;
+    }
 
     public long getCode() {
         return code;

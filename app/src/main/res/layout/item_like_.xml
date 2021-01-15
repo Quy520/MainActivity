@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:layout_marginLeft="@dimen/sobot_10PX"
+    android:layout_marginRight="@dimen/dp_10"
     android:background="@color/theme_color"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="160dp"
+    android:layout_width="150dp"
     android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/vedio"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="100dp">
 
         <ImageView
             android:scaleType="fitXY"
             android:id="@+id/foodImg"
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_marginTop="3dp"
             android:src="@mipmap/demo_bg" />
+
+        <TextView
+            android:textColor="@color/theme_color"
+            android:id="@+id/views"
+            android:textSize="@dimen/dp_10"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="80dp"
+            android:text="1次播放"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:layout_centerInParent="true"
             android:src="@mipmap/icon_video_play"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
         <TextView
 
             android:id="@+id/time"
             android:textSize="11dp"
             android:gravity="center"
             android:textColor="@color/theme_color"
-            android:background="@drawable/btn_blackshape_"
+
             android:layout_marginRight="@dimen/sobot_10PX"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
@@ -40,15 +50,16 @@
 
 
     <TextView
+        android:layout_marginRight="10dp"
         android:id="@+id/name"
-        android:layout_width="165dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="今天带大家看一下能让老公给你做40年饭的厨房 "
         android:layout_below="@+id/vedio"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textColor="@color/edit_color"
+        android:textColor="@color/black3"
         android:textSize="14dp"
         />
 

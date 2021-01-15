@@ -29,17 +29,18 @@ public class ShareDialogUtil {
     private int sex=1;
     private CheckBox man;
     private CheckBox woamn;
-    private View.OnClickListener clickListener;
+    private CheckBox sercet;
+    private OnSuccess clickListener;
     public ShareDialogUtil(Context context) {
         this.context = context;
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
     }
 
-    public interface ShareCallBack {
-        void success();
+    public interface OnSuccess {
+        void success(int sex);
     }
-    public void setOnClickListener(View.OnClickListener clickListener) {
+    public void setOnClickListener(OnSuccess clickListener) {
         this.clickListener = clickListener;
     }
     public void showDialog() {
@@ -48,15 +49,23 @@ public class ShareDialogUtil {
         bottomSheet.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         man=view.findViewById(R.id.man);
         woamn=view.findViewById(R.id.woman);
+        sercet=view.findViewById(R.id.sercet);
+        if (sex==1){
+            man.setChecked(true);
+        }else {
+            woamn.setChecked(true);
+
+        }
         man.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ToastUtil.showToast("manb"+b);
                 if (b){
+                    clickListener.success(1);
                     sex=1;
                     woamn.setChecked(false);
+                    sercet.setChecked(false);
+
                 }else {
-                    ToastUtil.showToast("b"+b);
                 }
 
             }
@@ -64,10 +73,27 @@ public class ShareDialogUtil {
         woamn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ToastUtil.showToast("woman"+b);
                 if (b){
+                    clickListener.success(2);
+
                     sex=2;
                     man.setChecked(false);
+                    sercet.setChecked(false);
+
+                }
+            }
+        });
+
+        sercet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    clickListener.success(0);
+
+                    sex=0;
+                    man.setChecked(false);
+                    woamn.setChecked(false);
+
                 }
             }
         });
@@ -76,7 +102,7 @@ public class ShareDialogUtil {
             @Override
             public void onClick(View view) {
                 if (clickListener != null) {
-                    clickListener.onClick(view);
+
                 }
                 bottomSheet.cancel();
             }
@@ -85,7 +111,7 @@ public class ShareDialogUtil {
             @Override
             public void onClick(View view) {
                 if (clickListener != null) {
-                    clickListener.onClick(view);
+
                 }
                 bottomSheet.cancel();
 
@@ -100,6 +126,9 @@ public class ShareDialogUtil {
 
     public int getSex(){
         return sex;
+    }
+public void setSex(int msex){
+        this.sex=msex;
     }
 
 

@@ -25,6 +25,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.dialog.ActionSheetDialog;
+import com.fm.designstar.events.DeleteMonEvent;
 import com.fm.designstar.events.GetCommetsEvent;
 import com.fm.designstar.events.GetLikesEvent;
 import com.fm.designstar.events.GetTagsEvent;
@@ -41,13 +43,17 @@ import com.fm.designstar.utils.Util;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 import com.fm.designstar.views.Detail.adapter.ReplyAdapter;
 import com.fm.designstar.views.Detail.contract.DelCommentContract;
+import com.fm.designstar.views.Detail.contract.DeleteContract;
 import com.fm.designstar.views.Detail.contract.GetCommentContract;
 import com.fm.designstar.views.Detail.contract.LikeContract;
 import com.fm.designstar.views.Detail.contract.SendCommentContract;
+import com.fm.designstar.views.Detail.contract.ViewContract;
 import com.fm.designstar.views.Detail.presenter.DelCommentPresenter;
+import com.fm.designstar.views.Detail.presenter.DeletePresenter;
 import com.fm.designstar.views.Detail.presenter.GetCommentPresenter;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.Detail.presenter.SendCommentPresenter;
+import com.fm.designstar.views.Detail.presenter.ViewPresenter;
 import com.fm.designstar.views.login.activitys.LoginActivity;
 import com.fm.designstar.views.main.adapter.ReviewImageAdapter;
 import com.fm.designstar.views.main.adapter.StffReviewGroupAdapter;
@@ -61,7 +67,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DTDetailsActivity extends BaseActivity<GetCommentPresenter> implements GetCommentContract.View, SendCommentContract.View, DelCommentContract.View , LikeContract.View {
+public class DTDetailsActivity extends BaseActivity<GetCommentPresenter> implements GetCommentContract.View, SendCommentContract.View, DelCommentContract.View , LikeContract.View, ViewContract.View , DeleteContract.View{
 private HomeFindBean findBean;
 private int Width;
     private List<String> urlList=new ArrayList<>();
@@ -74,11 +80,15 @@ private int Width;
     TextView address;
     @BindView(R.id.content)
     TextView content;
-
+    @BindView(R.id.more)
+    ImageView more;
     @BindView(R.id.time)
     TextView time;
     @BindView(R.id.likenum)
     TextView likenum;
+
+    @BindView(R.id.message_num)
+    TextView message_num;
 
     @BindView(R.id.buttonLay)
     RelativeLayout buttonLay;
@@ -122,12 +132,14 @@ private int Width;
     private ReviewImageAdapter reviewAdapter;
     private RequestOptions rOptions;
     private ReplyAdapter commentAdapter;
-private int pagenum=0;
+private int pagenum=1;
 private SendCommentPresenter sendCommentPresenter;
 private DelCommentPresenter delCommentPresenter;
 private LikePresenter likePresenter;
 private int like=0;
 private String id;
+private ViewPresenter viewPresenter;
+    private DeletePresenter deletePresenter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_d_t_details;
@@ -142,6 +154,11 @@ private String id;
         delCommentPresenter.init(this);
         likePresenter=new LikePresenter();
         likePresenter.init(this);
+        viewPresenter=new ViewPresenter();
+        viewPresenter.init(this);
+
+        deletePresenter=new DeletePresenter();
+        deletePresenter.init(this);
     }
 
     @Override
@@ -154,7 +171,7 @@ private String id;
         if (findBean==null){
             return;
         }
-        mPresenter.GetComment(pagenum,10,findBean.getMomentId()+"");
+        mPresenter.GetComment(pagenum,100,findBean.getMomentId()+"");
         rOptions = RequestOptionsUtil.getRoundedOptionsErr(mContext);
         urlList=new ArrayList<>();
         tagList=new ArrayList<>();
@@ -173,7 +190,7 @@ private String id;
         });
         if (StringUtil.isBlank(findBean.getAddress())){
             im.setVisibility(View.GONE);
-            address.setVisibility(View.GONE);
+            address.setVisibility(View.INVISIBLE);
         }else {
             im.setVisibility(View.VISIBLE);
             address.setVisibility(View.VISIBLE);
@@ -185,9 +202,29 @@ private String id;
             check_like.setChecked(true);
         }
         likenum.setText(findBean.getLikes()+"");
-        content.setText(findBean.getContent());
-        time.setText(TimeUtil.getfriendlyTime(findBean.getCreateTimeStamp()));
+        if (StringUtil.isBlank(findBean.getContent())){
 
+            content.setVisibility(View.GONE);
+        }else {
+            content.setText(findBean.getContent());
+            content.setVisibility(View.VISIBLE);
+
+        }
+        time.setText(TimeUtil.getfriendlyTime(findBean.getCreateTimeStamp()));
+        if (!findBean.isMine()){
+            more.setVisibility(View.GONE);
+        }
+      more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (findBean.isMine()){
+                    showdeleteDialog(findBean.getMomentId());
+                }else {
+                    showjubaoDialog(findBean.getMomentId());
+                }
+
+            }
+        });
 
 
         if (findBean.getMomentType()==2){//作品
@@ -199,10 +236,12 @@ private String id;
 
         }
 
-
-        for (int i=0;i<findBean.getTagsList().size();i++){
-            tagList.add(findBean.getTagsList().get(i).getTagName());
+        if (findBean.getTagsList()!=null){
+            for (int i=0;i<findBean.getTagsList().size();i++){
+                tagList.add(findBean.getTagsList().get(i).getTagName());
+            }
         }
+
         if (findBean.getMediaType()==2){//视频
             oneImg.getLayoutParams().height = (int)((Width*(findBean.getMultimediaList().get(0).getHeight()))/findBean.getMultimediaList().get(0).getWidth());
             imgLay.setVisibility(View.VISIBLE);
@@ -363,16 +402,46 @@ private String id;
                 }
             }
         });
+        viewPresenter.View(null,null,findBean.getMomentId(),1);
 
     }
-    @OnClick({R.id.go_comment,R.id.send,R.id.inputLay})
+
+    private void showjubaoDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.jubao_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void showdeleteDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.delete_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+                deletePresenter.Delete(id);
+            }
+        });
+
+
+        dialog.show();
+    }
+    @OnClick({R.id.go_comment,R.id.send,R.id.inputLay,R.id.message})
     public void OnClick(View view) {
         if (Tool.isFastDoubleClick()) {
             return;
         }
         switch (view.getId()) {
-            case R.id.go_comment:
 
+            case R.id.go_comment:
+            case R.id.message:
                 buttonLay.setVisibility(View.GONE);
                 inputLay.setVisibility(View.VISIBLE);
 
@@ -407,10 +476,10 @@ private String id;
             EventBus.getDefault().removeStickyEvent(GetCommetsEvent.class);
             EventBus.getDefault().post(new GetCommetsEvent(id,commentsResponse.getTotal()));
         }
-    if (pagenum==0){
+    if (pagenum==1){
         commentAdapter.clearData();
     }
-
+        message_num.setText(commentsResponse.getTotal()+"");
         commentAdapter.addData(commentsResponse.getResult());
     }
     @Override
@@ -435,7 +504,8 @@ private String id;
     @Override
     public void SendCommentSuccess() {
         ToastUtil.showToast("评论成功");
-        mPresenter.GetComment(pagenum,10,findBean.getMomentId()+"");
+
+        mPresenter.GetComment(pagenum,50,findBean.getMomentId()+"");
 
 
     }
@@ -443,7 +513,7 @@ private String id;
     @Override
     public void DelCommentSuccess() {
         ToastUtil.showToast("评论删除成功");
-        mPresenter.GetComment(pagenum,10,findBean.getMomentId()+"");
+        mPresenter.GetComment(pagenum,50,findBean.getMomentId()+"");
 
     }
 
@@ -456,5 +526,18 @@ private String id;
         EventBus.getDefault().removeStickyEvent(GetLikesEvent.class);
         EventBus.getDefault().post(new GetLikesEvent(isselect,likeResponse.getLikes()));
 
+    }
+
+    @Override
+    public void ViewSuccess() {
+
+    }
+
+    @Override
+    public void DeleteSuccess(long momentId) {
+        ToastUtil.showToast("该动态已删除");
+finish();
+        EventBus.getDefault().removeStickyEvent(DeleteMonEvent.class);
+        EventBus.getDefault().post(new DeleteMonEvent(momentId));
     }
 }

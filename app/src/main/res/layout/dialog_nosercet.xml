@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_background"
+        android:orientation="vertical"
+        android:paddingTop="13dp"
+        android:layout_marginLeft="@dimen/sobot_20PX"
+        android:layout_marginRight="@dimen/sobot_20PX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:text="@string/notice"
+            android:textColor="@color/edit_color"
+            android:textSize="15sp" />
+        <ScrollView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+            <LinearLayout
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:text=" 星说仅会将您的信息用于提供服务和改善体验，我们将全力保障您的信息安全，请同意后使用。\n若您不同意本隐私政策，很遗憾我们将无法为您提供服务"
+                    android:textColor="@color/edit_color"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/sobot_20PX"
+            android:id="@+id/re_shenhe"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/theme_color"
+                android:layout_marginTop="@dimen/sobot_10PX"
+              android:paddingLeft="@dimen/sobot_20PX"
+                android:paddingRight="@dimen/sobot_20PX"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:id="@+id/dissagress"
+                android:background="@drawable/btn_round_huise2_shape"
+
+
+                android:text="不同意并退出"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+               android:layout_below="@+id/dissagress"
+                android:textColor="@color/theme_color"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:background="@drawable/btn_round_click_shape"
+
+                android:id="@+id/ok"
+                android:paddingLeft="@dimen/sobot_20PX"
+                android:paddingRight="@dimen/sobot_20PX"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="同意"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

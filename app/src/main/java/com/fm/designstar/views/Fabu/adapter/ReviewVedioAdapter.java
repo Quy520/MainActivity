@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.fm.designstar.R;
+import com.fm.designstar.utils.SpUtil;
 import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Util;
@@ -76,6 +77,8 @@ private MediaFile mediaFile;
 
         }*/
         if (position < mData.size()) {
+            Log.e("qsd","mData"+mData.get(position)+"mediaFile"+mediaFile.getDuration());
+
             if (mData.get(position).contains("http")) {
                 Glide.with(mContext).load(mData.get(position))
 
@@ -94,9 +97,14 @@ private MediaFile mediaFile;
                 Glide.with(mContext).load(mData.get(position))
 
                         .into(holder.image);
+                if (mData.get(position).contains("compose.mp4")){
+                    holder.biaji.setVisibility(View.GONE);
+                }else {
+                    holder.biaji.setVisibility(View.VISIBLE);
+                }
                 holder. close.setVisibility(View.VISIBLE);
                 holder.time.setVisibility(View.VISIBLE);
-                holder.biaji.setVisibility(View.VISIBLE);
+
 
                 if (mediaFile!=null){
                     holder.time.setText(TimeUtil.getSecondByFormat( mediaFile.getDuration(),""));
@@ -106,9 +114,11 @@ private MediaFile mediaFile;
 
                         .into(holder.image);
                 holder. close.setVisibility(View.VISIBLE);
-                holder.time.setVisibility(View.GONE);
+                holder.time.setVisibility(View.VISIBLE);
                 holder.biaji.setVisibility(View.GONE);
-
+                if (mediaFile!=null){
+                    holder.time.setText(TimeUtil.getSecondByFormat( mediaFile.getDuration(),""));
+                }
 
             }
         } else {
@@ -127,7 +137,8 @@ private MediaFile mediaFile;
             @Override
             public void onClick(View view) {
                 remove(mData.get(position));
-
+                SpUtil.putString("MEDIA","");
+                SpUtil. putString("mThumbnailPath","");
             }
         });
         holder.biaji.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +158,9 @@ private MediaFile mediaFile;
                 Log.e("qsd",position+"=="+mData.size()+"==="+holder.getLayoutPosition()+"==");
                 if (holder.getLayoutPosition() < mData.size()) {
                    // NewShowPictureActivity.startAction(mContext, view, mData, holder.getLayoutPosition() );
+                    if (listener != null) {
+                        listener.pre();
+                    }
                 } else {
                     if (listener != null) {
                         listener.addPhoto();
@@ -163,8 +177,11 @@ private MediaFile mediaFile;
 
     public interface AddPhotoListener {
         void addPhoto();
+        void pre();
         void toEDIT(int p);
-    } public interface DeletePhotoListener {
+
+    }
+    public interface DeletePhotoListener {
         void remove(String url);
     }
 

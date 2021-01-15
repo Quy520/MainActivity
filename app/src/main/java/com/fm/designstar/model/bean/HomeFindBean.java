@@ -48,9 +48,36 @@ public class HomeFindBean extends BaseBean {
     private int isLike;
     private int likes;
     private int comments;
+    private int views;
     private int forwards;
     private boolean follow;
     private boolean mine;
+    private String tagName;
+    private String userAddress;
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public String getUserAdddress() {
+        return userAddress;
+    }
+
+    public void setUserAdddress(String userAdddress) {
+        this.userAddress = userAdddress;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
 
     private List<MultimediaListBean> multimediaList;
     private List<TagsListBean> tagsList;

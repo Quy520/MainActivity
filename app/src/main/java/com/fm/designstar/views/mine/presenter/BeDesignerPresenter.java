@@ -17,8 +17,8 @@ import com.fm.designstar.views.mine.contract.BeDesignerContract;
  */
 public class BeDesignerPresenter extends BasePresenter<BeDesignerContract.View> implements BeDesignerContract.Presenter {
     @Override
-    public void Designer(String url) {
-        toSubscribe(HttpManager.getApi().Designer(new Designerbody(url)), new AbstractHttpSubscriber() {
+    public void Designer(String imgUrl, String address, String birthday, String corporation, String position, String realName,String contactNumber) {
+        toSubscribe(HttpManager.getApi().Designer(new Designerbody(imgUrl,  address,  birthday,  corporation,  position,  realName, contactNumber)), new AbstractHttpSubscriber() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);

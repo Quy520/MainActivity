@@ -49,7 +49,7 @@
             android:gravity="center"
             android:textColor="@color/hint_color"
             android:textSize="13dp"
-            android:text="视频时长不超过20分钟"
+            android:text="视频时长不超过20分钟(建议横屏)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

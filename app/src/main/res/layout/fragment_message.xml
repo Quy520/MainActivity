@@ -35,12 +35,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/sobot_10PX"></ImageView>
                 <TextView
+                    android:textColor="@color/home_color2"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_guanzhu"
                     android:textSize="16dp"
                     android:text="@string/message_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>
+                <TextView
+                    android:layout_marginLeft="@dimen/dp3"
+                    android:id="@+id/interNo"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/btn_round_click_shape"
+                    android:gravity="center"
+                    android:textSize="@dimen/sobot_10PX"
+                    android:visibility="invisible" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -57,9 +67,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/sobot_10PX"></ImageView>
                 <TextView
+                    android:textColor="@color/black3"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_tuijain"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     android:text="@string/sixin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>

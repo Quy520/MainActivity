@@ -51,16 +51,29 @@
             android:text="@string/com_info2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <com.fm.designstar.widget.CircleImageView
+        <RelativeLayout
             android:layout_marginRight="@dimen/sobot_40PX"
-           android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/hand"
-            android:layout_width="69dp"
-            android:layout_height="69dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@mipmap/app_logo" />
+            android:layout_width="wrap_content"
+            android:layout_height="70dp">
+            <com.fm.designstar.widget.CircleImageView
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/hand"
+                android:layout_width="69dp"
+                android:layout_height="69dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/app_logo" />
+            <ImageView
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/setting"
+                android:layout_width="20dp"
+                android:layout_height="20dp"></ImageView>
+        </RelativeLayout>
+
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/re_phone"
@@ -116,10 +129,24 @@
         android:text="选择地址"
         android:layout_width="match_parent"
         android:layout_height="54dp"></TextView>
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/btn_round_huise_shape"
+        android:layout_marginTop="@dimen/sobot_20PX"
+        android:layout_below="@+id/city"
+        android:textSize="@dimen/sobot_15PX"
+        android:textColor="@color/edit_color"
+        android:gravity="center_vertical"
+        android:id="@+id/sex"
+        android:paddingLeft="@dimen/sobot_20PX"
+        android:text="男"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"></TextView>
 
     <TextView
         android:id="@+id/next"
-        android:layout_below="@+id/city"
+        android:layout_below="@+id/sex"
         android:layout_marginTop="@dimen/sobot_20PX"
         android:layout_marginLeft="40dp"
         android:paddingLeft="@dimen/sobot_10PX"

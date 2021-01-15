@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.dialog.ActionSheetDialog;
+import com.fm.designstar.events.DeleteMonEvent;
 import com.fm.designstar.events.GetCommetsEvent;
 import com.fm.designstar.events.GetLikesEvent;
 import com.fm.designstar.events.HomeEvent;
@@ -24,7 +27,9 @@ import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.Detail.activity.DTDetailsActivity;
 import com.fm.designstar.views.Detail.activity.VedioPlayActivity;
+import com.fm.designstar.views.Detail.contract.DeleteContract;
 import com.fm.designstar.views.Detail.contract.LikeContract;
+import com.fm.designstar.views.Detail.presenter.DeletePresenter;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.main.contract.HomeFindContract;
@@ -53,7 +58,7 @@ import cn.jzvd.JZVideoPlayerStandard;
 
 
 
-public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> implements HomeGuanzhuContract.View ,HomeFindContract.View , LikeContract.View ,XRecyclerView.LoadingListener {
+public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> implements HomeGuanzhuContract.View ,HomeFindContract.View , LikeContract.View ,XRecyclerView.LoadingListener, DeleteContract.View {
 
     private List<String> urls=new ArrayList<>();
 
@@ -62,7 +67,9 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
     XRecyclerView hotRecycler;
     @BindView(R.id.nodada)
     ImageView imageView;
-    private int pagenum=0;
+    @BindView(R.id.tv_noda)
+    TextView tv_noda;
+    private int pagenum=1;
     private HomeFindPresenter homeFindPresenter;
     private LikePresenter likePresenter;
     private int like=0,islike,type=1,index;
@@ -70,6 +77,7 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     private LinearLayoutManager mLayoutManager;
     JZVideoPlayerStandard jzvd;
+    private DeletePresenter deletePresenter;
 
     @Override
     public int getLayoutId() {
@@ -83,6 +91,8 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
         homeFindPresenter.init(this);
         likePresenter=new LikePresenter();
         likePresenter.init(this);
+        deletePresenter=new DeletePresenter();
+        deletePresenter.init(this);
     }
 
     @Override
@@ -125,6 +135,18 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
                }
 
            }
+
+           @Override
+           public void onmoreClick(long id) {
+               showdeleteDialog(id);
+
+
+           }
+
+           @Override
+           public void onjubaoClick(long id) {
+               showjubaoDialog(id);
+           }
        });
        guanzhuAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClick() {
            @Override
@@ -166,6 +188,7 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.e("qsd","滑动播放");
                     AutoPlayUtils.onScrollPlayVideo(recyclerView, R.id.video_player, mLayoutManager.findFirstVisibleItemPosition(), mLayoutManager.findLastVisibleItemPosition());
                 }
             }
@@ -174,12 +197,41 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy != 0) {
+                    Log.e("qsd","滑动停止播放");
                     AutoPlayUtils.onScrollReleaseAllVideos(mLayoutManager.findFirstVisibleItemPosition(), mLayoutManager.findLastVisibleItemPosition(), 0.2f);
                 }
             }
         });
 
 
+    }
+
+    private void showjubaoDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.jubao_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void showdeleteDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.delete_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+                deletePresenter.Delete(id);
+            }
+        });
+
+
+        dialog.show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -203,20 +255,27 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void HomeGuanzhuSuccess(HomeFindResponse homeFindResponse) {
-        if (pagenum==0){
+        AutoPlayUtils.onScrollReleaseAllVideos(mLayoutManager.findFirstVisibleItemPosition(), mLayoutManager.findLastVisibleItemPosition(), 0.2f);
+
+        if (pagenum==1){
             guanzhuAdapter.clearData();
         }
         if (homeFindResponse.getResult()==null){
             imageView.setVisibility(View.VISIBLE);
             hotRecycler.setVisibility(View.GONE);
+            tv_noda.setVisibility(View.VISIBLE);
         }else {
             if (homeFindResponse.getResult().size()>0){
                 imageView.setVisibility(View.GONE);
+                tv_noda.setVisibility(View.GONE);
+
                 hotRecycler.setVisibility(View.VISIBLE);
                 guanzhuAdapter.addData(homeFindResponse.getResult());
             }else {
-                if (pagenum==0){
+                if (pagenum==1){
                     imageView.setVisibility(View.VISIBLE);
+                    tv_noda.setVisibility(View.VISIBLE);
+
                     hotRecycler.setVisibility(View.GONE);
                 }
 
@@ -247,23 +306,29 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void HomeFindSuccess(HomeFindResponse homeFindResponse) {
-        if (pagenum==0){
+        if (pagenum==1){
             guanzhuAdapter.clearData();
         }
         if (homeFindResponse.getResult()==null){
-            if (pagenum==0){
+            if (pagenum==1){
                 imageView.setVisibility(View.VISIBLE);
+                tv_noda.setVisibility(View.VISIBLE);
+
                 hotRecycler.setVisibility(View.GONE);
             }
         }else {
 
             if (homeFindResponse.getResult().size()>0){
                 imageView.setVisibility(View.GONE);
+                tv_noda.setVisibility(View.GONE);
+
                 hotRecycler.setVisibility(View.VISIBLE);
                 guanzhuAdapter.addData(homeFindResponse.getResult());
             }else {
-                if (pagenum==0){
+                if (pagenum==1){
                     imageView.setVisibility(View.VISIBLE);
+                    tv_noda.setVisibility(View.VISIBLE);
+
                     hotRecycler.setVisibility(View.GONE);
                 }
             }
@@ -281,8 +346,6 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(UploadzpEvent event) {
-
-                guanzhuAdapter.clearData();
             homeFindPresenter.HomeFind(pagenum,10);
 
 
@@ -297,6 +360,26 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
                 guanzhuAdapter.notifyItemChanged(i+1);
 
             }
+        }
+
+
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(DeleteMonEvent event) {
+Log.e("qsd","getTAG"+event.getTAG());
+        for (int i = 0; i < guanzhuAdapter.getData().size(); i++) {
+            HomeFindBean bean = guanzhuAdapter.getData().get(i);
+            if (String.valueOf(bean.getMomentId()).equals(String.valueOf(event.getTAG()))) {
+                Log.e("qsd","getTAG"+event.getTAG()+"===="+i);
+
+                hotRecycler.removeViewAt(i+1);
+                guanzhuAdapter.getData().remove(i);
+
+                guanzhuAdapter.notifyItemRemoved(i+1);
+
+            }
+
         }
 
 
@@ -319,7 +402,7 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
 
     @Override
     public void onRefresh() {
-        pagenum=0;
+        pagenum=1;
         if (type==1){
             mPresenter.HomeGuanzhu(pagenum,10);
         }else {
@@ -344,5 +427,25 @@ public class HomeGuanzhuFragment extends   BaseFragment<HomeGuanzhuPresenter> im
     public void onPause() {
         super.onPause();
         JZVideoPlayerStandard.releaseAllVideos();
+    }
+
+    @Override
+    public void DeleteSuccess(long id) {
+        ToastUtil.showToast("删除成功");
+
+        for (int i = 0; i < guanzhuAdapter.getData().size(); i++) {
+            HomeFindBean bean = guanzhuAdapter.getData().get(i);
+                if (String.valueOf(bean.getMomentId()).equals(String.valueOf(id))) {
+                    hotRecycler.removeViewAt(i+1);
+                    guanzhuAdapter.getData().remove(i);
+
+                    guanzhuAdapter.notifyItemRemoved(i+1);
+
+
+                }
+
+        }
+
+
     }
 }

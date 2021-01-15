@@ -9,7 +9,15 @@ import java.util.List;
 public  class FansResponse extends BaseBean {
 
     private List<FansBean> list;
+    private boolean hasNextPage;
 
+    public boolean isHasNextPage() {
+        return hasNextPage;
+    }
+
+    public void setHasNextPage(boolean hasNextPage) {
+        this.hasNextPage = hasNextPage;
+    }
 
     public List<FansBean> getResult() {
         return list;

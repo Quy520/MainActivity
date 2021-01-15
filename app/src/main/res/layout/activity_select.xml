@@ -8,7 +8,61 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-<include layout="@layout/layout_toolbar"></include>
+
+    <LinearLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <RelativeLayout
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:src="@mipmap/back_b" />
+
+
+                <EditText
+                    android:id="@+id/searchEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="35dp"
+
+                    android:layout_toRightOf="@+id/back"
+                    android:background="@drawable/shape_search"
+                    android:gravity="center_vertical"
+                    android:hint="@string/search"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="45dp"
+                    android:singleLine="true"
+                    android:textColor="@color/edit_color"
+                    android:textColorHint="@color/hint_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/top_title"

@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import io.rong.push.PushType;
 import io.rong.push.notification.PushMessageReceiver;
@@ -15,6 +16,7 @@ public class CustomPushMessageReceiver extends PushMessageReceiver {
 
     @Override
     public boolean onNotificationMessageArrived(Context context, PushType pushType, PushNotificationMessage pushNotificationMessage) {
+        Log.e("qsd","pushType"+pushType+"pushNotificationMessage"+pushNotificationMessage);
         return false;
     }
 
@@ -26,6 +28,7 @@ public class CustomPushMessageReceiver extends PushMessageReceiver {
             return true; // 此处返回 true. 代表不触发 SDK 默认实现，您自定义处理通知点击跳转事件。
         } else if (pushType == PushType.HUAWEI) {
             //实现您自定义的通知点击跳转逻辑
+            Log.e("qsd","HUAWEI"+"dfaefa");
             return true; // 此处返回 true. 代表不触发 SDK 默认实现，您自定义处理通知点击跳转事件。
         } else if (pushType == PushType.MEIZU) {
             //实现您自定义的通知点击跳转逻辑
@@ -42,6 +45,8 @@ public class CustomPushMessageReceiver extends PushMessageReceiver {
             return true; // 此处返回 true. 代表不触发 SDK 默认实现，您自定义处理通知点击跳转事件。
         } else if (pushType == PushType.RONG) {
             //实现您自定义的通知点击跳转逻辑
+            Log.e("qsd","HUAWEI"+"dfaefa");
+
             return true; // 此处返回 true. 代表不触发 SDK 默认实现，您自定义处理通知点击跳转事件。
         }
         return false;

@@ -4,9 +4,11 @@ package com.fm.designstar.views.Fabu.presenter;
 import com.fm.designstar.base.BasePresenter;
 import com.fm.designstar.https.AbstractHttpSubscriber;
 import com.fm.designstar.https.HttpManager;
+import com.fm.designstar.model.bean.DesignerTagsInfoVoBean;
 import com.fm.designstar.model.bean.TagBean;
 import com.fm.designstar.model.server.body.AdddesignerTagsCombody;
 import com.fm.designstar.model.server.body.TagsBody;
+import com.fm.designstar.model.server.response.DesignerTagInfoResponse;
 import com.fm.designstar.model.server.response.TagInfoResponse;
 import com.fm.designstar.model.server.response.UserinfoResponse;
 import com.fm.designstar.model.server.response.UserlikeResponse;
@@ -26,14 +28,14 @@ public class GetTagPresenter extends BasePresenter<GetTagContract.View> implemen
 
     @Override
     public void GetTag(int type) {
-        toSubscribe(HttpManager.getApi().findAllTagInfo(type), new AbstractHttpSubscriber<TagInfoResponse>() {
+        toSubscribe(HttpManager.getApi().findAllTagInfo(type), new AbstractHttpSubscriber<DesignerTagInfoResponse>() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);
             }
 
             @Override
-            protected void onHttpNext(TagInfoResponse tagInfoResponse ) {
+            protected void onHttpNext(DesignerTagInfoResponse tagInfoResponse ) {
 
                 mView.GetTagSuccess(tagInfoResponse);
 

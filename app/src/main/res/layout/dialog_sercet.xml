@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_background"
+        android:orientation="vertical"
+        android:paddingTop="13dp"
+        android:layout_marginLeft="@dimen/sobot_20PX"
+        android:layout_marginRight="@dimen/sobot_20PX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+
+            android:text="@string/notice"
+            android:textColor="@color/edit_color"
+            android:textSize="15sp" />
+        <ScrollView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+<LinearLayout
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:text=" 欢迎来到星说的世界！星说重视与保障您的个人隐私，特向您说明如下："
+        android:textColor="@color/edit_color"
+        android:textSize="13sp" />
+    <TextView
+        android:layout_marginTop="3dp"
+        android:id="@+id/name1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:text=" 1. 为了给您提供发布服务和账号安全服务，我们可能会申请手读取机设备信息权限，存储权限，摄像头权限，定位权限"
+        android:textColor="@color/edit_color"
+        android:textSize="13sp" />
+    <TextView
+        android:layout_marginTop="3dp"
+
+        android:id="@+id/name2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:text=" 2.未经您同意，我们不会从第三方获取、共享或向其提供您的信息"
+        android:textColor="@color/edit_color"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/name3"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="3.我们非常重视您的个人信息保护。关于个人信息收集和使用的详细信息，您可以点星说《用户协议》和《隐私政策》"
+        android:textColor="@color/edit_color"
+        android:textSize="13sp" />
+</LinearLayout>
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/sobot_20PX"
+            android:id="@+id/re_shenhe"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/theme_color"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:id="@+id/dissagress"
+                android:background="@drawable/btn_round_huise2_shape"
+
+                android:padding="@dimen/sobot_10PX"
+                android:text="不同意"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_toRightOf="@+id/dissagress"
+                android:textColor="@color/theme_color"
+                android:layout_marginTop="@dimen/sobot_10PX"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:background="@drawable/btn_round_click_shape"
+
+                android:id="@+id/ok"
+                android:padding="@dimen/sobot_10PX"
+                android:text="同意"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

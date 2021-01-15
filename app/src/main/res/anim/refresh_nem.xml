@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/loading_00000"
+        android:drawable="@drawable/loading_01"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_00030"
+        android:drawable="@drawable/loading_03"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_00050"
+        android:drawable="@drawable/loading_06"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_00100"
+        android:drawable="@drawable/loading_08"
         android:duration="150" />
     <item
-        android:drawable="@drawable/loading_00150"
+        android:drawable="@drawable/loading_10"
+        android:duration="150" />
+
+    <item
+        android:drawable="@drawable/loading_11"
+        android:duration="150" />
+    <item
+        android:drawable="@drawable/loading_12"
         android:duration="150" />
 
 </animation-list>

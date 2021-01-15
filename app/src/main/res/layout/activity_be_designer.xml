@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/theme_color"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,13 +9,7 @@
     android:layout_height="match_parent"
     tools:context="com.fm.designstar.views.mine.activity.BeDesignerActivity">
     <include layout="@layout/layout_toolbar"></include>
-    <ImageView
-        android:layout_marginTop="@dimen/sobot_20PX"
-        android:scaleType="centerInside"
-        android:layout_gravity="center"
-        android:id="@+id/com_im"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ImageView>
+
 <com.fm.designstar.widget.MyScrollView
     android:id="@+id/scroll"
 
@@ -28,26 +23,233 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:id="@+id/re_name"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:background="@color/theme_color"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im"
+                android:id="@+id/name"
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/plsce_ent"
+                android:textColor="@color/edit_color"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/real_name"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/re_birth"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im3"
+                android:id="@+id/birth"
+                android:layout_marginRight="@dimen/sobot_10PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未设定"
+                android:textColor="@color/hint_color"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/im3"
+                android:layout_width="8dp"
+                android:layout_height="@dimen/sobot_15PX"
+                android:layout_alignParentEnd="true"
+
+
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:src="@mipmap/icon_right" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/my_brith"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/re_phone"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:background="@color/theme_color"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im"
+                android:id="@+id/phone"
+                android:inputType="number"
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/plsce_ent"
+                android:textColor="@color/edit_color"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/real_phone"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/re_city"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im4"
+                android:id="@+id/city"
+                android:layout_marginRight="@dimen/sobot_10PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上海"
+                android:textColor="@color/edit_color"
+                android:textSize="16dp" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/im4"
+                android:layout_width="8dp"
+                android:layout_height="@dimen/sobot_15PX"
+                android:layout_alignParentEnd="true"
+
+
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:src="@mipmap/icon_right" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/my_city"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/re_com"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:background="@color/theme_color"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im"
+                android:id="@+id/com"
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/plsce_ent"
+                android:textColor="@color/edit_color"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/com_name"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+
+            android:id="@+id/re_job"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:background="@color/theme_color"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/im"
+                android:id="@+id/job"
+                android:layout_marginRight="@dimen/sobot_20PX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/plsce_ent"
+                android:textColor="@color/edit_color"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+
+                android:text="@string/job_name"
+                android:textColor="@color/edit_color2"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
     <TextView
-        android:layout_margin="@dimen/sobot_10PX"
-        android:gravity="center"
-        android:text="请选择以下任一材料上传，证明你的职业经历"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_marginLeft="@dimen/sobot_10PX"
+
+        android:layout_marginLeft="@dimen/sobot_20PX"
         android:textColor="@color/edit_color"
         android:textSize="18dp"
-        android:text="名片"
+        android:text="名片或工牌"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_margin="@dimen/sobot_10PX"
+            android:gravity="center"
+            android:text="请上传以下材料，证明你的职业经历"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/im_card"
         android:layout_marginTop="@dimen/sobot_10PX"
         android:src="@mipmap/upload_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <TextView
+   <!-- <TextView
         android:layout_marginTop="@dimen/sobot_10PX"
         android:layout_marginLeft="@dimen/sobot_10PX"
         android:textColor="@color/edit_color"
@@ -78,7 +280,21 @@
         android:layout_marginTop="@dimen/sobot_10PX"
         android:src="@mipmap/upload_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>-->
+        <TextView
+
+            android:textColor="@color/theme_color"
+            android:layout_marginTop="@dimen/sobot_20PX"
+            android:layout_marginRight="@dimen/sobot_40PX"
+            android:layout_marginLeft="@dimen/sobot_40PX"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:background="@drawable/btn_round_click_shape"
+            android:id="@+id/commit"
+            android:padding="@dimen/sobot_10PX"
+            android:text="提交审核"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </com.fm.designstar.widget.MyScrollView>

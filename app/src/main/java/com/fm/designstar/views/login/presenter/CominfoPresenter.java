@@ -18,8 +18,8 @@ import com.fm.designstar.views.login.contract.ComInfoContract;
  */
 public class CominfoPresenter extends BasePresenter<ComInfoContract.View> implements ComInfoContract.Presenter {
     @Override
-    public void ComInfo(String avatar, String userName, String birthday, int sex,String address,String signature) {
-        toSubscribe(HttpManager.getApi().comInfo(new comInfobody(avatar,  userName,  birthday,  sex,1,address,signature)), new AbstractHttpSubscriber() {
+    public void ComInfo(String avatar, String userName, String birthday, int sex,String address,String signature,String contactNumber) {
+        toSubscribe(HttpManager.getApi().comInfo(new comInfobody(avatar,  userName,  birthday,  sex,1,address,signature,contactNumber)), new AbstractHttpSubscriber() {
             @Override
             protected void onHttpStart() {
                 mView.showLoading("", 0);

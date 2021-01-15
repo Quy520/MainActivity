@@ -26,7 +26,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,6 +94,9 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
     TextView vesion;
     @BindView(R.id.hand)
     CircleImageView hand;
+
+    @BindView(R.id.phone)
+    EditText phone;
     private UploadFilePresenter uploadFilePresenter;
     private CominfoPresenter cominfoPresenter;
     private OssTokenResponse ossTokenResponse;
@@ -130,7 +135,7 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
                     ToastUtil.showToast(R.string.name_err);
                     return;
                 }
-                if (brith.getText().toString().equals(R.string.brth)) {
+                if (brith.getText().toString().equals("出生年月日")) {
                     ToastUtil.showToast(R.string.birth_err);
                     return;
                 }
@@ -138,16 +143,20 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
                     ToastUtil.showToast(R.string.city_err);
                     return;
                 }
-                if (shareDialogUtil==null){
-                    sex=1;
-                }else {
-                sex=    shareDialogUtil.getSex();
-                }
 
-                cominfoPresenter.ComInfo(icon,name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),sing.getText().toString());
+
+                cominfoPresenter.ComInfo(icon,name.getText().toString(),brith.getText().toString(),sex,city.getText().toString(),sing.getText().toString(),phone.getText().toString());
             }
         });
         initJsonData();
+        sex=App.getConfig().getSex();
+        if ( App.getConfig().getSex()==1){
+            tv_sex.setText("男");
+        }else if ( App.getConfig().getSex()==2){
+            tv_sex.setText("女");
+        }else {
+            tv_sex.setText("保密");
+        }
         if (StringUtil.isBlank(App.getConfig().getBirthday())){
             brith.setText(R.string.no_birth);
             brith.setTextColor(getResources().getColor(R.color.hint_color));
@@ -174,6 +183,9 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
             Glide.with(mActivity).load(App.getConfig().getUser_head()).error(R.mipmap.defu_hand).into(hand);
         }
         name.setText(App.getConfig().getUser_name());
+        if (!StringUtil.isBlank(App.getConfig().getContactNumber())){
+            phone.setText(App.getConfig().getContactNumber());
+        }
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
         startDate.set(1900, 0, 23);
@@ -222,17 +234,23 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
                 break;
             case R.id.re_sex:
                  shareDialogUtil = new ShareDialogUtil(mContext);
-                 shareDialogUtil.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View view) {
-                         sex=shareDialogUtil.getSex();
+                 shareDialogUtil.setSex(sex);
+                shareDialogUtil.setOnClickListener(new ShareDialogUtil.OnSuccess() {
+                    @Override
+                    public void success(int msex) {
+                        sex=msex;
+                        Log.e("qsd","shareDialogUtil"+sex);
+
                         if (sex==1){
                             tv_sex.setText("男");
-                        }else {
+                        }else if (sex==2){
                             tv_sex.setText("女");
+                        }else {
+                            tv_sex.setText("保密");
                         }
-                     }
-                 });
+                    }
+                });
+
 
                 shareDialogUtil.showDialog();
 
@@ -632,6 +650,7 @@ public class SettingActivity extends BaseActivity<LoginOutPresenter> implements 
         App.getConfig().setUser_name(name.getText().toString());//zhengshixingm
         App.getConfig().setAddress(city.getText().toString());//zhengshixingm
         App.getConfig().setSingmarks(sing.getText().toString());//zhengshixingm
+        App.getConfig().setContactNumber(phone.getText().toString());//zhengshixingm
         App.getConfig().setUser_head(icon);
         App.getConfig().setSex(sex);
         EventBus.getDefault().removeStickyEvent(UpdatainfoEvent.class);
@@ -651,6 +670,7 @@ finish();
     @Override
     public void uploadImageSuccess(String url) {
         icon=url;
+        Log.e("qsd","url"+url);
 
     }
 }

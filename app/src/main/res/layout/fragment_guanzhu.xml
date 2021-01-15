@@ -20,11 +20,19 @@
 
             </com.jcodecraeer.xrecyclerview.XRecyclerView>
             <ImageView
+                android:layout_marginTop="100dp"
                 android:id="@+id/nodada"
                 android:visibility="visible"
                 android:src="@mipmap/nodata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_noda"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="还没有关注的设计师"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
 <!--    </com.fm.designstar.widget.MyScrollView>-->
 </LinearLayout>

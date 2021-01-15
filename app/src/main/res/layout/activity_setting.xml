@@ -232,19 +232,60 @@
         android:background="@color/line"></View>
     <RelativeLayout
 
+        android:id="@+id/re_phone"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:background="@color/theme_color"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/phone"
+            android:inputType="number"
+            android:layout_marginRight="@dimen/sobot_20PX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/plsce_ent"
+            android:textColor="@color/edit_color"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="@string/real_phone"
+            android:textColor="@color/edit_color2"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/sobot_15PX"
+        android:layout_marginRight="@dimen/sobot_15PX"
+        android:background="@color/line"></View>
+    <RelativeLayout
+
         android:id="@+id/re_sing"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:orientation="horizontal">
 
         <TextView
+            android:gravity="end"
+            android:ellipsize="end"
+            android:maxLength="20"
+            android:maxLines="2"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/im5"
             android:id="@+id/sing"
             android:layout_marginRight="@dimen/sobot_20PX"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="去写点什么"
+            android:text="去写点"
             android:textColor="@color/hint_color"
             android:textSize="16dp" />
         <ImageView
@@ -255,10 +296,12 @@
             android:layout_alignParentEnd="true"
 
 
+
             android:layout_marginRight="@dimen/sobot_20PX"
             android:src="@mipmap/icon_right" />
 
         <TextView
+            android:id="@+id/tv"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -276,6 +319,7 @@
         android:layout_marginLeft="@dimen/sobot_15PX"
         android:layout_marginRight="@dimen/sobot_15PX"
         android:background="@color/line"></View>
+
 
     <TextView
         android:id="@+id/longout"

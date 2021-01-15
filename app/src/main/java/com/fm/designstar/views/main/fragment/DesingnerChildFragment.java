@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.fm.designstar.R;
 import com.fm.designstar.base.BaseFragment;
+import com.fm.designstar.events.FllowEvent;
+import com.fm.designstar.events.GetLikesEvent;
 import com.fm.designstar.model.bean.DesignerBean;
 import com.fm.designstar.model.server.response.DesignerResponse;
 import com.fm.designstar.model.server.response.HomeFindResponse;
@@ -20,8 +22,13 @@ import com.fm.designstar.views.mine.activity.InfoDetailActivity;
 import com.fm.designstar.views.mine.contract.followContract;
 import com.fm.designstar.views.mine.presenter.followPresenter;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
+import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +41,7 @@ import butterknife.BindView;
 public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  implements DesignerContract.View ,XRecyclerView.LoadingListener, followContract.View{
 
     DesignerBean designerBean;
-    private int pagenum=0;
+    private int pagenum=1;
     @BindView(R.id.designer_recy)
     XRecyclerView designer_recy;
     private DesignerAdapter designerAdapter;
@@ -57,6 +64,9 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
 
     @Override
     public void loadData() {
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
         designer_recy.setPullRefreshEnabled(true);
         designer_recy.setLoadingMoreEnabled(true);
         designer_recy.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
@@ -100,7 +110,7 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
     @Override
     public void DesignerSuccess(DesignerResponse homeFindResponse) {
         idnext=homeFindResponse.isHasNextPage();
-       if (pagenum==0){
+       if (pagenum==1){
            designerAdapter.clearData();
        }
         designerAdapter.addData(homeFindResponse.getResult());
@@ -109,10 +119,15 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
     @Override
     public void DesignerfindSuccess(DesignerResponse homeFindResponse) {
         idnext=homeFindResponse.isHasNextPage();
-        if (pagenum==0){
+        if (pagenum==1){
             designerAdapter.clearData();
         }
         designerAdapter.addData(homeFindResponse.getResult());
+        designerAdapter.notifyDataSetChanged();
+        if (designerAdapter.getData().size()>12){
+            Log.e("qsd","designerAdapter"+designerAdapter.getData().size()+"==="+new Gson().toJson(designerAdapter.getData().get(11)));
+
+        }
     }
 
     @Override
@@ -137,8 +152,8 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
 
     @Override
     public void onRefresh() {
-        pagenum=0;
-        if (pagenum==0){
+        pagenum=1;
+        if (pagenum==1){
          designerAdapter.clearData();
         }
 
@@ -164,15 +179,29 @@ public class DesingnerChildFragment extends BaseFragment<DesignerPresenter>  imp
     }
 
     @Override
-    public void followSuccess() {               mPresenter.Designerfind(pagenum,10);
-        ;
+    public void followSuccess() {
+        pagenum=1;
+        mPresenter.Designerfind(pagenum,10);
+
 
 
     }
 
     @Override
-    public void canclefollowSuccess() {               mPresenter.Designerfind(pagenum,10);
-        ;
+    public void canclefollowSuccess() {
+        pagenum=1;
+
+        mPresenter.Designerfind(pagenum,10);
+
 
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(FllowEvent event) {
+        pagenum=1;
+
+        mPresenter.Designerfind(pagenum,10);
+
+    }
+
 }

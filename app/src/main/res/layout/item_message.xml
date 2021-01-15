@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
+        android:layout_toLeftOf="@+id/foodImg"
         android:layout_marginTop="3dp"
         android:layout_below="@+id/name"
         android:id="@+id/content"

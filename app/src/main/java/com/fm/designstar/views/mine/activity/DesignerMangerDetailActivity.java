@@ -20,13 +20,18 @@ import com.fm.designstar.base.BaseActivity;
 import com.fm.designstar.events.UpdataEvent;
 import com.fm.designstar.events.UpdatainfoEvent;
 import com.fm.designstar.model.bean.RecordBean;
+import com.fm.designstar.photo.ShowPictureActivity;
 import com.fm.designstar.utils.StringUtil;
+import com.fm.designstar.utils.TimeUtil;
 import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.views.mine.contract.UptaDesignerContract;
 import com.fm.designstar.views.mine.presenter.UpdataDesignerPresenter;
 import com.fm.designstar.widget.CircleImageView;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DesignerMangerDetailActivity extends BaseActivity<UpdataDesignerPresenter> implements UptaDesignerContract.View {
 
@@ -40,8 +45,19 @@ private RecordBean recordBean;
     TextView time;
     @BindView(R.id.name)
     TextView name;
-    @BindView(R.id.resons)
-    TextView resons;
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+    @BindView(R.id.tv_phone)
+    TextView tv_phone;
+    @BindView(R.id.tv_birth)
+    TextView tv_birth;
+    @BindView(R.id.tv_city)
+    TextView tv_city;
+    @BindView(R.id.tv_com)
+    TextView tv_com;
+    @BindView(R.id.tv_job)
+    TextView tv_job;
+
     @BindView(R.id.pass)
     TextView pass;
     @BindView(R.id.nopass)
@@ -52,6 +68,7 @@ private RecordBean recordBean;
     TextView sure;
     @BindView(R.id.cancle)
     TextView cancle;
+
     @BindView(R.id.re_nopass)
     RelativeLayout re_nopass;
     @BindView(R.id.check_re)
@@ -68,7 +85,9 @@ private RecordBean recordBean;
     @BindView(R.id.other)
     CheckBox other;
     private int type=3;
+    private int lujin=0;
 
+    private List<String> handurl=new ArrayList<>();
 
 
     @Override
@@ -86,15 +105,35 @@ private RecordBean recordBean;
     public void loadData() {
         mTitle.setTitle("审核设计师");
         recordBean= (RecordBean) getIntent().getSerializableExtra("info");
-
+        lujin= getIntent().getIntExtra("type",0);
+        if (recordBean==null){
+            return;
+        }
+        if (lujin==1){
+            re_shenhe.setVisibility(View.GONE);
+        }
         if (!StringUtil.isBlank(recordBean.getAvatar())){
             Glide.with(mActivity).load(recordBean.getAvatar()).error(R.mipmap.defu_hand).into(hand);
         } if (!StringUtil.isBlank(recordBean.getImgUrl())){
             Glide.with(mActivity).load(recordBean.getImgUrl()).error(R.mipmap.defu_hand).into(com_im);
+            handurl.add(recordBean.getImgUrl());
+
         }
         name.setText(recordBean.getUserName());
-        time.setText("认证于："+recordBean.getCreateTime());
-        resons.setText("手机号："+recordBean.getMobile());
+        time.setText("认证于："+ TimeUtil.getfriendlyTime(recordBean.getCreateTimestamp()));
+        tv_name.setText(recordBean.getRealName());
+        tv_phone.setText(recordBean.getContactNumber());
+        tv_birth.setText(recordBean.getBirthday());
+        tv_city.setText(recordBean.getAddress());
+        tv_com.setText(recordBean.getCorporation());
+        tv_job.setText(recordBean.getPosition());
+        com_im.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowPictureActivity.startAction(mContext,view, (ArrayList<String>) handurl, "", "", 0, 0,1);
+
+            }
+        });
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

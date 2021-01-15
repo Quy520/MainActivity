@@ -1,5 +1,6 @@
 package com.fm.designstar.views.main.fragment;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -30,6 +31,8 @@ import com.fm.designstar.views.main.presenter.AddPresenter;
 import com.fm.designstar.widget.NoScrollViewPager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +60,9 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
     ImageView im_tuijain;
     @BindView(R.id.viewPager)
     NoScrollViewPager viewPager;
+
+    @BindView(R.id.interNo)
+    TextView interNo;
     private List<BaseFragment> fragmentList = new ArrayList<>();
 
 
@@ -73,8 +79,11 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
 
     @Override
     public void loadData() {
-        re_title.getLayoutParams().height = Tool.dip2px(mContext, 44) + Util.getStatusBarH(mContext);
-        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext);
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
+        re_title.getLayoutParams().height = Tool.dip2px(mContext, 35) + Util.getStatusBarH(mContext);
+        ((ViewGroup.MarginLayoutParams) re_title.getLayoutParams()).topMargin = Util.getStatusBarH(mContext)-10;
         fragmentList.add(new MessageSystemFragment());
         fragmentList.add(new MessageSixinFragment());
         viewPager.setEnabled(false);
@@ -122,10 +131,12 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.re_guanzhu:
+                interNo.setVisibility(View.GONE);
                 setItem();
-                tv_guanzhu.setTextSize(22);
+                tv_guanzhu.setTextSize(18);
                 im_guanzhu.setVisibility(View.VISIBLE);
                  viewPager.setCurrentItem(0);
+                tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
 
                 EventBus.getDefault().removeStickyEvent(messageupdataEvent.class);
                 EventBus.getDefault().post(new messageupdataEvent(0));
@@ -133,9 +144,10 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
             case R.id.re_tuijain:
                 initronhgyun(App.getConfig().getRongyuntoken());
                 setItem();
-                tv_tuijain.setTextSize(22);
+                tv_tuijain.setTextSize(18);
                 im_tuijain.setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(1);
+                tv_tuijain.setTextColor(ContextCompat.getColor(getContext(),R.color.black3));
 
                 EventBus.getDefault().removeStickyEvent(messageupdataEvent.class);
                 EventBus.getDefault().post(new messageupdataEvent(1));
@@ -153,8 +165,12 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
     private void setItem() {
         tv_guanzhu.setTextSize(16);
         im_guanzhu.setVisibility(View.GONE);
+        tv_guanzhu.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
         tv_tuijain.setTextSize(16);
         im_tuijain.setVisibility(View.GONE);
+        tv_tuijain.setTextColor(ContextCompat.getColor(getContext(), com.aliyun.svideo.base.R.color.alivc_common_font_gray_999));
+
 
 
     }
@@ -195,5 +211,21 @@ public class MessageFragment extends BaseFragment<AddPresenter>  implements AddC
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(messageEvent event) {
+        Log.e("qsd","messageEvent"+event.getType());
+        if (event.getType()==2){
+            if (event.getTAG()>0){
+                interNo.setVisibility(View.VISIBLE);
+
+            }else {
+                interNo.setVisibility(View.INVISIBLE);
+
+            }
+
+        }
+
     }
 }

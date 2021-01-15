@@ -34,7 +34,7 @@ public class TitleUtil {
     //activity构造
     public TitleUtil(AppCompatActivity activity, View view) {
         toolLay = view.findViewById(R.id.toolLay);
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mToolbar =  view.findViewById(R.id.toolbar);
         if (mToolbar == null) {
             return;
         }

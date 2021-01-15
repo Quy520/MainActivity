@@ -67,6 +67,7 @@ public class EditVedioActivity extends BaseActivity <UploadFilePresenter>  imple
     mTitle.setRightTitle("确认", new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if (bitmap!=null){
             upload = ConvertUtil.saveImageToGallery(mContext, bitmap);
             Log.e("qsd","=="+bitmap+"=="+upload);
             if (ossTokenResponse == null) {
@@ -75,6 +76,7 @@ public class EditVedioActivity extends BaseActivity <UploadFilePresenter>  imple
             }else {
                 mPresenter.uploadImage(ossTokenResponse, upload);
 
+            }
             }
         }
     });

@@ -43,6 +43,26 @@ public class DesignerBean extends BaseBean {
     private boolean mine;
     private List<HomeFindBean> designerMomentVos;
 
+    private String tagName;
+    private String userAddress;
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public String getUserAdddress() {
+        return userAddress;
+    }
+
+    public void setUserAdddress(String userAdddress) {
+        this.userAddress = userAdddress;
+    }
+
+
     public String getHeadUri() {
         return headUri;
     }

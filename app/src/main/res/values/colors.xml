@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- 主题色 -->
     <color name="theme_color">#ffffff</color>
     <!--默认背景颜色-->
@@ -15,17 +15,29 @@
 
     <!-- 通用线条颜色-->
     <color name="line">#e6e6e6</color>
+    <color name="line2">#F7F8F9</color>
+    <color name="home_line">#EAEDEF</color>
     <color name="hint_color">#9292AF</color>
     <color name="edit_color">#FF222222</color>
     <color name="edit_color2">#FF666666</color>
+    <color name="home_color">#ff666666</color>
+
+    <color name="home_color2">#999999</color>
     <color name="notice">#fdd650</color>
     <color name="black">#aa000000</color>
+    <color name="black0">#00000000</color>
+    <color name="black3">#ff000000</color>
     <color name="black2">#66000000</color>
 
 
     <color name="background_color">#F5F7FA</color>
     <color name="tip_color">#49565D</color>
     <color name="text_bg_gray">#99000000</color>
+    <color name="text_6c">#F5F7FA</color>
+
+    <color name="transparent" tools:ignore="MissingDefaultResource">#00000000</color>
+    <color name="safe_mode_text">#f0ffffff</color>
+    <color name="search_white">#ffF4F4F4</color>
 
 
 </resources>

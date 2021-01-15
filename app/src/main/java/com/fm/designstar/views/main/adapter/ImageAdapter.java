@@ -26,10 +26,10 @@ public class ImageAdapter  extends BannerAdapter<String, ImageAdapter.ImageHolde
     @Override
     public ImageHolder onCreateHolder(ViewGroup parent, int viewType) {
         ImageView imageView = (ImageView) BannerUtils.getView(parent, R.layout.banner_image);
-        //通过裁剪实现圆角
+     /*   //通过裁剪实现圆角
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             BannerUtils.setBannerRound(imageView, 20);
-        }
+        }*/
         return new ImageHolder(imageView);
     }
 

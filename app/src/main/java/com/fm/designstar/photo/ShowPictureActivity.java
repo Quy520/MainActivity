@@ -159,13 +159,14 @@ public class ShowPictureActivity extends BaseActivity {
 
 
         envList = getIntent().getParcelableArrayListExtra("envList");
-        urls = new ArrayList<>();
+if (tagsList!=null){
+    urls = new ArrayList<>();
         if (tagsList.size()>0) {
             for (int i = 0; i < tagsList.size(); i++) {
                 urls.add(tagsList.get(i).getMultimediaUrl());
             }
         }
-
+}
       /*  if (envList == null) {
            // handUrl = getIntent().getStringExtra("handUrl");
             name = getIntent().getStringExtra("name");

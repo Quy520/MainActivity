@@ -4,14 +4,27 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+
+        //hms
+        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'https://www.jitpack.io' }
+
     }
+    apply from: 'thirdparty-lib/config.gradle'
+
     dependencies {
+
+
         classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // 注册MobSDK
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        //huawei
+        classpath 'com.huawei.agconnect:agcp:1.2.1.301'
     }
 }
 
@@ -19,8 +32,22 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'http://4thline.org/m2' }
+        flatDir { dirs 'src/main/libs' }
+
         maven {url  "https://dl.bintray.com/rongcloud/maven"}
+
+        //hms
+        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'https://www.jitpack.io' }
+
+
     }
+    buildDir = new File(rootDir, "gradle-build/${path.replaceAll(':', '/')}")
+
 }
 
 task clean(type: Delete) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
+ <!--   <item
         android:drawable="@drawable/walking_00000"
         android:duration="15" />
 
@@ -111,5 +111,5 @@
         android:duration="15" />
     <item
         android:drawable="@drawable/walking_00059"
-        android:duration="15" />
+        android:duration="15" />-->
 </animation-list>

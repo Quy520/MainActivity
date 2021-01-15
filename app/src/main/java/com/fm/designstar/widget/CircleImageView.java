@@ -206,7 +206,7 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         mBitmapHeight = mBitmap.getHeight();
         mBitmapWidth = mBitmap.getWidth();
 
-        mBorderRect.set(0, 0, getWidth(), getHeight());
+        mBorderRect.set(5, 5, getWidth(), getHeight());
         mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2, (mBorderRect.width() - mBorderWidth) / 2);
 
         mDrawableRect.set(mBorderWidth, mBorderWidth, mBorderRect.width() - mBorderWidth, mBorderRect.height() - mBorderWidth);

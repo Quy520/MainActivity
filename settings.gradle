@@ -1,3 +1,12 @@
+include ':AlivcLittleVideo'
+include ':AliyunEditor'
+include ':AliyunCrop:crop'
+include ':AlivcMedia'
+include ':AliyunFileDownLoader'
+include ':AliyunSVideoBase'
+include ':AliyunRecorder:record'
+include ':AliyunVideoCommon'
+include ':AliyunSvideoMusic'
 include ':library'
 include ':app'
 rootProject.name = "MainActivity"

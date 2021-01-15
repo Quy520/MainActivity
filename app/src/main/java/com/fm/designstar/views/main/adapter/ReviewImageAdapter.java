@@ -1,6 +1,7 @@
 package com.fm.designstar.views.main.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,17 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.fm.designstar.R;
+import com.fm.designstar.utils.OssImageUtil;
+import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.image.RequestOptionsUtil;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ReviewImageAdapter extends BaseAdapter {
     private Context context;
@@ -55,10 +63,12 @@ public class ReviewImageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         rOptions =  RequestOptionsUtil.getRoundedOptionsErr(context, R.mipmap.ico_default);
         Glide.with(context)
-                .load(dataList.get(position))
+                .load(OssImageUtil.getThumbnailCut(dataList.get(position), Tool.dip2px(context, 50), Tool.dip2px(context, 50)))
                 .apply(rOptions)
+
                 .into(viewHolder.ivimage);
 
         return convertView;

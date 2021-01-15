@@ -5,6 +5,7 @@ import butterknife.BindView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 
@@ -61,6 +62,8 @@ public class ChangInfoActivity extends BaseActivity <AddTagsPresenter> implement
         if (type==2){
             mTitle.setTitle(R.string.chang_name);
             editText.setHint("请输入姓名");
+            InputFilter[] filters = {new InputFilter.LengthFilter(7)};
+            editText.setFilters(filters);
         }else if (type==1){
             mTitle.setTitle(R.string.change_sin);
             editText.setHint("请输入签名");

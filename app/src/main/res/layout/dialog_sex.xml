@@ -35,7 +35,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
-            android:checked="true"
+            android:visibility="gone"
+            android:id="@+id/sercet"
+            android:button="@null"
+            android:background="@drawable/sercet_check"
+            android:layout_width="60dp"
+            android:layout_height="60dp"></CheckBox>
+        <CheckBox
+            android:layout_marginLeft="@dimen/sobot_40PX"
+            android:layout_toRightOf="@+id/sercet"
+
             android:id="@+id/man"
             android:button="@null"
             android:background="@drawable/man_check"

@@ -29,6 +29,7 @@ import com.fm.designstar.R;
 import com.fm.designstar.utils.ConvertUtil;
 import com.fm.designstar.utils.ExtractVideoInfoUtil;
 import com.fm.designstar.utils.Util;
+import com.fm.designstar.views.Fabu.FabuActivity;
 import com.fm.designstar.widget.imagePicker.adapter.ImageFoldersAdapter;
 import com.fm.designstar.widget.imagePicker.adapter.ImagePickerAdapter;
 import com.fm.designstar.widget.imagePicker.data.MediaFile;
@@ -505,7 +506,7 @@ public class ImagePickerActivity extends BaseActivity implements ImagePickerAdap
             duration = Integer.parseInt(mmr.extractMetadata
                     (MediaMetadataRetriever.METADATA_KEY_DURATION));
             String orientation = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION);//视频方向
-Log.e("qsd","qsd"+orientation);//横屏 是0.竖屏 90
+Log.e("qsd","qsd==orientation"+orientation);//横屏 是0.竖屏 90
 //宽
             String width = mmr.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
 //高
@@ -513,7 +514,9 @@ Log.e("qsd","qsd"+orientation);//横屏 是0.竖屏 90
             mediaFile.setDuration(duration);
             mediaFile.setPath(videoPath);
             Log.e("qsd",videoPath+"qsd"+orientation+"width"+width+"height"+height);
-            if (orientation.equals("0")){
+            mediaFile.setW(width);
+            mediaFile.setH(height);
+       /*     if (orientation.equals("0")){
                 if (Integer.parseInt(height)>Integer.parseInt(width)){
                     mediaFile.setW(height);
                     mediaFile.setH(width);
@@ -531,7 +534,7 @@ Log.e("qsd","qsd"+orientation);//横屏 是0.竖屏 90
                     mediaFile.setH(width);
                 }
             }
-
+*/
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -719,10 +722,10 @@ Log.e("qsd","qsd"+orientation);//横屏 是0.竖屏 90
             Log.e("qsd","path"+"===="+mediaFile.getPath());
             if (MediaFileUtil.isVideoFileType( mediaFile.getPath())){
                 mediaFile=   getLocalVideo( mediaFile.getPath());
-                Intent intent = new Intent();
+                Intent intent = new Intent(this,FabuActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("MEDIA", mediaFile);
-                intent.putStringArrayListExtra(SELECT_RESULT2, images);
+                bundle.putSerializable("MEDIA", mediaFile);//视频对象
+                intent.putStringArrayListExtra(SELECT_RESULT2, images);//封面图 礼盒
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
             }  else {

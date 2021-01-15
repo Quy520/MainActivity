@@ -2,14 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_view"
+    android:background="@color/black3"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.fm.designstar.widget.JzvdStdTikTok
 
+    <com.fm.designstar.widget.JzvdStdTikTok
+        android:layout_centerInParent="true"
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
+    <ImageView
+        android:padding="5dp"
+        android:layout_marginLeft="@dimen/dp_10"
+       android:layout_marginTop="@dimen/rc_dimen_size_50"
+        android:id="@+id/left"
+        android:button="@null"
+        android:src="@mipmap/back_w"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
 <!--    <com.fm.designstar.widget.FullWindowVideoView
         android:visibility="gone"
         android:id="@+id/video_view"
@@ -50,16 +61,16 @@
         android:gravity="center_horizontal"
         >
         <RelativeLayout
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <com.fm.designstar.widget.CircleImageView
+
                 android:id="@+id/hand"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignParentTop="true"
-                android:src="@mipmap/defu_hand"
-               />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/defu_hand" />
             <ImageView
                 android:visibility="gone"
                 android:layout_width="20dp"
@@ -78,7 +89,7 @@
             android:layout_centerHorizontal="true"
                 android:id="@+id/check_guanzhu"
                 android:button="@null"
-                android:background="@drawable/homelike_check"
+                android:background="@drawable/vediolike_check"
                 android:src="@mipmap/home_guanzhu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
@@ -88,7 +99,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="8"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textColor="@color/theme_color"
                 android:gravity="center"
                 />
@@ -105,14 +116,14 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/message"
                 android:button="@null"
-                android:src="@mipmap/home_com"
+                android:src="@mipmap/vedio_com"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
                 android:id="@+id/comenum"
                 android:layout_below="@+id/message"
                 android:layout_width="30dp"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:layout_height="wrap_content"
                 android:text="8"
                 android:textColor="@color/theme_color"
@@ -122,9 +133,10 @@
         </RelativeLayout>
 
         <ImageView
+
             android:id="@+id/vedio_share"
             android:layout_marginTop="@dimen/dp_10"
-            android:src="@mipmap/vedio_share"
+            android:src="@mipmap/home_share"
             android:layout_width="30dp"
             android:layout_height="30dp"></ImageView>
 
@@ -144,7 +156,7 @@
 
 <TextView
     android:layout_toLeftOf="@+id/btn_left"
-    android:textStyle="bold"
+
     android:layout_above="@+id/go_comment"
     android:layout_marginRight="@dimen/sobot_10PX"
     android:layout_marginLeft="@dimen/sobot_20PX"
@@ -152,7 +164,7 @@
     android:layout_alignParentBottom="true"
     android:id="@+id/comment"
     android:text=""
-    android:textSize="15dp"
+    android:textSize="16dp"
     android:maxLines="2"
     android:ellipsize="end"
     android:textColor="@color/theme_color"
@@ -160,7 +172,7 @@
     android:layout_height="wrap_content"/>
 
     <TextView
-
+android:visibility="gone"
         android:layout_marginRight="@dimen/sobot_20PX"
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"

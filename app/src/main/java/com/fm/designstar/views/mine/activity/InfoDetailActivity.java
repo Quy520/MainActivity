@@ -14,7 +14,10 @@ import com.bumptech.glide.Glide;
 import com.fm.designstar.R;
 import com.fm.designstar.app.App;
 import com.fm.designstar.base.BaseActivity;
+import com.fm.designstar.dialog.ActionSheetDialog;
 import com.fm.designstar.dialog.AlertFragmentDialog;
+import com.fm.designstar.events.FllowEvent;
+import com.fm.designstar.events.messageEvent;
 import com.fm.designstar.model.bean.HomeFindBean;
 import com.fm.designstar.model.server.response.HomeFindResponse;
 import com.fm.designstar.model.server.response.LikeResponse;
@@ -26,7 +29,9 @@ import com.fm.designstar.utils.ToastUtil;
 import com.fm.designstar.utils.Tool;
 import com.fm.designstar.utils.Util;
 import com.fm.designstar.views.Detail.activity.DTDetailsActivity;
+import com.fm.designstar.views.Detail.contract.DeleteContract;
 import com.fm.designstar.views.Detail.contract.LikeContract;
+import com.fm.designstar.views.Detail.presenter.DeletePresenter;
 import com.fm.designstar.views.Detail.presenter.LikePresenter;
 import com.fm.designstar.views.main.adapter.HomeGuanzhuAdapter;
 import com.fm.designstar.views.main.adapter.HomeRecomAdapter;
@@ -41,21 +46,24 @@ import com.fm.designstar.views.mine.presenter.followPresenter;
 import com.fm.designstar.widget.CircleImageView;
 import com.fm.designstar.widget.recycler.BaseRecyclerAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jzvdother.JzvdStd;
 import io.rong.imkit.RongIM;
 
-public class InfoDetailActivity extends BaseActivity<UseMomentPresenter>  implements UseMomentContract.View , GetInfoContract.View, followContract.View, LikeContract.View, FirDesignerContract.View {
+public class InfoDetailActivity extends BaseActivity<UseMomentPresenter>  implements UseMomentContract.View , GetInfoContract.View, followContract.View, LikeContract.View, FirDesignerContract.View, DeleteContract.View {
 
 private GetInfoPresenter getInfoPresenter;
 
     @BindView(R.id.my_recy)
     RecyclerView my_recy;
 
-    private int pageNum=0;
+    private int pageNum=1;
     private String uuid;
 
     @BindView(R.id.zp_num)
@@ -105,6 +113,8 @@ private GetInfoPresenter getInfoPresenter;
     private LikePresenter likePresenter;
     private int like=0,islike,type=2,lujin;
     HomeFindBean findBean;
+    private DeletePresenter deletePresenter;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_info_detail;
@@ -121,6 +131,8 @@ private GetInfoPresenter getInfoPresenter;
         likePresenter.init(this);
         firDesignerPresenter =new FirDesignerPresenter();
         firDesignerPresenter.init(this);
+        deletePresenter=new DeletePresenter();
+        deletePresenter.init(this);
 
     }
 
@@ -128,7 +140,7 @@ private GetInfoPresenter getInfoPresenter;
     public void loadData() {
        uuid= getIntent().getStringExtra("UUID");
         lujin= getIntent().getIntExtra("type",0);
-        mPresenter.UseMoment(pageNum,10,2,null,uuid);
+        mPresenter.UseMoment(pageNum,100,2,null,uuid);
 Log.e("qsd","uuid"+uuid+"=="+Long.parseLong(uuid));
         getInfoPresenter.getOtherUserInfo(uuid);
 
@@ -173,6 +185,16 @@ if (uuid.equals(App.getConfig().getUserid())){
                 }
 
             }
+
+            @Override
+            public void onmoreClick(long id) {
+                showdeleteDialog(id);
+            }
+
+            @Override
+            public void onjubaoClick(long id) {
+                showjubaoDialog(id);
+            }
         });
 
 
@@ -197,7 +219,7 @@ if (uuid.equals(App.getConfig().getUserid())){
         my_recy.setLayoutManager(new LinearLayoutManager(mContext));
         my_recy.addItemDecoration(new SpaceItemDecoration().setBottom(Tool.dip2px(mContext, 0)));
         my_recy.setNestedScrollingEnabled(false);
-        homeRecomAdapter=new HomeRecomAdapter();
+        homeRecomAdapter=new HomeRecomAdapter(1);
         my_recy.setAdapter(homeRecomAdapter);
         my_recy.setHasFixedSize(true);
         my_recy.setFocusable(false);
@@ -206,17 +228,29 @@ if (uuid.equals(App.getConfig().getUserid())){
         homeRecomAdapter.setOnClickListener(new HomeRecomAdapter.OnClickListener() {
             @Override
             public void onLikeClick(int position, boolean b, CompoundButton compoundButton) {
+like=position;
+                findBean = homeRecomAdapter.getData().get(position);
 
                 if (b){
                     if (compoundButton.isPressed()){
-                        like=1;
+                        islike=1;
                        // index=position;
                         likePresenter.Like(1,homeRecomAdapter.getData().get(position).getMomentId());
                     }
                 }else {
-                    like=0;
+                    islike=0;
                   //  index=position;
                     likePresenter.Like(1,homeRecomAdapter.getData().get(position).getMomentId());
+
+                }
+            }
+
+            @Override
+            public void onGuanClick(int position, boolean b, CompoundButton compoundButton) {
+                if (mresponse.getStatus() == 1) {
+                    presenter.canclefollow(mresponse.getCode() + "");
+                } else {
+                    presenter.follow(mresponse.getCode() + "");
 
                 }
             }
@@ -227,13 +261,41 @@ if (uuid.equals(App.getConfig().getUserid())){
 
     }
 
+    private void showjubaoDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.jubao_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void showdeleteDialog(long id) {
+        ActionSheetDialog dialog = new ActionSheetDialog(mActivity).builder();
+
+        dialog.addSheetItem(R.string.delete_review, ActionSheetDialog.SheetItemColor.Red, new ActionSheetDialog.OnSheetItemClickListener() {
+            @Override
+            public void onClick(int which) {
+                deletePresenter.Delete(id);
+            }
+        });
+
+
+        dialog.show();
+    }
+
     @OnClick({R.id.sixin,R.id.tv_guanzhu,R.id.re_zp,R.id.re_dt})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.re_zp:
                 setItem();
                 type=2;
-                mPresenter.UseMoment(pageNum,10,2,null,uuid);
+                mPresenter.UseMoment(pageNum,100,2,null,uuid);
                 tv_zp.setTextSize(22);
                 im_zp.setVisibility(View.VISIBLE);
                 my_recy.setAdapter(homeRecomAdapter);
@@ -241,7 +303,7 @@ if (uuid.equals(App.getConfig().getUserid())){
             case R.id.re_dt:
                 setItem();
                 type=1;
-                mPresenter.UseMoment(pageNum,10,1,null,uuid);
+                mPresenter.UseMoment(pageNum,100,1,null,uuid);
                 tv_dt.setTextSize(22);
                 im_dt.setVisibility(View.VISIBLE);
                 my_recy.setAdapter(guanzhuAdapter);
@@ -250,7 +312,11 @@ if (uuid.equals(App.getConfig().getUserid())){
             case R.id.sixin:
                 if(lujin==1){
                     Intent intent=new Intent(mContext,ChoseDesignerTagsActivity.class);
+
                     intent.putExtra("uuid",uuid);
+                    if (mresponse!=null){
+                        intent.putExtra("name",mresponse.getTagInfo().getTagName());
+                    }
                     startActivityForResult(intent,1111);
                 }else {
                   //跳转到聊天页面 传入对方的id 和 名字
@@ -310,13 +376,17 @@ if (uuid.equals(App.getConfig().getUserid())){
         if (requestCode == 1111) {
          String tags=   data.getStringExtra("resule");
             info.setText(city+"|"+tags);
+            mresponse.getTagInfo().setTagName(tags);
+            mPresenter.UseMoment(pageNum,100,type,null,uuid);
+           // mPresenter.UseMoment(pageNum,100,1,null,uuid);
+
         }
 
     }
 
     @Override
     public void UseMomentSuccess(HomeFindResponse homeFindResponse) {
-        if (pageNum==0){
+        if (pageNum==1){
             guanzhuAdapter.clearData();
             homeRecomAdapter.clearData();
         }
@@ -361,7 +431,7 @@ if (uuid.equals(App.getConfig().getUserid())){
 
     @Override
     public void GetuserlikeInfoSuccess(UserlikeResponse userlikeResponse) {
-        if (pageNum==0){
+        if (pageNum==1){
             zp_num.setText(userlikeResponse.getMomentNum()+"");
             like_num.setText(userlikeResponse.getLikeNum()+"");
             guanzhu_num.setText(userlikeResponse.getFollowNum()+"");
@@ -410,7 +480,10 @@ if (uuid.equals(App.getConfig().getUserid())){
         tv_guanzhu.setText("已关注");
         ToastUtil.showToast("关注成功");
         mresponse.setStatus(1);
-
+        mPresenter.UseMoment(pageNum,100,2,null,uuid);
+        getInfoPresenter.GetotherLikeInfo(uuid);
+        EventBus.getDefault().removeStickyEvent(FllowEvent.class);
+        EventBus.getDefault().post(new FllowEvent());
     }
 
     @Override
@@ -418,7 +491,10 @@ if (uuid.equals(App.getConfig().getUserid())){
         ToastUtil.showToast("已取消成功");
         tv_guanzhu.setText("关注");
         mresponse.setStatus(0);
-
+        mPresenter.UseMoment(pageNum,100,2,null,uuid);
+        getInfoPresenter.GetotherLikeInfo(uuid);
+        EventBus.getDefault().removeStickyEvent(FllowEvent.class);
+        EventBus.getDefault().post(new FllowEvent());
     }
 
     @Override
@@ -427,8 +503,12 @@ if (uuid.equals(App.getConfig().getUserid())){
             findBean .setLikes(likeResponse.getLikes());
             findBean.setIsLike(islike);
             guanzhuAdapter.notifyItemChanged(like);
+            getInfoPresenter.GetotherLikeInfo(uuid);
         }else {
-
+            findBean .setLikes(likeResponse.getLikes());
+            findBean.setIsLike(islike);
+            homeRecomAdapter.notifyItemChanged(like);
+            getInfoPresenter.GetotherLikeInfo(uuid);
         }
 
     }
@@ -437,5 +517,31 @@ if (uuid.equals(App.getConfig().getUserid())){
     public void FirignerSuccess() {
         ToastUtil.showToast("解雇成功");
 
+    }
+    @Override
+    public void onBackPressed() {
+        if (JzvdStd.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JzvdStd.releaseAllVideos();
+    }
+
+    @Override
+    public void DeleteSuccess(long momentId) {
+        ToastUtil.showToast("删除成功");
+        for (int i = 0; i < guanzhuAdapter.getData().size(); i++) {
+            HomeFindBean bean = guanzhuAdapter.getData().get(i);
+            if (String.valueOf(bean.getMomentId()).equals(String.valueOf(momentId))) {
+                guanzhuAdapter.getData().remove(i);
+                guanzhuAdapter.notifyItemRemoved(i);
+            }
+
+        }
     }
 }
