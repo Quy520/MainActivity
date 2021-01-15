@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.fm.designstar",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "INSTANT_APP_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 114,
+        "versionName": "1.1.4",
+        "outputFile": "com.fm.designstar.apk",
+        "fullName": "xiaomiRelease",
+        "baseName": "xiaomi-release",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.fm.designstar",
+        "split": "",
+        "minSdkVersion": "21"
+      }
+    }
+  ]
+}

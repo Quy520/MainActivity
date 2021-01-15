@@ -1,0 +1,10 @@
+#Thu Dec 24 18:09:55 CST 2020
+path.2=classes3.dex
+path.1=classes2.dex
+path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/my_selfDebug/mergeProjectDexMy_selfDebug/classes3.dex
+base.1=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/my_selfDebug/mergeProjectDexMy_selfDebug/classes2.dex
+base.0=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/my_selfDebug/mergeProjectDexMy_selfDebug/classes.dex

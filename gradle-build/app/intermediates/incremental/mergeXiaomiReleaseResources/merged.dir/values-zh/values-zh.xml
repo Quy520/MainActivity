@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="click_to_restart">点击重试</string>
+    <string name="jg_channel_name_p_default">普通</string>
+    <string name="jg_channel_name_p_high">重要</string>
+    <string name="jg_channel_name_p_low">不重要</string>
+    <string name="jg_channel_name_p_min">不重要</string>
+    <string name="listview_header_hint_normal">下拉刷新</string>
+    <string name="listview_header_hint_release">释放立即刷新</string>
+    <string name="listview_header_last_time">上次更新时间：</string>
+    <string name="listview_loading">正在加载...</string>
+    <string name="loading_done">加载完成</string>
+    <string name="mobcommon_authorize_dialog_accept">同意</string>
+    <string name="mobcommon_authorize_dialog_content"><![CDATA[为了给您提供Mobservice相关产品服务，请您详细查看我们的隐私政策，详见<a href="http://www.mob.com/policy/zh">http://www.mob.com/policy/zh</a>。如您同意我们的隐私政策，请点击“接受”，如您不同意我们的隐私政策，请点击“拒绝”。]]></string>
+    <string name="mobcommon_authorize_dialog_reject">拒绝</string>
+    <string name="mobcommon_authorize_dialog_title">服务授权</string>
+    <string name="no_url">播放地址无效</string>
+    <string name="nomore_loading">没有了</string>
+    <string name="refresh_done">刷新完成</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="replay">重播</string>
+    <string name="tips_not_wifi">您当前正在使用移动网络，继续播放将消耗流量</string>
+    <string name="tips_not_wifi_cancel">停止播放</string>
+    <string name="tips_not_wifi_confirm">继续播放</string>
+    <string name="video_loading_faild">视频加载失败</string>
+    <string name="video_loading_failed">视频加载失败</string>
+</resources>

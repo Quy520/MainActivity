@@ -1,0 +1,10 @@
+#Fri Nov 27 16:19:35 CST 2020
+path.2=classes3.dex
+path.1=classes2.dex
+path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/xiaomiRelease/mergeDexXiaomiRelease/classes3.dex
+base.1=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/xiaomiRelease/mergeDexXiaomiRelease/classes2.dex
+base.0=/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/dex/xiaomiRelease/mergeDexXiaomiRelease/classes.dex

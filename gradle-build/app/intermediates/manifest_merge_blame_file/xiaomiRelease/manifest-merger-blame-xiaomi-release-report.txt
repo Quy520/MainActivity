@@ -1,0 +1,1870 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.fm.designstar"
+4    android:versionCode="114"
+5    android:versionName="1.1.4" >
+6
+7    <uses-sdk
+7-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:454:5-1291
+8        android:minSdkVersion="21"
+8-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:454:5-1291
+9        android:targetSdkVersion="29" />
+9-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:454:5-1291
+10    <!-- 小米 配置开始 < -->
+11    <permission
+11-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:395:5-397:47
+12        android:name="com.fm.designstar.permission.MIPUSH_RECEIVE"
+12-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:396:9-67
+13        android:protectionLevel="signature" />
+13-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:397:9-44
+14    <permission
+14-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:399:5-401:47
+15        android:name="com.fm.designstar.permission.JPUSH_MESSAGE"
+15-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:400:9-66
+16        android:protectionLevel="signature" /> <!-- 小米 配置结束 < -->
+16-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:401:9-44
+17    <!-- 极光  Required -->
+18    <queries>
+18-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:403:5-407:15
+19        <intent>
+19-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:404:9-406:18
+20            <action android:name="cn.jpush.android.intent.PushService" />
+20-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:405:13-74
+20-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:405:21-71
+21        </intent>
+22    </queries> <!-- 极光 Required -->
+23    <uses-feature android:name="android.hardware.camera" />
+23-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:408:5-60
+23-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:408:19-57
+24    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- oppo配置开始 < -->
+24-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:409:5-70
+24-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:409:19-67
+25    <uses-permission android:name="com.fm.designstar.permission.MIPUSH_RECEIVE" />
+25-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:410:5-83
+25-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:410:22-80
+26    <uses-permission android:name="com.fm.designstar.permission.JPUSH_MESSAGE" />
+26-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:411:5-82
+26-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:411:22-79
+27    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+27-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:412:5-79
+27-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:412:22-76
+28    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+28-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:414:5-86
+28-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:414:22-83
+29    <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE" /> <!-- 用于申请调用A-GPS模块 -->
+29-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:415:5-85
+29-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:415:22-82
+30    <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
+30-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:416:5-68
+30-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:416:22-65
+31    <uses-permission android:name="android.permission.CALL_PHONE" />
+31-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:417:5-69
+31-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:417:22-66
+32    <uses-permission android:name="android.permission.INTERNET" />
+32-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:418:5-67
+32-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:418:22-64
+33    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+33-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:419:5-79
+33-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:419:22-76
+34    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+34-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:420:5-76
+34-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:420:22-73
+35    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+35-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:421:5-79
+35-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:421:22-76
+36    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+36-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:422:5-76
+36-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:422:22-73
+37    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+37-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:423:5-75
+37-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:423:22-72
+38    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+38-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:424:5-426:47
+38-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:425:9-70
+39    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+39-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:427:5-81
+39-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:427:22-78
+40    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+40-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:428:5-80
+40-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:428:22-77
+41    <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
+41-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:429:5-431:47
+41-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:430:9-62
+42    <uses-permission android:name="android.permission.CAMERA" />
+42-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:432:5-65
+42-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:432:22-62
+43    <uses-permission android:name="android.permission.WAKE_LOCK" />
+43-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:433:5-68
+43-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:433:22-65
+44    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+44-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:434:5-436:47
+44-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:435:9-69
+45    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+45-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:437:5-80
+45-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:437:22-77
+46    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+46-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:428:5-80
+46-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:428:22-77
+47    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 自动更新URI跳转安装时需要 -->
+47-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:427:5-81
+47-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:427:22-78
+48    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+48-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:440:5-78
+48-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:440:22-75
+49    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+49-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:441:5-83
+49-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:441:22-80
+50    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+50-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:442:5-444:47
+50-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:443:9-68
+51    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+51-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:441:5-83
+51-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:441:22-80
+52    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- Android Q后台定位权限 -->
+52-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:446:5-68
+52-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:446:22-65
+53    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- Optional for location -->
+53-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:447:5-74
+53-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:447:22-71
+54    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+54-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:448:5-89
+54-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:448:22-86
+55    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+55-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:449:5-77
+55-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:449:22-74
+56    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+56-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:450:5-66
+56-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:450:22-63
+57    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- for androidR targetSdkVersion >=30 -->
+57-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:440:5-78
+57-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:440:22-75
+58    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+58-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:452:5-81
+58-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:452:22-78
+59
+60    <!-- 拍照等 -->
+61    <uses-permission android:name="android.permission.WRITE_SETTINGS" /> <!-- 录音 -->
+61-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:19:5-73
+61-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:19:22-70
+62    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+62-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:26:5-71
+62-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:26:22-68
+63
+64    <uses-feature
+64-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:13:5-15:35
+65        android:glEsVersion="0x00020000"
+65-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:14:9-41
+66        android:required="true" /> <!-- 华为角标 -->
+66-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:15:9-32
+67    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+67-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:28:5-91
+67-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:28:22-88
+68    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+68-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:36:5-85
+68-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:36:22-82
+69    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- 注意这里.permission.PASSBY_MSG是自身app的包名 + .permission.PROCESS_PUSH_MSG -->
+69-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:38:5-79
+69-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:38:22-76
+70    <permission
+70-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:10:5-12:55
+71        android:name="com.fm.designstar.permission.PROCESS_PUSH_MSG"
+71-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:11:9-68
+72        android:protectionLevel="signatureOrSystem" />
+72-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:12:9-52
+73    <permission
+73-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:13:5-15:55
+74        android:name="com.fm.designstar.permission.PUSH_PROVIDER"
+74-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:14:9-65
+75        android:protectionLevel="signatureOrSystem" />
+75-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:15:9-52
+76    <permission
+76-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:16:5-18:55
+77        android:name="com.fm.designstar.permission.PUSH_WRITE_PROVIDER"
+77-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:17:9-71
+78        android:protectionLevel="signatureOrSystem" /> <!-- 注意这里.permission.PASSBY_MSG是自身app的包名 + .permission.PROCESS_PUSH_MSG -->
+78-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:18:9-52
+79    <uses-permission android:name="com.fm.designstar.permission.PROCESS_PUSH_MSG" />
+79-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:20:5-84
+79-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:20:22-81
+80    <uses-permission android:name="com.fm.designstar.permission.PUSH_PROVIDER" /> <!-- 应用市场9.0版本必须使用该权限获取用户的服务地 -->
+80-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:21:5-81
+80-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:21:22-78
+81    <uses-permission android:name="com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA" />
+81-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:18:5-106
+81-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:18:22-103
+82
+83    <application
+84        android:name="com.fm.designstar.app.App"
+84-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:7:9-32
+85        android:allowBackup="true"
+85-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:8:9-35
+86        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+86-->[androidx.core:core:1.5.0-alpha05] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c214b4b0763dfa6ba0825b2530b710e6/core-1.5.0-alpha05/AndroidManifest.xml:24:18-86
+87        android:icon="@mipmap/app_logo"
+87-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:9:9-40
+88        android:label="星说短视频"
+88-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:10:9-36
+89        android:largeHeap="true"
+89-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:11:9-33
+90        android:networkSecurityConfig="@xml/net"
+90-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:12:9-49
+91        android:requestLegacyExternalStorage="true"
+91-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:13:9-52
+92        android:roundIcon="@mipmap/app_logo"
+92-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:14:9-45
+93        android:supportsRtl="true"
+93-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:15:9-35
+94        android:theme="@style/AppTheme"
+94-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:16:9-40
+95        android:vmSafeMode="true" >
+95-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:17:9-34
+96        <activity
+96-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:19:9-22:80
+97            android:name="com.fm.designstar.views.main.activity.SearchActivity"
+97-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:19:19-69
+98            android:configChanges="orientation|keyboardHidden|locale"
+98-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:20:13-70
+99            android:screenOrientation="portrait"
+99-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:21:13-49
+100            android:windowSoftInputMode="stateVisible|adjustResize" />
+100-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:22:13-68
+101        <activity android:name="com.fm.designstar.views.mine.activity.ChoseDesignerTagsActivity" />
+101-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:23:9-83
+101-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:23:19-80
+102        <activity android:name="com.fm.designstar.views.mine.activity.DesignerMangerDetailActivity" />
+102-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:24:9-86
+102-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:24:19-83
+103        <activity android:name="com.fm.designstar.views.mine.activity.DesignerRecordActivity" />
+103-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:25:9-80
+103-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:25:19-77
+104        <activity android:name="com.fm.designstar.views.Fabu.activity.EditVedioActivity" />
+104-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:26:9-75
+104-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:26:19-72
+105        <activity android:name="com.fm.designstar.views.mine.activity.qsdActivity" />
+105-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:27:9-69
+105-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:27:19-66
+106        <activity
+106-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:28:9-30:55
+107            android:name="com.fm.designstar.views.Detail.activity.VedioPlayActivity"
+107-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:29:13-68
+108            android:windowSoftInputMode="adjustPan" />
+108-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:30:13-52
+109        <activity
+109-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:31:9-33:70
+110            android:name="com.fm.designstar.views.Detail.activity.DTDetailsActivity"
+110-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:32:13-68
+111            android:windowSoftInputMode="adjustResize|stateHidden" />
+111-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:33:13-67
+112        <activity android:name="com.fm.designstar.views.Fabu.activity.ChoseTagActivity" />
+112-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:34:9-74
+112-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:34:19-71
+113        <activity android:name="com.fm.designstar.views.Fabu.activity.ChoseScrollTagActivity" />
+113-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:35:9-80
+113-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:35:19-77
+114        <activity android:name="com.fm.designstar.views.Fabu.FabuActivity" />
+114-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:36:9-61
+114-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:36:19-58
+115        <activity
+115-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:37:9-53:20
+116            android:name="com.fm.designstar.views.main.activity.ConversationActivity"
+116-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:38:13-69
+117            android:configChanges="orientation|screenSize"
+117-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:39:13-59
+118            android:launchMode="singleTop"
+118-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:40:13-43
+119            android:screenOrientation="portrait"
+119-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:41:13-49
+120            android:windowSoftInputMode="stateHidden|adjustResize" >
+120-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:42:13-67
+121            <intent-filter>
+121-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:43:13-52:29
+122                <action android:name="android.intent.action.VIEW" />
+122-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:17-69
+122-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:25-66
+123
+124                <category android:name="android.intent.category.DEFAULT" />
+124-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+124-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+125
+126                <data
+126-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:48:17-51:45
+127                    android:host="com.fm.designstar"
+127-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:49:21-53
+128                    android:pathPrefix="/conversation/"
+128-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:50:21-56
+129                    android:scheme="rong" />
+129-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:51:21-42
+130            </intent-filter>
+131        </activity>
+132        <activity
+132-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:54:9-69:20
+133            android:name="com.fm.designstar.views.main.activity.ConversationListActivity"
+133-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:55:13-73
+134            android:launchMode="singleTask"
+134-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:56:13-44
+135            android:screenOrientation="portrait"
+135-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:57:13-49
+136            android:windowSoftInputMode="stateHidden|adjustResize" >
+136-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:58:13-67
+137            <intent-filter>
+137-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:59:13-68:29
+138                <action android:name="android.intent.action.VIEW" />
+138-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:17-69
+138-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:25-66
+139
+140                <category android:name="android.intent.category.DEFAULT" />
+140-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+140-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+141
+142                <data
+142-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:48:17-51:45
+143                    android:host="com.fm.designstar"
+143-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:49:21-53
+144                    android:pathPrefix="/conversationlist"
+144-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:50:21-56
+145                    android:scheme="rong" />
+145-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:51:21-42
+146            </intent-filter>
+147        </activity>
+148        <activity android:name="com.fm.designstar.views.mine.activity.ChangInfoActivity" />
+148-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:70:9-75
+148-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:70:19-72
+149        <activity android:name="com.fm.designstar.views.mine.activity.ShDesignerActivity" />
+149-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:71:9-76
+149-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:71:19-73
+150        <activity android:name="com.fm.designstar.views.mine.activity.DesignerMangerActivity" />
+150-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:72:9-80
+150-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:72:19-77
+151        <activity android:name="com.fm.designstar.views.mine.activity.BeDesignerActivity" />
+151-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:73:9-76
+151-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:73:19-73
+152        <activity android:name="com.fm.designstar.views.mine.activity.MyActivitysActivity" />
+152-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:74:9-77
+152-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:74:19-74
+153        <activity android:name="com.fm.designstar.views.mine.activity.MyWorkActivity" />
+153-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:75:9-72
+153-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:75:19-69
+154        <activity android:name="com.fm.designstar.views.mine.activity.BlackListActivity" />
+154-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:76:9-75
+154-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:76:19-72
+155        <activity android:name="com.fm.designstar.views.mine.activity.FansListActivity" />
+155-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:77:9-74
+155-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:77:19-71
+156        <activity android:name="com.fm.designstar.views.mine.activity.MyLikesListActivity" />
+156-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:78:9-77
+156-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:78:19-74
+157        <activity android:name="com.fm.designstar.views.mine.activity.SettingActivity" />
+157-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:79:9-73
+157-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:79:19-70
+158        <activity android:name="com.fm.designstar.views.login.activitys.ComUserInfoActivity" />
+158-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:80:9-79
+158-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:80:19-76
+159        <activity android:name="com.fm.designstar.views.login.activitys.PwdActivity" />
+159-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:81:9-71
+159-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:81:19-68
+160        <activity android:name="com.fm.designstar.views.login.activitys.MsgCodeActivity" />
+160-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:82:9-75
+160-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:82:19-72
+161        <activity android:name="com.fm.designstar.views.login.activitys.ForgetActivity" />
+161-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:83:9-74
+161-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:83:19-71
+162        <activity android:name="com.fm.designstar.views.login.activitys.RegisteredActivity" />
+162-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:84:9-78
+162-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:84:19-75
+163        <activity android:name="com.fm.designstar.widget.imagePicker.activity.VideoPreviewActivity" />
+163-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:85:9-86
+163-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:85:19-83
+164        <activity android:name="com.fm.designstar.views.main.activity.FeedbackActivity" />
+164-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:86:9-74
+164-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:86:19-71
+165        <activity
+165-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:87:9-89:46
+166            android:name="com.fm.designstar.views.login.activitys.LoginActivity"
+166-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:88:13-64
+167            android:launchMode="singleTop" />
+167-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:89:13-43
+168        <activity
+168-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:90:9-92:46
+169            android:name="com.fm.designstar.views.main.activity.WebActivity"
+169-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:91:13-60
+170            android:launchMode="singleTop" />
+170-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:92:13-43
+171        <activity
+171-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:93:9-106:20
+172            android:name="com.fm.designstar.views.main.activity.MainActivity"
+172-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:94:13-61
+173            android:configChanges="orientation|screenSize|keyboardHidden"
+173-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:95:13-74
+174            android:launchMode="singleTask"
+174-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:96:13-44
+175            android:screenOrientation="portrait" >
+175-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:97:13-49
+176            <intent-filter>
+176-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:98:13-105:29
+177                <action android:name="android.intent.action.VIEW" />
+177-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:17-69
+177-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:44:25-66
+178
+179                <category android:name="android.intent.category.BROWSABLE" />
+179-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:101:17-78
+179-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:101:27-75
+180                <category android:name="android.intent.category.DEFAULT" />
+180-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+180-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+181
+182                <data android:scheme="designstar" />
+182-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:48:17-51:45
+182-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:51:21-42
+183            </intent-filter>
+184        </activity>
+185        <activity android:name="com.fm.designstar.map.Selectaddress" />
+185-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:107:9-55
+185-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:107:19-52
+186        <activity android:name="com.fm.designstar.views.mine.activity.InfoDetailActivity" />
+186-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:108:9-76
+186-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:108:19-73
+187        <activity
+187-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:109:9-118:20
+188            android:name="com.fm.designstar.views.main.activity.SplashActivity"
+188-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:110:13-63
+189            android:screenOrientation="portrait"
+189-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:111:13-49
+190            android:theme="@style/AppTheme.Launcher" >
+190-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:112:13-53
+191            <intent-filter>
+191-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:113:13-117:29
+192                <action android:name="android.intent.action.MAIN" />
+192-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:114:17-69
+192-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:114:25-66
+193
+194                <category android:name="android.intent.category.LAUNCHER" />
+194-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:116:17-77
+194-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:116:27-74
+195            </intent-filter>
+196        </activity>
+197        <activity
+197-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:119:9-121:52
+198            android:name="com.fm.designstar.widget.imagePicker.activity.ImagePickerActivity"
+198-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:120:13-76
+199            android:screenOrientation="portrait" />
+199-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:121:13-49
+200        <activity android:name="com.fm.designstar.photo.ShowPictureActivity" />
+200-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:122:9-63
+200-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:122:19-60
+201        <activity
+201-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:123:9-125:52
+202            android:name="com.fm.designstar.widget.imagePicker.activity.ImagePreActivity"
+202-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:124:13-73
+203            android:screenOrientation="portrait" /> <!-- Required since 高地地图 -->
+203-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:125:13-49
+204        <activity
+204-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:126:9-130:75
+205            android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+205-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:127:13-69
+206            android:exported="false"
+206-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:128:13-37
+207            android:screenOrientation="portrait"
+207-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:129:13-49
+208            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- 图片列表Activity -->
+208-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:130:13-72
+209        <meta-data
+209-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:131:9-133:64
+210            android:name="com.amap.api.v2.apikey"
+210-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:132:13-50
+211            android:value="499468ee45bbd3fb6721ac736b1b36c1" /> <!-- 大图预览Activity -->
+211-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:133:13-61
+212        <meta-data
+212-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:134:9-136:64
+213            android:name="com.vivo.push.api_key"
+213-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:135:13-49
+214            android:value="dc69fa90c7e28282fceed994713079e0" />
+214-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:136:13-61
+215        <meta-data
+215-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:137:9-139:41
+216            android:name="com.vivo.push.app_id"
+216-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:138:13-48
+217            android:value="104372219" /> <!-- Required since 3.0.7 -->
+217-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:139:13-38
+218        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
+219        <!-- 3.3.0开始所有事件将通过该类回调 -->
+220        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+221        <!-- Required SDK 核心功能 -->
+222        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+223        <meta-data
+223-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:145:9-147:48
+224            android:name="XIAOMI_APPKEY"
+224-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:146:13-41
+225            android:value="MI-5781861954068" /> <!-- Required SDK核心功能 -->
+225-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:147:13-45
+226        <meta-data
+226-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:148:9-150:54
+227            android:name="XIAOMI_APPID"
+227-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:149:13-40
+228            android:value="MI-2882303761518619068" />
+228-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:150:13-51
+229        <meta-data
+229-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:151:9-153:68
+230            android:name="OPPO_APPKEY"
+230-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:152:13-39
+231            android:value="OP-O64bfa1ce65564162b667aaec850f6a57" />
+231-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:153:13-65
+232        <meta-data
+232-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:154:9-156:43
+233            android:name="OPPO_APPID"
+233-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:155:13-38
+234            android:value="OP-30331293" /> <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+234-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:156:13-40
+235        <meta-data
+235-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:157:9-159:67
+236            android:name="OPPO_APPSECRET"
+236-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:158:13-42
+237            android:value="OP-0f8d83148be542d6871d8ba92b96d5b5" /> <!-- 融云 Required -->
+237-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:159:13-64
+238        <provider
+239            android:name="com.fm.designstar.app.MyProvider"
+239-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:161:13-43
+240            android:authorities="com.fm.designstar.fileProvider"
+240-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:162:13-64
+241            android:exported="false"
+241-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:163:13-37
+242            android:grantUriPermissions="true" >
+242-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:164:13-47
+243            <meta-data
+243-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:165:13-167:53
+244                android:name="android.support.FILE_PROVIDER_PATHS"
+244-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:166:17-67
+245                android:resource="@xml/file_path" />
+245-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:167:17-50
+246        </provider> <!-- huawei开始 -->
+247        <provider
+248            android:name="com.fm.designstar.widget.imagePicker.provider.ImagePickerProvider"
+248-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:170:13-76
+249            android:authorities="com.fm.designstar.provider"
+249-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:171:13-60
+250            android:exported="false"
+250-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:172:13-37
+251            android:grantUriPermissions="true" >
+251-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:173:13-47
+252            <meta-data
+252-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:165:13-167:53
+253                android:name="android.support.FILE_PROVIDER_PATHS"
+253-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:166:17-67
+254                android:resource="@xml/file_path" />
+254-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:167:17-50
+255        </provider>
+256
+257        <receiver
+257-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:178:9-196:20
+258            android:name="cn.jpush.android.service.PushReceiver"
+258-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:179:13-65
+259            android:enabled="true" >
+259-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:180:13-35
+260            <intent-filter android:priority="1000" >
+260-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:181:13-184:29
+260-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:181:28-51
+261                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+261-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:182:17-94
+261-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:182:25-91
+262                <category android:name="com.fm.designstar" />
+262-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+262-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+263            </intent-filter>
+264            <intent-filter>
+264-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:185:13-188:29
+265                <action android:name="android.intent.action.USER_PRESENT" />
+265-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:186:17-77
+265-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:186:25-74
+266                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+266-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:17-79
+266-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:25-76
+267            </intent-filter>
+268            <!-- Optional -->
+269            <intent-filter>
+269-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:190:13-195:29
+270                <action android:name="android.intent.action.PACKAGE_ADDED" />
+270-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:191:17-78
+270-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:191:25-75
+271                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+271-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:192:17-80
+271-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:192:25-77
+272
+273                <data android:scheme="package" />
+273-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:48:17-51:45
+273-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:51:21-42
+274            </intent-filter>
+275        </receiver>
+276        <receiver
+276-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:198:9-207:20
+277            android:name="com.fm.designstar.service.JGReceiver"
+277-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:199:13-47
+278            android:enabled="true"
+278-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:200:13-35
+279            android:exported="false" >
+279-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:201:13-37
+280            <intent-filter>
+280-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:202:13-206:29
+281                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+281-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:203:17-82
+281-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:203:25-79
+282
+283                <category android:name="com.fm.designstar" />
+283-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+283-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+284            </intent-filter>
+285        </receiver> <!-- 小米开始 -->
+286        <receiver
+286-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:208:9-222:20
+287            android:name="com.fm.designstar.service.MyReceiver"
+287-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:209:13-47
+288            android:enabled="true"
+288-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:210:13-35
+289            android:exported="false" >
+289-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:211:13-37
+290            <intent-filter>
+290-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:212:13-221:29
+291                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+291-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:213:17-79
+291-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:213:25-76
+292                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+292-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:214:17-83
+292-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:214:25-80
+293                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+293-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:215:17-88
+293-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:215:25-85
+294                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+294-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:216:17-86
+294-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:216:25-83
+295                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+295-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:217:17-92
+295-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:217:25-89
+296                <action android:name="cn.jpush.android.intent.CONNECTION" />
+296-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:218:17-77
+296-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:218:25-74
+297
+298                <category android:name="com.fm.designstar" />
+298-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+298-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+299            </intent-filter>
+300        </receiver>
+301        <receiver
+301-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:223:9-231:20
+302            android:name="com.fm.designstar.service.SealNotificationReceiver"
+302-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:224:13-61
+303            android:exported="false" >
+303-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:225:13-37
+304            <intent-filter>
+304-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:226:13-230:29
+305                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+305-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:227:17-78
+305-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:227:25-75
+306                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+306-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:228:17-78
+306-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:228:25-75
+307                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+307-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:229:17-85
+307-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:229:25-82
+308            </intent-filter>
+309        </receiver>
+310        <receiver
+310-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:232:9-240:20
+311            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+311-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:233:13-83
+312            android:exported="true" >
+312-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:234:13-36
+313            <intent-filter>
+313-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:235:13-239:29
+314                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+314-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:17-79
+314-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:25-76
+315
+316                <category android:name="android.intent.category.DEFAULT" />
+316-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+316-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+317            </intent-filter>
+318        </receiver>
+319        <receiver
+319-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:241:9-248:20
+320            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+320-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:242:13-74
+321            android:exported="false"
+321-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:243:13-37
+322            android:process=":pushcore" >
+322-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:244:13-40
+323            <intent-filter>
+323-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:245:13-247:29
+324                <action android:name="com.xiaomi.push.PING_TIMER" />
+324-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:246:17-69
+324-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:246:25-66
+325            </intent-filter>
+326        </receiver>
+327        <receiver
+327-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:250:9-262:20
+328            android:name="cn.jpush.android.service.PluginXiaomiPlatformsReceiver"
+328-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:251:13-82
+329            android:exported="true" >
+329-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:252:13-36
+330            <intent-filter>
+330-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:253:13-255:29
+331                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+331-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:254:17-76
+331-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:254:25-73
+332            </intent-filter>
+333            <intent-filter>
+333-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:256:13-258:29
+334                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+334-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:257:17-76
+334-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:257:25-73
+335            </intent-filter>
+336            <intent-filter>
+336-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:259:13-261:29
+337                <action android:name="com.xiaomi.mipush.ERROR" />
+337-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:260:17-66
+337-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:260:25-63
+338            </intent-filter>
+339        </receiver>
+340        <receiver android:name="cn.jpush.android.service.PluginVivoMessageReceiver" >
+340-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:263:9-269:20
+340-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:263:19-84
+341            <intent-filter>
+341-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:264:13-268:29
+342
+343                <!-- 接收 push 消息 -->
+344                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+344-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:267:17-77
+344-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:267:25-74
+345            </intent-filter>
+346        </receiver>
+347        <receiver android:name="io.rong.push.platform.vivo.VivoPushMessageReceiver" >
+347-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:270:9-276:20
+347-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:270:19-84
+348            <intent-filter>
+348-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:264:13-268:29
+349
+350                <!-- 接收 vivo push 消息 -->
+351                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+351-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:267:17-77
+351-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:267:25-74
+352            </intent-filter>
+353        </receiver> <!-- 小米结束 -->
+354        <!-- vivo 推送服务需要配置的 service、activity -->
+355        <receiver
+355-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:278:9-290:20
+356            android:name="io.rong.push.platform.mi.MiMessageReceiver"
+356-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:279:13-70
+357            android:exported="true" >
+357-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:280:13-36
+358            <intent-filter>
+358-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:253:13-255:29
+359                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+359-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:254:17-76
+359-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:254:25-73
+360            </intent-filter>
+361            <intent-filter>
+361-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:256:13-258:29
+362                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+362-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:257:17-76
+362-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:257:25-73
+363            </intent-filter>
+364            <intent-filter>
+364-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:259:13-261:29
+365                <action android:name="com.xiaomi.mipush.ERROR" />
+365-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:260:17-66
+365-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:260:25-63
+366            </intent-filter>
+367        </receiver>
+368
+369        <service android:name="com.amap.api.location.APSService" />
+369-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:292:9-68
+369-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:292:18-65
+370        <service
+370-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:294:9-304:19
+371            android:name="cn.jpush.android.service.PushService"
+371-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:295:13-64
+372            android:enabled="true"
+372-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:74:13-35
+373            android:exported="false"
+373-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:296:13-37
+374            android:process=":pushcore" >
+374-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:297:13-40
+375            <intent-filter>
+375-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:298:13-303:29
+376                <action android:name="cn.jpush.android.intent.REGISTER" />
+376-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:299:17-75
+376-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:299:25-72
+377                <action android:name="cn.jpush.android.intent.REPORT" />
+377-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:300:17-73
+377-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:300:25-70
+378                <action android:name="cn.jpush.android.intent.PushService" />
+378-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:405:13-74
+378-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:405:21-71
+379                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+379-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:302:17-76
+379-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:302:25-73
+380            </intent-filter>
+381        </service> <!-- vivo push 推送 receiver 声明 -->
+382        <service
+382-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:305:9-313:19
+383            android:name="com.fm.designstar.service.JGService"
+383-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:306:13-46
+384            android:enabled="true"
+384-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:307:13-35
+385            android:exported="false"
+385-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:308:13-37
+386            android:process=":pushcore" >
+386-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:309:13-40
+387            <intent-filter>
+387-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:310:13-312:29
+388                <action android:name="cn.jiguang.user.service.action" />
+388-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:311:17-73
+388-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:311:25-70
+389            </intent-filter>
+390        </service>
+391        <service
+391-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:315:9-324:19
+392            android:name="com.fm.designstar.service.CustomPushMessageReceiver"
+392-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:316:13-62
+393            android:exported="true" >
+393-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:317:13-36
+394            <intent-filter>
+394-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:226:13-230:29
+395                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+395-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:227:17-78
+395-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:227:25-75
+396                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+396-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:228:17-78
+396-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:228:25-75
+397                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+397-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:229:17-85
+397-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:229:25-82
+398            </intent-filter>
+399        </service>
+400        <service
+400-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:325:9-331:19
+401            android:name="cn.jpush.android.service.PluginHuaweiPlatformsService"
+401-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:326:13-81
+402            android:exported="false" >
+402-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:327:13-37
+403            <intent-filter>
+403-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:328:13-330:29
+404                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+404-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:329:17-81
+404-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:329:25-78
+405            </intent-filter>
+406        </service> <!-- 配置融云接受的小米sdk的消息接受类 -->
+407        <service
+407-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:332:9-338:19
+408            android:name="io.rong.push.platform.hms.HMSPushService"
+408-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:333:13-68
+409            android:exported="false" >
+409-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:334:13-37
+410            <intent-filter>
+410-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:328:13-330:29
+411                <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+411-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:329:17-81
+411-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:329:25-78
+412            </intent-filter>
+413        </service>
+414        <!--
+415 <service
+416            android:name="com.heytap.mcssdk.PushService"
+417            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+418            <intent-filter>
+419                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE"/>
+420            </intent-filter>
+421        </service>
+422        -->
+423        <service
+423-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:348:9-353:43
+424            android:name="com.xiaomi.push.service.XMJobService"
+424-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:349:13-64
+425            android:enabled="true"
+425-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:350:13-35
+426            android:exported="false"
+426-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:351:13-37
+427            android:permission="android.permission.BIND_JOB_SERVICE"
+427-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:352:13-69
+428            android:process=":pushcore" />
+428-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:353:13-40
+429        <service
+429-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:354:9-357:43
+430            android:name="com.xiaomi.push.service.XMPushService"
+430-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:355:13-65
+431            android:enabled="true"
+431-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:356:13-35
+432            android:process=":pushcore" /> <!-- oppo配置开始 < -->
+432-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:357:13-40
+433        <!--
+434  <service
+435            android:name="com.heytap.mcssdk.AppPushService"
+436            android:permission="com.heytap.mcs.permission.SEND_MCS_MESSAGE">
+437            <intent-filter>
+438                <action android:name="com.heytap.mcs.action.RECEIVE_MCS_MESSAGE"/>
+439            </intent-filter>
+440        </service>
+441        -->
+442        <!-- since JPushv3.6.8 ，oppov2.1.0 oppo 核心功能 -->
+443        <service
+443-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:368:9-371:39
+444            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+444-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:369:13-68
+445            android:enabled="true"
+445-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:370:13-35
+446            android:exported="true" /> <!-- since JPushv3.6.8 ，oppov2.1.0 oppo 核心功能 -->
+446-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:371:13-36
+447        <service
+447-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:372:9-374:38
+448            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+448-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:373:13-70
+449            android:enabled="true" /> <!-- 兼容Q版本 -->
+449-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:374:13-35
+450        <service
+450-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:375:9-377:39
+451            android:name="com.vivo.push.sdk.service.CommandClientService"
+451-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:376:13-74
+452            android:exported="true" />
+452-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:377:13-36
+453        <service
+453-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:378:9-384:19
+454            android:name="cn.jpush.android.service.PluginOppoPushService"
+454-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:379:13-74
+455            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE" >
+455-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:380:13-77
+456            <intent-filter>
+456-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:381:13-383:29
+457                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+457-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:382:17-85
+457-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:382:25-82
+458            </intent-filter>
+459        </service>
+460        <service
+460-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:385:9-392:19
+461            android:name="com.heytap.msp.push.service.DataMessageCallbackService"
+461-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:386:13-82
+462            android:permission="com.heytap.mcs.permission.SEND_PUSH_MESSAGE" >
+462-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:387:13-77
+463            <intent-filter>
+463-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:388:13-391:29
+464                <action android:name="com.heytap.mcs.action.RECEIVE_MCS_MESSAGE" />
+464-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:389:17-84
+464-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:389:25-81
+465                <action android:name="com.heytap.msp.push.RECEIVE_MCS_MESSAGE" />
+465-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:390:17-82
+465-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:390:25-79
+466            </intent-filter>
+467        </service>
+468        <!-- imlib config begin -->
+469        <service
+469-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:25:9-27:38
+470            android:name="io.rong.imlib.ipc.RongService"
+470-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:26:13-57
+471            android:process=":ipc" />
+471-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:27:13-35
+472
+473        <receiver android:name="io.rong.imlib.ConnectChangeReceiver" />
+473-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:29:9-72
+473-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:29:19-69
+474        <receiver
+474-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:30:9-32:38
+475            android:name="io.rong.imlib.HeartbeatReceiver"
+475-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:31:13-59
+476            android:process=":ipc" /> <!-- imlib config end -->
+476-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:32:13-35
+477        <!-- 必选： SDK 核心功能 -->
+478        <service
+478-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:37:9-41:46
+479            android:name="io.rong.push.rongpush.PushService"
+479-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:38:13-61
+480            android:exported="true"
+480-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:39:13-36
+481            android:permission="android.permission.BIND_JOB_SERVICE"
+481-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:40:13-69
+482            android:process="io.rong.push" /> <!-- push 相关事件接收器 -->
+482-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:41:13-43
+483        <receiver
+483-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:44:9-59:20
+484            android:name="io.rong.push.rongpush.PushReceiver"
+484-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:45:13-62
+485            android:process="io.rong.push" > <!-- 此处进程可以改名，名称需要和PushService所在进程统一 -->
+485-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:46:13-43
+486            <!-- 心跳事件和网络切换事件监听,必须 -->
+487            <intent-filter>
+487-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:48:13-51:29
+488                <action android:name="io.rong.push.intent.action.HEART_BEAT" />
+488-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:49:17-80
+488-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:49:25-77
+489                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+489-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:17-79
+489-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:187:25-76
+490            </intent-filter>
+491
+492            <!-- 部分用户事件监听, 用来提高推送拉活率; 可移除 -->
+493            <intent-filter>
+493-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:54:13-58:29
+494                <action android:name="android.intent.action.USER_PRESENT" />
+494-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:186:17-77
+494-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:186:25-74
+495                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+495-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:56:17-87
+495-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:56:25-84
+496                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+496-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:57:17-90
+496-->[cn.rongcloud.sdk:im_lib:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/c0fdf9fbe90d5394ed42bd5f1675e8e8/jetified-im_lib-4.0.0.1/AndroidManifest.xml:57:25-87
+497            </intent-filter>
+498        </receiver>
+499
+500        <activity
+500-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:37:9-39:52
+501            android:name="io.rong.imkit.plugin.location.AMapLocationActivity"
+501-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:38:13-78
+502            android:screenOrientation="portrait" />
+502-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:39:13-49
+503        <activity
+503-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:40:9-42:52
+504            android:name="io.rong.imkit.plugin.location.AMapLocationActivity2D"
+504-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:41:13-80
+505            android:screenOrientation="portrait" />
+505-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:42:13-49
+506        <activity android:name="io.rong.imkit.plugin.location.AMapPreviewActivity" />
+506-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:43:9-86
+506-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:43:19-83
+507        <activity android:name="io.rong.imkit.plugin.location.AMapPreviewActivity2D" />
+507-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:44:9-88
+507-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:44:19-85
+508        <activity android:name="io.rong.imkit.plugin.location.AMapRealTimeActivity" />
+508-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:45:9-87
+508-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:45:19-84
+509        <activity android:name="io.rong.imkit.plugin.location.AMapRealTimeActivity2D" />
+509-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:46:9-89
+509-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:46:19-86
+510        <activity
+510-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:47:9-50:71
+511            android:name="io.rong.imkit.plugin.location.SearchLocationActivity"
+511-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:48:13-80
+512            android:screenOrientation="portrait"
+512-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:49:13-49
+513            android:windowSoftInputMode="stateVisible|adjustResize" />
+513-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:50:13-68
+514        <activity
+514-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:51:9-54:52
+515            android:name="io.rong.imkit.plugin.image.PictureSelectorActivity"
+515-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:52:13-78
+516            android:configChanges="keyboardHidden|orientation|screenSize"
+516-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:53:13-74
+517            android:screenOrientation="portrait" />
+517-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:54:13-49
+518        <activity
+518-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:55:9-57:52
+519            android:name="io.rong.imkit.plugin.image.PicturePreviewActivity"
+519-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:56:13-77
+520            android:screenOrientation="portrait" /> <!-- 开发者可以修改 RongBaseActivity 的 rc_base_activity_layout 布局文件调整 actionbar -->
+520-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:57:13-49
+521        <activity
+521-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:60:9-69:20
+522            android:name="io.rong.imkit.tools.RongWebviewActivity"
+522-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:61:13-67
+523            android:exported="false"
+523-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:62:13-37
+524            android:screenOrientation="portrait" >
+524-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:63:13-49
+525            <intent-filter>
+525-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:64:13-68:29
+526                <action android:name="io.rong.imkit.intent.action.webview" />
+526-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:65:17-78
+526-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:65:25-75
+527
+528                <category android:name="android.intent.category.DEFAULT" />
+528-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+528-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+529            </intent-filter>
+530        </activity>
+531        <activity
+531-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:70:9-79:20
+532            android:name="io.rong.imkit.tools.CombineWebViewActivity"
+532-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:71:13-70
+533            android:exported="false"
+533-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:72:13-37
+534            android:screenOrientation="portrait" >
+534-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:73:13-49
+535            <intent-filter>
+535-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:74:13-78:29
+536                <action android:name="io.rong.imkit.intent.action.combinewebview" />
+536-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:75:17-85
+536-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:75:25-82
+537
+538                <category android:name="android.intent.category.DEFAULT" />
+538-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+538-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+539            </intent-filter>
+540        </activity>
+541        <activity
+541-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:80:9-83:52
+542            android:name="io.rong.imkit.widget.provider.TakingPicturesActivity"
+542-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:81:13-80
+543            android:configChanges="orientation|keyboardHidden"
+543-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:82:13-63
+544            android:screenOrientation="portrait" />
+544-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:83:13-49
+545        <activity
+545-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:84:9-93:20
+546            android:name="io.rong.imkit.activity.PicturePagerActivity"
+546-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:85:13-71
+547            android:exported="false"
+547-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:86:13-37
+548            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+548-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:87:13-71
+549            <intent-filter>
+549-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:88:13-92:29
+550                <action android:name="io.rong.imkit.intent.action.picturepagerview" />
+550-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:89:17-87
+550-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:89:25-84
+551
+552                <category android:name="android.intent.category.DEFAULT" />
+552-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+552-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+553            </intent-filter>
+554        </activity>
+555        <activity
+555-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:94:9-101:20
+556            android:name="io.rong.imkit.activity.CombinePicturePagerActivity"
+556-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:95:13-78
+557            android:exported="false"
+557-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:96:13-37
+558            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+558-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:97:13-71
+559            <intent-filter>
+559-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:98:13-100:29
+560                <category android:name="android.intent.category.DEFAULT" />
+560-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+560-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+561            </intent-filter>
+562        </activity>
+563        <activity
+563-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:102:9-105:67
+564            android:name="io.rong.imkit.mention.MemberMentionedActivity"
+564-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:103:13-73
+565            android:configChanges="orientation|keyboardHidden"
+565-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:104:13-63
+566            android:windowSoftInputMode="adjustPan|stateHidden" />
+566-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:105:13-64
+567        <activity android:name="io.rong.imkit.activity.FileManagerActivity" />
+567-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:106:9-79
+567-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:106:19-76
+568        <activity android:name="io.rong.imkit.activity.FileListActivity" />
+568-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:107:9-76
+568-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:107:19-73
+569        <activity
+569-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:108:9-117:20
+570            android:name="io.rong.imkit.activity.FilePreviewActivity"
+570-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:109:13-70
+571            android:exported="false"
+571-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:110:13-37
+572            android:screenOrientation="portrait" >
+572-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:111:13-49
+573            <intent-filter>
+573-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:112:13-116:29
+574                <action android:name="io.rong.imkit.intent.action.openfile" />
+574-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:113:17-79
+574-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:113:25-76
+575
+576                <category android:name="android.intent.category.DEFAULT" />
+576-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+576-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+577            </intent-filter>
+578        </activity>
+579        <activity
+579-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:118:9-127:20
+580            android:name="io.rong.imkit.activity.WebFilePreviewActivity"
+580-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:119:13-73
+581            android:exported="false"
+581-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:120:13-37
+582            android:screenOrientation="portrait" >
+582-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:121:13-49
+583            <intent-filter>
+583-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:122:13-126:29
+584                <action android:name="io.rong.imkit.intent.action.openwebfile" />
+584-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:123:17-82
+584-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:123:25-79
+585
+586                <category android:name="android.intent.category.DEFAULT" />
+586-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+586-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+587            </intent-filter>
+588        </activity>
+589        <activity
+589-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:128:9-131:52
+590            android:name="io.rong.imkit.activity.CSLeaveMessageActivity"
+590-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:129:13-73
+591            android:configChanges="orientation|keyboardHidden"
+591-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:130:13-63
+592            android:screenOrientation="portrait" />
+592-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:131:13-49
+593        <activity
+593-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:132:9-141:20
+594            android:name="io.rong.imkit.activity.GIFPreviewActivity"
+594-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:133:13-69
+595            android:exported="false"
+595-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:134:13-37
+596            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+596-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:135:13-71
+597            <intent-filter>
+597-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:136:13-140:29
+598                <action android:name="io.rong.imkit.intent.action.gifrview" />
+598-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:137:17-79
+598-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:137:25-76
+599
+600                <category android:name="android.intent.category.DEFAULT" />
+600-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+600-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+601            </intent-filter>
+602        </activity>
+603        <activity android:name="io.rong.imkit.activity.SelectConversationActivity" />
+603-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:142:9-86
+603-->[cn.rongcloud.sdk:im_kit:4.0.0.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/bfdbe8cb613b5acabede9eff6b4e4ef6/jetified-im_kit-4.0.0.1/AndroidManifest.xml:142:19-83
+604
+605        <service
+605-->[:com.heytap.msp-push-2.1.0:] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/110a13bc3a01bdfea3d773b779eec910/jetified-com.heytap.msp-push-2.1.0/AndroidManifest.xml:14:9-20:19
+606            android:name="com.heytap.msp.push.service.CompatibleDataMessageCallbackService"
+606-->[:com.heytap.msp-push-2.1.0:] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/110a13bc3a01bdfea3d773b779eec910/jetified-com.heytap.msp-push-2.1.0/AndroidManifest.xml:15:13-92
+607            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE" >
+607-->[:com.heytap.msp-push-2.1.0:] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/110a13bc3a01bdfea3d773b779eec910/jetified-com.heytap.msp-push-2.1.0/AndroidManifest.xml:16:13-77
+608            <intent-filter>
+608-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:381:13-383:29
+609                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+609-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:382:17-85
+609-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:382:25-82
+610            </intent-filter>
+611        </service>
+612
+613        <activity
+613-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:23:9-27:66
+614            android:name="com.aliyun.apsara.alivclittlevideo.activity.VideoListActivity"
+614-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:24:13-89
+615            android:launchMode="singleTask"
+615-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:25:13-44
+616            android:screenOrientation="portrait"
+616-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:26:13-49
+617            android:theme="@style/Theme.AppCompat.NoActionBar" />
+617-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:27:13-63
+618        <activity
+618-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:28:9-31:52
+619            android:name="com.aliyun.apsara.alivclittlevideo.activity.PublishActivity"
+619-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:29:13-87
+620            android:launchMode="singleTop"
+620-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:30:13-43
+621            android:screenOrientation="portrait" />
+621-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:31:13-49
+622        <activity
+622-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:32:9-35:66
+623            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittleSettingActivity"
+623-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:33:13-98
+624            android:screenOrientation="portrait"
+624-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:34:13-49
+625            android:theme="@style/Theme.AppCompat.NoActionBar" />
+625-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:35:13-63
+626        <activity
+626-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:36:9-38:52
+627            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittleUserSettingActivity"
+627-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:37:13-102
+628            android:screenOrientation="portrait" />
+628-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:38:13-49
+629        <activity
+629-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:39:9-41:52
+630            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittleUserChangeActivity"
+630-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:40:13-101
+631            android:screenOrientation="portrait" />
+631-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:41:13-49
+632        <activity
+632-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:42:9-44:52
+633            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittlePlayerActivity"
+633-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:43:13-97
+634            android:screenOrientation="portrait" />
+634-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:44:13-49
+635        <activity
+635-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:45:9-47:52
+636            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittlePreviewActivity"
+636-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:46:13-98
+637            android:screenOrientation="portrait" />
+637-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:47:13-49
+638        <activity
+638-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:48:9-50:52
+639            android:name="com.aliyun.apsara.alivclittlevideo.activity.AlivcLittleLiveActivity"
+639-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:49:13-95
+640            android:screenOrientation="portrait" />
+640-->[:AlivcLittleVideo] /Users/qianshide/FWMX _EDIT/gradle-build/AlivcLittleVideo/intermediates/library_manifest/release/AndroidManifest.xml:50:13-49
+641        <activity
+641-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:21:9-24:57
+642            android:name="com.aliyun.svideo.recorder.activity.AlivcSvideoRecordActivity"
+642-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:22:13-89
+643            android:screenOrientation="portrait"
+643-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:23:13-49
+644            android:theme="@style/AlivcRecordUIStyle" />
+644-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:24:13-54
+645        <activity
+645-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:25:9-28:57
+646            android:name="com.aliyun.svideo.recorder.activity.AlivcSvideoMixRecordActivity"
+646-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:26:13-92
+647            android:screenOrientation="portrait"
+647-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:27:13-49
+648            android:theme="@style/AlivcRecordUIStyle" />
+648-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:28:13-54
+649        <activity
+649-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:29:9-31:52
+650            android:name="com.aliyun.svideo.recorder.activity.AlivcMixMediaActivity"
+650-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:30:13-85
+651            android:screenOrientation="portrait" />
+651-->[:AliyunRecorder:record] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunRecorder/record/intermediates/library_manifest/release/AndroidManifest.xml:31:13-49
+652        <activity
+652-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:16:9-21:20
+653            android:name="com.aliyun.svideo.editor.editor.EditorActivity"
+653-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:17:13-74
+654            android:launchMode="singleTask"
+654-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:18:13-44
+655            android:screenOrientation="portrait"
+655-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:19:13-49
+656            android:theme="@style/AlivcEditUIStyle" >
+656-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:20:13-52
+657        </activity>
+658        <activity
+658-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:22:9-26:20
+659            android:name="com.aliyun.svideo.editor.EditorMediaActivity"
+659-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:23:13-72
+660            android:screenOrientation="portrait"
+660-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:24:13-49
+661            android:theme="@style/Theme.AppCompat.NoActionBar" >
+661-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:25:13-63
+662        </activity>
+663        <activity
+663-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:27:9-31:20
+664            android:name="com.aliyun.svideo.editor.effectmanager.EffectManagerActivity"
+664-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:28:13-88
+665            android:screenOrientation="portrait"
+665-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:29:13-49
+666            android:theme="@style/Theme.AppCompat.NoActionBar" >
+666-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:30:13-63
+667        </activity>
+668        <activity
+668-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:32:9-36:20
+669            android:name="com.aliyun.svideo.editor.effectmanager.MorePasterActivity"
+669-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:33:13-85
+670            android:screenOrientation="portrait"
+670-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:34:13-49
+671            android:theme="@style/Theme.AppCompat.NoActionBar" >
+671-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:35:13-63
+672        </activity>
+673        <activity
+673-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:37:9-41:20
+674            android:name="com.aliyun.svideo.editor.effectmanager.MoreCaptionActivity"
+674-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:38:13-86
+675            android:screenOrientation="portrait"
+675-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:39:13-49
+676            android:theme="@style/Theme.AppCompat.NoActionBar" >
+676-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:40:13-63
+677        </activity>
+678        <activity
+678-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:42:9-46:20
+679            android:name="com.aliyun.svideo.editor.effectmanager.MoreMVActivity"
+679-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:43:13-81
+680            android:screenOrientation="portrait"
+680-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:44:13-49
+681            android:theme="@style/Theme.AppCompat.NoActionBar" >
+681-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:45:13-63
+682        </activity>
+683        <activity
+683-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:47:9-51:20
+684            android:name="com.aliyun.svideo.editor.publish.PublishActivity"
+684-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:48:13-76
+685            android:screenOrientation="portrait"
+685-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:49:13-49
+686            android:theme="@style/Theme.AppCompat.NoActionBar" >
+686-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:50:13-63
+687        </activity>
+688        <activity
+688-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:52:9-56:20
+689            android:name="com.aliyun.svideo.editor.publish.CoverEditActivity"
+689-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:53:13-78
+690            android:screenOrientation="portrait"
+690-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:54:13-49
+691            android:theme="@style/Theme.AppCompat.NoActionBar" >
+691-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:55:13-63
+692        </activity>
+693        <activity
+693-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:57:9-61:66
+694            android:name="com.aliyun.svideo.editor.publish.UploadActivity"
+694-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:58:13-75
+695            android:hardwareAccelerated="true"
+695-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:59:13-47
+696            android:screenOrientation="portrait"
+696-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:60:13-49
+697            android:theme="@style/Theme.AppCompat.NoActionBar" />
+697-->[:AliyunEditor] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunEditor/intermediates/library_manifest/release/AndroidManifest.xml:61:13-63
+698
+699        <service
+699-->[:AliyunFileDownLoader] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunFileDownLoader/intermediates/library_manifest/release/AndroidManifest.xml:18:9-20:49
+700            android:name="com.liulishuo.filedownloader.services.FileDownloadService"
+700-->[:AliyunFileDownLoader] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunFileDownLoader/intermediates/library_manifest/release/AndroidManifest.xml:19:13-85
+701            android:process=":filedownloader" />
+701-->[:AliyunFileDownLoader] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunFileDownLoader/intermediates/library_manifest/release/AndroidManifest.xml:20:13-46
+702
+703        <activity
+703-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:11:9-16:20
+704            android:name="com.aliyun.svideo.crop.CropMediaActivity"
+704-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:12:13-68
+705            android:screenOrientation="portrait"
+705-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:13:13-49
+706            android:theme="@style/AliyunVideoUIStytle" >
+706-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:14:13-55
+707        </activity>
+708        <activity
+708-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:17:9-22:20
+709            android:name="com.aliyun.svideo.crop.AliyunVideoCropActivity"
+709-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:18:13-74
+710            android:screenOrientation="portrait"
+710-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:19:13-49
+711            android:theme="@style/AliyunVideoUIStytle" >
+711-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:20:13-55
+712        </activity>
+713        <activity
+713-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:23:9-28:20
+714            android:name="com.aliyun.svideo.crop.AliyunImageCropActivity"
+714-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:24:13-74
+715            android:screenOrientation="portrait"
+715-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:25:13-49
+716            android:theme="@style/AliyunVideoUIStytle" >
+716-->[:AliyunCrop:crop] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunCrop/crop/intermediates/library_manifest/release/AndroidManifest.xml:26:13-55
+717        </activity>
+718        <activity android:name="com.aliyun.svideo.base.CopyrightWebActivity" />
+718-->[:AliyunSVideoBase] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunSVideoBase/intermediates/library_manifest/release/AndroidManifest.xml:12:9-80
+718-->[:AliyunSVideoBase] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunSVideoBase/intermediates/library_manifest/release/AndroidManifest.xml:12:19-77
+719        <activity
+719-->[:AliyunSVideoBase] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunSVideoBase/intermediates/library_manifest/release/AndroidManifest.xml:13:9-15:72
+720            android:name="com.aliyun.svideo.base.ui.SdkVersionActivity"
+720-->[:AliyunSVideoBase] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunSVideoBase/intermediates/library_manifest/release/AndroidManifest.xml:14:13-72
+721            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- FileProvider配置访问路径，适配7.0及其以上 -->
+721-->[:AliyunSVideoBase] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunSVideoBase/intermediates/library_manifest/release/AndroidManifest.xml:15:13-69
+722        <provider
+722-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:29:9-38:20
+723            android:name="androidx.core.content.FileProvider"
+723-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:30:13-62
+724            android:authorities="com.fm.designstar.fileprovider"
+724-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:31:13-64
+725            android:banner="@string/alivc_common_cancel"
+725-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:32:13-57
+726            android:exported="false"
+726-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:33:13-37
+727            android:grantUriPermissions="true" >
+727-->[:AliyunVideoCommon] /Users/qianshide/FWMX _EDIT/gradle-build/AliyunVideoCommon/intermediates/library_manifest/release/AndroidManifest.xml:34:13-47
+728            <meta-data
+728-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:165:13-167:53
+729                android:name="android.support.FILE_PROVIDER_PATHS"
+729-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:166:17-67
+730                android:resource="@xml/provider_paths" />
+730-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:167:17-50
+731        </provider>
+732
+733        <meta-data
+733-->[com.github.bumptech.glide:okhttp3-integration:4.3.0] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/0c68a54219e4a6d0d74e7a2561b40ad0/jetified-okhttp3-integration-4.3.0/AndroidManifest.xml:11:9-13:43
+734            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+734-->[com.github.bumptech.glide:okhttp3-integration:4.3.0] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/0c68a54219e4a6d0d74e7a2561b40ad0/jetified-okhttp3-integration-4.3.0/AndroidManifest.xml:12:13-84
+735            android:value="GlideModule" />
+735-->[com.github.bumptech.glide:okhttp3-integration:4.3.0] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/0c68a54219e4a6d0d74e7a2561b40ad0/jetified-okhttp3-integration-4.3.0/AndroidManifest.xml:13:13-40
+736
+737        <provider
+737-->[net.grandcentrix.tray:tray:0.11.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/47aded6ccf89e421950859995f0602d0/jetified-tray-0.11.1/AndroidManifest.xml:12:9-16:44
+738            android:name="net.grandcentrix.tray.provider.TrayContentProvider"
+738-->[net.grandcentrix.tray:tray:0.11.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/47aded6ccf89e421950859995f0602d0/jetified-tray-0.11.1/AndroidManifest.xml:13:13-78
+739            android:authorities="@string/tray__authority"
+739-->[net.grandcentrix.tray:tray:0.11.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/47aded6ccf89e421950859995f0602d0/jetified-tray-0.11.1/AndroidManifest.xml:14:13-58
+740            android:exported="false"
+740-->[net.grandcentrix.tray:tray:0.11.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/47aded6ccf89e421950859995f0602d0/jetified-tray-0.11.1/AndroidManifest.xml:15:13-37
+741            android:multiprocess="false" /> <!-- Rich push 核心功能 since 2.0.6 -->
+741-->[net.grandcentrix.tray:tray:0.11.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/47aded6ccf89e421950859995f0602d0/jetified-tray-0.11.1/AndroidManifest.xml:16:13-41
+742        <activity
+742-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:44:9-55:20
+743            android:name="cn.jpush.android.ui.PopWinActivity"
+743-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:45:13-62
+744            android:exported="true"
+744-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:46:13-36
+745            android:theme="@style/MyDialogStyle" >
+745-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:47:13-49
+746            <intent-filter>
+746-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:48:13-54:29
+747                <category android:name="android.intent.category.DEFAULT" />
+747-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+747-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+748
+749                <action android:name="cn.jpush.android.ui.PopWinActivity" />
+749-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:51:17-77
+749-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:51:25-74
+750
+751                <category android:name="com.fm.designstar" />
+751-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+751-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+752            </intent-filter>
+753        </activity> <!-- Required SDK核心功能 -->
+754        <activity
+754-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:58:9-69:20
+755            android:name="cn.jpush.android.ui.PushActivity"
+755-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:59:13-60
+756            android:configChanges="orientation|keyboardHidden"
+756-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:60:13-63
+757            android:exported="true"
+757-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:61:13-36
+758            android:theme="@android:style/Theme.NoTitleBar" >
+758-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:62:13-60
+759            <intent-filter>
+759-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:63:13-68:29
+760                <action android:name="cn.jpush.android.ui.PushActivity" />
+760-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:64:17-75
+760-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:64:25-72
+761
+762                <category android:name="android.intent.category.DEFAULT" />
+762-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:17-76
+762-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:46:27-73
+763                <category android:name="com.fm.designstar" />
+763-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+763-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+764            </intent-filter>
+765        </activity> <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+766        <!-- 若不启用该功能可删除该组件，或把 enabled 设置成 false ；App 不会被其他 App 拉起，但会拉起其他的 App。 -->
+767        <service
+767-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:87:9-96:19
+768            android:name="cn.jpush.android.service.DaemonService"
+768-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:88:13-66
+769            android:enabled="true"
+769-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:89:13-35
+770            android:exported="true" >
+770-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:90:13-36
+771            <intent-filter>
+771-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:91:13-95:29
+772                <action android:name="cn.jpush.android.intent.DaemonService" />
+772-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:92:17-80
+772-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:92:25-77
+773
+774                <category android:name="com.fm.designstar" />
+774-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+774-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+775            </intent-filter>
+776        </service> <!-- 可选，如果使用静态Activity方式拉起，该组件必须声明 -->
+777        <activity
+777-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:98:9-109:20
+778            android:name="cn.jpush.android.service.DActivity"
+778-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:99:13-62
+779            android:enabled="true"
+779-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:100:13-35
+780            android:exported="true"
+780-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:101:13-36
+781            android:taskAffinity="jpush.custom"
+781-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:102:13-48
+782            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+782-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:103:13-72
+783            <intent-filter>
+783-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:104:13-108:29
+784                <action android:name="cn.jpush.android.intent.DActivity" />
+784-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:105:17-76
+784-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:105:25-73
+785
+786                <category android:name="com.fm.designstar" />
+786-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+786-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+787            </intent-filter>
+788        </activity> <!-- Required SDK核心功能 -->
+789        <receiver
+789-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:133:9-135:40
+790            android:name="cn.jpush.android.service.AlarmReceiver"
+790-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:134:13-66
+791            android:exported="false" /> <!-- since 3.5.0 Required SDK 核心功能 -->
+791-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:135:13-37
+792        <!-- 3.5.0新增，用于定时展示功能 -->
+793        <receiver
+793-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:139:9-141:40
+794            android:name="cn.jpush.android.service.SchedulerReceiver"
+794-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:140:13-70
+795            android:exported="false" /> <!-- 3.6.7 新增，用于负反馈组件 -->
+795-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:141:13-37
+796        <service android:name="cn.jpush.android.service.MessagingIntentService" /> <!-- since 3.0.9 Required SDK 核心功能 -->
+796-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:144:9-83
+796-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:144:18-80
+797        <provider
+797-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:147:9-151:43
+798            android:name="cn.jpush.android.service.DataProvider"
+798-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:148:13-65
+799            android:authorities="com.fm.designstar.DataProvider"
+799-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:149:13-64
+800            android:exported="false"
+800-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:150:13-37
+801            android:process=":pushcore" /> <!-- since 3.1.0 Required SDK 核心功能 -->
+801-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:151:13-40
+802        <provider
+802-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:153:9-156:39
+803            android:name="cn.jpush.android.service.DownloadProvider"
+803-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:154:13-69
+804            android:authorities="com.fm.designstar.DownloadProvider"
+804-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:155:13-68
+805            android:exported="true" /> <!-- since 3.3.0 Required SDK核心功能 -->
+805-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:156:13-36
+806        <activity
+806-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:159:9-169:20
+807            android:name="cn.jpush.android.service.JNotifyActivity"
+807-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:160:13-68
+808            android:exported="true"
+808-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:161:13-36
+809            android:taskAffinity="jpush.custom"
+809-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:162:13-48
+810            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+810-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:163:13-72
+811            <intent-filter>
+811-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:164:13-168:29
+812                <action android:name="cn.jpush.android.intent.JNotifyActivity" />
+812-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:165:17-82
+812-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:165:25-79
+813
+814                <category android:name="com.fm.designstar" />
+814-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:17-62
+814-->/Users/qianshide/FWMX _EDIT/app/src/main/AndroidManifest.xml:183:27-59
+815            </intent-filter>
+816        </activity> <!-- since 3.5.6 新增华硕通道 -->
+817        <receiver android:name="cn.jpush.android.asus.AsusPushMessageReceiver" /> <!-- Required  . Enable it you can get statistics data with channel -->
+817-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:171:9-82
+817-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:171:19-79
+818        <meta-data
+818-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:173:9-175:48
+819            android:name="JPUSH_CHANNEL"
+819-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:174:13-41
+820            android:value="developer-default" />
+820-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:175:13-45
+821        <meta-data
+821-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:176:9-178:47
+822            android:name="JPUSH_APPKEY"
+822-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:177:13-40
+823            android:value="c8431a8245872dd1b14573c8" />
+823-->[cn.jiguang.sdk:jpush:3.6.8] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/b213355cd3e5d2b9130b0c6b44a8c9a8/jetified-jpush-3.6.8/AndroidManifest.xml:178:13-44
+824
+825        <receiver
+825-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:24:9-34:20
+826            android:name="com.huawei.hms.support.api.push.PushMsgReceiver"
+826-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:25:13-75
+827            android:permission="com.fm.designstar.permission.PROCESS_PUSH_MSG" >
+827-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:26:13-78
+828            <intent-filter>
+828-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:27:13-33:29
+829
+830                <!-- 必须, 用于接收通知栏消息点击事件 -->
+831                <action android:name="com.huawei.intent.action.PUSH_DELAY_NOTIFY" />
+831-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:30:17-85
+831-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:30:25-82
+832                <!-- 可选，兼容老的华为手机 -->
+833                <action android:name="com.huawei.intent.action.PUSH" />
+833-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:32:17-72
+833-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:32:25-69
+834            </intent-filter>
+835        </receiver>
+836        <receiver
+836-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:35:9-45:20
+837            android:name="com.huawei.hms.support.api.push.PushReceiver"
+837-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:36:13-72
+838            android:permission="com.fm.designstar.permission.PROCESS_PUSH_MSG" >
+838-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:37:13-78
+839            <intent-filter>
+839-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:38:13-44:29
+840
+841                <!-- 必须,用于接收token -->
+842                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+842-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:41:17-86
+842-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:41:25-83
+843                <!-- 必须, 用于接收消息 -->
+844                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+844-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:43:17-81
+844-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:43:25-78
+845            </intent-filter>
+846        </receiver> <!-- 非华为手机通知栏和透传消息的接收服务定义 -->
+847        <service
+847-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:48:9-57:19
+848            android:name="com.huawei.hms.support.api.push.service.HmsMsgService"
+848-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:49:13-81
+849            android:enabled="true"
+849-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:50:13-35
+850            android:exported="true"
+850-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:51:13-36
+851            android:process=":pushservice" >
+851-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:52:13-43
+852            <intent-filter>
+852-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:53:13-56:29
+853                <action android:name="com.huawei.push.msg.NOTIFY_MSG" />
+853-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:54:17-73
+853-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:54:25-70
+854                <action android:name="com.huawei.push.msg.PASSBY_MSG" />
+854-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:55:17-73
+854-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:55:25-70
+855            </intent-filter>
+856        </service>
+857
+858        <provider
+858-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:59:9-65:89
+859            android:name="com.huawei.hms.support.api.push.PushProvider"
+859-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:60:13-72
+860            android:authorities="com.fm.designstar.huawei.push.provider"
+860-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:61:13-72
+861            android:exported="true"
+861-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:62:13-36
+862            android:permission="com.fm.designstar.permission.PUSH_PROVIDER"
+862-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:63:13-75
+863            android:readPermission="com.fm.designstar.permission.PUSH_PROVIDER"
+863-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:64:13-79
+864            android:writePermission="com.fm.designstar.permission.PUSH_WRITE_PROVIDER" />
+864-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:65:13-86
+865
+866        <meta-data
+866-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:67:9-69:46
+867            android:name="com.huawei.hms.client.service.name:push"
+867-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:68:13-67
+868            android:value="push:4.0.2.300" />
+868-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:69:13-43
+869        <meta-data
+869-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:70:9-72:33
+870            android:name="com.huawei.hms.min_api_level:push:push"
+870-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:71:13-66
+871            android:value="1" />
+871-->[com.huawei.hms:push:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/a8c40a8d31d3c723b4b4d47871555805/jetified-push-4.0.2.300/AndroidManifest.xml:72:13-30
+872
+873        <provider
+873-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:10:9-13:40
+874            android:name="com.huawei.hms.aaid.InitProvider"
+874-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:11:13-60
+875            android:authorities="com.fm.designstar.aaidinitprovider"
+875-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:12:13-68
+876            android:exported="false" />
+876-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:13:13-37
+877
+878        <meta-data
+878-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:15:9-17:52
+879            android:name="com.huawei.hms.client.service.name:opendevice"
+879-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:16:13-73
+880            android:value="opendevice:4.0.1.301" />
+880-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:17:13-49
+881        <meta-data
+881-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:18:9-20:33
+882            android:name="com.huawei.hms.min_api_level:opendevice:push"
+882-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:19:13-72
+883            android:value="1" />
+883-->[com.huawei.hms:opendevice:4.0.1.301] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/cf33513e5175793bfe80cec5b74acf87/jetified-opendevice-4.0.1.301/AndroidManifest.xml:20:13-30
+884        <!--
+885        为后续统计第三方app集成了哪些Kit，因此需要Kit在自己的AndroidManifest.xml文件中定义业务标签元数据，
+886        流水线打包时会替换成HMSVER对应的版本号，不要手动修改
+887        -->
+888        <meta-data
+888-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:26:9-28:46
+889            android:name="com.huawei.hms.client.service.name:base"
+889-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:27:13-67
+890            android:value="base:4.0.2.300" /> <!-- SDK依赖的HMSCore的最低api level元数据 -->
+890-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:28:13-43
+891        <meta-data
+891-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:31:9-33:33
+892            android:name="com.huawei.hms.min_api_level:base:hmscore"
+892-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:32:13-69
+893            android:value="1" />
+893-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:33:13-30
+894
+895        <activity
+895-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:35:9-45:20
+896            android:name="com.huawei.hms.activity.BridgeActivity"
+896-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:36:13-66
+897            android:configChanges="orientation|locale|layoutDirection|fontScale|screenSize|smallestScreenSize|screenLayout"
+897-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:37:13-124
+898            android:excludeFromRecents="true"
+898-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:38:13-46
+899            android:exported="false"
+899-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:39:13-37
+900            android:hardwareAccelerated="true"
+900-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:40:13-47
+901            android:theme="@android:style/Theme.Translucent" >
+901-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:41:13-61
+902            <meta-data
+902-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:42:13-44:77
+903                android:name="hwc-theme"
+903-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:43:17-41
+904                android:value="androidhwext:style/Theme.Emui.Translucent" />
+904-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:44:17-74
+905        </activity>
+906        <activity
+906-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:46:9-49:20
+907            android:name="com.huawei.hms.activity.EnableServiceActivity"
+907-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:47:13-73
+908            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout" >
+908-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:48:13-106
+909        </activity>
+910
+911        <provider
+911-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:51:9-56:20
+912            android:name="com.huawei.hms.update.provider.UpdateProvider"
+912-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:52:13-73
+913            android:authorities="com.fm.designstar.hms.update.provider"
+913-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:53:13-71
+914            android:exported="false"
+914-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:54:13-37
+915            android:grantUriPermissions="true" >
+915-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:55:13-47
+916        </provider>
+917
+918        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService" />
+918-->[com.liulishuo.filedownloader:library:1.4.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/322e4321ceb4739f8753059e97ff6547/jetified-library-1.4.1/AndroidManifest.xml:12:9-118
+918-->[com.liulishuo.filedownloader:library:1.4.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/322e4321ceb4739f8753059e97ff6547/jetified-library-1.4.1/AndroidManifest.xml:12:18-115
+919        <service
+919-->[com.liulishuo.filedownloader:library:1.4.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/322e4321ceb4739f8753059e97ff6547/jetified-library-1.4.1/AndroidManifest.xml:13:9-15:49
+920            android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService"
+920-->[com.liulishuo.filedownloader:library:1.4.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/322e4321ceb4739f8753059e97ff6547/jetified-library-1.4.1/AndroidManifest.xml:14:13-108
+921            android:process=":filedownloader" />
+921-->[com.liulishuo.filedownloader:library:1.4.1] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/322e4321ceb4739f8753059e97ff6547/jetified-library-1.4.1/AndroidManifest.xml:15:13-46
+922
+923        <provider
+923-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:10:9-13:40
+924            android:name="com.huawei.agconnect.core.provider.AGConnectInitializeProvider"
+924-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:11:13-90
+925            android:authorities="com.fm.designstar.AGCInitializeProvider"
+925-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:12:13-73
+926            android:exported="false" />
+926-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:13:13-37
+927
+928        <service
+928-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:15:9-17:40
+929            android:name="com.huawei.agconnect.core.ServiceDiscovery"
+929-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:16:13-70
+930            android:exported="false" />
+930-->[com.huawei.agconnect:agconnect-core:1.0.0.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/ca2af4d2643f3abee2995fad1d1ad77e/jetified-agconnect-core-1.0.0.300/AndroidManifest.xml:17:13-37
+931
+932        <activity
+932-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:21:9-29:20
+933            android:name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity"
+933-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:22:13-84
+934            android:configChanges="orientation|screenSize"
+934-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:23:13-59
+935            android:exported="false"
+935-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:24:13-37
+936            android:theme="@style/upsdkDlDialog" >
+936-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:25:13-49
+937            <meta-data
+937-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:42:13-44:77
+938                android:name="hwc-theme"
+938-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:43:17-41
+939                android:value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar" />
+939-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:44:17-74
+940        </activity>
+941        <activity
+941-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:30:9-38:20
+942            android:name="com.huawei.updatesdk.support.pm.PackageInstallerActivity"
+942-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:31:13-84
+943            android:configChanges="orientation|keyboardHidden|screenSize"
+943-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:32:13-74
+944            android:exported="false"
+944-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:33:13-37
+945            android:theme="@style/upsdkDlDialog" >
+945-->[com.huawei.hms:update:2.0.6.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/49d6ac5c65d73d7a8cdb7dd6dd73980a/jetified-update-2.0.6.300/AndroidManifest.xml:34:13-49
+946            <meta-data
+946-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:42:13-44:77
+947                android:name="hwc-theme"
+947-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:43:17-41
+948                android:value="androidhwext:style/Theme.Emui.Translucent" />
+948-->[com.huawei.hms:base:4.0.2.300] /Users/qianshide/.gradle/caches/transforms-2/files-2.1/04167dddac468f5b9aaff20cbcc5a308/jetified-base-4.0.2.300/AndroidManifest.xml:44:17-74
+949        </activity>
+950    </application>
+951
+952</manifest>

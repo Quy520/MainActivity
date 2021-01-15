@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/qianshide/FWMX _EDIT/gradle-build/app/intermediates/incremental/mergeTingyongbaoReleaseResources/merged.dir/values-my-rMM/values-my-rMM.xml",
+            "map": [
+                {
+                    "source": "/Users/qianshide/.gradle/caches/transforms-2/files-2.1/86063aefc7e0ec1df111a8c90d6ed0be/jetified-push-4.0.2.300/res/values-my-rMM/values-my-rMM.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}
